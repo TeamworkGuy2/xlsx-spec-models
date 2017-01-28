@@ -1,27 +1,21 @@
 "use strict";
-/** <col> (Column Width & Formatting) "x:col"
- * parent: cols (§18.3.1.17)
- * @see https://msdn.microsoft.com/EN-US/library/documentformat.openxml.spreadsheet.column.aspx
- */
 var Column = (function () {
     function Column() {
     }
     Column.read = function (xmlDoc, elem) {
-        if (elem.tagName !== "col") {
-            throw xmlDoc.validator.unexpectedNode(elem.tagName, "col", "cols");
-        }
+        xmlDoc.validator.expectNode(elem, "col", "cols");
         var attrs = elem.attributes;
         return {
-            bestFit: xmlDoc.domHelper.attrBool(attrs, "bestFit"),
-            collapsed: xmlDoc.domHelper.attrBool(attrs, "collapsed"),
-            customWidth: xmlDoc.domHelper.attrBool(attrs, "customWidth"),
-            hidden: xmlDoc.domHelper.attrBool(attrs, "hidden"),
-            max: xmlDoc.domHelper.attrInt(attrs, "max"),
-            min: xmlDoc.domHelper.attrInt(attrs, "min"),
-            outlineLevel: xmlDoc.domHelper.attrInt(attrs, "outlineLevel"),
-            phonetic: xmlDoc.domHelper.attrBool(attrs, "phonetic"),
-            style: xmlDoc.domHelper.attrInt(attrs, "style"),
-            width: xmlDoc.domHelper.attrFloat(attrs, "width"),
+            bestFit: xmlDoc.attrBool(attrs, "bestFit"),
+            collapsed: xmlDoc.attrBool(attrs, "collapsed"),
+            customWidth: xmlDoc.attrBool(attrs, "customWidth"),
+            hidden: xmlDoc.attrBool(attrs, "hidden"),
+            max: xmlDoc.attrInt(attrs, "max"),
+            min: xmlDoc.attrInt(attrs, "min"),
+            outlineLevel: xmlDoc.attrInt(attrs, "outlineLevel"),
+            phonetic: xmlDoc.attrBool(attrs, "phonetic"),
+            style: xmlDoc.attrInt(attrs, "style"),
+            width: xmlDoc.attrFloat(attrs, "width"),
         };
     };
     Column.write = function (xmlDoc, inst) {
@@ -39,7 +33,7 @@ var Column = (function () {
             .element;
         return elem;
     };
-    Column.type = Column; // TODO type-checker
     return Column;
 }());
+Column.type = Column; // TODO type-checker
 module.exports = Column;

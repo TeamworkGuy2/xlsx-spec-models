@@ -1,30 +1,26 @@
 ﻿import CommentText = require("./CommentText");
 
-/** <comment> (Comment) "x:comment"
- * parent: commentList (§18.7.4)
- * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.comment.aspx
- */
 class Comment {
     private static type: OpenXmlIo.ReadWrite<OpenXml.Comment> = Comment; // TODO type-checker
 
 
-    public static read(xmlDoc: OpenXmlIo.ParsedFile, elem: HTMLElement): OpenXml.Comment {
-        if (elem.tagName !== "comment") { throw xmlDoc.validator.unexpectedNode(elem.tagName, "comment", "comments"); }
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.Comment {
+        xmlDoc.validator.expectNode(elem, "comment", "comments");
+        var attrs = elem.attributes;
 
-        var textElem = xmlDoc.domHelper.queryOneChild(elem, "text");
+        var textElem = xmlDoc.queryOneChild(elem, "text");
         var text = CommentText.read(xmlDoc, textElem);
 
-        var attrs = elem.attributes;
         return {
-            authorId: xmlDoc.domHelper.attrInt(attrs, "authorId"),
-            ref: xmlDoc.domHelper.attrString(attrs, "ref"),
-            shapeId: xmlDoc.domHelper.attrInt(attrs, "shapeId"),
+            authorId: xmlDoc.attrInt(attrs, "authorId"),
+            ref: xmlDoc.attrString(attrs, "ref"),
+            shapeId: xmlDoc.attrInt(attrs, "shapeId"),
             text: text,
         };
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.ParsedFile, inst: OpenXml.Comment): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Comment): HTMLElement {
         var elem = xmlDoc.domBldr.create("comment")
             .attrString("ref", inst.ref)
             .attrInt("authorId", inst.authorId)

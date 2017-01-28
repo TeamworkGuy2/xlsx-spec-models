@@ -6,12 +6,10 @@ var StringAttribute = (function () {
     function StringAttribute() {
     }
     StringAttribute.read = function (xmlDoc, elem, expectedTagName, parentTags) {
-        if (elem.tagName !== expectedTagName) {
-            throw xmlDoc.validator.unexpectedNode(elem.tagName, expectedTagName, parentTags);
-        }
+        xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
         var attrs = elem.attributes;
         return {
-            val: xmlDoc.domHelper.attrString(attrs, "val"),
+            val: xmlDoc.attrString(attrs, "val"),
         };
     };
     StringAttribute.write = function (xmlDoc, inst, tagName) {
@@ -25,7 +23,7 @@ var StringAttribute = (function () {
             val: inst.val
         };
     };
-    StringAttribute.type = StringAttribute; // TODO type-checker
     return StringAttribute;
 }());
+StringAttribute.type = StringAttribute; // TODO type-checker
 module.exports = StringAttribute;

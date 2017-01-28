@@ -1,23 +1,17 @@
 "use strict";
 var CommentText = require("./CommentText");
-/** <comment> (Comment) "x:comment"
- * parent: commentList (§18.7.4)
- * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.comment.aspx
- */
 var Comment = (function () {
     function Comment() {
     }
     Comment.read = function (xmlDoc, elem) {
-        if (elem.tagName !== "comment") {
-            throw xmlDoc.validator.unexpectedNode(elem.tagName, "comment", "comments");
-        }
-        var textElem = xmlDoc.domHelper.queryOneChild(elem, "text");
-        var text = CommentText.read(xmlDoc, textElem);
+        xmlDoc.validator.expectNode(elem, "comment", "comments");
         var attrs = elem.attributes;
+        var textElem = xmlDoc.queryOneChild(elem, "text");
+        var text = CommentText.read(xmlDoc, textElem);
         return {
-            authorId: xmlDoc.domHelper.attrInt(attrs, "authorId"),
-            ref: xmlDoc.domHelper.attrString(attrs, "ref"),
-            shapeId: xmlDoc.domHelper.attrInt(attrs, "shapeId"),
+            authorId: xmlDoc.attrInt(attrs, "authorId"),
+            ref: xmlDoc.attrString(attrs, "ref"),
+            shapeId: xmlDoc.attrInt(attrs, "shapeId"),
             text: text,
         };
     };
@@ -30,7 +24,7 @@ var Comment = (function () {
         elem.appendChild(CommentText.write(xmlDoc, inst.text));
         return elem;
     };
-    Comment.type = Comment; // TODO type-checker
     return Comment;
 }());
+Comment.type = Comment; // TODO type-checker
 module.exports = Comment;

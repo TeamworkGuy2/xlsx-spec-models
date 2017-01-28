@@ -5,23 +5,17 @@ var Fill = require("./Fill");
 var Font = require("./Font");
 var NumberingFormat = require("./NumberingFormat");
 var Protection = require("./Protection");
-/** <dxf> (Formatting) "x:dxf"
- * parent: dxfs (§18.8.15); rfmt (§18.11.1.17)
- * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.differentialformat.aspx
- */
 var DifferentialFormat = (function () {
     function DifferentialFormat() {
     }
     DifferentialFormat.read = function (xmlDoc, elem) {
-        if (elem.tagName !== "dxf") {
-            throw xmlDoc.validator.unexpectedNode(elem.tagName, "dxf", "dxfs, rfmt");
-        }
-        var alignmentElem = xmlDoc.domHelper.queryOneChild(elem, "alignment");
-        var borderElem = xmlDoc.domHelper.queryOneChild(elem, "border");
-        var fillElem = xmlDoc.domHelper.queryOneChild(elem, "fill");
-        var fontElem = xmlDoc.domHelper.queryOneChild(elem, "font");
-        var numFmtElem = xmlDoc.domHelper.queryOneChild(elem, "numFmt");
-        var protectionElem = xmlDoc.domHelper.queryOneChild(elem, "protection");
+        xmlDoc.validator.expectNode(elem, "dxf", "dxfs, rfmt");
+        var alignmentElem = xmlDoc.queryOneChild(elem, "alignment");
+        var borderElem = xmlDoc.queryOneChild(elem, "border");
+        var fillElem = xmlDoc.queryOneChild(elem, "fill");
+        var fontElem = xmlDoc.queryOneChild(elem, "font");
+        var numFmtElem = xmlDoc.queryOneChild(elem, "numFmt");
+        var protectionElem = xmlDoc.queryOneChild(elem, "protection");
         return {
             alignment: alignmentElem ? Alignment.read(xmlDoc, alignmentElem) : null,
             border: borderElem ? Border.read(xmlDoc, borderElem) : null,
@@ -53,7 +47,7 @@ var DifferentialFormat = (function () {
         }
         return elem;
     };
-    DifferentialFormat.type = DifferentialFormat; // TODO type-checker
     return DifferentialFormat;
 }());
+DifferentialFormat.type = DifferentialFormat; // TODO type-checker
 module.exports = DifferentialFormat;

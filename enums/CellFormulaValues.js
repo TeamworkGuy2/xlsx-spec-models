@@ -8,10 +8,10 @@ var CellFormulaValues = (function () {
     function CellFormulaValues(xmlValue) {
         this.xmlValue = xmlValue;
     }
-    CellFormulaValues.Normal = new CellFormulaValues("normal");
-    CellFormulaValues.Array = new CellFormulaValues("array");
-    CellFormulaValues.DataTable = new CellFormulaValues("dataTable");
-    CellFormulaValues.Shared = new CellFormulaValues("shared");
     return CellFormulaValues;
 }());
+CellFormulaValues.Normal = new CellFormulaValues("normal");
+CellFormulaValues.Array = new CellFormulaValues("array");
+CellFormulaValues.DataTable = new CellFormulaValues("dataTable");
+CellFormulaValues.Shared = new CellFormulaValues("shared");
 module.exports = CellFormulaValues;

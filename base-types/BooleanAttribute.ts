@@ -5,16 +5,16 @@ class BooleanAttribute {
     private static type: OpenXmlIo.ReadWriteNamed<{ val: boolean }> = BooleanAttribute; // TODO type-checker
 
 
-    public static read(xmlDoc: OpenXmlIo.ParsedFile, elem: HTMLElement, expectedTagName: string, parentTags?: string): { val: boolean } {
-        if (elem.tagName !== expectedTagName) { throw xmlDoc.validator.unexpectedNode(elem.tagName, expectedTagName, parentTags); }
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement, expectedTagName: string, parentTags?: string): { val: boolean } {
+        xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
         var attrs = elem.attributes;
         return {
-            val: xmlDoc.domHelper.attrBool(attrs, "val"),
+            val: xmlDoc.attrBool(attrs, "val"),
         };
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.ParsedFile, inst: { val: boolean }, tagName: string): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: { val: boolean }, tagName: string): HTMLElement {
         var elem = xmlDoc.domBldr.create(tagName)
             .attrBool("val", inst.val, true, "1", "0")
             .element;

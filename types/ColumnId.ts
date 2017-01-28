@@ -1,0 +1,18 @@
+﻿import IntElement = require("../base-types/IntElement");
+
+class ColumnId {
+    private static type: OpenXmlIo.ReadWrite<OpenXml.ColumnId> = ColumnId; // TODO type-checker
+
+
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.ColumnId {
+        return IntElement.read(xmlDoc, elem, "xdr:col", "from, to");
+    }
+
+
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.ColumnId): HTMLElement {
+        return IntElement.write(xmlDoc, inst, "xdr:col");
+    }
+
+}
+
+export = ColumnId;

@@ -9,31 +9,27 @@ import FontSize = require("./FontSize");
 import Underline = require("./Underline");
 import VerticalTextAlignment = require("./VerticalTextAlignment");
 
-/** <font> (Font) "x:font"
- * parents: dxf (§18.8.14); fonts (§18.8.23); ndxf (§18.11.1.4); odxf (§18.11.1.6)
- * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.font.aspx
- */
 class Font {
     private static type: OpenXmlIo.ReadWrite<OpenXml.Font> = Font; // TODO type-checker
 
 
-    public static read(xmlDoc: OpenXmlIo.ParsedFile, elem: HTMLElement): OpenXml.Font {
-        if (elem.tagName !== "font") { throw xmlDoc.validator.unexpectedNode(elem.tagName, "font", "dxf, fonts, ndxf, odxf"); }
-        var bElem = xmlDoc.domHelper.queryOneChild(elem, "b");
-        var charsetElem = xmlDoc.domHelper.queryOneChild(elem, "charset");
-        var colorElem = xmlDoc.domHelper.queryOneChild(elem, "color");
-        var condenseElem = xmlDoc.domHelper.queryOneChild(elem, "condense");
-        var extendElem = xmlDoc.domHelper.queryOneChild(elem, "extend");
-        var familyElem = xmlDoc.domHelper.queryOneChild(elem, "family");
-        var iElem = xmlDoc.domHelper.queryOneChild(elem, "i");
-        var nameElem = xmlDoc.domHelper.queryOneChild(elem, "name");
-        var outlineElem = xmlDoc.domHelper.queryOneChild(elem, "outline");
-        var schemeElem = xmlDoc.domHelper.queryOneChild(elem, "scheme");
-        var shadowElem = xmlDoc.domHelper.queryOneChild(elem, "shadow");
-        var strikeElem = xmlDoc.domHelper.queryOneChild(elem, "strike");
-        var szElem = xmlDoc.domHelper.queryOneChild(elem, "sz");
-        var uElem = xmlDoc.domHelper.queryOneChild(elem, "u");
-        var vertAlignElem = xmlDoc.domHelper.queryOneChild(elem, "vertAlign");
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.Font {
+        xmlDoc.validator.expectNode(elem, "font", "dxf, fonts, ndxf, odxf");
+        var bElem = xmlDoc.queryOneChild(elem, "b");
+        var charsetElem = xmlDoc.queryOneChild(elem, "charset");
+        var colorElem = xmlDoc.queryOneChild(elem, "color");
+        var condenseElem = xmlDoc.queryOneChild(elem, "condense");
+        var extendElem = xmlDoc.queryOneChild(elem, "extend");
+        var familyElem = xmlDoc.queryOneChild(elem, "family");
+        var iElem = xmlDoc.queryOneChild(elem, "i");
+        var nameElem = xmlDoc.queryOneChild(elem, "name");
+        var outlineElem = xmlDoc.queryOneChild(elem, "outline");
+        var schemeElem = xmlDoc.queryOneChild(elem, "scheme");
+        var shadowElem = xmlDoc.queryOneChild(elem, "shadow");
+        var strikeElem = xmlDoc.queryOneChild(elem, "strike");
+        var szElem = xmlDoc.queryOneChild(elem, "sz");
+        var uElem = xmlDoc.queryOneChild(elem, "u");
+        var vertAlignElem = xmlDoc.queryOneChild(elem, "vertAlign");
 
         var attrs = elem.attributes;
         return {
@@ -56,7 +52,7 @@ class Font {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.ParsedFile, inst: OpenXml.Font): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Font): HTMLElement {
         var elem = xmlDoc.dom.createElement("font");
         if (inst.b && inst.b.val) { elem.appendChild(Bold.write(xmlDoc, inst.b, "b")); }
         if (inst.sz) { elem.appendChild(FontSize.write(xmlDoc, inst.sz)); }

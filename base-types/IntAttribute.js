@@ -6,12 +6,10 @@ var IntAttribute = (function () {
     function IntAttribute() {
     }
     IntAttribute.read = function (xmlDoc, elem, expectedTagName, parentTags) {
-        if (elem.tagName !== expectedTagName) {
-            throw xmlDoc.validator.unexpectedNode(elem.tagName, expectedTagName, parentTags);
-        }
+        xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
         var attrs = elem.attributes;
         return {
-            val: xmlDoc.domHelper.attrInt(attrs, "val"),
+            val: xmlDoc.attrInt(attrs, "val"),
         };
     };
     IntAttribute.write = function (xmlDoc, inst, tagName) {
@@ -25,7 +23,7 @@ var IntAttribute = (function () {
             val: inst.val
         };
     };
-    IntAttribute.type = IntAttribute; // TODO type-checker
     return IntAttribute;
 }());
+IntAttribute.type = IntAttribute; // TODO type-checker
 module.exports = IntAttribute;

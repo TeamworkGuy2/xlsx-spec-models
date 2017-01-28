@@ -1,30 +1,26 @@
 ﻿import RichTextRun = require("./RichTextRun");
 import Text = require("./Text");
 
-/** <si> (String Item) "x:si"
- * parent: sst (§18.4.9)
- * @see https://msdn.microsoft.com/EN-US/library/documentformat.openxml.spreadsheet.sharedstringitem.aspx
- */
 class SharedStringItem {
     private static type: OpenXmlIo.ReadWrite<OpenXml.SharedStringItem> = SharedStringItem; // TODO type-checker
 
 
-    public static read(xmlDoc: OpenXmlIo.ParsedFile, elem: HTMLElement): OpenXml.SharedStringItem {
-        if (elem.tagName !== "si") { throw xmlDoc.validator.unexpectedNode(elem.tagName, "si", "sst"); }
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.SharedStringItem {
+        xmlDoc.validator.expectNode(elem, "si", "sst");
 
-        var rtrChilds = xmlDoc.domHelper.queryAllChilds(elem, "r");
-        var textChild = xmlDoc.domHelper.queryOneChild(elem, "t");
+        var rtrChilds = xmlDoc.queryAllChilds(elem, "r");
+        var textChild = xmlDoc.queryOneChild(elem, "t");
 
         return {
-            rs: xmlDoc.readOpenXml.readMulti(xmlDoc, RichTextRun.read, rtrChilds),
+            rs: xmlDoc.readMulti(RichTextRun.read, rtrChilds),
             t: textChild ? Text.read(xmlDoc, textChild) : null,
         };
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.ParsedFile, inst: OpenXml.SharedStringItem): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.SharedStringItem): HTMLElement {
         var elem = xmlDoc.dom.createElement("si");
-        xmlDoc.domHelper.addChilds(elem, xmlDoc.writeOpenXml.writeMulti(xmlDoc, RichTextRun.write, inst.rs));
+        xmlDoc.addChilds(elem, xmlDoc.writeMulti(RichTextRun.write, inst.rs));
         if (inst.t) { elem.appendChild(Text.write(xmlDoc, inst.t)); }
 
         return elem;

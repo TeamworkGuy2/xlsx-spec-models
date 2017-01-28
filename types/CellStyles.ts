@@ -1,30 +1,25 @@
 ﻿import CellStyle = require("./CellStyle");
 
-/** <cellStyles> (Cell Styles) "x:cellStyles"
- * parents: styleSheet (§18.8.39)
- * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.cellstyles.aspx
- */
 class CellStyles {
     private static type: OpenXmlIo.ReadWrite<OpenXml.CellStyles> = CellStyles; // TODO type-checker
 
 
-    public static read(xmlDoc: OpenXmlIo.ParsedFile, elem: HTMLElement): OpenXml.CellStyles {
-        if (elem.tagName !== "cellStyles") { throw xmlDoc.validator.unexpectedNode(elem.tagName, "cellStyles", "styleSheet"); }
-        var cellStyleElems = xmlDoc.domHelper.queryAllChilds(elem, "cellStyle");
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.CellStyles {
+        xmlDoc.validator.expectNode(elem, "cellStyles", "styleSheet");
+        var cellStyleElems = xmlDoc.queryAllChilds(elem, "cellStyle");
         var attrs = elem.attributes;
         return {
-            cellStyles: xmlDoc.readOpenXml.readMulti(xmlDoc, CellStyle.read, cellStyleElems),
-            count: xmlDoc.domHelper.attrInt(attrs, "count"),
+            cellStyles: xmlDoc.readMulti(CellStyle.read, cellStyleElems),
+            count: xmlDoc.attrInt(attrs, "count"),
         };
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.ParsedFile, inst: OpenXml.CellStyles): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.CellStyles): HTMLElement {
         var elem = xmlDoc.domBldr.create("cellStyles")
             .attrInt("count", inst.count, true)
             .element;
-        var cellStyleElems = xmlDoc.writeOpenXml.writeMulti(xmlDoc, CellStyle.write, inst.cellStyles);
-        xmlDoc.domHelper.addChilds(elem, cellStyleElems);
+        xmlDoc.addChilds(elem, xmlDoc.writeMulti(CellStyle.write, inst.cellStyles));
         return elem;
     }
 

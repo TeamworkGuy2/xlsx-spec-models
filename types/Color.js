@@ -1,23 +1,17 @@
 "use strict";
-/** <color> (Data Bar Color) "x:color"
- * parent: bottom (§18.8.6); colorScale (§18.3.1.16); dataBar (§18.3.1.28); diagonal (§18.8.13); end (§18.8.16); font (§18.8.22); horizontal (§18.8.25); mruColors (§18.8.28); rPr (§18.4.7); start (§18.8.37); stop (§18.8.38); top (§18.8.43); vertical (§18.8.44)
- * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.color.aspx
- */
 var Color = (function () {
     function Color() {
     }
     Color.read = function (xmlDoc, elem, expectedTagName) {
-        if (elem.tagName !== expectedTagName) {
-            throw xmlDoc.validator.unexpectedNode(elem.tagName, expectedTagName, "bottom, colorScale, dataBar, diagonal, end, font, horizontal, mruColors, rPr, start, stop, top, vertical");
-        }
+        xmlDoc.validator.expectNode(elem, expectedTagName, "bottom, colorScale, dataBar, diagonal, end, font, horizontal, mruColors, rPr, start, stop, top, vertical");
         var attrs = elem.attributes;
-        var rgbStr = xmlDoc.domHelper.attrString(attrs, "rgb");
+        var rgbStr = xmlDoc.attrString(attrs, "rgb");
         return {
-            auto: xmlDoc.domHelper.attrBool(attrs, "auto"),
-            indexed: xmlDoc.domHelper.attrInt(attrs, "indexed"),
+            auto: xmlDoc.attrBool(attrs, "auto"),
+            indexed: xmlDoc.attrInt(attrs, "indexed"),
             rgb: rgbStr ? parseInt(rgbStr, 16) : null,
-            theme: xmlDoc.domHelper.attrInt(attrs, "theme"),
-            tint: xmlDoc.domHelper.attrFloat(attrs, "tint"),
+            theme: xmlDoc.attrInt(attrs, "theme"),
+            tint: xmlDoc.attrFloat(attrs, "tint"),
         };
     };
     Color.write = function (xmlDoc, inst, expectedTagName) {
@@ -40,7 +34,7 @@ var Color = (function () {
             tint: inst.tint,
         };
     };
-    Color.type = Color; // TODO type-checker
     return Color;
 }());
+Color.type = Color; // TODO type-checker
 module.exports = Color;

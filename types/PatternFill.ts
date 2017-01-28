@@ -1,27 +1,23 @@
 ﻿import Color = require("./Color");
 
-/** <patternFill> (Pattern) "x:patternFill"
- * parent: fill (§18.8.20)
- * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.patternfill.aspx
- */
 class PatternFill {
     private static type: OpenXmlIo.ReadWrite<OpenXml.PatternFill> = PatternFill; // TODO type-checker
 
 
-    public static read(xmlDoc: OpenXmlIo.ParsedFile, elem: HTMLElement): OpenXml.PatternFill {
-        if (elem.tagName !== "patternFill") { throw xmlDoc.validator.unexpectedNode(elem.tagName, "patternFill", "dxfs, rfmt"); }
-        var bgColorElem = xmlDoc.domHelper.queryOneChild(elem, "bgColor");
-        var fgColorElem = xmlDoc.domHelper.queryOneChild(elem, "fgColor");
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.PatternFill {
+        xmlDoc.validator.expectNode(elem, "patternFill", "dxfs, rfmt");
         var attrs = elem.attributes;
+        var bgColorElem = xmlDoc.queryOneChild(elem, "bgColor");
+        var fgColorElem = xmlDoc.queryOneChild(elem, "fgColor");
         return {
             bgColor: bgColorElem ? Color.read(xmlDoc, bgColorElem, "bgColor") : null,
             fgColor: fgColorElem ? Color.read(xmlDoc, fgColorElem, "fgColor") : null,
-            patternType: xmlDoc.domHelper.attrString(attrs, "patternType"),
+            patternType: <OpenXml.ST_PatternType>xmlDoc.attrString(attrs, "patternType"),
         };
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.ParsedFile, inst: OpenXml.PatternFill): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.PatternFill): HTMLElement {
         var elem = xmlDoc.domBldr.create("patternFill")
             .attrString("patternType", inst.patternType, true)
             .element;

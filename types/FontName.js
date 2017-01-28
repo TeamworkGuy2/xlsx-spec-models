@@ -1,9 +1,5 @@
 "use strict";
 var StringAttribute = require("../base-types/StringAttribute");
-/** <name> (Font Name) "x:name"
- * parent: font (§18.8.22)
- * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.fontname.aspx
- */
 var FontName = (function () {
     function FontName() {
     }
@@ -16,7 +12,7 @@ var FontName = (function () {
     FontName.copy = function (inst) {
         return StringAttribute.copy(inst);
     };
-    FontName.type = FontName; // TODO type-checker
     return FontName;
 }());
+FontName.type = FontName; // TODO type-checker
 module.exports = FontName;

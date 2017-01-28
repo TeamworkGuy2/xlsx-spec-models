@@ -7,27 +7,23 @@ import StartBorder = require("./StartBorder");
 import TopBorder = require("./TopBorder");
 import VerticalBorder = require("./VerticalBorder");
 
-/** <border> (Border) "x:border"
- * parents: borders (§18.8.5); dxf (§18.8.14); ndxf (§18.11.1.4); odxf (§18.11.1.6)
- * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.border.aspx
- */
 class Border {
     private static type: OpenXmlIo.ReadWrite<OpenXml.Border> = Border; // TODO type-checker
 
 
-    public static read(xmlDoc: OpenXmlIo.ParsedFile, elem: HTMLElement): OpenXml.Border {
-        if (elem.tagName !== "border") { throw xmlDoc.validator.unexpectedNode(elem.tagName, "border", "borders, dxf, ndxf, odxf"); }
-        var bottomElem = xmlDoc.domHelper.queryOneChild(elem, "bottom");
-        var diagonalElem = xmlDoc.domHelper.queryOneChild(elem, "diagonal");
-        var endElem = xmlDoc.domHelper.queryOneChild(elem, "end");
-        var horizontalElem = xmlDoc.domHelper.queryOneChild(elem, "horizontal");
-        var startElem = xmlDoc.domHelper.queryOneChild(elem, "start");
-        var topElem = xmlDoc.domHelper.queryOneChild(elem, "top");
-        var verticlaElem = xmlDoc.domHelper.queryOneChild(elem, "vertical");
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.Border {
+        xmlDoc.validator.expectNode(elem, "border", "borders, dxf, ndxf, odxf");
+        var bottomElem = xmlDoc.queryOneChild(elem, "bottom");
+        var diagonalElem = xmlDoc.queryOneChild(elem, "diagonal");
+        var endElem = xmlDoc.queryOneChild(elem, "end");
+        var horizontalElem = xmlDoc.queryOneChild(elem, "horizontal");
+        var startElem = xmlDoc.queryOneChild(elem, "start");
+        var topElem = xmlDoc.queryOneChild(elem, "top");
+        var verticlaElem = xmlDoc.queryOneChild(elem, "vertical");
 
         // these aren't part of the spec, but MS Office 2013 requires them
-        var leftElem = xmlDoc.domHelper.queryOneChild(elem, "left");
-        var rightElem = xmlDoc.domHelper.queryOneChild(elem, "right");
+        var leftElem = xmlDoc.queryOneChild(elem, "left");
+        var rightElem = xmlDoc.queryOneChild(elem, "right");
 
         var attrs = elem.attributes;
 
@@ -42,14 +38,14 @@ class Border {
             start: startElem ? StartBorder.read(xmlDoc, startElem) : null,
             top: topElem ? TopBorder.read(xmlDoc, topElem) : null,
             vertical: verticlaElem ? VerticalBorder.read(xmlDoc, verticlaElem) : null,
-            diagonalDown: xmlDoc.domHelper.attrBool(attrs, "diagonalDown"),
-            diagonalUp: xmlDoc.domHelper.attrBool(attrs, "diagonalUp"),
-            outline: xmlDoc.domHelper.attrBool(attrs, "outline"),
+            diagonalDown: xmlDoc.attrBool(attrs, "diagonalDown"),
+            diagonalUp: xmlDoc.attrBool(attrs, "diagonalUp"),
+            outline: xmlDoc.attrBool(attrs, "outline"),
         };
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.ParsedFile, inst: OpenXml.Border): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Border): HTMLElement {
         var elem = xmlDoc.domBldr.create("border")
             .attrBool("diagonalDown", inst.diagonalDown, true, "1", "0")
             .attrBool("diagonalUp", inst.diagonalUp, true, "1", "0")

@@ -2,35 +2,31 @@
 import InlineString = require("./InlineString");
 import CellValue = require("./CellValue");
 
-/** <c> (Cell) "x:c"
- * parent: row (§18.3.1.73)
- * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.cell.aspx
- */
 class Cell {
     private static type: OpenXmlIo.ReadWrite<OpenXml.Cell> = Cell; // TODO type-checker
 
 
-    public static read(xmlDoc: OpenXmlIo.ParsedFile, elem: HTMLElement): OpenXml.Cell {
-        if (elem.tagName !== "c") { throw xmlDoc.validator.unexpectedNode(elem.tagName, "c", "row"); }
-        var fElem = xmlDoc.domHelper.queryOneChild(elem, "f");
-        var isElem = xmlDoc.domHelper.queryOneChild(elem, "is");
-        var vElem = xmlDoc.domHelper.queryOneChild(elem, "v");
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.Cell {
+        xmlDoc.validator.expectNode(elem, "c", "row");
         var attrs = elem.attributes;
+        var fElem = xmlDoc.queryOneChild(elem, "f");
+        var isElem = xmlDoc.queryOneChild(elem, "is");
+        var vElem = xmlDoc.queryOneChild(elem, "v");
         return {
             f: fElem ? CellFormula.read(xmlDoc, fElem) : null,
             is: isElem ? InlineString.read(xmlDoc, isElem) : null,
             v: vElem ? CellValue.read(xmlDoc, vElem) : null,
-            cm: xmlDoc.domHelper.attrInt(attrs, "cm"),
-            ph: xmlDoc.domHelper.attrBool(attrs, "ph"),
-            r: xmlDoc.domHelper.attrString(attrs, "r"),
-            s: xmlDoc.domHelper.attrInt(attrs, "s"),
-            t: xmlDoc.domHelper.attrString(attrs, "t"),
-            vm: xmlDoc.domHelper.attrInt(attrs, "vm"),
+            cm: xmlDoc.attrInt(attrs, "cm"),
+            ph: xmlDoc.attrBool(attrs, "ph"),
+            r: xmlDoc.attrString(attrs, "r"),
+            s: xmlDoc.attrInt(attrs, "s"),
+            t: xmlDoc.attrString(attrs, "t"),
+            vm: xmlDoc.attrInt(attrs, "vm"),
         };
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.ParsedFile, inst: OpenXml.Cell): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Cell): HTMLElement {
         var elem = xmlDoc.domBldr.create("c")
             .attrInt("cm", inst.cm, true)
             .attrBool("ph", inst.ph, true)

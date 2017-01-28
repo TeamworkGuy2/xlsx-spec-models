@@ -5,16 +5,16 @@ class IntAttribute {
     private static type: OpenXmlIo.ReadWriteNamed<{ val: number }> = IntAttribute; // TODO type-checker
 
 
-    public static read(xmlDoc: OpenXmlIo.ParsedFile, elem: HTMLElement, expectedTagName: string, parentTags?: string): { val: number } {
-        if (elem.tagName !== expectedTagName) { throw xmlDoc.validator.unexpectedNode(elem.tagName, expectedTagName, parentTags); }
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement, expectedTagName: string, parentTags?: string): { val: number } {
+        xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
         var attrs = elem.attributes;
         return {
-            val: xmlDoc.domHelper.attrInt(attrs, "val"),
+            val: xmlDoc.attrInt(attrs, "val"),
         };
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.ParsedFile, inst: { val: number }, tagName: string): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: { val: number }, tagName: string): HTMLElement {
         var elem = xmlDoc.domBldr.create(tagName)
             .attrInt("val", inst.val)
             .element;

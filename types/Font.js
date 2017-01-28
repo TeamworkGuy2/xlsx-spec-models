@@ -9,32 +9,26 @@ var FontScheme = require("./FontScheme");
 var FontSize = require("./FontSize");
 var Underline = require("./Underline");
 var VerticalTextAlignment = require("./VerticalTextAlignment");
-/** <font> (Font) "x:font"
- * parents: dxf (§18.8.14); fonts (§18.8.23); ndxf (§18.11.1.4); odxf (§18.11.1.6)
- * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.font.aspx
- */
 var Font = (function () {
     function Font() {
     }
     Font.read = function (xmlDoc, elem) {
-        if (elem.tagName !== "font") {
-            throw xmlDoc.validator.unexpectedNode(elem.tagName, "font", "dxf, fonts, ndxf, odxf");
-        }
-        var bElem = xmlDoc.domHelper.queryOneChild(elem, "b");
-        var charsetElem = xmlDoc.domHelper.queryOneChild(elem, "charset");
-        var colorElem = xmlDoc.domHelper.queryOneChild(elem, "color");
-        var condenseElem = xmlDoc.domHelper.queryOneChild(elem, "condense");
-        var extendElem = xmlDoc.domHelper.queryOneChild(elem, "extend");
-        var familyElem = xmlDoc.domHelper.queryOneChild(elem, "family");
-        var iElem = xmlDoc.domHelper.queryOneChild(elem, "i");
-        var nameElem = xmlDoc.domHelper.queryOneChild(elem, "name");
-        var outlineElem = xmlDoc.domHelper.queryOneChild(elem, "outline");
-        var schemeElem = xmlDoc.domHelper.queryOneChild(elem, "scheme");
-        var shadowElem = xmlDoc.domHelper.queryOneChild(elem, "shadow");
-        var strikeElem = xmlDoc.domHelper.queryOneChild(elem, "strike");
-        var szElem = xmlDoc.domHelper.queryOneChild(elem, "sz");
-        var uElem = xmlDoc.domHelper.queryOneChild(elem, "u");
-        var vertAlignElem = xmlDoc.domHelper.queryOneChild(elem, "vertAlign");
+        xmlDoc.validator.expectNode(elem, "font", "dxf, fonts, ndxf, odxf");
+        var bElem = xmlDoc.queryOneChild(elem, "b");
+        var charsetElem = xmlDoc.queryOneChild(elem, "charset");
+        var colorElem = xmlDoc.queryOneChild(elem, "color");
+        var condenseElem = xmlDoc.queryOneChild(elem, "condense");
+        var extendElem = xmlDoc.queryOneChild(elem, "extend");
+        var familyElem = xmlDoc.queryOneChild(elem, "family");
+        var iElem = xmlDoc.queryOneChild(elem, "i");
+        var nameElem = xmlDoc.queryOneChild(elem, "name");
+        var outlineElem = xmlDoc.queryOneChild(elem, "outline");
+        var schemeElem = xmlDoc.queryOneChild(elem, "scheme");
+        var shadowElem = xmlDoc.queryOneChild(elem, "shadow");
+        var strikeElem = xmlDoc.queryOneChild(elem, "strike");
+        var szElem = xmlDoc.queryOneChild(elem, "sz");
+        var uElem = xmlDoc.queryOneChild(elem, "u");
+        var vertAlignElem = xmlDoc.queryOneChild(elem, "vertAlign");
         var attrs = elem.attributes;
         return {
             b: bElem ? Bold.read(xmlDoc, bElem, "b", "font, rPr") : null,
@@ -103,7 +97,7 @@ var Font = (function () {
         }
         return elem;
     };
-    Font.type = Font; // TODO type-checker
     return Font;
 }());
+Font.type = Font; // TODO type-checker
 module.exports = Font;

@@ -1,24 +1,18 @@
 "use strict";
 var TableStyleElement = require("./TableStyleElement");
-/** <tableStyle> (Table Style) "x:tableStyle"
- * parents: tableStyles (§18.8.42)
- * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.tablestyle.aspx
- */
 var TableStyle = (function () {
     function TableStyle() {
     }
     TableStyle.read = function (xmlDoc, elem) {
-        if (elem.tagName !== "tableStyle") {
-            throw xmlDoc.validator.unexpectedNode(elem.tagName, "tableStyle", "tableStyles");
-        }
-        var tableStyleElementElems = xmlDoc.domHelper.queryAllChilds(elem, "tableStyleElement");
+        xmlDoc.validator.expectNode(elem, "tableStyle", "tableStyles");
         var attrs = elem.attributes;
+        var tableStyleElementElems = xmlDoc.queryAllChilds(elem, "tableStyleElement");
         return {
-            tableStyleElements: xmlDoc.readOpenXml.readMulti(xmlDoc, TableStyleElement.read, tableStyleElementElems, "tableStyleElement"),
-            count: xmlDoc.domHelper.attrInt(attrs, "count"),
-            name: xmlDoc.domHelper.attrString(attrs, "name"),
-            pivot: xmlDoc.domHelper.attrBool(attrs, "pivot"),
-            table: xmlDoc.domHelper.attrBool(attrs, "table"),
+            tableStyleElements: xmlDoc.readMulti(TableStyleElement.read, tableStyleElementElems, "tableStyleElement"),
+            count: xmlDoc.attrInt(attrs, "count"),
+            name: xmlDoc.attrString(attrs, "name"),
+            pivot: xmlDoc.attrBool(attrs, "pivot"),
+            table: xmlDoc.attrBool(attrs, "table"),
         };
     };
     TableStyle.write = function (xmlDoc, inst) {
@@ -29,11 +23,11 @@ var TableStyle = (function () {
             .attrBool("table", inst.table, true)
             .element;
         if (inst.tableStyleElements) {
-            xmlDoc.domHelper.addChilds(elem, xmlDoc.writeOpenXml.writeMulti(xmlDoc, TableStyleElement.write, inst.tableStyleElements));
+            xmlDoc.addChilds(elem, xmlDoc.writeMulti(TableStyleElement.write, inst.tableStyleElements));
         }
         return elem;
     };
-    TableStyle.type = TableStyle; // TODO type-checker
     return TableStyle;
 }());
+TableStyle.type = TableStyle; // TODO type-checker
 module.exports = TableStyle;

@@ -1,36 +1,30 @@
 "use strict";
 var Alignment = require("./Alignment");
 var Protection = require("./Protection");
-/** <xf> (Format) "x:xf"
- * parents: cellStyleXfs (§18.8.9); cellXfs (§18.8.10)
- * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.cellformat.aspx
- */
 var CellFormat = (function () {
     function CellFormat() {
     }
     CellFormat.read = function (xmlDoc, elem) {
-        if (elem.tagName !== "xf") {
-            throw xmlDoc.validator.unexpectedNode(elem.tagName, "xf", "cellStyleXfs, cellXfs");
-        }
-        var alignmentElem = xmlDoc.domHelper.queryOneChild(elem, "alignment");
-        var protectionElem = xmlDoc.domHelper.queryOneChild(elem, "protection");
+        xmlDoc.validator.expectNode(elem, "xf", "cellStyleXfs, cellXfs");
         var attrs = elem.attributes;
+        var alignmentElem = xmlDoc.queryOneChild(elem, "alignment");
+        var protectionElem = xmlDoc.queryOneChild(elem, "protection");
         return {
             alignment: alignmentElem ? Alignment.read(xmlDoc, alignmentElem) : null,
             protection: protectionElem ? Protection.read(xmlDoc, protectionElem) : null,
-            applyAlignment: xmlDoc.domHelper.attrBool(attrs, "applyAlignment"),
-            applyBorder: xmlDoc.domHelper.attrBool(attrs, "applyBorder"),
-            applyFill: xmlDoc.domHelper.attrBool(attrs, "applyFill"),
-            applyFont: xmlDoc.domHelper.attrBool(attrs, "applyFont"),
-            applyNumberFormat: xmlDoc.domHelper.attrBool(attrs, "applyNumberFormat"),
-            applyProtection: xmlDoc.domHelper.attrBool(attrs, "applyProtection"),
-            borderId: xmlDoc.domHelper.attrInt(attrs, "borderId"),
-            fillId: xmlDoc.domHelper.attrInt(attrs, "fillId"),
-            fontId: xmlDoc.domHelper.attrInt(attrs, "fontId"),
-            numFmtId: xmlDoc.domHelper.attrInt(attrs, "numFmtId"),
-            pivotButton: xmlDoc.domHelper.attrBool(attrs, "pivotButton"),
-            quotePrefix: xmlDoc.domHelper.attrBool(attrs, "quotePrefix"),
-            xfId: xmlDoc.domHelper.attrInt(attrs, "xfId"),
+            applyAlignment: xmlDoc.attrBool(attrs, "applyAlignment"),
+            applyBorder: xmlDoc.attrBool(attrs, "applyBorder"),
+            applyFill: xmlDoc.attrBool(attrs, "applyFill"),
+            applyFont: xmlDoc.attrBool(attrs, "applyFont"),
+            applyNumberFormat: xmlDoc.attrBool(attrs, "applyNumberFormat"),
+            applyProtection: xmlDoc.attrBool(attrs, "applyProtection"),
+            borderId: xmlDoc.attrInt(attrs, "borderId"),
+            fillId: xmlDoc.attrInt(attrs, "fillId"),
+            fontId: xmlDoc.attrInt(attrs, "fontId"),
+            numFmtId: xmlDoc.attrInt(attrs, "numFmtId"),
+            pivotButton: xmlDoc.attrBool(attrs, "pivotButton"),
+            quotePrefix: xmlDoc.attrBool(attrs, "quotePrefix"),
+            xfId: xmlDoc.attrInt(attrs, "xfId"),
         };
     };
     CellFormat.write = function (xmlDoc, inst) {
@@ -57,7 +51,7 @@ var CellFormat = (function () {
         }
         return elem;
     };
-    CellFormat.type = CellFormat; // TODO type-checker
     return CellFormat;
 }());
+CellFormat.type = CellFormat; // TODO type-checker
 module.exports = CellFormat;

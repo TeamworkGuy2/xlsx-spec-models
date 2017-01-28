@@ -1,17 +1,11 @@
 "use strict";
-/** <b> (Bold) "x:b"
- * parent: font (§18.8.22); rPr (§18.4.7)
- * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.bold.aspx
- */
 var Bold = (function () {
     function Bold() {
     }
     Bold.read = function (xmlDoc, elem, expectedTagName, parentTags) {
-        if (elem.tagName !== expectedTagName) {
-            throw xmlDoc.validator.unexpectedNode(elem.tagName, expectedTagName, (parentTags || "font, rPr"));
-        }
+        xmlDoc.validator.expectNode(elem, expectedTagName, (parentTags || "font, rPr"));
         var attrs = elem.attributes;
-        var valAttr = xmlDoc.domHelper.attrBool(attrs, "val");
+        var valAttr = xmlDoc.attrBool(attrs, "val");
         return {
             val: (valAttr == null || valAttr == true) ? true : valAttr,
         };
@@ -27,7 +21,7 @@ var Bold = (function () {
             val: inst.val,
         };
     };
-    Bold.type = Bold; // TODO type-checker
     return Bold;
 }());
+Bold.type = Bold; // TODO type-checker
 module.exports = Bold;

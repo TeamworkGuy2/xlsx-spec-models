@@ -8,13 +8,13 @@ var CellValues = (function () {
     function CellValues(xmlValue) {
         this.xmlValue = xmlValue;
     }
-    CellValues.Boolean = new CellValues("b");
-    CellValues.Number = new CellValues("n");
-    CellValues.Error = new CellValues("e");
-    CellValues.SharedString = new CellValues("s");
-    CellValues.String = new CellValues("str");
-    CellValues.InlineString = new CellValues("inlineStr");
-    CellValues.Date = new CellValues("d");
     return CellValues;
 }());
+CellValues.Boolean = new CellValues("b");
+CellValues.Number = new CellValues("n");
+CellValues.Error = new CellValues("e");
+CellValues.SharedString = new CellValues("s");
+CellValues.String = new CellValues("str");
+CellValues.InlineString = new CellValues("inlineStr");
+CellValues.Date = new CellValues("d");
 module.exports = CellValues;

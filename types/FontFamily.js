@@ -1,9 +1,5 @@
 "use strict";
 var IntAttribute = require("../base-types/IntAttribute");
-/** <family> (Font Family) "x:family"
- * parent: font (§18.8.22); rPr (§18.4.7)
- * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.fontfamily.aspx
- */
 var FontFamily = (function () {
     function FontFamily() {
     }
@@ -16,7 +12,7 @@ var FontFamily = (function () {
     FontFamily.copy = function (inst) {
         return IntAttribute.copy(inst);
     };
-    FontFamily.type = FontFamily; // TODO type-checker
     return FontFamily;
 }());
+FontFamily.type = FontFamily; // TODO type-checker
 module.exports = FontFamily;

@@ -5,15 +5,15 @@ class StringElement {
     private static type: OpenXmlIo.ReadWrite<{ content: string }> = StringElement; // TODO type-checker
 
 
-    public static read(xmlDoc: OpenXmlIo.ParsedFile, elem: HTMLElement, expectedTagName: string, parentTags?: string): { content: string } {
-        if (elem.tagName !== expectedTagName) { throw xmlDoc.validator.unexpectedNode(elem.tagName, expectedTagName, parentTags); }
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement, expectedTagName: string, parentTags?: string): { content: string } {
+        xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
         return {
             content: elem.textContent,
         };
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.ParsedFile, inst: { content: string }, tagName: string): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: { content: string }, tagName: string): HTMLElement {
         var elem = xmlDoc.dom.createElement(tagName);
         elem.textContent = inst.content;
         return elem;

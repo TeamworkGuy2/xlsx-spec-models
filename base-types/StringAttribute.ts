@@ -5,16 +5,16 @@ class StringAttribute {
     private static type: OpenXmlIo.ReadWriteNamed<{ val: string }> = StringAttribute; // TODO type-checker
 
 
-    public static read(xmlDoc: OpenXmlIo.ParsedFile, elem: HTMLElement, expectedTagName: string, parentTags?: string): { val: string } {
-        if (elem.tagName !== expectedTagName) { throw xmlDoc.validator.unexpectedNode(elem.tagName, expectedTagName, parentTags); }
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement, expectedTagName: string, parentTags?: string): { val: string } {
+        xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
         var attrs = elem.attributes;
         return {
-            val: xmlDoc.domHelper.attrString(attrs, "val"),
+            val: xmlDoc.attrString(attrs, "val"),
         };
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.ParsedFile, inst: { val: string }, tagName: string): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: { val: string }, tagName: string): HTMLElement {
         var elem = xmlDoc.domBldr.create(tagName)
             .attrString("val", inst.val)
             .element;

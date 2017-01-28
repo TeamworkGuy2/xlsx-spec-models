@@ -6,12 +6,10 @@ var FloatAttribute = (function () {
     function FloatAttribute() {
     }
     FloatAttribute.read = function (xmlDoc, elem, expectedTagName, parentTags) {
-        if (elem.tagName !== expectedTagName) {
-            throw xmlDoc.validator.unexpectedNode(elem.tagName, expectedTagName, parentTags);
-        }
+        xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
         var attrs = elem.attributes;
         return {
-            val: xmlDoc.domHelper.attrFloat(attrs, "val"),
+            val: xmlDoc.attrFloat(attrs, "val"),
         };
     };
     FloatAttribute.write = function (xmlDoc, inst, tagName) {
@@ -25,7 +23,7 @@ var FloatAttribute = (function () {
             val: inst.val
         };
     };
-    FloatAttribute.type = FloatAttribute; // TODO type-checker
     return FloatAttribute;
 }());
+FloatAttribute.type = FloatAttribute; // TODO type-checker
 module.exports = FloatAttribute;

@@ -1,26 +1,20 @@
 "use strict";
-/** <alignment> (Alignment) "x:alignment"
- * parent: dxf (§18.8.14); ndxf (§18.11.1.4); odxf (§18.11.1.6); xf (§18.8.45)
- * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.alignment.aspx
- */
 var Alignment = (function () {
     function Alignment() {
     }
     Alignment.read = function (xmlDoc, elem) {
-        if (elem.tagName !== "alignment") {
-            throw xmlDoc.validator.unexpectedNode(elem.tagName, "alignment", "dxf, ndxf, odxf, xf");
-        }
+        xmlDoc.validator.expectNode(elem, "alignment", "dxf, ndxf, odxf, xf");
         var attrs = elem.attributes;
         return {
-            horizontal: xmlDoc.domHelper.attrString(attrs, "horizontal"),
-            indent: xmlDoc.domHelper.attrInt(attrs, "indent"),
-            justifyLastLine: xmlDoc.domHelper.attrBool(attrs, "justifyLastLine"),
-            readingOrder: xmlDoc.domHelper.attrInt(attrs, "readingOrder"),
-            relativeIndent: xmlDoc.domHelper.attrInt(attrs, "relativeIndent"),
-            shrinkToFit: xmlDoc.domHelper.attrBool(attrs, "shrinkToFit"),
-            textRotation: xmlDoc.domHelper.attrFloat(attrs, "textRotation"),
-            vertical: xmlDoc.domHelper.attrString(attrs, "vertical"),
-            wrapText: xmlDoc.domHelper.attrBool(attrs, "wrapText"),
+            horizontal: xmlDoc.attrString(attrs, "horizontal"),
+            indent: xmlDoc.attrInt(attrs, "indent"),
+            justifyLastLine: xmlDoc.attrBool(attrs, "justifyLastLine"),
+            readingOrder: xmlDoc.attrInt(attrs, "readingOrder"),
+            relativeIndent: xmlDoc.attrInt(attrs, "relativeIndent"),
+            shrinkToFit: xmlDoc.attrBool(attrs, "shrinkToFit"),
+            textRotation: xmlDoc.attrFloat(attrs, "textRotation"),
+            vertical: xmlDoc.attrString(attrs, "vertical"),
+            wrapText: xmlDoc.attrBool(attrs, "wrapText"),
         };
     };
     Alignment.write = function (xmlDoc, inst) {
@@ -37,7 +31,7 @@ var Alignment = (function () {
             .element;
         return elem;
     };
-    Alignment.type = Alignment; // TODO type-checker
     return Alignment;
 }());
+Alignment.type = Alignment; // TODO type-checker
 module.exports = Alignment;

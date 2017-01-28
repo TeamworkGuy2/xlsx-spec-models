@@ -6,12 +6,10 @@ var BooleanAttribute = (function () {
     function BooleanAttribute() {
     }
     BooleanAttribute.read = function (xmlDoc, elem, expectedTagName, parentTags) {
-        if (elem.tagName !== expectedTagName) {
-            throw xmlDoc.validator.unexpectedNode(elem.tagName, expectedTagName, parentTags);
-        }
+        xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
         var attrs = elem.attributes;
         return {
-            val: xmlDoc.domHelper.attrBool(attrs, "val"),
+            val: xmlDoc.attrBool(attrs, "val"),
         };
     };
     BooleanAttribute.write = function (xmlDoc, inst, tagName) {
@@ -25,7 +23,7 @@ var BooleanAttribute = (function () {
             val: inst.val
         };
     };
-    BooleanAttribute.type = BooleanAttribute; // TODO type-checker
     return BooleanAttribute;
 }());
+BooleanAttribute.type = BooleanAttribute; // TODO type-checker
 module.exports = BooleanAttribute;

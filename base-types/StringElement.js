@@ -6,9 +6,7 @@ var StringElement = (function () {
     function StringElement() {
     }
     StringElement.read = function (xmlDoc, elem, expectedTagName, parentTags) {
-        if (elem.tagName !== expectedTagName) {
-            throw xmlDoc.validator.unexpectedNode(elem.tagName, expectedTagName, parentTags);
-        }
+        xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
         return {
             content: elem.textContent,
         };
@@ -18,7 +16,7 @@ var StringElement = (function () {
         elem.textContent = inst.content;
         return elem;
     };
-    StringElement.type = StringElement; // TODO type-checker
     return StringElement;
 }());
+StringElement.type = StringElement; // TODO type-checker
 module.exports = StringElement;

@@ -1,9 +1,5 @@
 "use strict";
 var IntAttribute = require("../base-types/IntAttribute");
-/** <charset> (Charset) "x:charset"
- * parent:
- * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.fontcharset.aspx
- */
 var FontCharSet = (function () {
     function FontCharSet() {
     }
@@ -16,7 +12,7 @@ var FontCharSet = (function () {
     FontCharSet.copy = function (inst) {
         return IntAttribute.copy(inst);
     };
-    FontCharSet.type = FontCharSet; // TODO type-checker
     return FontCharSet;
 }());
+FontCharSet.type = FontCharSet; // TODO type-checker
 module.exports = FontCharSet;

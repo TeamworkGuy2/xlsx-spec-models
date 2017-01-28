@@ -1,20 +1,18 @@
 "use strict";
 var Color = require("../types/Color");
-/** Generic Open XML Border Property parser
+/** (W3C XML CT_BorderPr §A.2) Generic Open XML Border Property parser
  * @since 2016-05-26
  */
 var BorderProperty = (function () {
     function BorderProperty() {
     }
     BorderProperty.read = function (xmlDoc, elem, expectedTagName, parentTags) {
-        if (elem.tagName !== expectedTagName) {
-            throw xmlDoc.validator.unexpectedNode(elem.tagName, expectedTagName, parentTags || "border");
-        }
-        var colorElem = xmlDoc.domHelper.queryOneChild(elem, "color");
+        xmlDoc.validator.expectNode(elem, expectedTagName, parentTags || "border");
+        var colorElem = xmlDoc.queryOneChild(elem, "color");
         var attrs = elem.attributes;
         return {
             color: colorElem ? Color.read(xmlDoc, colorElem, "color") : null,
-            style: xmlDoc.domHelper.attrString(attrs, "style"),
+            style: xmlDoc.attrString(attrs, "style"),
         };
     };
     BorderProperty.write = function (xmlDoc, inst, tagName) {
@@ -26,7 +24,7 @@ var BorderProperty = (function () {
         }
         return elem;
     };
-    BorderProperty.type = BorderProperty; // TODO type-checker
     return BorderProperty;
 }());
+BorderProperty.type = BorderProperty; // TODO type-checker
 module.exports = BorderProperty;

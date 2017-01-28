@@ -4,23 +4,16 @@ var Color = require("./Color");
 var FontFamily = require("./FontFamily");
 var RunFont = require("./RunFont");
 var FontSize = require("./FontSize");
-/** <rPr> (Run Properties) "x:rPr"
- * parent: r (§18.4.4)
- * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.runproperties.aspx
- */
 var RichTextRunProperties = (function () {
     function RichTextRunProperties() {
     }
     RichTextRunProperties.read = function (xmlDoc, elem) {
-        var elemAttrs = elem.attributes;
-        if (elem.tagName !== "rPr") {
-            throw xmlDoc.validator.unexpectedNode(elem.tagName, "rPr", "r");
-        }
-        var boldElem = xmlDoc.domHelper.queryOneChild(elem, "b");
-        var colorElem = xmlDoc.domHelper.queryOneChild(elem, "color");
-        var familyElem = xmlDoc.domHelper.queryOneChild(elem, "family");
-        var rFontElem = xmlDoc.domHelper.queryOneChild(elem, "rFont");
-        var szElem = xmlDoc.domHelper.queryOneChild(elem, "sz");
+        xmlDoc.validator.expectNode(elem, "rPr", "r");
+        var boldElem = xmlDoc.queryOneChild(elem, "b");
+        var colorElem = xmlDoc.queryOneChild(elem, "color");
+        var familyElem = xmlDoc.queryOneChild(elem, "family");
+        var rFontElem = xmlDoc.queryOneChild(elem, "rFont");
+        var szElem = xmlDoc.queryOneChild(elem, "sz");
         return {
             b: boldElem ? Bold.read(xmlDoc, boldElem, "b", "rPr") : null,
             color: colorElem ? Color.read(xmlDoc, colorElem, "color") : null,
@@ -58,7 +51,7 @@ var RichTextRunProperties = (function () {
             sz: inst.sz != null ? FontSize.copy(inst.sz) : null,
         };
     };
-    RichTextRunProperties.type = RichTextRunProperties; // TODO type-checker
     return RichTextRunProperties;
 }());
+RichTextRunProperties.type = RichTextRunProperties; // TODO type-checker
 module.exports = RichTextRunProperties;

@@ -9,29 +9,26 @@ import HeaderFooter = require("../types/HeaderFooter");
 import Drawing = require("../types/Drawing");
 import LegacyDrawing = require("../types/LegacyDrawing");
 
-/** <worksheet> (Worksheet) "x:worksheet"
- * parent: Root element of SpreadsheetML Worksheet part
- * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.worksheet.aspx
- */
 class Worksheet {
     private static type: OpenXmlIo.ReadWrite<OpenXml.Worksheet> = Worksheet; // TODO type-checker
 
 
-    public static read(xmlDoc: OpenXmlIo.ParsedFile, elem: HTMLElement): OpenXml.Worksheet {
-        if (elem.tagName !== "worksheet") { throw xmlDoc.validator.unexpectedNode(elem.tagName, "worksheet", "root element of SpreadsheetML Worksheet part"); }
-        var colsElems = xmlDoc.domHelper.queryAllChilds(elem, "cols");
-        var dimensionElem = xmlDoc.domHelper.queryOneChild(elem, "dimension");
-        var drawingElem = xmlDoc.domHelper.queryOneChild(elem, "drawing");
-        var headerFooterElem = xmlDoc.domHelper.queryOneChild(elem, "headerFooter");
-        var legacyDrawingElem = xmlDoc.domHelper.queryOneChild(elem, "legacyDrawing");
-        var pageMarginElem = xmlDoc.domHelper.queryOneChild(elem, "pageMargins");
-        var pageSetupElem = xmlDoc.domHelper.queryOneChild(elem, "pageSetup");
-        var sheetDataElem = xmlDoc.domHelper.queryOneChild(elem, "sheetData");
-        var sheetFormatPrElem = xmlDoc.domHelper.queryOneChild(elem, "sheetFormatPr");
-        var sheetViewsElem = xmlDoc.domHelper.queryOneChild(elem, "sheetViews");
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.Worksheet {
+        xmlDoc.validator.expectNode(elem, "worksheet", "root element of SpreadsheetML Worksheet part");
+
+        var colsElems = xmlDoc.queryAllChilds(elem, "cols");
+        var dimensionElem = xmlDoc.queryOneChild(elem, "dimension");
+        var drawingElem = xmlDoc.queryOneChild(elem, "drawing");
+        var headerFooterElem = xmlDoc.queryOneChild(elem, "headerFooter");
+        var legacyDrawingElem = xmlDoc.queryOneChild(elem, "legacyDrawing");
+        var pageMarginElem = xmlDoc.queryOneChild(elem, "pageMargins");
+        var pageSetupElem = xmlDoc.queryOneChild(elem, "pageSetup");
+        var sheetDataElem = xmlDoc.queryOneChild(elem, "sheetData");
+        var sheetFormatPrElem = xmlDoc.queryOneChild(elem, "sheetFormatPr");
+        var sheetViewsElem = xmlDoc.queryOneChild(elem, "sheetViews");
 
         var inst = {
-            cols: xmlDoc.readOpenXml.readMulti(xmlDoc, Columns.read, colsElems),
+            cols: xmlDoc.readMulti(Columns.read, colsElems),
             dimension: dimensionElem ? SheetDimension.read(xmlDoc, dimensionElem) : null,
             drawing: drawingElem ? Drawing.read(xmlDoc, drawingElem) : null,
             headerFooter: headerFooterElem ? HeaderFooter.read(xmlDoc, headerFooterElem) : null,
@@ -46,13 +43,13 @@ class Worksheet {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.ParsedFile, inst: OpenXml.Worksheet): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Worksheet): HTMLElement {
         var elem = xmlDoc.dom.createElement("worksheet");
 
         if (inst.dimension) { elem.appendChild(SheetDimension.write(xmlDoc, inst.dimension)); }
         if (inst.sheetViews) { elem.appendChild(SheetViews.write(xmlDoc, inst.sheetViews)); }
         if (inst.sheetFormatPr) { elem.appendChild(SheetFormatProperties.write(xmlDoc, inst.sheetFormatPr)); }
-        xmlDoc.domHelper.addChilds(elem, xmlDoc.writeOpenXml.writeMulti(xmlDoc, Columns.write, inst.cols));
+        xmlDoc.addChilds(elem, xmlDoc.writeMulti(Columns.write, inst.cols));
         elem.appendChild(SheetData.write(xmlDoc, inst.sheetData));
         if (inst.pageMargins) { elem.appendChild(PageMargins.write(xmlDoc, inst.pageMargins)); }
         if (inst.pageSetup) { elem.appendChild(PageSetup.write(xmlDoc, inst.pageSetup)); }

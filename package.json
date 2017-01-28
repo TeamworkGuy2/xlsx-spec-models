@@ -1,6 +1,6 @@
 {
   "name": "xlsx-spec-models",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "TypeScript Open XML XLSX format models with DOM read/write methods",
   "dependencies": {
   },

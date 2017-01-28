@@ -5,22 +5,18 @@ import Font = require("./Font");
 import NumberingFormat = require("./NumberingFormat");
 import Protection = require("./Protection");
 
-/** <dxf> (Formatting) "x:dxf"
- * parent: dxfs (§18.8.15); rfmt (§18.11.1.17)
- * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.differentialformat.aspx
- */
 class DifferentialFormat {
     private static type: OpenXmlIo.ReadWrite<OpenXml.DifferentialFormat> = DifferentialFormat; // TODO type-checker
 
 
-    public static read(xmlDoc: OpenXmlIo.ParsedFile, elem: HTMLElement): OpenXml.DifferentialFormat {
-        if (elem.tagName !== "dxf") { throw xmlDoc.validator.unexpectedNode(elem.tagName, "dxf", "dxfs, rfmt"); }
-        var alignmentElem = xmlDoc.domHelper.queryOneChild(elem, "alignment");
-        var borderElem = xmlDoc.domHelper.queryOneChild(elem, "border");
-        var fillElem = xmlDoc.domHelper.queryOneChild(elem, "fill");
-        var fontElem = xmlDoc.domHelper.queryOneChild(elem, "font");
-        var numFmtElem = xmlDoc.domHelper.queryOneChild(elem, "numFmt");
-        var protectionElem = xmlDoc.domHelper.queryOneChild(elem, "protection");
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.DifferentialFormat {
+        xmlDoc.validator.expectNode(elem, "dxf", "dxfs, rfmt");
+        var alignmentElem = xmlDoc.queryOneChild(elem, "alignment");
+        var borderElem = xmlDoc.queryOneChild(elem, "border");
+        var fillElem = xmlDoc.queryOneChild(elem, "fill");
+        var fontElem = xmlDoc.queryOneChild(elem, "font");
+        var numFmtElem = xmlDoc.queryOneChild(elem, "numFmt");
+        var protectionElem = xmlDoc.queryOneChild(elem, "protection");
         return {
             alignment: alignmentElem ? Alignment.read(xmlDoc, alignmentElem) : null,
             border: borderElem ? Border.read(xmlDoc, borderElem) : null,
@@ -32,7 +28,7 @@ class DifferentialFormat {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.ParsedFile, inst: OpenXml.DifferentialFormat): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.DifferentialFormat): HTMLElement {
         var elem = xmlDoc.dom.createElement("dxf");
         if (inst.alignment) { elem.appendChild(Alignment.write(xmlDoc, inst.alignment)); }
         if (inst.border) { elem.appendChild(Border.write(xmlDoc, inst.border)); }

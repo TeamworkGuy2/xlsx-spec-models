@@ -1,9 +1,5 @@
 "use strict";
 var BorderProperty = require("../base-types/BorderProperty");
-/** <start> (Leading End Border) "x:start"
- * parents: border (§18.8.4)
- * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.startborder.aspx
- */
 var StartBorder = (function () {
     function StartBorder() {
     }
@@ -13,7 +9,7 @@ var StartBorder = (function () {
     StartBorder.write = function (xmlDoc, inst) {
         return BorderProperty.write(xmlDoc, inst, "start");
     };
-    StartBorder.type = StartBorder; // TODO type-checker
     return StartBorder;
 }());
+StartBorder.type = StartBorder; // TODO type-checker
 module.exports = StartBorder;

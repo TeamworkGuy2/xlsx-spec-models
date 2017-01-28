@@ -9,28 +9,22 @@ var Fills = require("./Fills");
 var Fonts = require("./Fonts");
 var NumberingFormats = require("./NumberingFormats");
 var TableStyles = require("./TableStyles");
-/** <styleSheet> (Stylesheet) "x:styleSheet"
- * parent: Root element of SpreadsheetML Stylesheet part
- * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.stylesheet.aspx
- */
 var Stylesheet = (function () {
     function Stylesheet() {
     }
     Stylesheet.read = function (xmlDoc, elem) {
-        if (elem.tagName !== "styleSheet") {
-            throw xmlDoc.validator.unexpectedNode(elem.tagName, "styleSheet", "root element of SpreadsheetML Stylesheet part");
-        }
-        var bordersElem = xmlDoc.domHelper.queryOneChild(elem, "borders");
-        var cellStylesElem = xmlDoc.domHelper.queryOneChild(elem, "cellStyles");
-        var cellStyleXfsElem = xmlDoc.domHelper.queryOneChild(elem, "cellStyleXfs");
-        var cellXfsElems = xmlDoc.domHelper.queryOneChild(elem, "cellXfs");
-        var colorsElem = xmlDoc.domHelper.queryOneChild(elem, "colors");
-        var dxfsElem = xmlDoc.domHelper.queryOneChild(elem, "dxfs");
-        var fillsElem = xmlDoc.domHelper.queryOneChild(elem, "fills");
-        var fontsElem = xmlDoc.domHelper.queryOneChild(elem, "fonts");
-        var numFmtsElem = xmlDoc.domHelper.queryOneChild(elem, "numFmts");
-        var tableStylesElem = xmlDoc.domHelper.queryOneChild(elem, "tableStyles");
-        var extLstElem = xmlDoc.domHelper.queryOneChild(elem, "extLst");
+        xmlDoc.validator.expectNode(elem, "styleSheet", "root element of SpreadsheetML Stylesheet part");
+        var bordersElem = xmlDoc.queryOneChild(elem, "borders");
+        var cellStylesElem = xmlDoc.queryOneChild(elem, "cellStyles");
+        var cellStyleXfsElem = xmlDoc.queryOneChild(elem, "cellStyleXfs");
+        var cellXfsElems = xmlDoc.queryOneChild(elem, "cellXfs");
+        var colorsElem = xmlDoc.queryOneChild(elem, "colors");
+        var dxfsElem = xmlDoc.queryOneChild(elem, "dxfs");
+        var fillsElem = xmlDoc.queryOneChild(elem, "fills");
+        var fontsElem = xmlDoc.queryOneChild(elem, "fonts");
+        var numFmtsElem = xmlDoc.queryOneChild(elem, "numFmts");
+        var tableStylesElem = xmlDoc.queryOneChild(elem, "tableStyles");
+        var extLstElem = xmlDoc.queryOneChild(elem, "extLst");
         var inst = {
             borders: bordersElem ? Borders.read(xmlDoc, bordersElem) : null,
             cellStyles: cellStylesElem ? CellStyles.read(xmlDoc, cellStylesElem) : null,
@@ -83,7 +77,7 @@ var Stylesheet = (function () {
         }
         return elem;
     };
-    Stylesheet.type = Stylesheet; // TODO type-checker
     return Stylesheet;
 }());
+Stylesheet.type = Stylesheet; // TODO type-checker
 module.exports = Stylesheet;

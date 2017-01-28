@@ -9,39 +9,23 @@ import Fonts = require("./Fonts");
 import NumberingFormats = require("./NumberingFormats");
 import TableStyles = require("./TableStyles");
 
-/** <styleSheet> (Stylesheet) "x:styleSheet"
- * parent: Root element of SpreadsheetML Stylesheet part
- * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.stylesheet.aspx
- */
 class Stylesheet {
     private static type: OpenXmlIo.ReadWrite<OpenXml.Stylesheet> = Stylesheet; // TODO type-checker
 
-    public borders: OpenXml.Borders;
-    public cellStyles: OpenXml.CellStyles;
-    public cellStyleXfs: OpenXml.CellStyleFormats;
-    public cellXfs: OpenXml.CellFormats;
-    public colors: OpenXml.Colors;
-    public dxfs: OpenXml.DifferentialFormats;
-    public fills: OpenXml.Fills;
-    public fonts: OpenXml.Fonts;
-    public numFmts: OpenXml.NumberingFormats;
-    public tableStyles: OpenXml.TableStyles;
-    public extLst: Element; // TODO
 
-
-    public static read(xmlDoc: OpenXmlIo.ParsedFile, elem: HTMLElement): OpenXml.Stylesheet {
-        if (elem.tagName !== "styleSheet") { throw xmlDoc.validator.unexpectedNode(elem.tagName, "styleSheet", "root element of SpreadsheetML Stylesheet part"); }
-        var bordersElem = xmlDoc.domHelper.queryOneChild(elem, "borders");
-        var cellStylesElem = xmlDoc.domHelper.queryOneChild(elem, "cellStyles");
-        var cellStyleXfsElem = xmlDoc.domHelper.queryOneChild(elem, "cellStyleXfs");
-        var cellXfsElems = xmlDoc.domHelper.queryOneChild(elem, "cellXfs");
-        var colorsElem = xmlDoc.domHelper.queryOneChild(elem, "colors");
-        var dxfsElem = xmlDoc.domHelper.queryOneChild(elem, "dxfs");
-        var fillsElem = xmlDoc.domHelper.queryOneChild(elem, "fills");
-        var fontsElem = xmlDoc.domHelper.queryOneChild(elem, "fonts");
-        var numFmtsElem = xmlDoc.domHelper.queryOneChild(elem, "numFmts");
-        var tableStylesElem = xmlDoc.domHelper.queryOneChild(elem, "tableStyles");
-        var extLstElem = xmlDoc.domHelper.queryOneChild(elem, "extLst");
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.Stylesheet {
+        xmlDoc.validator.expectNode(elem, "styleSheet", "root element of SpreadsheetML Stylesheet part");
+        var bordersElem = xmlDoc.queryOneChild(elem, "borders");
+        var cellStylesElem = xmlDoc.queryOneChild(elem, "cellStyles");
+        var cellStyleXfsElem = xmlDoc.queryOneChild(elem, "cellStyleXfs");
+        var cellXfsElems = xmlDoc.queryOneChild(elem, "cellXfs");
+        var colorsElem = xmlDoc.queryOneChild(elem, "colors");
+        var dxfsElem = xmlDoc.queryOneChild(elem, "dxfs");
+        var fillsElem = xmlDoc.queryOneChild(elem, "fills");
+        var fontsElem = xmlDoc.queryOneChild(elem, "fonts");
+        var numFmtsElem = xmlDoc.queryOneChild(elem, "numFmts");
+        var tableStylesElem = xmlDoc.queryOneChild(elem, "tableStyles");
+        var extLstElem = xmlDoc.queryOneChild(elem, "extLst");
 
         var inst = {
             borders: bordersElem ? Borders.read(xmlDoc, bordersElem) : null,
@@ -60,7 +44,7 @@ class Stylesheet {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.ParsedFile, inst: OpenXml.Stylesheet): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Stylesheet): HTMLElement {
         var elem = xmlDoc.dom.createElement("styleSheet");
 
         if (inst.numFmts) { elem.appendChild(NumberingFormats.write(xmlDoc, inst.numFmts)); }

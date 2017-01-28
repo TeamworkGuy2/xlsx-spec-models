@@ -1,21 +1,15 @@
 "use strict";
 var Color = require("./Color");
-/** <stop> (Formatting) "x:stop"
- * parent: gradientFill (§18.8.24)
- * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.gradientstop.aspx
- */
 var GradientStop = (function () {
     function GradientStop() {
     }
     GradientStop.read = function (xmlDoc, elem) {
-        if (elem.tagName !== "stop") {
-            throw xmlDoc.validator.unexpectedNode(elem.tagName, "stop", "gradientFill");
-        }
-        var colorElem = xmlDoc.domHelper.queryOneChild(elem, "color");
+        xmlDoc.validator.expectNode(elem, "stop", "gradientFill");
+        var colorElem = xmlDoc.queryOneChild(elem, "color");
         var attrs = elem.attributes;
         return {
             color: colorElem ? Color.read(xmlDoc, colorElem, "color") : null,
-            position: xmlDoc.domHelper.attrFloat(attrs, "position"),
+            position: xmlDoc.attrFloat(attrs, "position"),
         };
     };
     GradientStop.write = function (xmlDoc, inst) {
@@ -27,7 +21,7 @@ var GradientStop = (function () {
         }
         return elem;
     };
-    GradientStop.type = GradientStop; // TODO type-checker
     return GradientStop;
 }());
+GradientStop.type = GradientStop; // TODO type-checker
 module.exports = GradientStop;

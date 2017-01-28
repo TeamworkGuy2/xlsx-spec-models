@@ -4,23 +4,17 @@ import FontFamily = require("./FontFamily");
 import RunFont = require("./RunFont");
 import FontSize = require("./FontSize");
 
-/** <rPr> (Run Properties) "x:rPr"
- * parent: r (§18.4.4)
- * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.runproperties.aspx
- */
 class RichTextRunProperties {
     private static type: OpenXmlIo.ReadWrite<OpenXml.RichTextRunProperties> = RichTextRunProperties; // TODO type-checker
 
 
-    public static read(xmlDoc: OpenXmlIo.ParsedFile, elem: HTMLElement): OpenXml.RichTextRunProperties {
-        var elemAttrs = elem.attributes;
-        if (elem.tagName !== "rPr") { throw xmlDoc.validator.unexpectedNode(elem.tagName, "rPr", "r"); }
-
-        var boldElem = xmlDoc.domHelper.queryOneChild(elem, "b");
-        var colorElem = xmlDoc.domHelper.queryOneChild(elem, "color");
-        var familyElem = xmlDoc.domHelper.queryOneChild(elem, "family");
-        var rFontElem = xmlDoc.domHelper.queryOneChild(elem, "rFont");
-        var szElem = xmlDoc.domHelper.queryOneChild(elem, "sz");
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.RichTextRunProperties {
+        xmlDoc.validator.expectNode(elem, "rPr", "r");
+        var boldElem = xmlDoc.queryOneChild(elem, "b");
+        var colorElem = xmlDoc.queryOneChild(elem, "color");
+        var familyElem = xmlDoc.queryOneChild(elem, "family");
+        var rFontElem = xmlDoc.queryOneChild(elem, "rFont");
+        var szElem = xmlDoc.queryOneChild(elem, "sz");
 
         return {
             b: boldElem ? Bold.read(xmlDoc, boldElem, "b", "rPr") : null,
@@ -32,7 +26,7 @@ class RichTextRunProperties {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.ParsedFile, inst: OpenXml.RichTextRunProperties): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.RichTextRunProperties): HTMLElement {
         var { dom, domBldr } = xmlDoc;
 
         var rPrElem = dom.createElement("rPr");

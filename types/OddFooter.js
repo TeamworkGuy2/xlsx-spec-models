@@ -1,9 +1,5 @@
 "use strict";
 var StringElement = require("../base-types/StringElement");
-/** <oddFooter> (Odd Footer) "x:oddFooter"
- * parent: headerFooter (§18.3.1.46)
- * @see https://msdn.microsoft.com/EN-US/library/documentformat.openxml.spreadsheet.oddfooter.aspx
- */
 var OddFooter = (function () {
     function OddFooter() {
     }
@@ -13,7 +9,7 @@ var OddFooter = (function () {
     OddFooter.write = function (xmlDoc, inst) {
         return StringElement.write(xmlDoc, inst, "oddFooter");
     };
-    OddFooter.type = OddFooter; // TODO type-checker
     return OddFooter;
 }());
+OddFooter.type = OddFooter; // TODO type-checker
 module.exports = OddFooter;
