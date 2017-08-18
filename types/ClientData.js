@@ -17,7 +17,7 @@ var ClientData = (function () {
             .element;
         return elem;
     };
+    ClientData.type = ClientData; // TODO type-checker
     return ClientData;
 }());
-ClientData.type = ClientData; // TODO type-checker
 module.exports = ClientData;

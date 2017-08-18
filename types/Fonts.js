@@ -19,7 +19,7 @@ var Fonts = (function () {
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(Font.write, inst.fonts));
         return elem;
     };
+    Fonts.type = Fonts; // TODO type-checker
     return Fonts;
 }());
-Fonts.type = Fonts; // TODO type-checker
 module.exports = Fonts;

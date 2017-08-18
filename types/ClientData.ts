@@ -14,7 +14,7 @@ class ClientData {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.ClientData): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.ClientData): ElementLike {
         var elem = xmlDoc.domBldr.create("xdr:clientData")
             .attrBool("fLocksWithSheet", inst.fLocksWithSheet, true, "1", "0")
             .attrBool("fPrintsWithSheet", inst.fPrintsWithSheet, true, "1", "0")

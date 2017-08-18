@@ -9,7 +9,7 @@ class RowOffset {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.RowOffset): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.RowOffset): ElementLike {
         return IntElement.write(xmlDoc, inst, "xdr:rowOff");
     }
 

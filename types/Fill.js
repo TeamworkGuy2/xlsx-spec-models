@@ -23,7 +23,7 @@ var Fill = (function () {
         }
         return elem;
     };
+    Fill.type = Fill; // TODO type-checker
     return Fill;
 }());
-Fill.type = Fill; // TODO type-checker
 module.exports = Fill;

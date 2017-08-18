@@ -19,7 +19,7 @@ var Borders = (function () {
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(Border.write, inst.borders));
         return elem;
     };
+    Borders.type = Borders; // TODO type-checker
     return Borders;
 }());
-Borders.type = Borders; // TODO type-checker
 module.exports = Borders;

@@ -9,7 +9,7 @@ class EvenFooter {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.EvenFooter): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.EvenFooter): ElementLike {
         return StringElement.write(xmlDoc, inst, "evenFooter");
     }
 

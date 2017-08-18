@@ -32,7 +32,7 @@ var Transform2D = (function () {
         }
         return elem;
     };
+    Transform2D.type = Transform2D; // TODO type-checker
     return Transform2D;
 }());
-Transform2D.type = Transform2D; // TODO type-checker
 module.exports = Transform2D;

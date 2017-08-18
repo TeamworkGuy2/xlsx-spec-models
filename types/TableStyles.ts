@@ -17,7 +17,7 @@ class TableStyles {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.TableStyles): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.TableStyles): ElementLike {
         var elem = xmlDoc.domBldr.create("tableStyles")
             .attrInt("count", inst.count, true)
             .attrString("defaultPivotStyle", inst.defaultPivotStyle, true)

@@ -9,7 +9,7 @@ class Underline {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Underline): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Underline): ElementLike {
         return StringAttribute.write(xmlDoc, inst, "u");
     }
 

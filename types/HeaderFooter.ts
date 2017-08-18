@@ -29,7 +29,7 @@ class HeaderFooter {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.HeaderFooter): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.HeaderFooter): ElementLike {
         var elem = xmlDoc.dom.createElement("headerFooter");
         if (inst.evenHeader) { elem.appendChild(EvenHeader.write(xmlDoc, inst.evenHeader)); }
         if (inst.evenFooter) { elem.appendChild(EvenFooter.write(xmlDoc, inst.evenFooter)); }

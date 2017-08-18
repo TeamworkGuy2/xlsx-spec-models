@@ -12,7 +12,7 @@ class LegacyDrawing {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.LegacyDrawing): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.LegacyDrawing): ElementLike {
         var elem = xmlDoc.domBldr.create("legacyDrawing")
             .attrString("r:id", inst.rid)
             .element;

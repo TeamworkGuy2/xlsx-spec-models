@@ -28,7 +28,7 @@ class DifferentialFormat {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.DifferentialFormat): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.DifferentialFormat): ElementLike {
         var elem = xmlDoc.dom.createElement("dxf");
         if (inst.alignment) { elem.appendChild(Alignment.write(xmlDoc, inst.alignment)); }
         if (inst.border) { elem.appendChild(Border.write(xmlDoc, inst.border)); }

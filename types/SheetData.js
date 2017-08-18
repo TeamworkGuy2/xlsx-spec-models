@@ -15,7 +15,7 @@ var SheetData = (function () {
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(Row.write, inst.rows));
         return elem;
     };
+    SheetData.type = SheetData; // TODO type-checker
     return SheetData;
 }());
-SheetData.type = SheetData; // TODO type-checker
 module.exports = SheetData;

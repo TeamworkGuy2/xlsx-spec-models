@@ -22,7 +22,7 @@ class Transform2D {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Transform2D): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Transform2D): ElementLike {
         var elem = xmlDoc.domBldr.create("a:xfrm")
             .attrBool("fPublished", inst.flipH, true, "1", "0")
             .attrBool("macro", inst.flipV, true, "1", "0")

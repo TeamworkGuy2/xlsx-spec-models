@@ -26,10 +26,8 @@ class RichTextRunProperties {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.RichTextRunProperties): HTMLElement {
-        var { dom, domBldr } = xmlDoc;
-
-        var rPrElem = dom.createElement("rPr");
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.RichTextRunProperties): ElementLike {
+        var rPrElem = xmlDoc.dom.createElement("rPr");
         if (inst.b && inst.b.val) { rPrElem.appendChild(Bold.write(xmlDoc, inst.b, "b")); }
         if (inst.sz) { rPrElem.appendChild(FontSize.write(xmlDoc, inst.sz)); }
         if (inst.color) { rPrElem.appendChild(Color.write(xmlDoc, inst.color, "color")); }

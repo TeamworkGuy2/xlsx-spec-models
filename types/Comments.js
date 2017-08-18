@@ -19,7 +19,7 @@ var Comments = (function () {
         elem.appendChild(CommentList.write(xmlDoc, inst.commentList));
         return elem;
     };
+    Comments.type = Comments; // TODO type-checker
     return Comments;
 }());
-Comments.type = Comments; // TODO type-checker
 module.exports = Comments;

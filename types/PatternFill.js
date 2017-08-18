@@ -26,7 +26,7 @@ var PatternFill = (function () {
         }
         return elem;
     };
+    PatternFill.type = PatternFill; // TODO type-checker
     return PatternFill;
 }());
-PatternFill.type = PatternFill; // TODO type-checker
 module.exports = PatternFill;

@@ -9,7 +9,7 @@ class FromMarker {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.FromMarker): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.FromMarker): ElementLike {
         return MarkerType.write(xmlDoc, inst, "xdr:from");
     }
 

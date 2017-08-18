@@ -13,7 +13,7 @@ class WorksheetDrawing {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.WorksheetDrawing): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.WorksheetDrawing): ElementLike {
         var elem = xmlDoc.dom.createElement("xdr:wsDr");
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(TwoCellAnchor.write, inst.twoCellAnchors));
         return elem;

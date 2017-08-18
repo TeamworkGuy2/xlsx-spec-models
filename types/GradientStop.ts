@@ -15,7 +15,7 @@ class GradientStop {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.GradientStop): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.GradientStop): ElementLike {
         var elem = xmlDoc.domBldr.create("stop")
             .attrFloat("position", inst.position)
             .element;

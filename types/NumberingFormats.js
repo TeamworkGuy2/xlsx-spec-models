@@ -19,7 +19,7 @@ var NumberingFormats = (function () {
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(NumberingFormat.write, inst.numFmts));
         return elem;
     };
+    NumberingFormats.type = NumberingFormats; // TODO type-checker
     return NumberingFormats;
 }());
-NumberingFormats.type = NumberingFormats; // TODO type-checker
 module.exports = NumberingFormats;

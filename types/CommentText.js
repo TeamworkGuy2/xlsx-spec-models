@@ -21,7 +21,7 @@ var CommentText = (function () {
         }
         return elem;
     };
+    CommentText.type = CommentText; // TODO type-checker
     return CommentText;
 }());
-CommentText.type = CommentText; // TODO type-checker
 module.exports = CommentText;

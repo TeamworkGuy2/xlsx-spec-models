@@ -9,7 +9,7 @@ var Offset = (function () {
     Offset.write = function (xmlDoc, inst) {
         return Point2DType.write(xmlDoc, inst, "a:off");
     };
+    Offset.type = Offset; // TODO type-checker
     return Offset;
 }());
-Offset.type = Offset; // TODO type-checker
 module.exports = Offset;

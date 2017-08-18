@@ -23,7 +23,7 @@ var StringAttribute = (function () {
             val: inst.val
         };
     };
+    StringAttribute.type = StringAttribute; // TODO type-checker
     return StringAttribute;
 }());
-StringAttribute.type = StringAttribute; // TODO type-checker
 module.exports = StringAttribute;

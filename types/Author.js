@@ -9,7 +9,7 @@ var Author = (function () {
     Author.write = function (xmlDoc, inst) {
         return StringElement.write(xmlDoc, inst, "author");
     };
+    Author.type = Author; // TODO type-checker
     return Author;
 }());
-Author.type = Author; // TODO type-checker
 module.exports = Author;

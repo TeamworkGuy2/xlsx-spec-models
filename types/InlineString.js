@@ -21,7 +21,7 @@ var InlineString = (function () {
         }
         return elem;
     };
+    InlineString.type = InlineString; // TODO type-checker
     return InlineString;
 }());
-InlineString.type = InlineString; // TODO type-checker
 module.exports = InlineString;

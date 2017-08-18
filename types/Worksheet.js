@@ -68,7 +68,7 @@ var Worksheet = (function () {
         }
         return elem;
     };
+    Worksheet.type = Worksheet; // TODO type-checker
     return Worksheet;
 }());
-Worksheet.type = Worksheet; // TODO type-checker
 module.exports = Worksheet;

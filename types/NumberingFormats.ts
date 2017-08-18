@@ -15,7 +15,7 @@ class NumberingFormats {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.NumberingFormats): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.NumberingFormats): ElementLike {
         var elem = xmlDoc.domBldr.create("numFmts")
             .attrInt("count", inst.count, true)
             .element;

@@ -9,7 +9,7 @@ var StartBorder = (function () {
     StartBorder.write = function (xmlDoc, inst) {
         return BorderProperty.write(xmlDoc, inst, "start");
     };
+    StartBorder.type = StartBorder; // TODO type-checker
     return StartBorder;
 }());
-StartBorder.type = StartBorder; // TODO type-checker
 module.exports = StartBorder;

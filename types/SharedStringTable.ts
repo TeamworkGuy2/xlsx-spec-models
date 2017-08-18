@@ -13,7 +13,7 @@ class SharedStringTable {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.SharedStringTable): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.SharedStringTable): ElementLike {
         var elem = xmlDoc.dom.createElement("sst");
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(SharedStringItem.write, inst.sis));
         return elem;

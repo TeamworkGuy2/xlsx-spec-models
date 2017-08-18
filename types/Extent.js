@@ -17,7 +17,7 @@ var Extent = (function () {
             .element;
         return elem;
     };
+    Extent.type = Extent; // TODO type-checker
     return Extent;
 }());
-Extent.type = Extent; // TODO type-checker
 module.exports = Extent;

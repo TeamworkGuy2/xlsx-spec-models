@@ -9,7 +9,7 @@ var Position = (function () {
     Position.write = function (xmlDoc, inst) {
         return Point2DType.write(xmlDoc, inst, "a:pos");
     };
+    Position.type = Position; // TODO type-checker
     return Position;
 }());
-Position.type = Position; // TODO type-checker
 module.exports = Position;

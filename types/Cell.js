@@ -43,7 +43,7 @@ var Cell = (function () {
         }
         return elem;
     };
+    Cell.type = Cell; // TODO type-checker
     return Cell;
 }());
-Cell.type = Cell; // TODO type-checker
 module.exports = Cell;

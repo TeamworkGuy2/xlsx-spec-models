@@ -51,7 +51,7 @@ var CellFormat = (function () {
         }
         return elem;
     };
+    CellFormat.type = CellFormat; // TODO type-checker
     return CellFormat;
 }());
-CellFormat.type = CellFormat; // TODO type-checker
 module.exports = CellFormat;

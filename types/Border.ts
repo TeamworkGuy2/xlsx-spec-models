@@ -45,7 +45,7 @@ class Border {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Border): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Border): ElementLike {
         var elem = xmlDoc.domBldr.create("border")
             .attrBool("diagonalDown", inst.diagonalDown, true, "1", "0")
             .attrBool("diagonalUp", inst.diagonalUp, true, "1", "0")

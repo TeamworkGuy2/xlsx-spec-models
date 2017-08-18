@@ -12,7 +12,7 @@ var VerticalTextAlignment = (function () {
     VerticalTextAlignment.copy = function (inst) {
         return StringAttribute.copy(inst);
     };
+    VerticalTextAlignment.type = VerticalTextAlignment; // TODO type-checker
     return VerticalTextAlignment;
 }());
-VerticalTextAlignment.type = VerticalTextAlignment; // TODO type-checker
 module.exports = VerticalTextAlignment;

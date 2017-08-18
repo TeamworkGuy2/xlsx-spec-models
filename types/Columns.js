@@ -15,7 +15,7 @@ var Columns = (function () {
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(Column.write, inst.cols));
         return elem;
     };
+    Columns.type = Columns; // TODO type-checker
     return Columns;
 }());
-Columns.type = Columns; // TODO type-checker
 module.exports = Columns;

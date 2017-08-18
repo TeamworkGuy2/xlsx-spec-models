@@ -9,7 +9,7 @@ class CellValue {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.CellValue): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.CellValue): ElementLike {
         return StringElement.write(xmlDoc, inst, "v");
     }
 

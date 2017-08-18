@@ -9,7 +9,7 @@ class TopBorder {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.BorderProperty): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.BorderProperty): ElementLike {
         return BorderProperty.write(xmlDoc, inst, "top");
     }
 

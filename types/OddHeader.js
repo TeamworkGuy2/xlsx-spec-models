@@ -9,7 +9,7 @@ var OddHeader = (function () {
     OddHeader.write = function (xmlDoc, inst) {
         return StringElement.write(xmlDoc, inst, "oddHeader");
     };
+    OddHeader.type = OddHeader; // TODO type-checker
     return OddHeader;
 }());
-OddHeader.type = OddHeader; // TODO type-checker
 module.exports = OddHeader;

@@ -9,7 +9,7 @@ class FirstFooter {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.FirstFooter): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.FirstFooter): ElementLike {
         return StringElement.write(xmlDoc, inst, "firstFooter");
     }
 

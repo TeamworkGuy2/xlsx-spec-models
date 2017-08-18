@@ -9,7 +9,7 @@ class Author {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Author): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Author): ElementLike {
         return StringElement.write(xmlDoc, inst, "author");
     }
 

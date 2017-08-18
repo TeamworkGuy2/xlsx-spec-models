@@ -25,7 +25,7 @@ var PageMargins = (function () {
             .element;
         return elem;
     };
+    PageMargins.type = PageMargins; // TODO type-checker
     return PageMargins;
 }());
-PageMargins.type = PageMargins; // TODO type-checker
 module.exports = PageMargins;

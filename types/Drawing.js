@@ -15,7 +15,7 @@ var Drawing = (function () {
             .element;
         return elem;
     };
+    Drawing.type = Drawing; // TODO type-checker
     return Drawing;
 }());
-Drawing.type = Drawing; // TODO type-checker
 module.exports = Drawing;

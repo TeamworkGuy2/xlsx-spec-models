@@ -20,7 +20,7 @@ var PageSetup = (function () {
             .element;
         return elem;
     };
+    PageSetup.type = PageSetup; // TODO type-checker
     return PageSetup;
 }());
-PageSetup.type = PageSetup; // TODO type-checker
 module.exports = PageSetup;

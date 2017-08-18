@@ -9,7 +9,7 @@ class FontCharSet {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.FontCharSet): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.FontCharSet): ElementLike {
         return IntAttribute.write(xmlDoc, inst, "charset");
     }
 

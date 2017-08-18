@@ -14,7 +14,7 @@ class StringAttribute {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: { val: string }, tagName: string): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: { val: string }, tagName: string): ElementLike {
         var elem = xmlDoc.domBldr.create(tagName)
             .attrString("val", inst.val)
             .element;

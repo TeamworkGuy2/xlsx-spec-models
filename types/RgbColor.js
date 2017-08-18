@@ -16,7 +16,7 @@ var RgbColor = (function () {
             .element;
         return elem;
     };
+    RgbColor.type = RgbColor; // TODO type-checker
     return RgbColor;
 }());
-RgbColor.type = RgbColor; // TODO type-checker
 module.exports = RgbColor;

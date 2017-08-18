@@ -13,7 +13,7 @@ class Columns {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Columns): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Columns): ElementLike {
         var elem = xmlDoc.dom.createElement("cols");
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(Column.write, inst.cols));
         return elem;

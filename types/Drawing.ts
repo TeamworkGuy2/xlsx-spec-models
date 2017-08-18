@@ -12,7 +12,7 @@ class Drawing {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Drawing): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Drawing): ElementLike {
         var elem = xmlDoc.domBldr.create("drawing")
             .attr("r:id", inst.rid)
             .element;

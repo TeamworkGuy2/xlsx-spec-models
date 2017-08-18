@@ -9,7 +9,7 @@ var BottomBorder = (function () {
     BottomBorder.write = function (xmlDoc, inst) {
         return BorderProperty.write(xmlDoc, inst, "bottom");
     };
+    BottomBorder.type = BottomBorder; // TODO type-checker
     return BottomBorder;
 }());
-BottomBorder.type = BottomBorder; // TODO type-checker
 module.exports = BottomBorder;

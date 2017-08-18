@@ -33,7 +33,7 @@ var Column = (function () {
             .element;
         return elem;
     };
+    Column.type = Column; // TODO type-checker
     return Column;
 }());
-Column.type = Column; // TODO type-checker
 module.exports = Column;

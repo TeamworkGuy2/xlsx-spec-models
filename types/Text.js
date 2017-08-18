@@ -10,12 +10,12 @@ var Text = (function () {
         };
     };
     Text.write = function (xmlDoc, inst) {
-        var elem = xmlDoc.dom.createElement("t");
-        elem.textContent = inst.content;
+        var elem = xmlDoc.domBldr.create("t");
         if (inst.preserveSpace) {
-            elem.setAttribute("xml:space", "preserve");
+            elem.attrString("xml:space", "preserve");
         }
-        return elem;
+        elem.element.textContent = inst.content;
+        return elem.element;
     };
     Text.copy = function (inst) {
         return {
@@ -23,7 +23,7 @@ var Text = (function () {
             preserveSpace: inst.preserveSpace
         };
     };
+    Text.type = Text; // TODO type-checker
     return Text;
 }());
-Text.type = Text; // TODO type-checker
 module.exports = Text;

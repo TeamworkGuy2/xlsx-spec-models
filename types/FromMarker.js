@@ -9,7 +9,7 @@ var FromMarker = (function () {
     FromMarker.write = function (xmlDoc, inst) {
         return MarkerType.write(xmlDoc, inst, "xdr:from");
     };
+    FromMarker.type = FromMarker; // TODO type-checker
     return FromMarker;
 }());
-FromMarker.type = FromMarker; // TODO type-checker
 module.exports = FromMarker;

@@ -9,7 +9,7 @@ var EvenHeader = (function () {
     EvenHeader.write = function (xmlDoc, inst) {
         return StringElement.write(xmlDoc, inst, "evenHeader");
     };
+    EvenHeader.type = EvenHeader; // TODO type-checker
     return EvenHeader;
 }());
-EvenHeader.type = EvenHeader; // TODO type-checker
 module.exports = EvenHeader;

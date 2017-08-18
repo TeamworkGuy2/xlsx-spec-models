@@ -9,7 +9,7 @@ class Position {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Position): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Position): ElementLike {
         return Point2DType.write(xmlDoc, inst, "a:pos");
     }
 

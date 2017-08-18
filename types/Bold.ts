@@ -13,7 +13,7 @@ class Bold {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Bold, tagName: string): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Bold, tagName: string): ElementLike {
         var elem = xmlDoc.domBldr.create(tagName)
             .attrBool("val", inst.val === true ? null : inst.val, true, "1", "0")
             .element;

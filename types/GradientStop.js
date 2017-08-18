@@ -21,7 +21,7 @@ var GradientStop = (function () {
         }
         return elem;
     };
+    GradientStop.type = GradientStop; // TODO type-checker
     return GradientStop;
 }());
-GradientStop.type = GradientStop; // TODO type-checker
 module.exports = GradientStop;

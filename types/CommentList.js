@@ -15,7 +15,7 @@ var CommentList = (function () {
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(Comment.write, inst.comments));
         return elem;
     };
+    CommentList.type = CommentList; // TODO type-checker
     return CommentList;
 }());
-CommentList.type = CommentList; // TODO type-checker
 module.exports = CommentList;

@@ -28,7 +28,7 @@ var TwoCellAnchor = (function () {
         elem.appendChild(ClientData.write(xmlDoc, inst.clientData));
         return elem;
     };
+    TwoCellAnchor.type = TwoCellAnchor; // TODO type-checker
     return TwoCellAnchor;
 }());
-TwoCellAnchor.type = TwoCellAnchor; // TODO type-checker
 module.exports = TwoCellAnchor;

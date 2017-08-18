@@ -15,7 +15,7 @@ class Borders {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Borders): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Borders): ElementLike {
         var elem = xmlDoc.domBldr.create("borders")
             .attrInt("count", inst.count, true)
             .element;

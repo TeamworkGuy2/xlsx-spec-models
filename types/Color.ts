@@ -17,7 +17,7 @@ class Color {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Color, expectedTagName: string): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Color, expectedTagName: string): ElementLike {
         var rgbStr = inst.rgb && typeof inst.rgb === "number" ? (<number>inst.rgb).toString(16).toUpperCase() : <string>inst.rgb;
         var elem = xmlDoc.domBldr.create(expectedTagName)
             .attrBool("auto", inst.auto, true, "1", "0")

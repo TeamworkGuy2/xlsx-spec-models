@@ -9,7 +9,7 @@ var FirstHeader = (function () {
     FirstHeader.write = function (xmlDoc, inst) {
         return StringElement.write(xmlDoc, inst, "firstHeader");
     };
+    FirstHeader.type = FirstHeader; // TODO type-checker
     return FirstHeader;
 }());
-FirstHeader.type = FirstHeader; // TODO type-checker
 module.exports = FirstHeader;

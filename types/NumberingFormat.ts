@@ -13,7 +13,7 @@ class NumberingFormat {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.NumberingFormat): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.NumberingFormat): ElementLike {
         var elem = xmlDoc.domBldr.create("numFmt")
             .attrInt("numFmtId", inst.numFmtId)
             .attrString("formatCode", inst.formatCode)

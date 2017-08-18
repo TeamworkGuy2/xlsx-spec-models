@@ -19,7 +19,7 @@ var TableStyleElement = (function () {
             .element;
         return elem;
     };
+    TableStyleElement.type = TableStyleElement; // TODO type-checker
     return TableStyleElement;
 }());
-TableStyleElement.type = TableStyleElement; // TODO type-checker
 module.exports = TableStyleElement;

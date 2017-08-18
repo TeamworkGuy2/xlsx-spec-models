@@ -9,7 +9,7 @@ class FontFamily {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.FontFamily): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.FontFamily): ElementLike {
         return IntAttribute.write(xmlDoc, inst, "family");
     }
 

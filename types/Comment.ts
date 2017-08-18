@@ -20,7 +20,7 @@ class Comment {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Comment): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Comment): ElementLike {
         var elem = xmlDoc.domBldr.create("comment")
             .attrString("ref", inst.ref)
             .attrInt("authorId", inst.authorId)

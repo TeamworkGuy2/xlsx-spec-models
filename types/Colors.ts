@@ -16,7 +16,7 @@ class Colors {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Colors): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Colors): ElementLike {
         var elem = xmlDoc.dom.createElement("cellXfs");
         if (inst.indexedColors) { elem.appendChild(IndexedColors.write(xmlDoc, inst.indexedColors)); }
         if (inst.mruColors) { elem.appendChild(MruColors.write(xmlDoc, inst.mruColors)); }

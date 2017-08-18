@@ -23,8 +23,7 @@ var RichTextRunProperties = (function () {
         };
     };
     RichTextRunProperties.write = function (xmlDoc, inst) {
-        var dom = xmlDoc.dom, domBldr = xmlDoc.domBldr;
-        var rPrElem = dom.createElement("rPr");
+        var rPrElem = xmlDoc.dom.createElement("rPr");
         if (inst.b && inst.b.val) {
             rPrElem.appendChild(Bold.write(xmlDoc, inst.b, "b"));
         }
@@ -51,7 +50,7 @@ var RichTextRunProperties = (function () {
             sz: inst.sz != null ? FontSize.copy(inst.sz) : null,
         };
     };
+    RichTextRunProperties.type = RichTextRunProperties; // TODO type-checker
     return RichTextRunProperties;
 }());
-RichTextRunProperties.type = RichTextRunProperties; // TODO type-checker
 module.exports = RichTextRunProperties;

@@ -9,7 +9,7 @@ class VerticalTextAlignment {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.VerticalTextAlignment): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.VerticalTextAlignment): ElementLike {
         return StringAttribute.write(xmlDoc, inst, "vertAlign");
     }
 

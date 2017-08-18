@@ -24,7 +24,7 @@ var BorderProperty = (function () {
         }
         return elem;
     };
+    BorderProperty.type = BorderProperty; // TODO type-checker
     return BorderProperty;
 }());
-BorderProperty.type = BorderProperty; // TODO type-checker
 module.exports = BorderProperty;

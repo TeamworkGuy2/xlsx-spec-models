@@ -26,7 +26,7 @@ class Cell {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Cell): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Cell): ElementLike {
         var elem = xmlDoc.domBldr.create("c")
             .attrInt("cm", inst.cm, true)
             .attrBool("ph", inst.ph, true)

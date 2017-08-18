@@ -17,7 +17,7 @@ class RichTextRun {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.RichTextRun): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.RichTextRun): ElementLike {
         var elem = xmlDoc.dom.createElement("r");
         if (inst.rPr) { elem.appendChild(RichTextRunProperties.write(xmlDoc, inst.rPr)); }
         if (inst.t) { elem.appendChild(Text.write(xmlDoc, inst.t)); }

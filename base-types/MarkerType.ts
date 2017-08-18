@@ -24,7 +24,7 @@ class MarkerType {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.MarkerType, tagName: string): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.MarkerType, tagName: string): ElementLike {
         var elem = xmlDoc.dom.createElement(tagName);
         elem.appendChild(ColumnId.write(xmlDoc, inst.col));
         elem.appendChild(ColumnOffset.write(xmlDoc, inst.colOff));

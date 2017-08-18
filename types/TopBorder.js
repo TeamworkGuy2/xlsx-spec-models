@@ -9,7 +9,7 @@ var TopBorder = (function () {
     TopBorder.write = function (xmlDoc, inst) {
         return BorderProperty.write(xmlDoc, inst, "top");
     };
+    TopBorder.type = TopBorder; // TODO type-checker
     return TopBorder;
 }());
-TopBorder.type = TopBorder; // TODO type-checker
 module.exports = TopBorder;

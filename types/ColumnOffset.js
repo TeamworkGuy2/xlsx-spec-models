@@ -9,7 +9,7 @@ var ColumnOffset = (function () {
     ColumnOffset.write = function (xmlDoc, inst) {
         return IntElement.write(xmlDoc, inst, "xdr:colOff");
     };
+    ColumnOffset.type = ColumnOffset; // TODO type-checker
     return ColumnOffset;
 }());
-ColumnOffset.type = ColumnOffset; // TODO type-checker
 module.exports = ColumnOffset;

@@ -29,7 +29,7 @@ var RichTextRun = (function () {
             t: inst.t != null ? Text.copy(inst.t) : null,
         };
     };
+    RichTextRun.type = RichTextRun; // TODO type-checker
     return RichTextRun;
 }());
-RichTextRun.type = RichTextRun; // TODO type-checker
 module.exports = RichTextRun;

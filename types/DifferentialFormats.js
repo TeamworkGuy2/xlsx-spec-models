@@ -19,7 +19,7 @@ var DifferentialFormats = (function () {
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(DifferentialFormat.write, inst.dxfs));
         return elem;
     };
+    DifferentialFormats.type = DifferentialFormats; // TODO type-checker
     return DifferentialFormats;
 }());
-DifferentialFormats.type = DifferentialFormats; // TODO type-checker
 module.exports = DifferentialFormats;

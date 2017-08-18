@@ -12,11 +12,11 @@ class Text {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Text): HTMLElement {
-        var elem = xmlDoc.dom.createElement("t");
-        elem.textContent = inst.content;
-        if (inst.preserveSpace) { elem.setAttribute("xml:space", "preserve"); }
-        return elem;
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Text): ElementLike {
+        var elem = xmlDoc.domBldr.create("t");
+        if (inst.preserveSpace) { elem.attrString("xml:space", "preserve"); }
+        elem.element.textContent = inst.content;
+        return elem.element;
     }
 
 

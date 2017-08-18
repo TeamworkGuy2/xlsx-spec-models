@@ -9,7 +9,7 @@ class RowId {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.RowId): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.RowId): ElementLike {
         return IntElement.write(xmlDoc, inst, "xdr:row");
     }
 

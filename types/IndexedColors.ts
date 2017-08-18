@@ -13,7 +13,7 @@ class IndexedColors {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.IndexedColors): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.IndexedColors): ElementLike {
         var elem = xmlDoc.dom.createElement("indexedColors");
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(RgbColor.write, inst.rgbColors));
         return elem;

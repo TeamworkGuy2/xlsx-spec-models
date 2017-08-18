@@ -20,7 +20,7 @@ class Alignment {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Alignment): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Alignment): ElementLike {
         var elem = xmlDoc.domBldr.create("alignment")
             .attrString("horizontal", inst.horizontal, true)
             .attrInt("indent", inst.indent, true)

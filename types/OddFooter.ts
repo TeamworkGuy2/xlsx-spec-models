@@ -9,7 +9,7 @@ class OddFooter {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.OddFooter): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.OddFooter): ElementLike {
         return StringElement.write(xmlDoc, inst, "oddFooter");
     }
 

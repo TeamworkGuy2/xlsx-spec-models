@@ -15,7 +15,7 @@ class PageSetup {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.PageSetup): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.PageSetup): ElementLike {
         var elem = xmlDoc.domBldr.create("pageSetup")
             .attrInt("scale", inst.scale, true)
             .attrString("orientation", inst.orientation, true)

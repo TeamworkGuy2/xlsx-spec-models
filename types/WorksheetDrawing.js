@@ -15,7 +15,7 @@ var WorksheetDrawing = (function () {
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(TwoCellAnchor.write, inst.twoCellAnchors));
         return elem;
     };
+    WorksheetDrawing.type = WorksheetDrawing; // TODO type-checker
     return WorksheetDrawing;
 }());
-WorksheetDrawing.type = WorksheetDrawing; // TODO type-checker
 module.exports = WorksheetDrawing;

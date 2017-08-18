@@ -47,7 +47,7 @@ var DifferentialFormat = (function () {
         }
         return elem;
     };
+    DifferentialFormat.type = DifferentialFormat; // TODO type-checker
     return DifferentialFormat;
 }());
-DifferentialFormat.type = DifferentialFormat; // TODO type-checker
 module.exports = DifferentialFormat;

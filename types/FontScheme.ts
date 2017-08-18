@@ -9,7 +9,7 @@ class FontScheme {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.FontScheme): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.FontScheme): ElementLike {
         return StringAttribute.write(xmlDoc, inst, "scheme");
     }
 

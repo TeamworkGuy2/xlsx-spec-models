@@ -17,7 +17,7 @@ class PatternFill {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.PatternFill): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.PatternFill): ElementLike {
         var elem = xmlDoc.domBldr.create("patternFill")
             .attrString("patternType", inst.patternType, true)
             .element;

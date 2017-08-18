@@ -9,7 +9,7 @@ var DiagonalBorder = (function () {
     DiagonalBorder.write = function (xmlDoc, inst) {
         return BorderProperty.write(xmlDoc, inst, "diagonal");
     };
+    DiagonalBorder.type = DiagonalBorder; // TODO type-checker
     return DiagonalBorder;
 }());
-DiagonalBorder.type = DiagonalBorder; // TODO type-checker
 module.exports = DiagonalBorder;

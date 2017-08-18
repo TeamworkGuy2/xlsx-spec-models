@@ -18,7 +18,7 @@ class SharedStringItem {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.SharedStringItem): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.SharedStringItem): ElementLike {
         var elem = xmlDoc.dom.createElement("si");
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(RichTextRun.write, inst.rs));
         if (inst.t) { elem.appendChild(Text.write(xmlDoc, inst.t)); }

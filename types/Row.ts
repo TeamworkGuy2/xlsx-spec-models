@@ -27,7 +27,7 @@ class Row {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Row): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Row): ElementLike {
         var elem = xmlDoc.domBldr.create("row")
             .attrInt("r", inst.r, true)
             .attrString("spans", inst.spans, true)

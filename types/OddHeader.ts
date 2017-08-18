@@ -9,7 +9,7 @@ class OddHeader {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.OddHeader): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.OddHeader): ElementLike {
         return StringElement.write(xmlDoc, inst, "oddHeader");
     }
 

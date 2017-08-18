@@ -12,7 +12,7 @@ var Underline = (function () {
     Underline.copy = function (inst) {
         return StringAttribute.copy(inst);
     };
+    Underline.type = Underline; // TODO type-checker
     return Underline;
 }());
-Underline.type = Underline; // TODO type-checker
 module.exports = Underline;

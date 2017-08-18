@@ -18,7 +18,7 @@ class BorderProperty {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.BorderProperty, tagName: string): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.BorderProperty, tagName: string): ElementLike {
         var elem = xmlDoc.domBldr.create(tagName)
             .attrString("style", inst.style, true)
             .element;

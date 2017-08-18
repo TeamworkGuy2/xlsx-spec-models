@@ -31,7 +31,7 @@ var GradientFill = (function () {
         }
         return elem;
     };
+    GradientFill.type = GradientFill; // TODO type-checker
     return GradientFill;
 }());
-GradientFill.type = GradientFill; // TODO type-checker
 module.exports = GradientFill;

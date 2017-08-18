@@ -9,7 +9,7 @@ var FontScheme = (function () {
     FontScheme.write = function (xmlDoc, inst) {
         return StringAttribute.write(xmlDoc, inst, "scheme");
     };
+    FontScheme.type = FontScheme; // TODO type-checker
     return FontScheme;
 }());
-FontScheme.type = FontScheme; // TODO type-checker
 module.exports = FontScheme;

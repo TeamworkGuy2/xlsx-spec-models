@@ -9,7 +9,7 @@ var RowOffset = (function () {
     RowOffset.write = function (xmlDoc, inst) {
         return IntElement.write(xmlDoc, inst, "xdr:rowOff");
     };
+    RowOffset.type = RowOffset; // TODO type-checker
     return RowOffset;
 }());
-RowOffset.type = RowOffset; // TODO type-checker
 module.exports = RowOffset;

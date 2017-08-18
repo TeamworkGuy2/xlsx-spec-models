@@ -22,7 +22,7 @@ class Picture {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Picture): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Picture): ElementLike {
         var elem = xmlDoc.domBldr.create("xdr:pic")
             .attrBool("fPublished", inst.fPublished, true, "1", "0")
             .attrString("macro", inst.macro, true)

@@ -17,7 +17,7 @@ class PageMargins {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.PageMargins): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.PageMargins): ElementLike {
         var elem = xmlDoc.domBldr.create("pageMargins")
             .attrFloat("left", inst.left)
             .attrFloat("right", inst.right)

@@ -15,7 +15,7 @@ var IndexedColors = (function () {
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(RgbColor.write, inst.rgbColors));
         return elem;
     };
+    IndexedColors.type = IndexedColors; // TODO type-checker
     return IndexedColors;
 }());
-IndexedColors.type = IndexedColors; // TODO type-checker
 module.exports = IndexedColors;

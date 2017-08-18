@@ -15,7 +15,7 @@ class CellFormats {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.CellFormats): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.CellFormats): ElementLike {
         var elem = xmlDoc.domBldr.create("cellXfs")
             .attrInt("count", inst.count, true)
             .element;

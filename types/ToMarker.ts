@@ -9,7 +9,7 @@ class ToMarker {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.ToMarker): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.ToMarker): ElementLike {
         return MarkerType.write(xmlDoc, inst, "xdr:to");
     }
 

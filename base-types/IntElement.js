@@ -16,7 +16,7 @@ var StringElement = (function () {
         elem.textContent = inst.content;
         return elem;
     };
+    StringElement.type = StringElement; // TODO type-checker
     return StringElement;
 }());
-StringElement.type = StringElement; // TODO type-checker
 module.exports = StringElement;

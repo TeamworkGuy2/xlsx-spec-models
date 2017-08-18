@@ -33,7 +33,7 @@ var SheetView = (function () {
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(Selection.write, inst.selections));
         return elem;
     };
+    SheetView.type = SheetView; // TODO type-checker
     return SheetView;
 }());
-SheetView.type = SheetView; // TODO type-checker
 module.exports = SheetView;

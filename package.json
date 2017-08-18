@@ -1,13 +1,14 @@
 {
   "name": "xlsx-spec-models",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "TypeScript Open XML XLSX format models with DOM read/write methods",
   "dependencies": {
   },
   "devDependencies": {
-    "chai": "~3.5.0",
-    "mocha": "~2.5.0",
-    "typescript": "~2.3.0"
+    "dom-builder": "~0.4.1",
+    "chai": "~4.1.0",
+    "mocha": "~3.5.0",
+    "typescript": "~2.4.0"
   },
   "scripts": {
     "test": "mocha -u tdd --recursive"

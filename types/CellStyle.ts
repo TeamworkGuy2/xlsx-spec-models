@@ -17,7 +17,7 @@ class CellStyle {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.CellStyle): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.CellStyle): ElementLike {
         var elem = xmlDoc.domBldr.create("cellStyle")
             .attrString("name", inst.name, true)
             .attrInt("xfId", inst.xfId)

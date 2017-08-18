@@ -9,7 +9,7 @@ class FirstHeader {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.FirstHeader): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.FirstHeader): ElementLike {
         return StringElement.write(xmlDoc, inst, "firstHeader");
     }
 

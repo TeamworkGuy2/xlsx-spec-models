@@ -21,7 +21,7 @@ class ShapeProperties {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.ShapeProperties): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.ShapeProperties): ElementLike {
         var elem = xmlDoc.domBldr.create("xdr:spPr")
             .attrString("bwMode", inst.bwMode, true)
             .element;

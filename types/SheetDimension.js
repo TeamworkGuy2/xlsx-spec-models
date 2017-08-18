@@ -15,7 +15,7 @@ var SheetDimension = (function () {
             .element;
         return elem;
     };
+    SheetDimension.type = SheetDimension; // TODO type-checker
     return SheetDimension;
 }());
-SheetDimension.type = SheetDimension; // TODO type-checker
 module.exports = SheetDimension;

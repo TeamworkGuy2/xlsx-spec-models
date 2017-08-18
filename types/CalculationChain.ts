@@ -13,7 +13,7 @@ class CalculationChain {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.CalculationChain): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.CalculationChain): ElementLike {
         var elem = xmlDoc.dom.createElement("calcChain");
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(CalculationCell.write, inst.cs));
         return elem;

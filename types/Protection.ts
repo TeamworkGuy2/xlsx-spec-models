@@ -13,7 +13,7 @@ class Protection {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Protection): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Protection): ElementLike {
         var elem = xmlDoc.domBldr.create("protection")
             .attrBool("hidden", inst.hidden, true, "1", "0")
             .attrBool("locked", inst.locked, true, "1", "0")

@@ -9,7 +9,7 @@ var CellValue = (function () {
     CellValue.write = function (xmlDoc, inst) {
         return StringElement.write(xmlDoc, inst, "v");
     };
+    CellValue.type = CellValue; // TODO type-checker
     return CellValue;
 }());
-CellValue.type = CellValue; // TODO type-checker
 module.exports = CellValue;

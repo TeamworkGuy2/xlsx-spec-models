@@ -9,7 +9,7 @@ var RowId = (function () {
     RowId.write = function (xmlDoc, inst) {
         return IntElement.write(xmlDoc, inst, "xdr:row");
     };
+    RowId.type = RowId; // TODO type-checker
     return RowId;
 }());
-RowId.type = RowId; // TODO type-checker
 module.exports = RowId;

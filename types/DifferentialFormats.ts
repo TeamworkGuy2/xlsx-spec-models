@@ -15,7 +15,7 @@ class DifferentialFormats {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.DifferentialFormats): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.DifferentialFormats): ElementLike {
         var elem = xmlDoc.domBldr.create("dxfs")
             .attrInt("count", inst.count, true)
             .element;

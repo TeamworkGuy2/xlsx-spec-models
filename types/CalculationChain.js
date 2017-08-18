@@ -15,7 +15,7 @@ var CalculationChain = (function () {
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(CalculationCell.write, inst.cs));
         return elem;
     };
+    CalculationChain.type = CalculationChain; // TODO type-checker
     return CalculationChain;
 }());
-CalculationChain.type = CalculationChain; // TODO type-checker
 module.exports = CalculationChain;

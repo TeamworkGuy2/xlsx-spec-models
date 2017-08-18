@@ -13,7 +13,7 @@ class CommentList {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.CommentList): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.CommentList): ElementLike {
         var elem = xmlDoc.dom.createElement("commentList");
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(Comment.write, inst.comments));
         return elem;

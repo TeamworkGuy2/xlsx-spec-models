@@ -19,7 +19,7 @@ var CellFormats = (function () {
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(CellFormat.write, inst.xfs));
         return elem;
     };
+    CellFormats.type = CellFormats; // TODO type-checker
     return CellFormats;
 }());
-CellFormats.type = CellFormats; // TODO type-checker
 module.exports = CellFormats;

@@ -15,7 +15,7 @@ class Fills {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Fills): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Fills): ElementLike {
         var elem = xmlDoc.domBldr.create("fills")
             .attrInt("count", inst.count, true)
             .element;

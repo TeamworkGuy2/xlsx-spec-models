@@ -17,7 +17,7 @@ var Protection = (function () {
             .element;
         return elem;
     };
+    Protection.type = Protection; // TODO type-checker
     return Protection;
 }());
-Protection.type = Protection; // TODO type-checker
 module.exports = Protection;

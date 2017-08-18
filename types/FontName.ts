@@ -9,7 +9,7 @@ class FontName {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.FontName): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.FontName): ElementLike {
         return StringAttribute.write(xmlDoc, inst, "name");
     }
 

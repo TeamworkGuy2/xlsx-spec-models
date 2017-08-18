@@ -15,7 +15,7 @@ class CellFormula {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.CellFormula): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.CellFormula): ElementLike {
         var elem = xmlDoc.domBldr.create("f")
             .attrString("t", inst.t, true)
             .attrString("ref", inst.ref, true)

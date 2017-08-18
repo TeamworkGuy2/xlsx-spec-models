@@ -23,7 +23,7 @@ var BooleanAttribute = (function () {
             val: inst.val
         };
     };
+    BooleanAttribute.type = BooleanAttribute; // TODO type-checker
     return BooleanAttribute;
 }());
-BooleanAttribute.type = BooleanAttribute; // TODO type-checker
 module.exports = BooleanAttribute;

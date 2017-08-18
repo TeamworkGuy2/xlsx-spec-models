@@ -18,7 +18,7 @@ var Selection = (function () {
             .attrString("sqref", inst.sqref, true)
             .element;
     };
+    Selection.type = Selection; // TODO type-checker
     return Selection;
 }());
-Selection.type = Selection; // TODO type-checker
 module.exports = Selection;

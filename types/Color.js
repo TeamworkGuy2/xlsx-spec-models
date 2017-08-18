@@ -34,7 +34,7 @@ var Color = (function () {
             tint: inst.tint,
         };
     };
+    Color.type = Color; // TODO type-checker
     return Color;
 }());
-Color.type = Color; // TODO type-checker
 module.exports = Color;

@@ -22,7 +22,7 @@ class SheetView {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.SheetView): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.SheetView): ElementLike {
         var elem = xmlDoc.domBldr.create("sheetView")
             .attrBool("tabSelected", inst.tabSelected, true, "1", "0")
             .attrString("view", inst.view, true)

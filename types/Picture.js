@@ -28,7 +28,7 @@ var Picture = (function () {
         elem.appendChild(ShapeProperties.write(xmlDoc, inst.spPr));
         return elem;
     };
+    Picture.type = Picture; // TODO type-checker
     return Picture;
 }());
-Picture.type = Picture; // TODO type-checker
 module.exports = Picture;

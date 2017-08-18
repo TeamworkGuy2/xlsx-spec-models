@@ -22,7 +22,7 @@ class TwoCellAnchor {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.TwoCellAnchor): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.TwoCellAnchor): ElementLike {
         var elem = xmlDoc.domBldr.create("xdr:twoCellAnchor")
             .attrString("editAs", inst.editAs, true)
             .element;

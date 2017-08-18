@@ -19,7 +19,7 @@ var SheetFormatProperties = (function () {
             .element;
         return elem;
     };
+    SheetFormatProperties.type = SheetFormatProperties; // TODO type-checker
     return SheetFormatProperties;
 }());
-SheetFormatProperties.type = SheetFormatProperties; // TODO type-checker
 module.exports = SheetFormatProperties;

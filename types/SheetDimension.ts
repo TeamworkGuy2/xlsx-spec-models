@@ -12,7 +12,7 @@ class SheetDimension {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.SheetDimension): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.SheetDimension): ElementLike {
         var elem = xmlDoc.domBldr.create("dimension")
             .attrString("ref", inst.ref)
             .element;

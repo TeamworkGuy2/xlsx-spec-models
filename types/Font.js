@@ -97,7 +97,7 @@ var Font = (function () {
         }
         return elem;
     };
+    Font.type = Font; // TODO type-checker
     return Font;
 }());
-Font.type = Font; // TODO type-checker
 module.exports = Font;

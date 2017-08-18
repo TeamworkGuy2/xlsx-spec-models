@@ -21,7 +21,7 @@ class Column {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Column): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Column): ElementLike {
         var elem = xmlDoc.domBldr.create("col")
             .attrInt("min", inst.min)
             .attrInt("max", inst.max)

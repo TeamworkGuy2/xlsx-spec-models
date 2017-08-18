@@ -24,7 +24,7 @@ var Comment = (function () {
         elem.appendChild(CommentText.write(xmlDoc, inst.text));
         return elem;
     };
+    Comment.type = Comment; // TODO type-checker
     return Comment;
 }());
-Comment.type = Comment; // TODO type-checker
 module.exports = Comment;

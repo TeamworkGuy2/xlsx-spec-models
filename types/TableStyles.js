@@ -23,7 +23,7 @@ var TableStyles = (function () {
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(TableStyle.write, inst.tableStyles));
         return elem;
     };
+    TableStyles.type = TableStyles; // TODO type-checker
     return TableStyles;
 }());
-TableStyles.type = TableStyles; // TODO type-checker
 module.exports = TableStyles;

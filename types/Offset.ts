@@ -9,7 +9,7 @@ class Offset {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Offset): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Offset): ElementLike {
         return Point2DType.write(xmlDoc, inst, "a:off");
     }
 

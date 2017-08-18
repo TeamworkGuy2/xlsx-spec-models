@@ -21,7 +21,7 @@ var CalculationCell = (function () {
             .element;
         return elem;
     };
+    CalculationCell.type = CalculationCell; // TODO type-checker
     return CalculationCell;
 }());
-CalculationCell.type = CalculationCell; // TODO type-checker
 module.exports = CalculationCell;

@@ -21,7 +21,7 @@ var Bold = (function () {
             val: inst.val,
         };
     };
+    Bold.type = Bold; // TODO type-checker
     return Bold;
 }());
-Bold.type = Bold; // TODO type-checker
 module.exports = Bold;

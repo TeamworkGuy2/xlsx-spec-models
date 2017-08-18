@@ -16,7 +16,7 @@ class CommentText {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.CommentText): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.CommentText): ElementLike {
         var elem = xmlDoc.dom.createElement("text");
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(RichTextRun.write, inst.rs));
         if (inst.t) { elem.appendChild(Text.write(xmlDoc, inst.t)); }

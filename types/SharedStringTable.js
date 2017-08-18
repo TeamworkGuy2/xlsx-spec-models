@@ -15,7 +15,7 @@ var SharedStringTable = (function () {
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(SharedStringItem.write, inst.sis));
         return elem;
     };
+    SharedStringTable.type = SharedStringTable; // TODO type-checker
     return SharedStringTable;
 }());
-SharedStringTable.type = SharedStringTable; // TODO type-checker
 module.exports = SharedStringTable;

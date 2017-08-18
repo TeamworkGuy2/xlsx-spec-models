@@ -13,7 +13,7 @@ class SheetViews {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.SheetViews): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.SheetViews): ElementLike {
         var elem = xmlDoc.dom.createElement("sheetViews");
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(SheetView.write, inst.sheetViews));
         return elem;

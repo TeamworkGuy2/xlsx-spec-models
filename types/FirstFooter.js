@@ -9,7 +9,7 @@ var FirstFooter = (function () {
     FirstFooter.write = function (xmlDoc, inst) {
         return StringElement.write(xmlDoc, inst, "firstFooter");
     };
+    FirstFooter.type = FirstFooter; // TODO type-checker
     return FirstFooter;
 }());
-FirstFooter.type = FirstFooter; // TODO type-checker
 module.exports = FirstFooter;

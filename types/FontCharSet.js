@@ -12,7 +12,7 @@ var FontCharSet = (function () {
     FontCharSet.copy = function (inst) {
         return IntAttribute.copy(inst);
     };
+    FontCharSet.type = FontCharSet; // TODO type-checker
     return FontCharSet;
 }());
-FontCharSet.type = FontCharSet; // TODO type-checker
 module.exports = FontCharSet;

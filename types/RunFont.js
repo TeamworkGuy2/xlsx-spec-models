@@ -20,7 +20,7 @@ var RunFont = (function () {
             val: inst.val
         };
     };
+    RunFont.type = RunFont; // TODO type-checker
     return RunFont;
 }());
-RunFont.type = RunFont; // TODO type-checker
 module.exports = RunFont;

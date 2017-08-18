@@ -4,7 +4,20 @@ This project does its best to adhere to [Semantic Versioning](http://semver.org/
 
 
 --------
-### [0.2.1](N/A) - 2017-05-09
+### [0.3.0](N/A) - 2017-08-18
+#### Added
+* `Workbook` interfaces and types
+
+#### Changed
+* Updated to TypeScript 2.4
+* Moved `open-xml-io.d.ts` from `xlsx-spec-utils` library to this project
+* Switched from `Document` and `HTMLElement` in `open-xml-io.d.ts` interfaces to `DocumentLike` and `ElementLike` (going along with `dom-builder` update)
+* Added `dom-builder@0.4.1` dev-dependency since it is required to compile the TypeScript code
+* Made many interface members optional based on open-xml spec and experience with real world xlsx files
+
+
+--------
+### [0.2.1](https://github.com/TeamworkGuy2/xlsx-spec-models/commit/8de4e66af713401f5bd65b8970e473a920d7002f) - 2017-05-09
 #### Changed
 * Updated to TypeScript 2.3, added tsconfig.json, use @types/ definitions
 

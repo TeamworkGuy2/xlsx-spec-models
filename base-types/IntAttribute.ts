@@ -14,7 +14,7 @@ class IntAttribute {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: { val: number }, tagName: string): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: { val: number }, tagName: string): ElementLike {
         var elem = xmlDoc.domBldr.create(tagName)
             .attrInt("val", inst.val)
             .element;

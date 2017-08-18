@@ -12,7 +12,7 @@ var FontSize = (function () {
     FontSize.copy = function (inst) {
         return FloatAttribute.copy(inst);
     };
+    FontSize.type = FontSize; // TODO type-checker
     return FontSize;
 }());
-FontSize.type = FontSize; // TODO type-checker
 module.exports = FontSize;

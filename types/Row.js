@@ -43,7 +43,7 @@ var Row = (function () {
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(Cell.write, inst.cs));
         return elem;
     };
+    Row.type = Row; // TODO type-checker
     return Row;
 }());
-Row.type = Row; // TODO type-checker
 module.exports = Row;

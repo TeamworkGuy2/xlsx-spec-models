@@ -9,7 +9,7 @@ class ColumnOffset {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.ColumnOffset): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.ColumnOffset): ElementLike {
         return IntElement.write(xmlDoc, inst, "xdr:colOff");
     }
 

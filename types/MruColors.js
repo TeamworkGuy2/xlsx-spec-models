@@ -15,7 +15,7 @@ var MruColors = (function () {
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(Color.write, inst.colors, "color"));
         return elem;
     };
+    MruColors.type = MruColors; // TODO type-checker
     return MruColors;
 }());
-MruColors.type = MruColors; // TODO type-checker
 module.exports = MruColors;

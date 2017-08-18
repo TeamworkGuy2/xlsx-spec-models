@@ -14,7 +14,7 @@ class SheetFormatProperties {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.SheetFormatProperties): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.SheetFormatProperties): ElementLike {
         var elem = xmlDoc.domBldr.create("sheetFormatPr")
             .attrFloat("defaultColWidth", inst.defaultColWidth, true)
             .attrFloat("defaultRowHeight", inst.defaultRowHeight)

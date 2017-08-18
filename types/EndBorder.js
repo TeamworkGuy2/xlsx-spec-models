@@ -9,7 +9,7 @@ var EndBorder = (function () {
     EndBorder.write = function (xmlDoc, inst) {
         return BorderProperty.write(xmlDoc, inst, "end");
     };
+    EndBorder.type = EndBorder; // TODO type-checker
     return EndBorder;
 }());
-EndBorder.type = EndBorder; // TODO type-checker
 module.exports = EndBorder;

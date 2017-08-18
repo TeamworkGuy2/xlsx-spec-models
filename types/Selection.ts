@@ -14,7 +14,7 @@ class Selection {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Selection): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Selection): ElementLike {
         return xmlDoc.domBldr.create("selection")
             .attrString("activeCell", inst.activeCell, true)
             .attrInt("activeCellId", inst.activeCellId, true)

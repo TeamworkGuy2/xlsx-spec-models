@@ -18,7 +18,7 @@ class Comments {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Comments): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Comments): ElementLike {
         var elem = xmlDoc.dom.createElement("comments");
         elem.appendChild(Authors.write(xmlDoc, inst.authors));
         elem.appendChild(CommentList.write(xmlDoc, inst.commentList));

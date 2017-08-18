@@ -43,7 +43,7 @@ class Worksheet {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Worksheet): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Worksheet): ElementLike {
         var elem = xmlDoc.dom.createElement("worksheet");
 
         if (inst.dimension) { elem.appendChild(SheetDimension.write(xmlDoc, inst.dimension)); }

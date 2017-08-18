@@ -73,7 +73,7 @@ var Border = (function () {
         }
         return elem;
     };
+    Border.type = Border; // TODO type-checker
     return Border;
 }());
-Border.type = Border; // TODO type-checker
 module.exports = Border;

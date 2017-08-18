@@ -16,7 +16,7 @@ class CalculationCell {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.CalculationCell): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.CalculationCell): ElementLike {
         var elem = xmlDoc.domBldr.create("c")
             .attrString("r", inst.r)
             .attrInt("i", inst.i)

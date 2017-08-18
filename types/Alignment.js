@@ -31,7 +31,7 @@ var Alignment = (function () {
             .element;
         return elem;
     };
+    Alignment.type = Alignment; // TODO type-checker
     return Alignment;
 }());
-Alignment.type = Alignment; // TODO type-checker
 module.exports = Alignment;

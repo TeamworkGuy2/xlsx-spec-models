@@ -16,7 +16,7 @@ class TableStyleElement {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.TableStyleElement): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.TableStyleElement): ElementLike {
         var elem = xmlDoc.domBldr.create("tableStyleElement")
             .attrInt("dxfId", inst.dxfId, true)
             .attrInt("size", inst.size, true)

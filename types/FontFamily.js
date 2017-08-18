@@ -12,7 +12,7 @@ var FontFamily = (function () {
     FontFamily.copy = function (inst) {
         return IntAttribute.copy(inst);
     };
+    FontFamily.type = FontFamily; // TODO type-checker
     return FontFamily;
 }());
-FontFamily.type = FontFamily; // TODO type-checker
 module.exports = FontFamily;

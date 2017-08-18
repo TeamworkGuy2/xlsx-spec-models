@@ -15,7 +15,7 @@ var SheetViews = (function () {
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(SheetView.write, inst.sheetViews));
         return elem;
     };
+    SheetViews.type = SheetViews; // TODO type-checker
     return SheetViews;
 }());
-SheetViews.type = SheetViews; // TODO type-checker
 module.exports = SheetViews;

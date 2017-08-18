@@ -13,7 +13,7 @@ class Point2DType {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Point2DType, tagName: string): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Point2DType, tagName: string): ElementLike {
         var elem = xmlDoc.domBldr.create(tagName)
             .attrInt("x", inst.x, true)
             .attrInt("y", inst.y, true)

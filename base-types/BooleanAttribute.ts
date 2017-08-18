@@ -14,7 +14,7 @@ class BooleanAttribute {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: { val: boolean }, tagName: string): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: { val: boolean }, tagName: string): ElementLike {
         var elem = xmlDoc.domBldr.create(tagName)
             .attrBool("val", inst.val, true, "1", "0")
             .element;

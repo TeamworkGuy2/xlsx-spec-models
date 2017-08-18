@@ -20,7 +20,7 @@ var CellStyleFormats = (function () {
         xmlDoc.addChilds(elem, cellFormatElems);
         return elem;
     };
+    CellStyleFormats.type = CellStyleFormats; // TODO type-checker
     return CellStyleFormats;
 }());
-CellStyleFormats.type = CellStyleFormats; // TODO type-checker
 module.exports = CellStyleFormats;

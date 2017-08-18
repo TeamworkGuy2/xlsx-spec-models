@@ -16,7 +16,7 @@ class InlineString {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.InlineString): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.InlineString): ElementLike {
         var elem = xmlDoc.dom.createElement("is");
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(RichTextRun.write, inst.rs));
         if (inst.t) { elem.appendChild(Text.write(xmlDoc, inst.t)); }

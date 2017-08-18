@@ -44,7 +44,7 @@ var ShapeProperties = (function () {
         }
         return elem;
     };
+    ShapeProperties.type = ShapeProperties; // TODO type-checker
     return ShapeProperties;
 }());
-ShapeProperties.type = ShapeProperties; // TODO type-checker
 module.exports = ShapeProperties;

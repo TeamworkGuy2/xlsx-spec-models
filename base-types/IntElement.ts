@@ -13,7 +13,7 @@ class StringElement {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: { content: number }, tagName: string): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: { content: number }, tagName: string): ElementLike {
         var elem = xmlDoc.dom.createElement(tagName);
         elem.textContent = <any>inst.content;
         return elem;

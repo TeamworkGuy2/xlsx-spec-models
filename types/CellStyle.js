@@ -25,7 +25,7 @@ var CellStyle = (function () {
             .element;
         return elem;
     };
+    CellStyle.type = CellStyle; // TODO type-checker
     return CellStyle;
 }());
-CellStyle.type = CellStyle; // TODO type-checker
 module.exports = CellStyle;

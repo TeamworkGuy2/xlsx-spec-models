@@ -13,7 +13,7 @@ class SheetData {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.SheetData): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.SheetData): ElementLike {
         var elem = xmlDoc.dom.createElement("sheetData");
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(Row.write, inst.rows));
         return elem;

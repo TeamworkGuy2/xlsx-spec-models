@@ -77,7 +77,7 @@ var Stylesheet = (function () {
         }
         return elem;
     };
+    Stylesheet.type = Stylesheet; // TODO type-checker
     return Stylesheet;
 }());
-Stylesheet.type = Stylesheet; // TODO type-checker
 module.exports = Stylesheet;

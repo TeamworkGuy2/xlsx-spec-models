@@ -18,7 +18,7 @@ class TableStyle {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.TableStyle): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.TableStyle): ElementLike {
         var elem = xmlDoc.domBldr.create("tableStyle")
             .attrInt("count", inst.count, true)
             .attrString("name", inst.name)

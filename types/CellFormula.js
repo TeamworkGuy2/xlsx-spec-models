@@ -21,7 +21,7 @@ var CellFormula = (function () {
         elem.textContent = inst.content;
         return elem;
     };
+    CellFormula.type = CellFormula; // TODO type-checker
     return CellFormula;
 }());
-CellFormula.type = CellFormula; // TODO type-checker
 module.exports = CellFormula;

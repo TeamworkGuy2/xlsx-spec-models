@@ -13,7 +13,7 @@ class MruColors {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.MruColors): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.MruColors): ElementLike {
         var elem = xmlDoc.dom.createElement("mruColors");
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(Color.write, inst.colors, "color"));
         return elem;

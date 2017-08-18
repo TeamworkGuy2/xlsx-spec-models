@@ -23,7 +23,7 @@ var FloatAttribute = (function () {
             val: inst.val
         };
     };
+    FloatAttribute.type = FloatAttribute; // TODO type-checker
     return FloatAttribute;
 }());
-FloatAttribute.type = FloatAttribute; // TODO type-checker
 module.exports = FloatAttribute;

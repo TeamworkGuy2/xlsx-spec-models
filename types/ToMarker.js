@@ -9,7 +9,7 @@ var ToMarker = (function () {
     ToMarker.write = function (xmlDoc, inst) {
         return MarkerType.write(xmlDoc, inst, "xdr:to");
     };
+    ToMarker.type = ToMarker; // TODO type-checker
     return ToMarker;
 }());
-ToMarker.type = ToMarker; // TODO type-checker
 module.exports = ToMarker;

@@ -9,7 +9,7 @@ var HorizontalBorder = (function () {
     HorizontalBorder.write = function (xmlDoc, inst) {
         return BorderProperty.write(xmlDoc, inst, "horizontal");
     };
+    HorizontalBorder.type = HorizontalBorder; // TODO type-checker
     return HorizontalBorder;
 }());
-HorizontalBorder.type = HorizontalBorder; // TODO type-checker
 module.exports = HorizontalBorder;

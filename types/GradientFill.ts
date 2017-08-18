@@ -20,7 +20,7 @@ class GradientFill {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.GradientFill): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.GradientFill): ElementLike {
         var elem = xmlDoc.domBldr.create("gradientFill")
             .attrFloat("bottom", inst.bottom, true)
             .attrFloat("degree", inst.degree, true)

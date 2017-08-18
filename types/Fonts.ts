@@ -15,7 +15,7 @@ class Fonts {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Fonts): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Fonts): ElementLike {
         var elem = xmlDoc.domBldr.create("fonts")
             .attrInt("count", inst.count, true)
             .element;

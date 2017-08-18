@@ -30,7 +30,7 @@ class CellFormat {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.CellFormat): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.CellFormat): ElementLike {
         var elem = xmlDoc.domBldr.create("xf")
             .attrInt("numFmtId", inst.numFmtId, true)
             .attrInt("fontId", inst.fontId, true)

@@ -44,7 +44,7 @@ class Stylesheet {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Stylesheet): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Stylesheet): ElementLike {
         var elem = xmlDoc.dom.createElement("styleSheet");
 
         if (inst.numFmts) { elem.appendChild(NumberingFormats.write(xmlDoc, inst.numFmts)); }

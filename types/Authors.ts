@@ -13,7 +13,7 @@ class Authors {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Authors): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Authors): ElementLike {
         var elem = xmlDoc.dom.createElement("authors");
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(Author.write, inst.authors));
         return elem;

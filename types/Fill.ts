@@ -18,7 +18,7 @@ class Fill {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Fill): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Fill): ElementLike {
         var elem = xmlDoc.dom.createElement("fill");
         if (inst.gradientFill) { elem.appendChild(GradientFill.write(xmlDoc, inst.gradientFill)); }
         if (inst.patternFill) { elem.appendChild(PatternFill.write(xmlDoc, inst.patternFill)); }

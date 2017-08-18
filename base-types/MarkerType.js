@@ -28,7 +28,7 @@ var MarkerType = (function () {
         elem.appendChild(RowOffset.write(xmlDoc, inst.rowOff));
         return elem;
     };
+    MarkerType.type = MarkerType; // TODO type-checker
     return MarkerType;
 }());
-MarkerType.type = MarkerType; // TODO type-checker
 module.exports = MarkerType;

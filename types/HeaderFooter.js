@@ -47,7 +47,7 @@ var HeaderFooter = (function () {
         }
         return elem;
     };
+    HeaderFooter.type = HeaderFooter; // TODO type-checker
     return HeaderFooter;
 }());
-HeaderFooter.type = HeaderFooter; // TODO type-checker
 module.exports = HeaderFooter;

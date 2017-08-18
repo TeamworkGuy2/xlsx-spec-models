@@ -9,7 +9,7 @@ class EvenHeader {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.EvenHeader): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.EvenHeader): ElementLike {
         return StringElement.write(xmlDoc, inst, "evenHeader");
     }
 

@@ -9,7 +9,7 @@ class FontSize {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.FontSize): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.FontSize): ElementLike {
         return FloatAttribute.write(xmlDoc, inst, "sz");
     }
 

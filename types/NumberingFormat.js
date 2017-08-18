@@ -17,7 +17,7 @@ var NumberingFormat = (function () {
             .element;
         return elem;
     };
+    NumberingFormat.type = NumberingFormat; // TODO type-checker
     return NumberingFormat;
 }());
-NumberingFormat.type = NumberingFormat; // TODO type-checker
 module.exports = NumberingFormat;

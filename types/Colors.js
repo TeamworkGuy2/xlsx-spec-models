@@ -23,7 +23,7 @@ var Colors = (function () {
         }
         return elem;
     };
+    Colors.type = Colors; // TODO type-checker
     return Colors;
 }());
-Colors.type = Colors; // TODO type-checker
 module.exports = Colors;

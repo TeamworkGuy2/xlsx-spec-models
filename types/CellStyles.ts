@@ -15,7 +15,7 @@ class CellStyles {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.CellStyles): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.CellStyles): ElementLike {
         var elem = xmlDoc.domBldr.create("cellStyles")
             .attrInt("count", inst.count, true)
             .element;

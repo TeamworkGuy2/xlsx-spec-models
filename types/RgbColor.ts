@@ -12,7 +12,7 @@ class RgbColor {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.RgbColor): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.RgbColor): ElementLike {
         var rgbStr = inst.rgb && typeof inst.rgb === "number" ? (<number>inst.rgb).toString(16).toUpperCase() : <string>inst.rgb;
         var elem = xmlDoc.domBldr.create("rgbColor")
             .attrString("rgb", rgbStr, true)

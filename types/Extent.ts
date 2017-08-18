@@ -13,7 +13,7 @@ class Extent {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Extent): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Extent): ElementLike {
         var elem = xmlDoc.domBldr.create("a:ext")
             .attrInt("cx", inst.cx, true)
             .attrInt("cy", inst.cy, true)

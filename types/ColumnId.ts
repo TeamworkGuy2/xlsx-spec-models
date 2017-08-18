@@ -9,7 +9,7 @@ class ColumnId {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.ColumnId): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.ColumnId): ElementLike {
         return IntElement.write(xmlDoc, inst, "xdr:col");
     }
 

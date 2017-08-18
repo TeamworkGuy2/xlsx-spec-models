@@ -9,7 +9,7 @@ var VerticalBorder = (function () {
     VerticalBorder.write = function (xmlDoc, inst) {
         return BorderProperty.write(xmlDoc, inst, "vertical");
     };
+    VerticalBorder.type = VerticalBorder; // TODO type-checker
     return VerticalBorder;
 }());
-VerticalBorder.type = VerticalBorder; // TODO type-checker
 module.exports = VerticalBorder;

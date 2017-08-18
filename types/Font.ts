@@ -52,7 +52,7 @@ class Font {
     }
 
 
-    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Font): HTMLElement {
+    public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Font): ElementLike {
         var elem = xmlDoc.dom.createElement("font");
         if (inst.b && inst.b.val) { elem.appendChild(Bold.write(xmlDoc, inst.b, "b")); }
         if (inst.sz) { elem.appendChild(FontSize.write(xmlDoc, inst.sz)); }

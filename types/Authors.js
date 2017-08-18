@@ -15,7 +15,7 @@ var Authors = (function () {
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(Author.write, inst.authors));
         return elem;
     };
+    Authors.type = Authors; // TODO type-checker
     return Authors;
 }());
-Authors.type = Authors; // TODO type-checker
 module.exports = Authors;

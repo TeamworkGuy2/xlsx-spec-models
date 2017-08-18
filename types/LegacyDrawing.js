@@ -15,7 +15,7 @@ var LegacyDrawing = (function () {
             .element;
         return elem;
     };
+    LegacyDrawing.type = LegacyDrawing; // TODO type-checker
     return LegacyDrawing;
 }());
-LegacyDrawing.type = LegacyDrawing; // TODO type-checker
 module.exports = LegacyDrawing;

@@ -43,6 +43,8 @@ declare module OpenXml {
 
     type ST_RowID = number; // >= 0
 
+    type ST_SheetState = ("visible" | "hidden" | "veryHidden");
+
     type ST_TableStyleType = ("wholeTable" | "headerRow" | "totalRow" | "firstColumn" | "lastColumn" | "firstRowStripe" | "secondRowStripe" | "firstColumnStripe" | "secondColumnStripe" | "firstHeaderCell" | "lastHeaderCell" | "firstTotalCell" | "lastTotalCell" | "firstSubtotalColumn" | "secondSubtotalColumn" | "thirdSubtotalColumn" | "firstSubtotalRow" | "secondSubtotalRow" | "thirdSubtotalRow" | "blankRow" | "firstColumnSubheading" | "secondColumnSubheading" | "thirdColumnSubheading" | "firstRowSubheading" | "secondRowSubheading" | "thirdRowSubheading" | "pageFieldLabels" | "pageFieldValues");
 
     type ST_TileFlipMode = ("none" | "x" | "y" | "xy");
@@ -296,31 +298,31 @@ declare module OpenXml {
      */
     interface Border {
         /** leading edge border */
-        start: BorderProperty;
+        start?: BorderProperty;
         /** trailing edge border */
-        end: BorderProperty;
+        end?: BorderProperty;
         /** top border */
-        top: BorderProperty;
+        top?: BorderProperty;
         /** bottom border */
-        bottom: BorderProperty;
+        bottom?: BorderProperty;
         /** diagonal */
-        diagonal: BorderProperty;
+        diagonal?: BorderProperty;
         /** vertical inner border */
-        vertical: BorderProperty;
+        vertical?: BorderProperty;
         /** horizontal inner borders */
-        horizontal: BorderProperty;
+        horizontal?: BorderProperty;
+
+        // these aren't part of the spec, but MS Office 2013 requires them
+        left?: BorderProperty;
+        right?: BorderProperty;
 
         // attributes
         /** indicates if the cell's diagonal border includes a diagonal line, starting at the top left corner of the cell and moving down to the bottom right corner of the cell */
-        diagonalDown: boolean;
+        diagonalDown?: boolean;
         /** indicates if the cell's diagonal border includes a diagonal line, starting at the bottom left corner of the cell and moving up to the top right corner of the cell */
-        diagonalUp: boolean;
+        diagonalUp?: boolean;
         /** indicates if left, right, top, and bottom borders should be applied only to outside borders of a cell range */
-        outline: boolean; // default: true
-
-        // these aren't part of the spec, but MS Office 2013 requires them
-        left: BorderProperty;
-        right: BorderProperty;
+        outline?: boolean; // default: true
     }
 
 
@@ -336,10 +338,10 @@ declare module OpenXml {
      * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.verticalborder.aspx
      */
     interface BorderProperty {
-        color: Color;
+        color?: Color;
 
         // attributes
-        style: ST_BorderStyle; // default: 'none'
+        style?: ST_BorderStyle; // default: 'none'
     }
 
 
@@ -381,7 +383,7 @@ declare module OpenXml {
 
 
     /** <x:calcChain> (Calculation Chain Info, W3C XML CT_CalcChain §A.2)
-     * parent: Root element of SpreadsheetML Calculation Chain part
+     * parents: Root element of SpreadsheetML Calculation Chain part
      *
      * This element represents the root of the calculation chain.
      * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.calculationchain.aspx
@@ -461,8 +463,8 @@ declare module OpenXml {
      * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.cellformat.aspx
      */
     interface CellFormat {
-        alignment: Alignment;
-        protection: Protection;
+        alignment?: Alignment;
+        protection?: Protection;
         //extLst? Element;
 
         // attributes
@@ -902,6 +904,26 @@ declare module OpenXml {
     }
 
 
+    interface ContentTypes {
+        defaults: ContentTypeDefault[];
+        overrides: ContentTypeOverride[];
+    }
+
+
+    interface ContentTypeDefault {
+        // attributes
+        contentType: string;
+        extension: string;
+    }
+
+
+    interface ContentTypeOverride {
+        // attributes
+        contentType: string;
+        partName: string;
+    }
+
+
     /** <x:drawing> (Drawing, W3C XML CT_Drawing §A.2)
      * parents: chartsheet (§18.3.1.12); dialogsheet (§18.3.1.34); worksheet (§18.3.1.99)
      *
@@ -987,12 +1009,12 @@ declare module OpenXml {
      * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.differentialformat.aspx
      */
     interface DifferentialFormat {
-        alignment: Alignment;
-        border: Border;
-        fill: Fill;
-        font: Font;
-        numFmt: NumberingFormat;
-        protection: Protection;
+        alignment?: Alignment;
+        border?: Border;
+        fill?: Fill;
+        font?: Font;
+        numFmt?: NumberingFormat;
+        protection?: Protection;
     }
 
 
@@ -1086,8 +1108,8 @@ declare module OpenXml {
      */
     interface Fill {
         // pattern and gradient are exclusive
-        patternFill: PatternFill;
-        gradientFill: GradientFill;
+        patternFill?: PatternFill;
+        gradientFill?: GradientFill;
     }
 
 
@@ -1175,21 +1197,21 @@ declare module OpenXml {
      * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.font.aspx
      */
     interface Font {
-        b: Bold;
-        charset: FontCharSet;
-        color: Color;
-        condense: Condense;
-        extend: Extend;
-        family: FontFamily;
-        i: Italic;
-        name: FontName;
-        outline: Outline;
-        scheme: FontScheme;
-        shadow: Shadow;
-        strike: Strike;
-        sz: FontSize;
-        u: Underline;
-        vertAlign: VerticalTextAlignment;
+        b?: Bold;
+        charset?: FontCharSet;
+        color?: Color;
+        condense?: Condense;
+        extend?: Extend;
+        family?: FontFamily;
+        i?: Italic;
+        name?: FontName;
+        outline?: Outline;
+        scheme?: FontScheme;
+        shadow?: Shadow;
+        strike?: Strike;
+        sz?: FontSize;
+        u?: Underline;
+        vertAlign?: VerticalTextAlignment;
     }
 
 
@@ -1251,7 +1273,7 @@ declare module OpenXml {
 
 
     /** <x:name> (Font Name, W3C XML CT_FontName §A.2)
-     * parent: font (§18.8.22)
+     * parents: font (§18.8.22)
      *
      * This element specifies the face name of this font.
      * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.fontname.aspx
@@ -1266,7 +1288,7 @@ declare module OpenXml {
 
 
     /** <x:scheme> (Scheme, W3C XML CT_FontScheme §A.2)
-     * parent: font (§18.8.22); rPr (§18.4.7)
+     * parents: font (§18.8.22); rPr (§18.4.7)
      *
      * Defines the font scheme, if any, to which this font belongs. When a font definition is part of a theme definition,
      * then the font is categorized as either a major or minor font scheme component.
@@ -2270,6 +2292,26 @@ declare module OpenXml {
     }
 
 
+    /** <Relationship> (Relationship, !!not documented in OOXML spec!!)
+     */
+    interface Relationship {
+        // attributes
+        /** Format: rId# (e.g. rId1, rId2, rId3) */
+        id: string;
+        /** Target file name (e.g. xl/workbook.xml) */
+        target: string;
+        /** XML schema name (e.g. http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument) */
+        type: string;
+    }
+
+
+    /** <Relationships> (Relationships, !!not documented in OOXML spec, a list of Relationship elements!!)
+     */
+    interface Relationships {
+        relationships: Relationship[];
+    }
+
+
     /** <x:r> (Rich Text Run, W3C XML CT_RElt §A.2)
      * parents: is (§18.3.1.53); si (§18.4.8); text (§18.7.7)
      *
@@ -2581,7 +2623,7 @@ declare module OpenXml {
     }
 
 
-    /** <x:sheetFormatPr> (Sheet Format Properties, W3C XML CT_SheetFormatPr §A.2) "x:sheetFormatPr"
+    /** <x:sheetFormatPr> (Sheet Format Properties, W3C XML CT_SheetFormatPr §A.2)
      * parents: dialogsheet (§18.3.1.34); worksheet (§18.3.1.99)
      *
      * Sheet formatting properties.
@@ -2600,6 +2642,39 @@ declare module OpenXml {
         //thickBottom: boolean;
         //thickTop: boolean;
         //zeroHeight: boolean;
+    }
+
+
+    /** <x:sheet> (Sheet, W3C XML CT_Sheet §A.2)
+     * parents: sheets (§18.2.20)
+     *
+     * This element defines a sheet in this workbook. Sheet data is stored in a separate part.
+     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.sheet.aspx
+     */
+    interface Sheet {
+        // attributes
+        id: ST_RelationshipId;
+        /** Sheet Name */
+        name: string;
+        /** Sheet Tab Id */
+        sheetId: number;
+        /** Visible State */
+        state?: ST_SheetState;
+    }
+
+
+    /** <x:sheets> (Sheets, W3C XML CT_Sheets §A.2)
+     * parents: workbook (§18.2.27)
+     *
+     * This element represents the collection of sheets in the workbook. There are different types of sheets you can create in SpreadsheetML.
+     * The most common sheet type is a worksheet; also called a spreadsheet. A worksheet is the primary document that you use in SpreadsheetML to store and work with data.
+     * A worksheet consists of cells that are organized into columns and rows.
+     * Some workbooks might have a modular design where there is one sheet for data and another worksheet for each specific analysis performed on that data.
+     * In a complex modular system, you might have dozens of sheets, each dedicated to a specific task.
+     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.sheets.aspx
+     */
+    interface Sheets {
+        sheets: Sheet[];
     }
 
 
@@ -2750,12 +2825,12 @@ declare module OpenXml {
         cellStyles: CellStyles;
         cellStyleXfs: CellStyleFormats;
         cellXfs: CellFormats;
-        colors: Colors;
+        colors?: Colors;
         dxfs: DifferentialFormats;
         fills: Fills;
         fonts: Fonts;
         numFmts: NumberingFormats;
-        tableStyles: TableStyles;
+        tableStyles?: TableStyles;
         extLst?: Element;
     }
 
@@ -2949,7 +3024,7 @@ declare module OpenXml {
 
 
     /** <x:u> (Underline, W3C XML CT_UnderlineProperty §A.2)
-     * parent: font (§18.8.22); rPr (§18.4.7)
+     * parents: font (§18.8.22); rPr (§18.4.7)
      * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.underline.aspx
      */
     interface Underline {
@@ -2958,11 +3033,47 @@ declare module OpenXml {
 
 
     /** <x:vertAlign> (Vertical Alignment, W3C XML CT_VerticalAlignFontProperty §A.2)
-     * parent: font (§18.8.22); rPr (§18.4.7)
+     * parents: font (§18.8.22); rPr (§18.4.7)
      * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.verticaltextalignment.aspx
      */
     interface VerticalTextAlignment {
         val: ST_VerticalAlignRun;
+    }
+
+
+    /** <x:workbook> (Workbook, W3C XML CT_Workbook §A.2)
+     * parents: root element of SpreadsheetML Workbook part
+     *
+     * This is the root element of the SpreadsheetML Workbook part.
+     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.workbook.aspx
+     */
+    interface Workbook {
+        // attributes
+        /*
+        conformance: ST_ConformanceClass;
+        */
+
+        // elements
+        /*
+        fileVersion?: CT_FileVersion;
+        fileSharing?: CT_FileSharing;
+        workbookPr?: CT_WorkbookPr;
+        workbookProtection?: CT_WorkbookProtection;
+        bookViews?: CT_BookViews;
+        functionGroups?: CT_FunctionGroups;
+        definedNames?: CT_DefinedNames;
+        calcPr?: CT_CalcPr;
+        oleSize?: CT_OleSize;
+        customWorkbookViews?: CT_CustomWorkbookViews;
+        pivotCaches?: CT_PivotCaches;
+        smartTagPr?: CT_SmartTagPr;
+        smartTagTypes?: CT_SmartTagTypes;
+        webPublishing?: CT_WebPublishing;
+        fileRecoveryPr?: CT_FileRecoveryPr[];
+        webPublishedObjects?: CT_WebPublishedObjects;
+        extLst?: CT_ExtensionList;
+        */
+        sheets: Sheets;
     }
 
 
@@ -2972,15 +3083,16 @@ declare module OpenXml {
      */
     interface Worksheet {
         dimension: SheetDimension;
-        sheetViews: SheetViews;
-        sheetFormatPr: SheetFormatProperties;
+        sheetViews?: SheetViews;
+        sheetFormatPr?: SheetFormatProperties;
         cols: Columns[];
         sheetData: SheetData;
-        pageMargins: PageMargins;
-        pageSetup: PageSetup;
-        headerFooter: HeaderFooter;
-        drawing: Drawing;
-        legacyDrawing: LegacyDrawing;
+        pageMargins?: PageMargins;
+        pageSetup?: PageSetup;
+        headerFooter?: HeaderFooter;
+        drawing?: Drawing;
+        legacyDrawing?: LegacyDrawing;
+        // TODO and other elements
     }
 
 

@@ -9,7 +9,7 @@ var OddFooter = (function () {
     OddFooter.write = function (xmlDoc, inst) {
         return StringElement.write(xmlDoc, inst, "oddFooter");
     };
+    OddFooter.type = OddFooter; // TODO type-checker
     return OddFooter;
 }());
-OddFooter.type = OddFooter; // TODO type-checker
 module.exports = OddFooter;

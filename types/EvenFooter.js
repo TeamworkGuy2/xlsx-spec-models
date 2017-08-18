@@ -9,7 +9,7 @@ var EvenFooter = (function () {
     EvenFooter.write = function (xmlDoc, inst) {
         return StringElement.write(xmlDoc, inst, "evenFooter");
     };
+    EvenFooter.type = EvenFooter; // TODO type-checker
     return EvenFooter;
 }());
-EvenFooter.type = EvenFooter; // TODO type-checker
 module.exports = EvenFooter;

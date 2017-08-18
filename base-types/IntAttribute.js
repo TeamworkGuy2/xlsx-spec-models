@@ -23,7 +23,7 @@ var IntAttribute = (function () {
             val: inst.val
         };
     };
+    IntAttribute.type = IntAttribute; // TODO type-checker
     return IntAttribute;
 }());
-IntAttribute.type = IntAttribute; // TODO type-checker
 module.exports = IntAttribute;

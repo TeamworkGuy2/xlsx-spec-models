@@ -27,7 +27,7 @@ var SharedStringItem = (function () {
             t: inst.t != null ? Text.copy(inst.t) : null,
         };
     };
+    SharedStringItem.type = SharedStringItem; // TODO type-checker
     return SharedStringItem;
 }());
-SharedStringItem.type = SharedStringItem; // TODO type-checker
 module.exports = SharedStringItem;

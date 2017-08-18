@@ -19,7 +19,7 @@ var Fills = (function () {
         xmlDoc.addChilds(elem, xmlDoc.writeMulti(Fill.write, inst.fills));
         return elem;
     };
+    Fills.type = Fills; // TODO type-checker
     return Fills;
 }());
-Fills.type = Fills; // TODO type-checker
 module.exports = Fills;

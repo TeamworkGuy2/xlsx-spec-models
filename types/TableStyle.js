@@ -27,7 +27,7 @@ var TableStyle = (function () {
         }
         return elem;
     };
+    TableStyle.type = TableStyle; // TODO type-checker
     return TableStyle;
 }());
-TableStyle.type = TableStyle; // TODO type-checker
 module.exports = TableStyle;
