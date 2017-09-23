@@ -4,7 +4,13 @@ This project does its best to adhere to [Semantic Versioning](http://semver.org/
 
 
 --------
-### [0.3.0](N/A) - 2017-08-18
+### [0.3.1](N/A) - 2017-09-23
+#### Added
+* Fix `Workbook` not preserving import data required by MS Office through to export
+
+
+--------
+### [0.3.0](https://github.com/TeamworkGuy2/xlsx-spec-models/commit/36851aba92ef41c64c2179b45ea92bc5862e1b39) - 2017-08-18
 #### Added
 * `Workbook` interfaces and types
 

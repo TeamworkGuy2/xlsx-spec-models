@@ -3074,6 +3074,34 @@ declare module OpenXml {
         extLst?: CT_ExtensionList;
         */
         sheets: Sheets;
+        fileVersion?: {
+            // attributes
+            appName: string;
+            codeName?: string; //ST_Guid;
+            lastEdited: string;
+            lowestEdited: string;
+            rupBuild: string;
+        } | Element;
+        workbookPr?: {
+            // attributes
+            defaultThemeVersion: number;
+            // others...
+        } | Element;
+        bookViews?: {
+            workbookView: {
+                // attributes
+                xWindow: number;
+                yWindow: number;
+                windowWidth: number;
+                windowHeight: number;
+                tabRatio: number;
+            };
+        } | Element;
+        calcPr?: {
+            // attributes
+            calcId: number;
+        } | Element;
+        extLst?: Element;
     }
 
 

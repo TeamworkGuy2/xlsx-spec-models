@@ -27,7 +27,7 @@ class Stylesheet {
         var tableStylesElem = xmlDoc.queryOneChild(elem, "tableStyles");
         var extLstElem = xmlDoc.queryOneChild(elem, "extLst");
 
-        var inst = {
+        return {
             borders: bordersElem ? Borders.read(xmlDoc, bordersElem) : null,
             cellStyles: cellStylesElem ? CellStyles.read(xmlDoc, cellStylesElem) : null,
             cellStyleXfs: cellStyleXfsElem ? CellStyleFormats.read(xmlDoc, cellStyleXfsElem) : null,
@@ -40,7 +40,6 @@ class Stylesheet {
             tableStyles: tableStylesElem ? TableStyles.read(xmlDoc, tableStylesElem) : null,
             extLst: extLstElem,
         };
-        return inst;
     }
 
 

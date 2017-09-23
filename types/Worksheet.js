@@ -24,7 +24,7 @@ var Worksheet = (function () {
         var sheetDataElem = xmlDoc.queryOneChild(elem, "sheetData");
         var sheetFormatPrElem = xmlDoc.queryOneChild(elem, "sheetFormatPr");
         var sheetViewsElem = xmlDoc.queryOneChild(elem, "sheetViews");
-        var inst = {
+        return {
             cols: xmlDoc.readMulti(Columns.read, colsElems),
             dimension: dimensionElem ? SheetDimension.read(xmlDoc, dimensionElem) : null,
             drawing: drawingElem ? Drawing.read(xmlDoc, drawingElem) : null,
@@ -36,7 +36,6 @@ var Worksheet = (function () {
             sheetFormatPr: sheetFormatPrElem ? SheetFormatProperties.read(xmlDoc, sheetFormatPrElem) : null,
             sheetViews: sheetViewsElem ? SheetViews.read(xmlDoc, sheetViewsElem) : null,
         };
-        return inst;
     };
     Worksheet.write = function (xmlDoc, inst) {
         var elem = xmlDoc.dom.createElement("worksheet");
