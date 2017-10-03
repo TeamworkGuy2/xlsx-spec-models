@@ -1,5 +1,5 @@
 "use strict";
-var IntAttribute = require("../base-types/IntAttribute");
+var IntAttribute = require("../types/IntAttribute");
 var FontFamily = (function () {
     function FontFamily() {
     }

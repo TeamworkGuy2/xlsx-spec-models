@@ -1,5 +1,5 @@
 "use strict";
-var IntElement = require("../base-types/IntElement");
+var IntElement = require("../types/IntElement");
 var ColumnId = (function () {
     function ColumnId() {
     }

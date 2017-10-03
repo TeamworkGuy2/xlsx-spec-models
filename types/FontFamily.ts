@@ -1,4 +1,4 @@
-﻿import IntAttribute = require("../base-types/IntAttribute");
+﻿import IntAttribute = require("../types/IntAttribute");
 
 class FontFamily {
     private static type: OpenXmlIo.ReadWrite<OpenXml.FontFamily> = FontFamily; // TODO type-checker

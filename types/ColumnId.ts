@@ -1,4 +1,4 @@
-﻿import IntElement = require("../base-types/IntElement");
+﻿import IntElement = require("../types/IntElement");
 
 class ColumnId {
     private static type: OpenXmlIo.ReadWrite<OpenXml.ColumnId> = ColumnId; // TODO type-checker

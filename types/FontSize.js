@@ -1,5 +1,5 @@
 "use strict";
-var FloatAttribute = require("../base-types/FloatAttribute");
+var FloatAttribute = require("../types/FloatAttribute");
 var FontSize = (function () {
     function FontSize() {
     }

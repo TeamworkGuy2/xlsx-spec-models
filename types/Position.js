@@ -1,5 +1,5 @@
 "use strict";
-var Point2DType = require("../base-types/Point2DType");
+var Point2DType = require("../types/Point2DType");
 var Position = (function () {
     function Position() {
     }

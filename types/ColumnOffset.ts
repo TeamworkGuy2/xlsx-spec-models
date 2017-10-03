@@ -1,4 +1,4 @@
-﻿import IntElement = require("../base-types/IntElement");
+﻿import IntElement = require("../types/IntElement");
 
 class ColumnOffset {
     private static type: OpenXmlIo.ReadWrite<OpenXml.ColumnOffset> = ColumnOffset; // TODO type-checker

@@ -1,4 +1,4 @@
-﻿import Point2DType = require("../base-types/Point2DType");
+﻿import Point2DType = require("../types/Point2DType");
 
 class Position {
     private static type: OpenXmlIo.ReadWrite<OpenXml.Position> = Position; // TODO type-checker

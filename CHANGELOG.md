@@ -4,7 +4,14 @@ This project does its best to adhere to [Semantic Versioning](http://semver.org/
 
 
 --------
-### [0.3.1](N/A) - 2017-09-23
+### [0.4.0](N/A) - 2017-10-03
+#### Changed
+* Combined most `types/` into new `root-types/` modules such as `CalcChain`, `SharedStringTable`, and `Workbook`
+* Moved `base-types/` to `types/`
+
+
+--------
+### [0.3.1](https://github.com/TeamworkGuy2/xlsx-spec-models/commit/040c4aa76c2480acee6ec4006a11816aca3d7a3e) - 2017-09-23
 #### Added
 * Fix `Workbook` not preserving import data required by MS Office through to export
 

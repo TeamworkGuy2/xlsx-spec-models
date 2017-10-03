@@ -107,7 +107,7 @@ declare module OpenXmlIo {
     }
 
     export interface ReadFuncNamed<T> {
-        (xmlDoc: ReaderContext, elem: HTMLElement, expectedElemName: string): T;
+        (xmlDoc: ReaderContext, elem: HTMLElement, expectedElemName: string, parentElemName?: string): T;
     }
 
 
@@ -116,7 +116,7 @@ declare module OpenXmlIo {
     }
 
     export interface WriteFuncNamed<T> {
-        (xmlDoc: WriterContext, data: T, expectedElemName: string): ElementLike;
+        (xmlDoc: WriterContext, data: T, expectedElemName: string, parentElemName?: string): ElementLike;
     }
 
 
@@ -128,6 +128,19 @@ declare module OpenXmlIo {
     export interface ReadWriteNamed<T> {
         read: ReadFuncNamed<T>;
         write: WriteFuncNamed<T>;
+    }
+
+
+    export interface ReadWriteCopy<T> {
+        read: ReadFunc<T>;
+        write: WriteFunc<T>;
+        copy: (elem: T) => T;
+    }
+
+    export interface ReadWriteCopyNamed<T> {
+        read: ReadFuncNamed<T>;
+        write: WriteFuncNamed<T>;
+        copy: (elem: T) => T;
     }
 
 }

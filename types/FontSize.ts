@@ -1,4 +1,4 @@
-﻿import FloatAttribute = require("../base-types/FloatAttribute");
+﻿import FloatAttribute = require("../types/FloatAttribute");
 
 class FontSize {
     private static type: OpenXmlIo.ReadWrite<OpenXml.FontSize> = FontSize; // TODO type-checker
