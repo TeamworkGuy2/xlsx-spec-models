@@ -3,7 +3,7 @@ var ColumnId = require("../types/ColumnId");
 var ColumnOffset = require("../types/ColumnOffset");
 var RowId = require("../types/RowId");
 var RowOffset = require("../types/RowOffset");
-var MarkerType = (function () {
+var MarkerType = /** @class */ (function () {
     function MarkerType() {
     }
     MarkerType.read = function (xmlDoc, elem, expectedTagName, parentTags) {

@@ -1,6 +1,6 @@
 "use strict";
 var IntAttribute = require("../types/IntAttribute");
-var FontFamily = (function () {
+var FontFamily = /** @class */ (function () {
     function FontFamily() {
     }
     FontFamily.read = function (xmlDoc, elem) {

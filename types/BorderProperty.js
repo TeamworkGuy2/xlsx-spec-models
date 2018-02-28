@@ -3,7 +3,7 @@ var Color = require("../types/Color");
 /** (W3C XML CT_BorderPr §A.2) Generic Open XML Border Property parser
  * @since 2016-05-26
  */
-var BorderProperty = (function () {
+var BorderProperty = /** @class */ (function () {
     function BorderProperty() {
     }
     BorderProperty.read = function (xmlDoc, elem, expectedTagName, parentTags) {

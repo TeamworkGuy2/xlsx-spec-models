@@ -2,7 +2,7 @@
 /** Generic Open XML parse for an element with a single boolean attribute
  * @since 2016-05-26
  */
-var BooleanAttribute = (function () {
+var BooleanAttribute = /** @class */ (function () {
     function BooleanAttribute() {
     }
     BooleanAttribute.read = function (xmlDoc, elem, expectedTagName, parentTags) {

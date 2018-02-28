@@ -1,6 +1,6 @@
 "use strict";
 var Point2DType = require("../types/Point2DType");
-var Position = (function () {
+var Position = /** @class */ (function () {
     function Position() {
     }
     Position.read = function (xmlDoc, elem) {

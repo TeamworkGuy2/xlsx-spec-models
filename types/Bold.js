@@ -1,5 +1,5 @@
 "use strict";
-var Bold = (function () {
+var Bold = /** @class */ (function () {
     function Bold() {
     }
     Bold.read = function (xmlDoc, elem, expectedTagName, parentTags) {

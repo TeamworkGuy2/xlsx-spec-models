@@ -1,5 +1,5 @@
 "use strict";
-var RunFont = (function () {
+var RunFont = /** @class */ (function () {
     function RunFont() {
     }
     RunFont.read = function (xmlDoc, elem) {

@@ -1,5 +1,5 @@
 "use strict";
-var Point2DType = (function () {
+var Point2DType = /** @class */ (function () {
     function Point2DType() {
     }
     Point2DType.read = function (xmlDoc, elem, expectedTagName, parentTags) {

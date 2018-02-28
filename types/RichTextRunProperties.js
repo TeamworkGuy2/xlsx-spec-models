@@ -4,7 +4,7 @@ var Color = require("./Color");
 var FontFamily = require("./FontFamily");
 var RunFont = require("./RunFont");
 var FontSize = require("./FontSize");
-var RichTextRunProperties = (function () {
+var RichTextRunProperties = /** @class */ (function () {
     function RichTextRunProperties() {
     }
     RichTextRunProperties.read = function (xmlDoc, elem) {

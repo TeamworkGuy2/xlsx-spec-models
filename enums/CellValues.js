@@ -4,7 +4,7 @@
  * @author TeamworkGuy2
  * @since 2016-5-26
  */
-var CellValues = (function () {
+var CellValues = /** @class */ (function () {
     function CellValues(xmlValue) {
         this.xmlValue = xmlValue;
     }

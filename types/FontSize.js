@@ -1,6 +1,6 @@
 "use strict";
 var FloatAttribute = require("../types/FloatAttribute");
-var FontSize = (function () {
+var FontSize = /** @class */ (function () {
     function FontSize() {
     }
     FontSize.read = function (xmlDoc, elem) {

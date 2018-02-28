@@ -2,7 +2,7 @@
 /** Generic Open XML parse for an element with a single string attribute
  * @since 2016-05-26
  */
-var StringAttribute = (function () {
+var StringAttribute = /** @class */ (function () {
     function StringAttribute() {
     }
     StringAttribute.read = function (xmlDoc, elem, expectedTagName, parentTags) {

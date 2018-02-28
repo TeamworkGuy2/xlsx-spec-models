@@ -4,7 +4,15 @@ This project does its best to adhere to [Semantic Versioning](http://semver.org/
 
 
 --------
-### [0.4.0](N/A) - 2017-10-03
+### [0.4.1](N/A) - 2018-02-28
+#### Changed
+* Update to TypeScript 2.7
+* Update dependencies: mocha, @types/chai, @types/mocha, @types/node
+* enable tsconfig.json `noImplicitAny`
+
+
+--------
+### [0.4.0](https://github.com/TeamworkGuy2/xlsx-spec-models/commit/0ec93974ea8a0eca808544e6ede40927f1d66b1a) - 2017-10-03
 #### Changed
 * Combined most `types/` into new `root-types/` modules such as `CalcChain`, `SharedStringTable`, and `Workbook`
 * Moved `base-types/` to `types/`

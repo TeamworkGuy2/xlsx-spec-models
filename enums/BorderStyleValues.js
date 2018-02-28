@@ -4,7 +4,7 @@
  * @author TeamworkGuy2
  * @since 2016-5-26
  */
-var BorderStyleValues = (function () {
+var BorderStyleValues = /** @class */ (function () {
     function BorderStyleValues(xmlValue) {
         this.xmlValue = xmlValue;
     }

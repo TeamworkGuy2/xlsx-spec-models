@@ -1,5 +1,5 @@
 "use strict";
-var Text = (function () {
+var Text = /** @class */ (function () {
     function Text() {
     }
     Text.read = function (xmlDoc, elem) {

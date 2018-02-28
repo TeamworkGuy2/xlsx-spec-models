@@ -1,7 +1,7 @@
 "use strict";
 var RichTextRunProperties = require("./RichTextRunProperties");
 var Text = require("./Text");
-var RichTextRun = (function () {
+var RichTextRun = /** @class */ (function () {
     function RichTextRun() {
     }
     RichTextRun.read = function (xmlDoc, elem) {

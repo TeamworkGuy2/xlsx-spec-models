@@ -1,6 +1,6 @@
 "use strict";
 var IntElement = require("../types/IntElement");
-var ColumnId = (function () {
+var ColumnId = /** @class */ (function () {
     function ColumnId() {
     }
     ColumnId.read = function (xmlDoc, elem) {

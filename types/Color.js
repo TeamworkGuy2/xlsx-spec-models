@@ -1,5 +1,5 @@
 "use strict";
-var Color = (function () {
+var Color = /** @class */ (function () {
     function Color() {
     }
     Color.read = function (xmlDoc, elem, expectedTagName) {

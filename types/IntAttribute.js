@@ -2,7 +2,7 @@
 /** Generic Open XML parse for an element with a single integer attribute
  * @since 2016-05-26
  */
-var IntAttribute = (function () {
+var IntAttribute = /** @class */ (function () {
     function IntAttribute() {
     }
     IntAttribute.read = function (xmlDoc, elem, expectedTagName, parentTags) {

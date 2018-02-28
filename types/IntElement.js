@@ -2,7 +2,7 @@
 /** Generic Open XML parser for an element containing integer/numeric content
  * @since 2016-05-26
  */
-var StringElement = (function () {
+var StringElement = /** @class */ (function () {
     function StringElement() {
     }
     StringElement.read = function (xmlDoc, elem, expectedTagName, parentTags) {

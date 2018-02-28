@@ -1,6 +1,6 @@
 "use strict";
 var IntElement = require("../types/IntElement");
-var ColumnOffset = (function () {
+var ColumnOffset = /** @class */ (function () {
     function ColumnOffset() {
     }
     ColumnOffset.read = function (xmlDoc, elem) {
