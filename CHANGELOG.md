@@ -4,11 +4,19 @@ This project does its best to adhere to [Semantic Versioning](http://semver.org/
 
 
 --------
-### [0.4.1](N/A) - 2018-02-28
+### [0.4.2](N/A) - 2018-04-08
+#### Changed
+* Update to TypeScript 2.8
+* Update tsconfig.json with `noImplicitReturns: true` and `forceConsistentCasingInFileNames: true`
+* Added tarball and package.json npm script `build-package` reference for creating tarball
+
+
+--------
+### [0.4.1](https://github.com/TeamworkGuy2/xlsx-spec-models/commit/ebceb72c60344d8262dd2a8fd0f66b61ac2d76b7) - 2018-02-28
 #### Changed
 * Update to TypeScript 2.7
 * Update dependencies: mocha, @types/chai, @types/mocha, @types/node
-* enable tsconfig.json `noImplicitAny`
+* Enable tsconfig.json `noImplicitAny`
 
 
 --------
