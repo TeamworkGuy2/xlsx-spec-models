@@ -2,8 +2,16 @@
 All notable changes to this project will be documented in this file.
 This project does its best to adhere to [Semantic Versioning](http://semver.org/).
 
+
 --------
-### [0.4.4](N/A) - 2018-10-20
+### [0.4.5](N/A) - 2018-12-29
+#### Changed
+* Update to TypeScript 3.2
+* Update @types dependencies
+
+
+--------
+### [0.4.4](https://github.com/TeamworkGuy2/xlsx-spec-models/commit/0b1f45dedab6519ed50e8ee4e2e400dd63bd988e) - 2018-10-20
 #### Changed
 * Switch `package.json` github dependencies from tag urls to release tarballs to simplify npm install (doesn't require git to npm install tarballs)
 * Added `repository` to `package.json`
