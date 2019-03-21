@@ -4,7 +4,13 @@ This project does its best to adhere to [Semantic Versioning](http://semver.org/
 
 
 --------
-### [0.4.6](N/A) - 2019-03-21
+### [0.4.7](N/A) - 2019-03-21
+#### Fixed
+* `dom-builder` import/reference paths not being updated to `@twg2/dom-builder`
+
+
+--------
+### [0.4.6](https://github.com/TeamworkGuy2/xlsx-spec-models/commit/49e5289b29e82ad1c889ca824ab8091f8ccd78dc) - 2019-03-21
 #### Changed
 * Switch `dom-builder` dependency from github to npm `@twg2/dom-builder`
 
