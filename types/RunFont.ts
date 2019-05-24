@@ -5,9 +5,8 @@ class RunFont {
 
     public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.RunFont {
         xmlDoc.validator.expectNode(elem, "rFont", "rPr");
-        var attrs = elem.attributes;
         return {
-            val: xmlDoc.attrString(attrs, "val"),
+            val: xmlDoc.attrString(elem, "val"),
         };
     }
 

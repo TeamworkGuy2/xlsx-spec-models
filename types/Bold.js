@@ -4,8 +4,7 @@ var Bold = /** @class */ (function () {
     }
     Bold.read = function (xmlDoc, elem, expectedTagName, parentTags) {
         xmlDoc.validator.expectNode(elem, expectedTagName, (parentTags || "font, rPr"));
-        var attrs = elem.attributes;
-        var valAttr = xmlDoc.attrBool(attrs, "val");
+        var valAttr = xmlDoc.attrBool(elem, "val");
         return {
             val: (valAttr == null || valAttr == true) ? true : valAttr,
         };

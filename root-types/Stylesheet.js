@@ -78,17 +78,16 @@ var Stylesheet;
     Stylesheet_1.Alignment = {
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "alignment", "dxf, ndxf, odxf, xf");
-            var attrs = elem.attributes;
             return {
-                horizontal: xmlDoc.attrString(attrs, "horizontal"),
-                indent: xmlDoc.attrInt(attrs, "indent"),
-                justifyLastLine: xmlDoc.attrBool(attrs, "justifyLastLine"),
-                readingOrder: xmlDoc.attrInt(attrs, "readingOrder"),
-                relativeIndent: xmlDoc.attrInt(attrs, "relativeIndent"),
-                shrinkToFit: xmlDoc.attrBool(attrs, "shrinkToFit"),
-                textRotation: xmlDoc.attrFloat(attrs, "textRotation"),
-                vertical: xmlDoc.attrString(attrs, "vertical"),
-                wrapText: xmlDoc.attrBool(attrs, "wrapText"),
+                horizontal: xmlDoc.attrString(elem, "horizontal"),
+                indent: xmlDoc.attrInt(elem, "indent"),
+                justifyLastLine: xmlDoc.attrBool(elem, "justifyLastLine"),
+                readingOrder: xmlDoc.attrInt(elem, "readingOrder"),
+                relativeIndent: xmlDoc.attrInt(elem, "relativeIndent"),
+                shrinkToFit: xmlDoc.attrBool(elem, "shrinkToFit"),
+                textRotation: xmlDoc.attrFloat(elem, "textRotation"),
+                vertical: xmlDoc.attrString(elem, "vertical"),
+                wrapText: xmlDoc.attrBool(elem, "wrapText"),
             };
         },
         write: function (xmlDoc, inst) {
@@ -119,7 +118,6 @@ var Stylesheet;
             // these aren't part of the spec, but MS Office 2013 requires them
             var leftElem = xmlDoc.queryOneChild(elem, "left");
             var rightElem = xmlDoc.queryOneChild(elem, "right");
-            var attrs = elem.attributes;
             return {
                 left: leftElem ? BorderProperty.read(xmlDoc, leftElem, "left", "border") : null,
                 right: rightElem ? BorderProperty.read(xmlDoc, rightElem, "right", "border") : null,
@@ -130,9 +128,9 @@ var Stylesheet;
                 start: startElem ? Stylesheet_1.StartBorder.read(xmlDoc, startElem) : null,
                 top: topElem ? Stylesheet_1.TopBorder.read(xmlDoc, topElem) : null,
                 vertical: verticlaElem ? Stylesheet_1.VerticalBorder.read(xmlDoc, verticlaElem) : null,
-                diagonalDown: xmlDoc.attrBool(attrs, "diagonalDown"),
-                diagonalUp: xmlDoc.attrBool(attrs, "diagonalUp"),
-                outline: xmlDoc.attrBool(attrs, "outline"),
+                diagonalDown: xmlDoc.attrBool(elem, "diagonalDown"),
+                diagonalUp: xmlDoc.attrBool(elem, "diagonalUp"),
+                outline: xmlDoc.attrBool(elem, "outline"),
             };
         },
         write: function (xmlDoc, inst) {
@@ -175,10 +173,9 @@ var Stylesheet;
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "borders", "styleSheet");
             var borderElems = xmlDoc.queryAllChilds(elem, "border");
-            var attrs = elem.attributes;
             return {
                 borders: xmlDoc.readMulti(Stylesheet_1.Border.read, borderElems),
-                count: xmlDoc.attrInt(attrs, "count"),
+                count: xmlDoc.attrInt(elem, "count"),
             };
         },
         write: function (xmlDoc, inst) {
@@ -248,25 +245,24 @@ var Stylesheet;
     Stylesheet_1.CellFormat = {
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "xf", "cellStyleXfs, cellXfs");
-            var attrs = elem.attributes;
             var alignmentElem = xmlDoc.queryOneChild(elem, "alignment");
             var protectionElem = xmlDoc.queryOneChild(elem, "protection");
             return {
                 alignment: alignmentElem ? Stylesheet_1.Alignment.read(xmlDoc, alignmentElem) : null,
                 protection: protectionElem ? Stylesheet_1.Protection.read(xmlDoc, protectionElem) : null,
-                applyAlignment: xmlDoc.attrBool(attrs, "applyAlignment"),
-                applyBorder: xmlDoc.attrBool(attrs, "applyBorder"),
-                applyFill: xmlDoc.attrBool(attrs, "applyFill"),
-                applyFont: xmlDoc.attrBool(attrs, "applyFont"),
-                applyNumberFormat: xmlDoc.attrBool(attrs, "applyNumberFormat"),
-                applyProtection: xmlDoc.attrBool(attrs, "applyProtection"),
-                borderId: xmlDoc.attrInt(attrs, "borderId"),
-                fillId: xmlDoc.attrInt(attrs, "fillId"),
-                fontId: xmlDoc.attrInt(attrs, "fontId"),
-                numFmtId: xmlDoc.attrInt(attrs, "numFmtId"),
-                pivotButton: xmlDoc.attrBool(attrs, "pivotButton"),
-                quotePrefix: xmlDoc.attrBool(attrs, "quotePrefix"),
-                xfId: xmlDoc.attrInt(attrs, "xfId"),
+                applyAlignment: xmlDoc.attrBool(elem, "applyAlignment"),
+                applyBorder: xmlDoc.attrBool(elem, "applyBorder"),
+                applyFill: xmlDoc.attrBool(elem, "applyFill"),
+                applyFont: xmlDoc.attrBool(elem, "applyFont"),
+                applyNumberFormat: xmlDoc.attrBool(elem, "applyNumberFormat"),
+                applyProtection: xmlDoc.attrBool(elem, "applyProtection"),
+                borderId: xmlDoc.attrInt(elem, "borderId"),
+                fillId: xmlDoc.attrInt(elem, "fillId"),
+                fontId: xmlDoc.attrInt(elem, "fontId"),
+                numFmtId: xmlDoc.attrInt(elem, "numFmtId"),
+                pivotButton: xmlDoc.attrBool(elem, "pivotButton"),
+                quotePrefix: xmlDoc.attrBool(elem, "quotePrefix"),
+                xfId: xmlDoc.attrInt(elem, "xfId"),
             };
         },
         write: function (xmlDoc, inst) {
@@ -298,10 +294,9 @@ var Stylesheet;
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "cellXfs", "styleSheet");
             var cellFormatElems = xmlDoc.queryAllChilds(elem, "xf");
-            var attrs = elem.attributes;
             return {
                 xfs: xmlDoc.readMulti(Stylesheet_1.CellFormat.read, cellFormatElems),
-                count: xmlDoc.attrInt(attrs, "count"),
+                count: xmlDoc.attrInt(elem, "count"),
             };
         },
         write: function (xmlDoc, inst) {
@@ -315,14 +310,13 @@ var Stylesheet;
     Stylesheet_1.CellStyle = {
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "cellStyle", "cellStyles");
-            var attrs = elem.attributes;
             return {
-                builtinId: xmlDoc.attrInt(attrs, "builtinId"),
-                customBuiltin: xmlDoc.attrBool(attrs, "customBuiltin"),
-                hidden: xmlDoc.attrBool(attrs, "hidden"),
-                iLevel: xmlDoc.attrInt(attrs, "iLevel"),
-                name: xmlDoc.attrString(attrs, "name"),
-                xfId: xmlDoc.attrInt(attrs, "xfId"),
+                builtinId: xmlDoc.attrInt(elem, "builtinId"),
+                customBuiltin: xmlDoc.attrBool(elem, "customBuiltin"),
+                hidden: xmlDoc.attrBool(elem, "hidden"),
+                iLevel: xmlDoc.attrInt(elem, "iLevel"),
+                name: xmlDoc.attrString(elem, "name"),
+                xfId: xmlDoc.attrInt(elem, "xfId"),
             };
         },
         write: function (xmlDoc, inst) {
@@ -341,10 +335,9 @@ var Stylesheet;
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "cellStyleXfs", "styleSheet");
             var cellFormatElems = xmlDoc.queryAllChilds(elem, "xf");
-            var attrs = elem.attributes;
             return {
                 xfs: xmlDoc.readMulti(Stylesheet_1.CellFormat.read, cellFormatElems),
-                count: xmlDoc.attrInt(attrs, "count"),
+                count: xmlDoc.attrInt(elem, "count"),
             };
         },
         write: function (xmlDoc, inst) {
@@ -360,10 +353,9 @@ var Stylesheet;
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "cellStyles", "styleSheet");
             var cellStyleElems = xmlDoc.queryAllChilds(elem, "cellStyle");
-            var attrs = elem.attributes;
             return {
                 cellStyles: xmlDoc.readMulti(Stylesheet_1.CellStyle.read, cellStyleElems),
-                count: xmlDoc.attrInt(attrs, "count"),
+                count: xmlDoc.attrInt(elem, "count"),
             };
         },
         write: function (xmlDoc, inst) {
@@ -440,10 +432,9 @@ var Stylesheet;
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "dxfs", "styleSheet");
             var dxfElems = xmlDoc.queryAllChilds(elem, "dxf");
-            var attrs = elem.attributes;
             return {
                 dxfs: xmlDoc.readMulti(Stylesheet_1.DifferentialFormat.read, dxfElems),
-                count: xmlDoc.attrInt(attrs, "count"),
+                count: xmlDoc.attrInt(elem, "count"),
             };
         },
         write: function (xmlDoc, inst) {
@@ -479,10 +470,9 @@ var Stylesheet;
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "fills", "styleSheet");
             var fillElems = xmlDoc.queryAllChilds(elem, "fill");
-            var attrs = elem.attributes;
             return {
                 fills: xmlDoc.readMulti(Stylesheet_1.Fill.read, fillElems),
-                count: xmlDoc.attrInt(attrs, "count"),
+                count: xmlDoc.attrInt(elem, "count"),
             };
         },
         write: function (xmlDoc, inst) {
@@ -606,10 +596,9 @@ var Stylesheet;
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "fonts", "styleSheet");
             var fontElems = xmlDoc.queryAllChilds(elem, "font");
-            var attrs = elem.attributes;
             return {
                 fonts: xmlDoc.readMulti(Stylesheet_1.Font.read, fontElems),
-                count: xmlDoc.attrInt(attrs, "count"),
+                count: xmlDoc.attrInt(elem, "count"),
             };
         },
         write: function (xmlDoc, inst) {
@@ -631,16 +620,15 @@ var Stylesheet;
     Stylesheet_1.GradientFill = {
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "gradientFill", "fill");
-            var attrs = elem.attributes;
             var stopElems = xmlDoc.queryAllChilds(elem, "stop");
             return {
                 stops: xmlDoc.readMulti(Stylesheet_1.GradientStop.read, stopElems),
-                bottom: xmlDoc.attrFloat(attrs, "bottom"),
-                degree: xmlDoc.attrFloat(attrs, "degree"),
-                left: xmlDoc.attrFloat(attrs, "left"),
-                right: xmlDoc.attrFloat(attrs, "right"),
-                top: xmlDoc.attrFloat(attrs, "top"),
-                type: xmlDoc.attrString(attrs, "type"),
+                bottom: xmlDoc.attrFloat(elem, "bottom"),
+                degree: xmlDoc.attrFloat(elem, "degree"),
+                left: xmlDoc.attrFloat(elem, "left"),
+                right: xmlDoc.attrFloat(elem, "right"),
+                top: xmlDoc.attrFloat(elem, "top"),
+                type: xmlDoc.attrString(elem, "type"),
             };
         },
         write: function (xmlDoc, inst) {
@@ -662,10 +650,9 @@ var Stylesheet;
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "stop", "gradientFill");
             var colorElem = xmlDoc.queryOneChild(elem, "color");
-            var attrs = elem.attributes;
             return {
                 color: colorElem ? Color.read(xmlDoc, colorElem, "color") : null,
-                position: xmlDoc.attrFloat(attrs, "position"),
+                position: xmlDoc.attrFloat(elem, "position"),
             };
         },
         write: function (xmlDoc, inst) {
@@ -709,10 +696,9 @@ var Stylesheet;
     Stylesheet_1.NumberingFormat = {
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "numFmt", "dxf, ndxf, numFmts, odxf");
-            var attrs = elem.attributes;
             return {
-                formatCode: xmlDoc.attrString(attrs, "formatCode"),
-                numFmtId: xmlDoc.attrInt(attrs, "numFmtId"),
+                formatCode: xmlDoc.attrString(elem, "formatCode"),
+                numFmtId: xmlDoc.attrInt(elem, "numFmtId"),
             };
         },
         write: function (xmlDoc, inst) {
@@ -727,10 +713,9 @@ var Stylesheet;
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "numFmts", "styleSheet");
             var numFmtElems = xmlDoc.queryAllChilds(elem, "numFmt");
-            var attrs = elem.attributes;
             return {
                 numFmts: xmlDoc.readMulti(Stylesheet_1.NumberingFormat.read, numFmtElems),
-                count: xmlDoc.attrInt(attrs, "count"),
+                count: xmlDoc.attrInt(elem, "count"),
             };
         },
         write: function (xmlDoc, inst) {
@@ -744,13 +729,12 @@ var Stylesheet;
     Stylesheet_1.PatternFill = {
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "patternFill", "dxfs, rfmt");
-            var attrs = elem.attributes;
             var bgColorElem = xmlDoc.queryOneChild(elem, "bgColor");
             var fgColorElem = xmlDoc.queryOneChild(elem, "fgColor");
             return {
                 bgColor: bgColorElem ? Color.read(xmlDoc, bgColorElem, "bgColor") : null,
                 fgColor: fgColorElem ? Color.read(xmlDoc, fgColorElem, "fgColor") : null,
-                patternType: xmlDoc.attrString(attrs, "patternType"),
+                patternType: xmlDoc.attrString(elem, "patternType"),
             };
         },
         write: function (xmlDoc, inst) {
@@ -769,10 +753,9 @@ var Stylesheet;
     Stylesheet_1.Protection = {
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "protection", "dxf, ndxf, odxf, xf");
-            var attrs = elem.attributes;
             return {
-                hidden: xmlDoc.attrBool(attrs, "hidden"),
-                locked: xmlDoc.attrBool(attrs, "locked"),
+                hidden: xmlDoc.attrBool(elem, "hidden"),
+                locked: xmlDoc.attrBool(elem, "locked"),
             };
         },
         write: function (xmlDoc, inst) {
@@ -786,7 +769,7 @@ var Stylesheet;
     Stylesheet_1.RgbColor = {
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "rgbColor", "indexedColors");
-            var rgbStr = xmlDoc.attrString(elem.attributes, "rgb");
+            var rgbStr = xmlDoc.attrString(elem, "rgb");
             return {
                 rgb: rgbStr ? parseInt(rgbStr, 16) : null,
             };
@@ -802,14 +785,13 @@ var Stylesheet;
     Stylesheet_1.TableStyle = {
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "tableStyle", "tableStyles");
-            var attrs = elem.attributes;
             var tableStyleElementElems = xmlDoc.queryAllChilds(elem, "tableStyleElement");
             return {
                 tableStyleElements: xmlDoc.readMulti(Stylesheet_1.TableStyleElement.read, tableStyleElementElems, "tableStyleElement"),
-                count: xmlDoc.attrInt(attrs, "count"),
-                name: xmlDoc.attrString(attrs, "name"),
-                pivot: xmlDoc.attrBool(attrs, "pivot"),
-                table: xmlDoc.attrBool(attrs, "table"),
+                count: xmlDoc.attrInt(elem, "count"),
+                name: xmlDoc.attrString(elem, "name"),
+                pivot: xmlDoc.attrBool(elem, "pivot"),
+                table: xmlDoc.attrBool(elem, "table"),
             };
         },
         write: function (xmlDoc, inst) {
@@ -828,11 +810,10 @@ var Stylesheet;
     Stylesheet_1.TableStyleElement = {
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "tableStyleElement", "tableStyle");
-            var attrs = elem.attributes;
             return {
-                dxfId: xmlDoc.attrInt(attrs, "dxfId"),
-                size: xmlDoc.attrInt(attrs, "size"),
-                type: xmlDoc.attrString(attrs, "type"),
+                dxfId: xmlDoc.attrInt(elem, "dxfId"),
+                size: xmlDoc.attrInt(elem, "size"),
+                type: xmlDoc.attrString(elem, "type"),
             };
         },
         write: function (xmlDoc, inst) {
@@ -847,13 +828,12 @@ var Stylesheet;
     Stylesheet_1.TableStyles = {
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "tableStyles", "styleSheet");
-            var attrs = elem.attributes;
             var tableStyleElems = xmlDoc.queryAllChilds(elem, "tableStyle");
             return {
                 tableStyles: xmlDoc.readMulti(Stylesheet_1.TableStyle.read, tableStyleElems),
-                count: xmlDoc.attrInt(attrs, "count"),
-                defaultPivotStyle: xmlDoc.attrString(attrs, "defaultPivotStyle"),
-                defaultTableStyle: xmlDoc.attrString(attrs, "defaultTableStyle"),
+                count: xmlDoc.attrInt(elem, "count"),
+                defaultPivotStyle: xmlDoc.attrString(elem, "defaultPivotStyle"),
+                defaultTableStyle: xmlDoc.attrString(elem, "defaultTableStyle"),
             };
         },
         write: function (xmlDoc, inst) {

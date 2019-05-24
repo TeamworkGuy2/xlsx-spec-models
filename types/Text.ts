@@ -6,7 +6,7 @@ class Text {
     public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.Text {
         xmlDoc.validator.expectNode(elem, "t", "si, r");
         return {
-            preserveSpace: xmlDoc.attrBool(elem.attributes, "xml:space"),
+            preserveSpace: xmlDoc.attrBool(elem, "xml:space"),
             content: elem.textContent
         };
     }

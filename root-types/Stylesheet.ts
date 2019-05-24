@@ -62,17 +62,16 @@ module Stylesheet {
     export var Alignment: OpenXmlIo.ReadWrite<OpenXml.Alignment> = {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "alignment", "dxf, ndxf, odxf, xf");
-            var attrs = elem.attributes;
             return {
-                horizontal: <OpenXml.ST_HorizontalAlignment>xmlDoc.attrString(attrs, "horizontal"),
-                indent: xmlDoc.attrInt(attrs, "indent"),
-                justifyLastLine: xmlDoc.attrBool(attrs, "justifyLastLine"),
-                readingOrder: xmlDoc.attrInt(attrs, "readingOrder"),
-                relativeIndent: xmlDoc.attrInt(attrs, "relativeIndent"),
-                shrinkToFit: xmlDoc.attrBool(attrs, "shrinkToFit"),
-                textRotation: xmlDoc.attrFloat(attrs, "textRotation"),
-                vertical: <OpenXml.ST_VerticalAlignment>xmlDoc.attrString(attrs, "vertical"),
-                wrapText: xmlDoc.attrBool(attrs, "wrapText"),
+                horizontal: <OpenXml.ST_HorizontalAlignment>xmlDoc.attrString(elem, "horizontal"),
+                indent: xmlDoc.attrInt(elem, "indent"),
+                justifyLastLine: xmlDoc.attrBool(elem, "justifyLastLine"),
+                readingOrder: xmlDoc.attrInt(elem, "readingOrder"),
+                relativeIndent: xmlDoc.attrInt(elem, "relativeIndent"),
+                shrinkToFit: xmlDoc.attrBool(elem, "shrinkToFit"),
+                textRotation: xmlDoc.attrFloat(elem, "textRotation"),
+                vertical: <OpenXml.ST_VerticalAlignment>xmlDoc.attrString(elem, "vertical"),
+                wrapText: xmlDoc.attrBool(elem, "wrapText"),
             };
         },
 
@@ -108,8 +107,6 @@ module Stylesheet {
             var leftElem = xmlDoc.queryOneChild(elem, "left");
             var rightElem = xmlDoc.queryOneChild(elem, "right");
 
-            var attrs = elem.attributes;
-
             return {
                 left: leftElem ? BorderProperty.read(xmlDoc, leftElem, "left", "border") : null,
                 right: rightElem ? BorderProperty.read(xmlDoc, rightElem, "right", "border") : null,
@@ -121,9 +118,9 @@ module Stylesheet {
                 start: startElem ? StartBorder.read(xmlDoc, startElem) : null,
                 top: topElem ? TopBorder.read(xmlDoc, topElem) : null,
                 vertical: verticlaElem ? VerticalBorder.read(xmlDoc, verticlaElem) : null,
-                diagonalDown: xmlDoc.attrBool(attrs, "diagonalDown"),
-                diagonalUp: xmlDoc.attrBool(attrs, "diagonalUp"),
-                outline: xmlDoc.attrBool(attrs, "outline"),
+                diagonalDown: xmlDoc.attrBool(elem, "diagonalDown"),
+                diagonalUp: xmlDoc.attrBool(elem, "diagonalUp"),
+                outline: xmlDoc.attrBool(elem, "outline"),
             };
         },
 
@@ -154,10 +151,9 @@ module Stylesheet {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "borders", "styleSheet");
             var borderElems = xmlDoc.queryAllChilds(elem, "border");
-            var attrs = elem.attributes;
             return {
                 borders: xmlDoc.readMulti(Border.read, borderElems),
-                count: xmlDoc.attrInt(attrs, "count"),
+                count: xmlDoc.attrInt(elem, "count"),
             };
         },
 
@@ -251,25 +247,24 @@ module Stylesheet {
     export var CellFormat: OpenXmlIo.ReadWrite<OpenXml.CellFormat> = {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "xf", "cellStyleXfs, cellXfs");
-            var attrs = elem.attributes;
             var alignmentElem = xmlDoc.queryOneChild(elem, "alignment");
             var protectionElem = xmlDoc.queryOneChild(elem, "protection");
             return {
                 alignment: alignmentElem ? Alignment.read(xmlDoc, alignmentElem) : null,
                 protection: protectionElem ? Protection.read(xmlDoc, protectionElem) : null,
-                applyAlignment: xmlDoc.attrBool(attrs, "applyAlignment"),
-                applyBorder: xmlDoc.attrBool(attrs, "applyBorder"),
-                applyFill: xmlDoc.attrBool(attrs, "applyFill"),
-                applyFont: xmlDoc.attrBool(attrs, "applyFont"),
-                applyNumberFormat: xmlDoc.attrBool(attrs, "applyNumberFormat"),
-                applyProtection: xmlDoc.attrBool(attrs, "applyProtection"),
-                borderId: xmlDoc.attrInt(attrs, "borderId"),
-                fillId: xmlDoc.attrInt(attrs, "fillId"),
-                fontId: xmlDoc.attrInt(attrs, "fontId"),
-                numFmtId: xmlDoc.attrInt(attrs, "numFmtId"),
-                pivotButton: xmlDoc.attrBool(attrs, "pivotButton"),
-                quotePrefix: xmlDoc.attrBool(attrs, "quotePrefix"),
-                xfId: xmlDoc.attrInt(attrs, "xfId"),
+                applyAlignment: xmlDoc.attrBool(elem, "applyAlignment"),
+                applyBorder: xmlDoc.attrBool(elem, "applyBorder"),
+                applyFill: xmlDoc.attrBool(elem, "applyFill"),
+                applyFont: xmlDoc.attrBool(elem, "applyFont"),
+                applyNumberFormat: xmlDoc.attrBool(elem, "applyNumberFormat"),
+                applyProtection: xmlDoc.attrBool(elem, "applyProtection"),
+                borderId: xmlDoc.attrInt(elem, "borderId"),
+                fillId: xmlDoc.attrInt(elem, "fillId"),
+                fontId: xmlDoc.attrInt(elem, "fontId"),
+                numFmtId: xmlDoc.attrInt(elem, "numFmtId"),
+                pivotButton: xmlDoc.attrBool(elem, "pivotButton"),
+                quotePrefix: xmlDoc.attrBool(elem, "quotePrefix"),
+                xfId: xmlDoc.attrInt(elem, "xfId"),
             };
         },
 
@@ -300,10 +295,9 @@ module Stylesheet {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "cellXfs", "styleSheet");
             var cellFormatElems = xmlDoc.queryAllChilds(elem, "xf");
-            var attrs = elem.attributes;
             return {
                 xfs: xmlDoc.readMulti(CellFormat.read, cellFormatElems),
-                count: xmlDoc.attrInt(attrs, "count"),
+                count: xmlDoc.attrInt(elem, "count"),
             };
         },
 
@@ -320,14 +314,13 @@ module Stylesheet {
     export var CellStyle: OpenXmlIo.ReadWrite<OpenXml.CellStyle> = {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "cellStyle", "cellStyles");
-            var attrs = elem.attributes;
             return {
-                builtinId: xmlDoc.attrInt(attrs, "builtinId"),
-                customBuiltin: xmlDoc.attrBool(attrs, "customBuiltin"),
-                hidden: xmlDoc.attrBool(attrs, "hidden"),
-                iLevel: xmlDoc.attrInt(attrs, "iLevel"),
-                name: xmlDoc.attrString(attrs, "name"),
-                xfId: xmlDoc.attrInt(attrs, "xfId"),
+                builtinId: xmlDoc.attrInt(elem, "builtinId"),
+                customBuiltin: xmlDoc.attrBool(elem, "customBuiltin"),
+                hidden: xmlDoc.attrBool(elem, "hidden"),
+                iLevel: xmlDoc.attrInt(elem, "iLevel"),
+                name: xmlDoc.attrString(elem, "name"),
+                xfId: xmlDoc.attrInt(elem, "xfId"),
             };
         },
 
@@ -349,10 +342,9 @@ module Stylesheet {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "cellStyleXfs", "styleSheet");
             var cellFormatElems = xmlDoc.queryAllChilds(elem, "xf");
-            var attrs = elem.attributes;
             return {
                 xfs: xmlDoc.readMulti(CellFormat.read, cellFormatElems),
-                count: xmlDoc.attrInt(attrs, "count"),
+                count: xmlDoc.attrInt(elem, "count"),
             };
         },
 
@@ -371,10 +363,9 @@ module Stylesheet {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "cellStyles", "styleSheet");
             var cellStyleElems = xmlDoc.queryAllChilds(elem, "cellStyle");
-            var attrs = elem.attributes;
             return {
                 cellStyles: xmlDoc.readMulti(CellStyle.read, cellStyleElems),
-                count: xmlDoc.attrInt(attrs, "count"),
+                count: xmlDoc.attrInt(elem, "count"),
             };
         },
 
@@ -444,10 +435,9 @@ module Stylesheet {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "dxfs", "styleSheet");
             var dxfElems = xmlDoc.queryAllChilds(elem, "dxf");
-            var attrs = elem.attributes;
             return {
                 dxfs: xmlDoc.readMulti(DifferentialFormat.read, dxfElems),
-                count: xmlDoc.attrInt(attrs, "count"),
+                count: xmlDoc.attrInt(elem, "count"),
             };
         },
 
@@ -488,10 +478,9 @@ module Stylesheet {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "fills", "styleSheet");
             var fillElems = xmlDoc.queryAllChilds(elem, "fill");
-            var attrs = elem.attributes;
             return {
                 fills: xmlDoc.readMulti(Fill.read, fillElems),
-                count: xmlDoc.attrInt(attrs, "count"),
+                count: xmlDoc.attrInt(elem, "count"),
             };
         },
 
@@ -600,10 +589,9 @@ module Stylesheet {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "fonts", "styleSheet");
             var fontElems = xmlDoc.queryAllChilds(elem, "font");
-            var attrs = elem.attributes;
             return {
                 fonts: xmlDoc.readMulti(Font.read, fontElems),
-                count: xmlDoc.attrInt(attrs, "count"),
+                count: xmlDoc.attrInt(elem, "count"),
             };
         },
 
@@ -631,16 +619,15 @@ module Stylesheet {
     export var GradientFill: OpenXmlIo.ReadWrite<OpenXml.GradientFill> = {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "gradientFill", "fill");
-            var attrs = elem.attributes;
             var stopElems = xmlDoc.queryAllChilds(elem, "stop");
             return {
                 stops: xmlDoc.readMulti(GradientStop.read, stopElems),
-                bottom: xmlDoc.attrFloat(attrs, "bottom"),
-                degree: xmlDoc.attrFloat(attrs, "degree"),
-                left: xmlDoc.attrFloat(attrs, "left"),
-                right: xmlDoc.attrFloat(attrs, "right"),
-                top: xmlDoc.attrFloat(attrs, "top"),
-                type: <OpenXml.ST_GradientType>xmlDoc.attrString(attrs, "type"),
+                bottom: xmlDoc.attrFloat(elem, "bottom"),
+                degree: xmlDoc.attrFloat(elem, "degree"),
+                left: xmlDoc.attrFloat(elem, "left"),
+                right: xmlDoc.attrFloat(elem, "right"),
+                top: xmlDoc.attrFloat(elem, "top"),
+                type: <OpenXml.ST_GradientType>xmlDoc.attrString(elem, "type"),
             };
         },
 
@@ -663,10 +650,9 @@ module Stylesheet {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "stop", "gradientFill");
             var colorElem = xmlDoc.queryOneChild(elem, "color");
-            var attrs = elem.attributes;
             return {
                 color: colorElem ? Color.read(xmlDoc, colorElem, "color") : null,
-                position: xmlDoc.attrFloat(attrs, "position"),
+                position: xmlDoc.attrFloat(elem, "position"),
             };
         },
 
@@ -717,10 +703,9 @@ module Stylesheet {
     export var NumberingFormat: OpenXmlIo.ReadWrite<OpenXml.NumberingFormat> = {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "numFmt", "dxf, ndxf, numFmts, odxf");
-            var attrs = elem.attributes;
             return {
-                formatCode: xmlDoc.attrString(attrs, "formatCode"),
-                numFmtId: xmlDoc.attrInt(attrs, "numFmtId"),
+                formatCode: xmlDoc.attrString(elem, "formatCode"),
+                numFmtId: xmlDoc.attrInt(elem, "numFmtId"),
             };
         },
 
@@ -738,10 +723,9 @@ module Stylesheet {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "numFmts", "styleSheet");
             var numFmtElems = xmlDoc.queryAllChilds(elem, "numFmt");
-            var attrs = elem.attributes;
             return {
                 numFmts: xmlDoc.readMulti(NumberingFormat.read, numFmtElems),
-                count: xmlDoc.attrInt(attrs, "count"),
+                count: xmlDoc.attrInt(elem, "count"),
             };
         },
 
@@ -758,13 +742,12 @@ module Stylesheet {
     export var PatternFill: OpenXmlIo.ReadWrite<OpenXml.PatternFill> = {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "patternFill", "dxfs, rfmt");
-            var attrs = elem.attributes;
             var bgColorElem = xmlDoc.queryOneChild(elem, "bgColor");
             var fgColorElem = xmlDoc.queryOneChild(elem, "fgColor");
             return {
                 bgColor: bgColorElem ? Color.read(xmlDoc, bgColorElem, "bgColor") : null,
                 fgColor: fgColorElem ? Color.read(xmlDoc, fgColorElem, "fgColor") : null,
-                patternType: <OpenXml.ST_PatternType>xmlDoc.attrString(attrs, "patternType"),
+                patternType: <OpenXml.ST_PatternType>xmlDoc.attrString(elem, "patternType"),
             };
         },
 
@@ -782,10 +765,9 @@ module Stylesheet {
     export var Protection: OpenXmlIo.ReadWrite<OpenXml.Protection> = {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "protection", "dxf, ndxf, odxf, xf");
-            var attrs = elem.attributes;
             return {
-                hidden: xmlDoc.attrBool(attrs, "hidden"),
-                locked: xmlDoc.attrBool(attrs, "locked"),
+                hidden: xmlDoc.attrBool(elem, "hidden"),
+                locked: xmlDoc.attrBool(elem, "locked"),
             };
         },
 
@@ -802,7 +784,7 @@ module Stylesheet {
     export var RgbColor: OpenXmlIo.ReadWrite<OpenXml.RgbColor> = {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "rgbColor", "indexedColors");
-            var rgbStr = xmlDoc.attrString(elem.attributes, "rgb");
+            var rgbStr = xmlDoc.attrString(elem, "rgb");
             return {
                 rgb: rgbStr ? parseInt(rgbStr, 16) : null,
             };
@@ -821,14 +803,13 @@ module Stylesheet {
     export var TableStyle: OpenXmlIo.ReadWrite<OpenXml.TableStyle> = {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "tableStyle", "tableStyles");
-            var attrs = elem.attributes;
             var tableStyleElementElems = xmlDoc.queryAllChilds(elem, "tableStyleElement");
             return {
                 tableStyleElements: xmlDoc.readMulti(TableStyleElement.read, tableStyleElementElems, "tableStyleElement"),
-                count: xmlDoc.attrInt(attrs, "count"),
-                name: xmlDoc.attrString(attrs, "name"),
-                pivot: xmlDoc.attrBool(attrs, "pivot"),
-                table: xmlDoc.attrBool(attrs, "table"),
+                count: xmlDoc.attrInt(elem, "count"),
+                name: xmlDoc.attrString(elem, "name"),
+                pivot: xmlDoc.attrBool(elem, "pivot"),
+                table: xmlDoc.attrBool(elem, "table"),
             };
         },
 
@@ -848,11 +829,10 @@ module Stylesheet {
     export var TableStyleElement: OpenXmlIo.ReadWrite<OpenXml.TableStyleElement> = {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "tableStyleElement", "tableStyle");
-            var attrs = elem.attributes;
             return {
-                dxfId: xmlDoc.attrInt(attrs, "dxfId"),
-                size: xmlDoc.attrInt(attrs, "size"),
-                type: <OpenXml.ST_TableStyleType>xmlDoc.attrString(attrs, "type"),
+                dxfId: xmlDoc.attrInt(elem, "dxfId"),
+                size: xmlDoc.attrInt(elem, "size"),
+                type: <OpenXml.ST_TableStyleType>xmlDoc.attrString(elem, "type"),
             };
         },
 
@@ -870,13 +850,12 @@ module Stylesheet {
     export var TableStyles: OpenXmlIo.ReadWrite<OpenXml.TableStyles> = {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "tableStyles", "styleSheet");
-            var attrs = elem.attributes;
             var tableStyleElems = xmlDoc.queryAllChilds(elem, "tableStyle");
             return {
                 tableStyles: xmlDoc.readMulti(TableStyle.read, tableStyleElems),
-                count: xmlDoc.attrInt(attrs, "count"),
-                defaultPivotStyle: xmlDoc.attrString(attrs, "defaultPivotStyle"),
-                defaultTableStyle: xmlDoc.attrString(attrs, "defaultTableStyle"),
+                count: xmlDoc.attrInt(elem, "count"),
+                defaultPivotStyle: xmlDoc.attrString(elem, "defaultPivotStyle"),
+                defaultTableStyle: xmlDoc.attrString(elem, "defaultTableStyle"),
             };
         },
 

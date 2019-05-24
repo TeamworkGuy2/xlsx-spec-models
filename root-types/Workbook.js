@@ -38,12 +38,11 @@ var Workbook;
     Workbook_1.Sheet = {
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "sheet", "sheets");
-            var attrs = elem.attributes;
             return {
-                id: xmlDoc.attrString(attrs, "r:id"),
-                name: xmlDoc.attrString(attrs, "name"),
-                sheetId: xmlDoc.attrInt(attrs, "sheetId"),
-                state: xmlDoc.attrString(attrs, "state"),
+                id: xmlDoc.attrString(elem, "r:id"),
+                name: xmlDoc.attrString(elem, "name"),
+                sheetId: xmlDoc.attrInt(elem, "sheetId"),
+                state: xmlDoc.attrString(elem, "state"),
             };
         },
         write: function (xmlDoc, inst) {

@@ -4,9 +4,8 @@ var RunFont = /** @class */ (function () {
     }
     RunFont.read = function (xmlDoc, elem) {
         xmlDoc.validator.expectNode(elem, "rFont", "rPr");
-        var attrs = elem.attributes;
         return {
-            val: xmlDoc.attrString(attrs, "val"),
+            val: xmlDoc.attrString(elem, "val"),
         };
     };
     RunFont.write = function (xmlDoc, inst) {

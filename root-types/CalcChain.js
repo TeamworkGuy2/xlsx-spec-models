@@ -18,12 +18,11 @@ var CalcChain;
     CalcChain_1.CalculationCell = {
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "c", "calcChain");
-            var childAttrs = elem.attributes;
             return {
-                i: xmlDoc.attrInt(childAttrs, "i"),
-                l: xmlDoc.attrBool(childAttrs, "l"),
-                r: xmlDoc.attrString(childAttrs, "r"),
-                s: xmlDoc.attrBool(childAttrs, "s"),
+                i: xmlDoc.attrInt(elem, "i"),
+                l: xmlDoc.attrBool(elem, "l"),
+                r: xmlDoc.attrString(elem, "r"),
+                s: xmlDoc.attrBool(elem, "s"),
             };
         },
         write: function (xmlDoc, inst) {

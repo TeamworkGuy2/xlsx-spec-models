@@ -5,8 +5,7 @@ class Bold {
 
     public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement, expectedTagName: string, parentTags?: string): OpenXml.Bold {
         xmlDoc.validator.expectNode(elem, expectedTagName, (parentTags || "font, rPr"));
-        var attrs = elem.attributes;
-        var valAttr = xmlDoc.attrBool(attrs, "val");
+        var valAttr = xmlDoc.attrBool(elem, "val");
         return {
             val: (valAttr == null || valAttr == true) ? true : valAttr,
         };

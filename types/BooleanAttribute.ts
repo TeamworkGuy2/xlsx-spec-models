@@ -7,9 +7,8 @@ class BooleanAttribute {
 
     public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement, expectedTagName: string, parentTags?: string): { val: boolean } {
         xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
-        var attrs = elem.attributes;
         return {
-            val: xmlDoc.attrBool(attrs, "val"),
+            val: xmlDoc.attrBool(elem, "val"),
         };
     }
 

@@ -7,9 +7,8 @@ class IntAttribute {
 
     public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement, expectedTagName: string, parentTags?: string): { val: number } {
         xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
-        var attrs = elem.attributes;
         return {
-            val: xmlDoc.attrInt(attrs, "val"),
+            val: xmlDoc.attrInt(elem, "val"),
         };
     }
 

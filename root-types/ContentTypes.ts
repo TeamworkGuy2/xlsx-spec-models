@@ -25,10 +25,9 @@ module ContentTypes {
     export var ContentTypeDefault: OpenXmlIo.ReadWriteNamed<OpenXml.ContentTypeDefault> = {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "Default", "Types");
-            var attrs = elem.attributes;
             return {
-                contentType: xmlDoc.attrString(attrs, "ContentType"),
-                extension: xmlDoc.attrString(attrs, "Extension"),
+                contentType: xmlDoc.attrString(elem, "ContentType"),
+                extension: xmlDoc.attrString(elem, "Extension"),
             };
         },
 
@@ -45,10 +44,9 @@ module ContentTypes {
     export var ContentTypeOverride: OpenXmlIo.ReadWriteNamed<OpenXml.ContentTypeOverride> = {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "Override", "Types");
-            var attrs = elem.attributes;
             return {
-                contentType: xmlDoc.attrString(attrs, "ContentType"),
-                partName: xmlDoc.attrString(attrs, "PartName"),
+                contentType: xmlDoc.attrString(elem, "ContentType"),
+                partName: xmlDoc.attrString(elem, "PartName"),
             };
         },
 

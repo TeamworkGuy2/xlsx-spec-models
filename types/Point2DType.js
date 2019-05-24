@@ -4,10 +4,9 @@ var Point2DType = /** @class */ (function () {
     }
     Point2DType.read = function (xmlDoc, elem, expectedTagName, parentTags) {
         xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
-        var attrs = elem.attributes;
         return {
-            x: xmlDoc.attrInt(attrs, "x"),
-            y: xmlDoc.attrInt(attrs, "y"),
+            x: xmlDoc.attrInt(elem, "x"),
+            y: xmlDoc.attrInt(elem, "y"),
         };
     };
     Point2DType.write = function (xmlDoc, inst, tagName) {

@@ -19,11 +19,10 @@ var Relationships;
     Relationships_1.Relationship = {
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "Relationship", "Relationships");
-            var attrs = elem.attributes;
             return {
-                id: xmlDoc.attrString(attrs, "Id"),
-                target: xmlDoc.attrString(attrs, "Target"),
-                type: xmlDoc.attrString(attrs, "Type"),
+                id: xmlDoc.attrString(elem, "Id"),
+                target: xmlDoc.attrString(elem, "Target"),
+                type: xmlDoc.attrString(elem, "Type"),
             };
         },
         write: function (xmlDoc, inst) {

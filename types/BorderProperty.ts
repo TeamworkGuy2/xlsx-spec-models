@@ -10,10 +10,9 @@ class BorderProperty {
     public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement, expectedTagName: string, parentTags?: string): OpenXml.BorderProperty {
         xmlDoc.validator.expectNode(elem, expectedTagName, parentTags || "border");
         var colorElem = xmlDoc.queryOneChild(elem, "color");
-        var attrs = elem.attributes;
         return {
             color: colorElem ? Color.read(xmlDoc, colorElem, "color") : null,
-            style: <OpenXml.ST_BorderStyle>xmlDoc.attrString(attrs, "style"),
+            style: <OpenXml.ST_BorderStyle>xmlDoc.attrString(elem, "style"),
         };
     }
 

@@ -9,10 +9,9 @@ var BorderProperty = /** @class */ (function () {
     BorderProperty.read = function (xmlDoc, elem, expectedTagName, parentTags) {
         xmlDoc.validator.expectNode(elem, expectedTagName, parentTags || "border");
         var colorElem = xmlDoc.queryOneChild(elem, "color");
-        var attrs = elem.attributes;
         return {
             color: colorElem ? Color.read(xmlDoc, colorElem, "color") : null,
-            style: xmlDoc.attrString(attrs, "style"),
+            style: xmlDoc.attrString(elem, "style"),
         };
     };
     BorderProperty.write = function (xmlDoc, inst, tagName) {

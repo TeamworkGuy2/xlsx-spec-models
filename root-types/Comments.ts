@@ -57,15 +57,14 @@ module Comments {
     export var Comment: OpenXmlIo.ReadWrite<OpenXml.Comment> = {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "comment", "comments");
-            var attrs = elem.attributes;
 
             var textElem = xmlDoc.queryOneChild(elem, "text");
             var text = CommentText.read(xmlDoc, textElem);
 
             return {
-                authorId: xmlDoc.attrInt(attrs, "authorId"),
-                ref: xmlDoc.attrString(attrs, "ref"),
-                shapeId: xmlDoc.attrInt(attrs, "shapeId"),
+                authorId: xmlDoc.attrInt(elem, "authorId"),
+                ref: xmlDoc.attrString(elem, "ref"),
+                shapeId: xmlDoc.attrInt(elem, "shapeId"),
                 text: text,
             };
         },

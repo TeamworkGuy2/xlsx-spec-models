@@ -5,14 +5,13 @@ class Color {
 
     public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement, expectedTagName: string): OpenXml.Color {
         xmlDoc.validator.expectNode(elem, expectedTagName, "bottom, colorScale, dataBar, diagonal, end, font, horizontal, mruColors, rPr, start, stop, top, vertical");
-        var attrs = elem.attributes;
-        var rgbStr = xmlDoc.attrString(attrs, "rgb");
+        var rgbStr = xmlDoc.attrString(elem, "rgb");
         return {
-            auto: xmlDoc.attrBool(attrs, "auto"),
-            indexed: xmlDoc.attrInt(attrs, "indexed"),
+            auto: xmlDoc.attrBool(elem, "auto"),
+            indexed: xmlDoc.attrInt(elem, "indexed"),
             rgb: rgbStr ? parseInt(rgbStr, 16) : null,
-            theme: xmlDoc.attrInt(attrs, "theme"),
-            tint: xmlDoc.attrFloat(attrs, "tint"),
+            theme: xmlDoc.attrInt(elem, "theme"),
+            tint: xmlDoc.attrFloat(elem, "tint"),
         };
     }
 

@@ -7,9 +7,8 @@ var FloatAttribute = /** @class */ (function () {
     }
     FloatAttribute.read = function (xmlDoc, elem, expectedTagName, parentTags) {
         xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
-        var attrs = elem.attributes;
         return {
-            val: xmlDoc.attrFloat(attrs, "val"),
+            val: xmlDoc.attrFloat(elem, "val"),
         };
     };
     FloatAttribute.write = function (xmlDoc, inst, tagName) {

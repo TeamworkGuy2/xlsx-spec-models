@@ -7,9 +7,8 @@ var IntAttribute = /** @class */ (function () {
     }
     IntAttribute.read = function (xmlDoc, elem, expectedTagName, parentTags) {
         xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
-        var attrs = elem.attributes;
         return {
-            val: xmlDoc.attrInt(attrs, "val"),
+            val: xmlDoc.attrInt(elem, "val"),
         };
     };
     IntAttribute.write = function (xmlDoc, inst, tagName) {

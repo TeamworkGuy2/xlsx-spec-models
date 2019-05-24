@@ -22,11 +22,9 @@ module WorksheetDrawing {
     export var ClientData: OpenXmlIo.ReadWrite<OpenXml.ClientData> = {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "xdr:clientData", "absoluteAnchor, oneCellAnchor, twoCellAnchor");
-
-            var attrs = elem.attributes;
             return {
-                fLocksWithSheet: xmlDoc.attrBool(attrs, "fLocksWithSheet"),
-                fPrintsWithSheet: xmlDoc.attrBool(attrs, "fPrintsWithSheet"),
+                fLocksWithSheet: xmlDoc.attrBool(elem, "fLocksWithSheet"),
+                fPrintsWithSheet: xmlDoc.attrBool(elem, "fPrintsWithSheet"),
             };
         },
 
@@ -44,10 +42,9 @@ module WorksheetDrawing {
     export var Extent: OpenXmlIo.ReadWrite<OpenXml.Extent> = {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "a:ext", "absoluteAnchor, oneCellAnchor");
-            var attrs = elem.attributes;
             return {
-                cx: xmlDoc.attrInt(attrs, "cx"),
-                cy: xmlDoc.attrInt(attrs, "cy"),
+                cx: xmlDoc.attrInt(elem, "cx"),
+                cy: xmlDoc.attrInt(elem, "cy"),
             };
         },
 
@@ -90,14 +87,13 @@ module WorksheetDrawing {
             var nvPicPrElem = xmlDoc.queryOneChild(elem, "nvPicPr");
             var spPrElem = xmlDoc.queryOneChild(elem, "spPr");
 
-            var attrs = elem.attributes;
             return {
                 blipFill: <any>blipFillElem,
                 nvPicPr: <any>nvPicPrElem,
                 spPr: ShapeProperties.read(xmlDoc, spPrElem),
                 // attributes
-                fPublished: xmlDoc.attrBool(attrs, "fPublished"),
-                macro: xmlDoc.attrString(attrs, "macro"),
+                fPublished: xmlDoc.attrBool(elem, "fPublished"),
+                macro: xmlDoc.attrString(elem, "macro"),
             };
         },
 
@@ -117,10 +113,9 @@ module WorksheetDrawing {
     export var Point2DType: OpenXmlIo.ReadWriteNamed<OpenXml.Point2DType> = {
         read(xmlDoc, elem, expectedTagName, parentTags?) {
             xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
-            var attrs = elem.attributes;
             return {
-                x: xmlDoc.attrInt(attrs, "x"),
-                y: xmlDoc.attrInt(attrs, "y"),
+                x: xmlDoc.attrInt(elem, "x"),
+                y: xmlDoc.attrInt(elem, "y"),
             };
         },
 
@@ -138,7 +133,6 @@ module WorksheetDrawing {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "xdr:spPr", "cxnSp, pic, sp");
 
-            var attrs = elem.attributes;
             return {
                 xfrm: Transform2D.read(xmlDoc, xmlDoc.queryOneChild(elem, "xfrm")),
                 ln: xmlDoc.queryOneChild(elem, "ln"),
@@ -147,7 +141,7 @@ module WorksheetDrawing {
                 prstGeom: xmlDoc.queryOneChild(elem, "prstGeom"),
                 extLst: xmlDoc.queryOneChild(elem, "extLst"),
                 // attributes
-                bwMode: <OpenXml.ST_BlackWhiteMode>xmlDoc.attrString(attrs, "bwMode"),
+                bwMode: <OpenXml.ST_BlackWhiteMode>xmlDoc.attrString(elem, "bwMode"),
             };
         },
 
@@ -184,14 +178,13 @@ module WorksheetDrawing {
             var offElem = xmlDoc.queryOneChild(elem, "off");
             var extElem = xmlDoc.queryOneChild(elem, "ext");
 
-            var attrs = elem.attributes;
             return {
                 off: Offset.read(xmlDoc, offElem),
                 ext: Extent.read(xmlDoc, extElem),
                 // attributes
-                flipH: xmlDoc.attrBool(attrs, "flipH"),
-                flipV: xmlDoc.attrBool(attrs, "flipV"),
-                rot: xmlDoc.attrInt(attrs, "rot"),
+                flipH: xmlDoc.attrBool(elem, "flipH"),
+                flipV: xmlDoc.attrBool(elem, "flipV"),
+                rot: xmlDoc.attrInt(elem, "rot"),
             };
         },
 
@@ -212,14 +205,13 @@ module WorksheetDrawing {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "xdr:twoCellAnchor", "xdr:wsDr");
 
-            var attrs = elem.attributes;
             return {
                 clientData: ClientData.read(xmlDoc, xmlDoc.queryOneChild(elem, "clientData")),
                 from: FromMarker.read(xmlDoc, xmlDoc.queryOneChild(elem, "from")),
                 to: ToMarker.read(xmlDoc, xmlDoc.queryOneChild(elem, "to")),
                 pic: Picture.read(xmlDoc, xmlDoc.queryOneChild(elem, "pic")),
                 // attributes
-                editAs: <OpenXml.ST_EditAs>xmlDoc.attrString(attrs, "editAs"),
+                editAs: <OpenXml.ST_EditAs>xmlDoc.attrString(elem, "editAs"),
             };
         },
 

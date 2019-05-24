@@ -31,12 +31,11 @@ module Workbook {
     export var Sheet: OpenXmlIo.ReadWrite<OpenXml.Sheet> = {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "sheet", "sheets");
-            var attrs = elem.attributes;
             return {
-                id: xmlDoc.attrString(attrs, "r:id"),
-                name: xmlDoc.attrString(attrs, "name"),
-                sheetId: xmlDoc.attrInt(attrs, "sheetId"),
-                state: <OpenXml.ST_SheetState>xmlDoc.attrString(attrs, "state"),
+                id: xmlDoc.attrString(elem, "r:id"),
+                name: xmlDoc.attrString(elem, "name"),
+                sheetId: xmlDoc.attrInt(elem, "sheetId"),
+                state: <OpenXml.ST_SheetState>xmlDoc.attrString(elem, "state"),
             };
         },
 

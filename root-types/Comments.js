@@ -46,13 +46,12 @@ var Comments;
     Comments_1.Comment = {
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "comment", "comments");
-            var attrs = elem.attributes;
             var textElem = xmlDoc.queryOneChild(elem, "text");
             var text = Comments_1.CommentText.read(xmlDoc, textElem);
             return {
-                authorId: xmlDoc.attrInt(attrs, "authorId"),
-                ref: xmlDoc.attrString(attrs, "ref"),
-                shapeId: xmlDoc.attrInt(attrs, "shapeId"),
+                authorId: xmlDoc.attrInt(elem, "authorId"),
+                ref: xmlDoc.attrString(elem, "ref"),
+                shapeId: xmlDoc.attrInt(elem, "shapeId"),
                 text: text,
             };
         },
