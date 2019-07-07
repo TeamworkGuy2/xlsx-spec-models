@@ -4,7 +4,13 @@ This project does its best to adhere to [Semantic Versioning](http://semver.org/
 
 
 --------
-### [0.4.8](N/A) - 2019-05-24
+### [0.4.9](N/A) - 2019-07-06
+#### Changes
+* Update to TypeScript 3.5
+
+
+--------
+### [0.4.8](https://github.com/TeamworkGuy2/xlsx-spec-models/commit/68a03571fe6877fdf9c3ca97b68333cfcfbf3ecc) - 2019-05-24
 #### Changes
 * `dom-builder` dependency update to v0.7.0 (improved attribute handling)
 * Switching `DocumentLike.attr*()` calls from passing 'elem.attributes' to simply passing 'elem'
