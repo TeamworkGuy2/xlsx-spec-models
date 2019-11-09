@@ -1,6 +1,6 @@
 {
   "name": "xlsx-spec-models",
-  "version": "0.4.9",
+  "version": "0.4.10",
   "description": "TypeScript Open XML XLSX format models with DOM read/write methods",
   "author": "TeamworkGuy2",
   "homepage" : "https://github.com/TeamworkGuy2/xlsx-spec-models",
@@ -11,13 +11,13 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@types/chai": "~4.1.7",
-    "@types/mocha": "~5.2.5",
-    "@types/node": "~10.12.18",
-    "@twg2/dom-builder": "~0.7.0",
+    "@types/chai": "~4.2.4",
+    "@types/mocha": "~5.2.7",
+    "@types/node": "^12.0.0",
+    "@twg2/dom-builder": "~0.7.2",
     "chai": "~4.2.0",
     "mocha": "~5.2.0",
-    "typescript": "~3.5.2"
+    "typescript": "~3.7.2"
   },
   "scripts": {
     "test": "node node_modules/mocha/bin/_mocha -u tdd --recursive",
