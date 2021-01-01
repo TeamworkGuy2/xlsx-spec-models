@@ -8,7 +8,7 @@ class StringAttribute {
     public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement, expectedTagName: string, parentTags?: string): { val: string } {
         xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
         return {
-            val: xmlDoc.attrString(elem, "val"),
+            val: xmlDoc.attrString(elem, "val") ?? "",
         };
     }
 

@@ -23,9 +23,9 @@ module Relationships {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "Relationship", "Relationships");
             return {
-                id: xmlDoc.attrString(elem, "Id"),
-                target: xmlDoc.attrString(elem, "Target"),
-                type: xmlDoc.attrString(elem, "Type"),
+                id: xmlDoc.attrString(elem, "Id") ?? "",
+                target: xmlDoc.attrString(elem, "Target") ?? "",
+                type: xmlDoc.attrString(elem, "Type") ?? "",
             };
         },
 

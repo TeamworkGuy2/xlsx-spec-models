@@ -8,15 +8,15 @@ var Worksheet;
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "worksheet", "root element of SpreadsheetML Worksheet part");
             var colsElems = xmlDoc.queryAllChilds(elem, "cols");
-            var dimensionElem = xmlDoc.queryOneChild(elem, "dimension");
-            var drawingElem = xmlDoc.queryOneChild(elem, "drawing");
-            var headerFooterElem = xmlDoc.queryOneChild(elem, "headerFooter");
-            var legacyDrawingElem = xmlDoc.queryOneChild(elem, "legacyDrawing");
-            var pageMarginElem = xmlDoc.queryOneChild(elem, "pageMargins");
-            var pageSetupElem = xmlDoc.queryOneChild(elem, "pageSetup");
+            var dimensionElem = xmlDoc.queryOneChild(elem, "dimension", false);
+            var drawingElem = xmlDoc.queryOneChild(elem, "drawing", false);
+            var headerFooterElem = xmlDoc.queryOneChild(elem, "headerFooter", false);
+            var legacyDrawingElem = xmlDoc.queryOneChild(elem, "legacyDrawing", false);
+            var pageMarginElem = xmlDoc.queryOneChild(elem, "pageMargins", false);
+            var pageSetupElem = xmlDoc.queryOneChild(elem, "pageSetup", false);
             var sheetDataElem = xmlDoc.queryOneChild(elem, "sheetData");
-            var sheetFormatPrElem = xmlDoc.queryOneChild(elem, "sheetFormatPr");
-            var sheetViewsElem = xmlDoc.queryOneChild(elem, "sheetViews");
+            var sheetFormatPrElem = xmlDoc.queryOneChild(elem, "sheetFormatPr", false);
+            var sheetViewsElem = xmlDoc.queryOneChild(elem, "sheetViews", false);
             return {
                 cols: xmlDoc.readMulti(Worksheet_1.Columns.read, colsElems),
                 dimension: dimensionElem ? Worksheet_1.SheetDimension.read(xmlDoc, dimensionElem) : null,
@@ -63,17 +63,18 @@ var Worksheet;
     };
     Worksheet_1.Cell = {
         read: function (xmlDoc, elem) {
+            var _a;
             xmlDoc.validator.expectNode(elem, "c", "row");
-            var fElem = xmlDoc.queryOneChild(elem, "f");
-            var isElem = xmlDoc.queryOneChild(elem, "is");
-            var vElem = xmlDoc.queryOneChild(elem, "v");
+            var fElem = xmlDoc.queryOneChild(elem, "f", false);
+            var isElem = xmlDoc.queryOneChild(elem, "is", false);
+            var vElem = xmlDoc.queryOneChild(elem, "v", false);
             return {
                 f: fElem ? Worksheet_1.CellFormula.read(xmlDoc, fElem) : null,
                 is: isElem ? Worksheet_1.InlineString.read(xmlDoc, isElem) : null,
                 v: vElem ? Worksheet_1.CellValue.read(xmlDoc, vElem) : null,
                 cm: xmlDoc.attrInt(elem, "cm"),
                 ph: xmlDoc.attrBool(elem, "ph"),
-                r: xmlDoc.attrString(elem, "r"),
+                r: (_a = xmlDoc.attrString(elem, "r")) !== null && _a !== void 0 ? _a : "",
                 s: xmlDoc.attrInt(elem, "s"),
                 t: xmlDoc.attrString(elem, "t"),
                 vm: xmlDoc.attrInt(elem, "vm"),
@@ -130,14 +131,15 @@ var Worksheet;
     };
     Worksheet_1.Column = {
         read: function (xmlDoc, elem) {
+            var _a, _b;
             xmlDoc.validator.expectNode(elem, "col", "cols");
             return {
                 bestFit: xmlDoc.attrBool(elem, "bestFit"),
                 collapsed: xmlDoc.attrBool(elem, "collapsed"),
                 customWidth: xmlDoc.attrBool(elem, "customWidth"),
                 hidden: xmlDoc.attrBool(elem, "hidden"),
-                max: xmlDoc.attrInt(elem, "max"),
-                min: xmlDoc.attrInt(elem, "min"),
+                max: (_a = xmlDoc.attrInt(elem, "max")) !== null && _a !== void 0 ? _a : 0,
+                min: (_b = xmlDoc.attrInt(elem, "min")) !== null && _b !== void 0 ? _b : 0,
                 outlineLevel: xmlDoc.attrInt(elem, "outlineLevel"),
                 phonetic: xmlDoc.attrBool(elem, "phonetic"),
                 style: xmlDoc.attrInt(elem, "style"),
@@ -176,9 +178,10 @@ var Worksheet;
     };
     Worksheet_1.Drawing = {
         read: function (xmlDoc, elem) {
+            var _a;
             xmlDoc.validator.expectNode(elem, "drawing", "chartsheet, dialogsheet, worksheet");
             return {
-                rid: xmlDoc.attrString(elem, "r:id"),
+                rid: (_a = xmlDoc.attrString(elem, "r:id")) !== null && _a !== void 0 ? _a : "",
             };
         },
         write: function (xmlDoc, inst) {
@@ -223,12 +226,12 @@ var Worksheet;
     Worksheet_1.HeaderFooter = {
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "headerFooter", "chartsheet, customSheetView, customSheetView, dialogsheet, worksheet");
-            var evenHeaderElem = xmlDoc.queryOneChild(elem, "evenHeader");
-            var evenFooterElem = xmlDoc.queryOneChild(elem, "evenFooter");
-            var firstHeaderElem = xmlDoc.queryOneChild(elem, "firstHeader");
-            var firstFooterElem = xmlDoc.queryOneChild(elem, "firstFooter");
-            var oddHeaderElem = xmlDoc.queryOneChild(elem, "oddHeader");
-            var oddFooterElem = xmlDoc.queryOneChild(elem, "oddFooter");
+            var evenHeaderElem = xmlDoc.queryOneChild(elem, "evenHeader", false);
+            var evenFooterElem = xmlDoc.queryOneChild(elem, "evenFooter", false);
+            var firstHeaderElem = xmlDoc.queryOneChild(elem, "firstHeader", false);
+            var firstFooterElem = xmlDoc.queryOneChild(elem, "firstFooter", false);
+            var oddHeaderElem = xmlDoc.queryOneChild(elem, "oddHeader", false);
+            var oddFooterElem = xmlDoc.queryOneChild(elem, "oddFooter", false);
             return {
                 evenHeader: evenHeaderElem ? Worksheet_1.EvenHeader.read(xmlDoc, evenHeaderElem) : null,
                 evenFooter: evenFooterElem ? Worksheet_1.EvenFooter.read(xmlDoc, evenFooterElem) : null,
@@ -265,7 +268,7 @@ var Worksheet;
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "is", "c, nc, oc");
             var rElems = xmlDoc.queryAllChilds(elem, "r");
-            var tElem = xmlDoc.queryOneChild(elem, "t");
+            var tElem = xmlDoc.queryOneChild(elem, "t", false);
             return {
                 rs: xmlDoc.readMulti(RichTextRun.read, rElems),
                 t: tElem ? Text.read(xmlDoc, tElem) : null,
@@ -282,9 +285,10 @@ var Worksheet;
     };
     Worksheet_1.LegacyDrawing = {
         read: function (xmlDoc, elem) {
+            var _a;
             xmlDoc.validator.expectNode(elem, "legacyDrawing", "chartsheet, dialogsheet, worksheet");
             return {
-                rid: xmlDoc.attrString(elem, "r:id"),
+                rid: (_a = xmlDoc.attrString(elem, "r:id")) !== null && _a !== void 0 ? _a : "",
             };
         },
         write: function (xmlDoc, inst) {
@@ -312,14 +316,15 @@ var Worksheet;
     };
     Worksheet_1.PageMargins = {
         read: function (xmlDoc, elem) {
+            var _a, _b, _c, _d, _e, _f;
             xmlDoc.validator.expectNode(elem, "pageMargins", "chartsheet, customSheetView, customSheetView, dialogsheet, worksheet");
             return {
-                bottom: xmlDoc.attrFloat(elem, "bottom"),
-                footer: xmlDoc.attrFloat(elem, "footer"),
-                header: xmlDoc.attrFloat(elem, "header"),
-                left: xmlDoc.attrFloat(elem, "left"),
-                right: xmlDoc.attrFloat(elem, "right"),
-                top: xmlDoc.attrFloat(elem, "top"),
+                bottom: (_a = xmlDoc.attrFloat(elem, "bottom")) !== null && _a !== void 0 ? _a : 0,
+                footer: (_b = xmlDoc.attrFloat(elem, "footer")) !== null && _b !== void 0 ? _b : 0,
+                header: (_c = xmlDoc.attrFloat(elem, "header")) !== null && _c !== void 0 ? _c : 0,
+                left: (_d = xmlDoc.attrFloat(elem, "left")) !== null && _d !== void 0 ? _d : 0,
+                right: (_e = xmlDoc.attrFloat(elem, "right")) !== null && _e !== void 0 ? _e : 0,
+                top: (_f = xmlDoc.attrFloat(elem, "top")) !== null && _f !== void 0 ? _f : 0,
             };
         },
         write: function (xmlDoc, inst) {
@@ -337,10 +342,11 @@ var Worksheet;
     Worksheet_1.PageSetup = {
         // TODO incomplete
         read: function (xmlDoc, elem) {
+            var _a;
             xmlDoc.validator.expectNode(elem, "pageSetup", "customSheetView, dialogsheet, worksheet");
             return {
                 orientation: xmlDoc.attrString(elem, "orientation"),
-                rid: xmlDoc.attrString(elem, "r:id"),
+                rid: (_a = xmlDoc.attrString(elem, "r:id")) !== null && _a !== void 0 ? _a : "",
                 scale: xmlDoc.attrInt(elem, "scale"),
             };
         },
@@ -355,6 +361,7 @@ var Worksheet;
     };
     Worksheet_1.Row = {
         read: function (xmlDoc, elem) {
+            var _a, _b;
             xmlDoc.validator.expectNode(elem, "row", "sheetData");
             var cElems = xmlDoc.queryAllChilds(elem, "c");
             return {
@@ -366,12 +373,12 @@ var Worksheet;
                 ht: xmlDoc.attrFloat(elem, "ht"),
                 outlineLevel: xmlDoc.attrInt(elem, "outlineLevel"),
                 ph: xmlDoc.attrBool(elem, "ph"),
-                r: xmlDoc.attrInt(elem, "r"),
+                r: (_a = xmlDoc.attrInt(elem, "r")) !== null && _a !== void 0 ? _a : 0,
                 s: xmlDoc.attrInt(elem, "s"),
                 spans: xmlDoc.attrString(elem, "spans"),
                 thickBot: xmlDoc.attrBool(elem, "thickBot"),
                 thickTop: xmlDoc.attrBool(elem, "thickTop"),
-                dyDescent: xmlDoc.attrFloat(elem, "x14ac:dyDescent"),
+                dyDescent: (_b = xmlDoc.attrFloat(elem, "x14ac:dyDescent")) !== null && _b !== void 0 ? _b : 0,
             };
         },
         write: function (xmlDoc, inst) {
@@ -427,9 +434,10 @@ var Worksheet;
     };
     Worksheet_1.SheetDimension = {
         read: function (xmlDoc, elem) {
+            var _a;
             xmlDoc.validator.expectNode(elem, "dimension", "worksheet");
             return {
-                ref: xmlDoc.attrString(elem, "ref")
+                ref: (_a = xmlDoc.attrString(elem, "ref")) !== null && _a !== void 0 ? _a : ""
             };
         },
         write: function (xmlDoc, inst) {
@@ -441,11 +449,12 @@ var Worksheet;
     };
     Worksheet_1.SheetFormatProperties = {
         read: function (xmlDoc, elem) {
+            var _a, _b;
             xmlDoc.validator.expectNode(elem, "sheetFormatPr", "dialogsheet, worksheet");
             return {
                 defaultColWidth: xmlDoc.attrFloat(elem, "defaultColWidth"),
-                defaultRowHeight: xmlDoc.attrFloat(elem, "defaultRowHeight"),
-                dyDescent: xmlDoc.attrFloat(elem, "x14ac:dyDescent"),
+                defaultRowHeight: (_a = xmlDoc.attrFloat(elem, "defaultRowHeight")) !== null && _a !== void 0 ? _a : 0,
+                dyDescent: (_b = xmlDoc.attrFloat(elem, "x14ac:dyDescent")) !== null && _b !== void 0 ? _b : 0,
             };
         },
         write: function (xmlDoc, inst) {
@@ -459,6 +468,7 @@ var Worksheet;
     };
     Worksheet_1.SheetView = {
         read: function (xmlDoc, elem) {
+            var _a;
             xmlDoc.validator.expectNode(elem, "sheetView", "sheetViews");
             var selectionElems = xmlDoc.queryAllChilds(elem, "selection");
             return {
@@ -466,7 +476,7 @@ var Worksheet;
                 tabSelected: xmlDoc.attrBool(elem, "tabSelected"),
                 view: xmlDoc.attrString(elem, "view"),
                 topLeftCell: xmlDoc.attrString(elem, "topLeftCell"),
-                workbookViewId: xmlDoc.attrInt(elem, "workbookViewId"),
+                workbookViewId: (_a = xmlDoc.attrInt(elem, "workbookViewId")) !== null && _a !== void 0 ? _a : 0,
                 zoomScale: xmlDoc.attrInt(elem, "zoomScale"),
                 zoomScaleNormal: xmlDoc.attrInt(elem, "zoomScaleNormal"),
                 zoomScalePageLayoutView: xmlDoc.attrInt(elem, "zoomScalePageLayoutView"),

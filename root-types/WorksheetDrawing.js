@@ -34,10 +34,11 @@ var WorksheetDrawing;
     };
     WorksheetDrawing_1.Extent = {
         read: function (xmlDoc, elem) {
+            var _a, _b;
             xmlDoc.validator.expectNode(elem, "a:ext", "absoluteAnchor, oneCellAnchor");
             return {
-                cx: xmlDoc.attrInt(elem, "cx"),
-                cy: xmlDoc.attrInt(elem, "cy"),
+                cx: (_a = xmlDoc.attrInt(elem, "cx")) !== null && _a !== void 0 ? _a : 0,
+                cy: (_b = xmlDoc.attrInt(elem, "cy")) !== null && _b !== void 0 ? _b : 0,
             };
         },
         write: function (xmlDoc, inst) {
@@ -92,10 +93,11 @@ var WorksheetDrawing;
     };
     WorksheetDrawing_1.Point2DType = {
         read: function (xmlDoc, elem, expectedTagName, parentTags) {
+            var _a, _b;
             xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
             return {
-                x: xmlDoc.attrInt(elem, "x"),
-                y: xmlDoc.attrInt(elem, "y"),
+                x: (_a = xmlDoc.attrInt(elem, "x")) !== null && _a !== void 0 ? _a : 0,
+                y: (_b = xmlDoc.attrInt(elem, "y")) !== null && _b !== void 0 ? _b : 0,
             };
         },
         write: function (xmlDoc, inst, tagName) {
@@ -109,13 +111,14 @@ var WorksheetDrawing;
     WorksheetDrawing_1.ShapeProperties = {
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "xdr:spPr", "cxnSp, pic, sp");
+            var xfrmElem = xmlDoc.queryOneChild(elem, "xfrm", false);
             return {
-                xfrm: WorksheetDrawing_1.Transform2D.read(xmlDoc, xmlDoc.queryOneChild(elem, "xfrm")),
-                ln: xmlDoc.queryOneChild(elem, "ln"),
-                scene3d: xmlDoc.queryOneChild(elem, "scene3d"),
-                sp3d: xmlDoc.queryOneChild(elem, "sp3d"),
-                prstGeom: xmlDoc.queryOneChild(elem, "prstGeom"),
-                extLst: xmlDoc.queryOneChild(elem, "extLst"),
+                xfrm: xfrmElem ? WorksheetDrawing_1.Transform2D.read(xmlDoc, xfrmElem) : null,
+                ln: xmlDoc.queryOneChild(elem, "ln", false),
+                scene3d: xmlDoc.queryOneChild(elem, "scene3d", false),
+                sp3d: xmlDoc.queryOneChild(elem, "sp3d", false),
+                prstGeom: xmlDoc.queryOneChild(elem, "prstGeom", false),
+                extLst: xmlDoc.queryOneChild(elem, "extLst", false),
                 // attributes
                 bwMode: xmlDoc.attrString(elem, "bwMode"),
             };
@@ -159,11 +162,11 @@ var WorksheetDrawing;
     WorksheetDrawing_1.Transform2D = {
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "a:xfrm", "graphicFrame, spPr, txSp");
-            var offElem = xmlDoc.queryOneChild(elem, "off");
-            var extElem = xmlDoc.queryOneChild(elem, "ext");
+            var offElem = xmlDoc.queryOneChild(elem, "off", false);
+            var extElem = xmlDoc.queryOneChild(elem, "ext", false);
             return {
-                off: WorksheetDrawing_1.Offset.read(xmlDoc, offElem),
-                ext: WorksheetDrawing_1.Extent.read(xmlDoc, extElem),
+                off: offElem ? WorksheetDrawing_1.Offset.read(xmlDoc, offElem) : null,
+                ext: extElem ? WorksheetDrawing_1.Extent.read(xmlDoc, extElem) : null,
                 // attributes
                 flipH: xmlDoc.attrBool(elem, "flipH"),
                 flipV: xmlDoc.attrBool(elem, "flipV"),
@@ -188,11 +191,13 @@ var WorksheetDrawing;
     WorksheetDrawing_1.TwoCellAnchor = {
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "xdr:twoCellAnchor", "xdr:wsDr");
+            var picElem = xmlDoc.queryOneChild(elem, "pic", false);
             return {
                 clientData: WorksheetDrawing_1.ClientData.read(xmlDoc, xmlDoc.queryOneChild(elem, "clientData")),
                 from: WorksheetDrawing_1.FromMarker.read(xmlDoc, xmlDoc.queryOneChild(elem, "from")),
                 to: WorksheetDrawing_1.ToMarker.read(xmlDoc, xmlDoc.queryOneChild(elem, "to")),
-                pic: WorksheetDrawing_1.Picture.read(xmlDoc, xmlDoc.queryOneChild(elem, "pic")),
+                pic: picElem ? WorksheetDrawing_1.Picture.read(xmlDoc, picElem) : null,
+                // TODO other EG_ObjectChoices properties
                 // attributes
                 editAs: xmlDoc.attrString(elem, "editAs"),
             };
@@ -203,7 +208,9 @@ var WorksheetDrawing;
                 .element;
             elem.appendChild(WorksheetDrawing_1.FromMarker.write(xmlDoc, inst.from));
             elem.appendChild(WorksheetDrawing_1.ToMarker.write(xmlDoc, inst.to));
-            elem.appendChild(WorksheetDrawing_1.Picture.write(xmlDoc, inst.pic));
+            if (inst.pic) {
+                elem.appendChild(WorksheetDrawing_1.Picture.write(xmlDoc, inst.pic));
+            }
             elem.appendChild(WorksheetDrawing_1.ClientData.write(xmlDoc, inst.clientData));
             return elem;
         }

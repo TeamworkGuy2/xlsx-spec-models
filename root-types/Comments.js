@@ -45,12 +45,13 @@ var Comments;
     };
     Comments_1.Comment = {
         read: function (xmlDoc, elem) {
+            var _a, _b;
             xmlDoc.validator.expectNode(elem, "comment", "comments");
             var textElem = xmlDoc.queryOneChild(elem, "text");
             var text = Comments_1.CommentText.read(xmlDoc, textElem);
             return {
-                authorId: xmlDoc.attrInt(elem, "authorId"),
-                ref: xmlDoc.attrString(elem, "ref"),
+                authorId: (_a = xmlDoc.attrInt(elem, "authorId")) !== null && _a !== void 0 ? _a : 0,
+                ref: (_b = xmlDoc.attrString(elem, "ref")) !== null && _b !== void 0 ? _b : "",
                 shapeId: xmlDoc.attrInt(elem, "shapeId"),
                 text: text,
             };
@@ -83,7 +84,7 @@ var Comments;
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "text", "comment");
             var rtrElems = xmlDoc.queryAllChilds(elem, "r");
-            var tElem = xmlDoc.queryOneChild(elem, "t");
+            var tElem = xmlDoc.queryOneChild(elem, "t", false);
             return {
                 rs: xmlDoc.readMulti(RichTextRun.read, rtrElems),
                 t: tElem ? Text.read(xmlDoc, tElem) : null,

@@ -14,7 +14,6 @@ class MarkerType {
         var rowElem = xmlDoc.queryOneChild(elem, "row");
         var rowOffElem = xmlDoc.queryOneChild(elem, "rowOff");
 
-        var attrs = elem.attributes;
         return {
             col: ColumnId.read(xmlDoc, colElem),
             colOff: ColumnOffset.read(xmlDoc, colOffElem),

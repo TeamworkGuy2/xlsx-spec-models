@@ -7,12 +7,12 @@ class RichTextRun {
 
     public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.RichTextRun {
         xmlDoc.validator.expectNode(elem, "r", "si");
-
-        var rPrElem = xmlDoc.queryOneChild(elem, "rPr");
+        var rPrElem = xmlDoc.queryOneChild(elem, "rPr", false);
         var textElem = xmlDoc.queryOneChild(elem, "t");
+
         return {
             rPr: rPrElem != null ? RichTextRunProperties.read(xmlDoc, rPrElem) : null,
-            t: textElem != null ? Text.read(xmlDoc, textElem) : null,
+            t: Text.read(xmlDoc, textElem),
         };
     }
 
@@ -20,7 +20,7 @@ class RichTextRun {
     public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.RichTextRun): ElementLike {
         var elem = xmlDoc.dom.createElement("r");
         if (inst.rPr) { elem.appendChild(RichTextRunProperties.write(xmlDoc, inst.rPr)); }
-        if (inst.t) { elem.appendChild(Text.write(xmlDoc, inst.t)); }
+        elem.appendChild(Text.write(xmlDoc, inst.t));
 
         return elem;
     }
@@ -29,7 +29,7 @@ class RichTextRun {
     public static copy(inst: OpenXml.RichTextRun): OpenXml.RichTextRun {
         return {
             rPr: inst.rPr != null ? RichTextRunProperties.copy(inst.rPr) : null,
-            t: inst.t != null ? Text.copy(inst.t) : null,
+            t: Text.copy(inst.t),
         };
     }
 

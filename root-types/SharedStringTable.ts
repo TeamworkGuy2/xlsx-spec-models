@@ -7,6 +7,7 @@ module SharedStringTable {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "sst", "root element of SpreadsheetML Shared String Table part");
             var sharedStringElems = xmlDoc.queryAllChilds(elem, "si");
+
             return {
                 sis: xmlDoc.readMulti(SharedStringItem.read, sharedStringElems),
             };
@@ -25,7 +26,7 @@ module SharedStringTable {
             xmlDoc.validator.expectNode(elem, "si", "sst");
 
             var rtrChilds = xmlDoc.queryAllChilds(elem, "r");
-            var textChild = xmlDoc.queryOneChild(elem, "t");
+            var textChild = xmlDoc.queryOneChild(elem, "t", false);
 
             return {
                 rs: xmlDoc.readMulti(RichTextRun.read, rtrChilds),
@@ -35,7 +36,7 @@ module SharedStringTable {
 
         write(xmlDoc, inst) {
             var elem = xmlDoc.dom.createElement("si");
-            xmlDoc.addChilds(elem, xmlDoc.writeMulti(RichTextRun.write, inst.rs));
+            if (inst.rs) { xmlDoc.addChilds(elem, xmlDoc.writeMulti(RichTextRun.write, inst.rs)); }
             if (inst.t) { elem.appendChild(Text.write(xmlDoc, inst.t)); }
 
             return elem;

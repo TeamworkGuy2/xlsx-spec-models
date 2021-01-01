@@ -6,8 +6,8 @@ class Point2DType {
     public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement, expectedTagName: string, parentTags?: string): OpenXml.Point2DType {
         xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
         return {
-            x: xmlDoc.attrInt(elem, "x"),
-            y: xmlDoc.attrInt(elem, "y"),
+            x: xmlDoc.attrInt(elem, "x") ?? 0,
+            y: xmlDoc.attrInt(elem, "y") ?? 0,
         };
     }
 

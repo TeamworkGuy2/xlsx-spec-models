@@ -5,13 +5,14 @@ module Workbook {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "workbook", "root element of SpreadsheetML Workbook part");
             var sheetsElem = xmlDoc.queryOneChild(elem, "sheets");
+
             return {
                 sheets: Sheets.read(xmlDoc, sheetsElem),
-                bookViews: xmlDoc.queryOneChild(elem, "bookViews"),
-                calcPr: xmlDoc.queryOneChild(elem, "calcPr"),
-                fileVersion: xmlDoc.queryOneChild(elem, "fileVersion"),
-                workbookPr: xmlDoc.queryOneChild(elem, "workbookPr"),
-                extLst: xmlDoc.queryOneChild(elem, "extLst"),
+                bookViews: xmlDoc.queryOneChild(elem, "bookViews", false),
+                calcPr: xmlDoc.queryOneChild(elem, "calcPr", false),
+                fileVersion: xmlDoc.queryOneChild(elem, "fileVersion", false),
+                workbookPr: xmlDoc.queryOneChild(elem, "workbookPr", false),
+                extLst: xmlDoc.queryOneChild(elem, "extLst", false),
             };
         },
 
@@ -32,10 +33,10 @@ module Workbook {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "sheet", "sheets");
             return {
-                id: xmlDoc.attrString(elem, "r:id"),
-                name: xmlDoc.attrString(elem, "name"),
-                sheetId: xmlDoc.attrInt(elem, "sheetId"),
-                state: <OpenXml.ST_SheetState>xmlDoc.attrString(elem, "state"),
+                id: xmlDoc.attrString(elem, "r:id") ?? "",
+                name: xmlDoc.attrString(elem, "name") ?? "",
+                sheetId: xmlDoc.attrInt(elem, "sheetId") ?? 0,
+                state: <OpenXml.ST_SheetState | null>xmlDoc.attrString(elem, "state"),
             };
         },
 

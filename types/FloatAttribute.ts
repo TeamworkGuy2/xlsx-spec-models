@@ -8,7 +8,7 @@ class FloatAttribute {
     public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement, expectedTagName: string, parentTags?: string): { val: number } {
         xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
         return {
-            val: xmlDoc.attrFloat(elem, "val"),
+            val: xmlDoc.attrFloat(elem, "val") ?? 0,
         };
     }
 

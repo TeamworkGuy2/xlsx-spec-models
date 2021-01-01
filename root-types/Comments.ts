@@ -7,7 +7,6 @@ module Comments {
     export var Comments: OpenXmlIo.ReadWrite<OpenXml.Comments> = {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "comments", "root element of SpreadsheetML Comments part");
-
             var authorElem = xmlDoc.queryOneChild(elem, "authors");
             var commentListElem = xmlDoc.queryOneChild(elem, "commentList");
 
@@ -57,13 +56,12 @@ module Comments {
     export var Comment: OpenXmlIo.ReadWrite<OpenXml.Comment> = {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "comment", "comments");
-
             var textElem = xmlDoc.queryOneChild(elem, "text");
             var text = CommentText.read(xmlDoc, textElem);
 
             return {
-                authorId: xmlDoc.attrInt(elem, "authorId"),
-                ref: xmlDoc.attrString(elem, "ref"),
+                authorId: xmlDoc.attrInt(elem, "authorId") ?? 0,
+                ref: xmlDoc.attrString(elem, "ref") ?? "",
                 shapeId: xmlDoc.attrInt(elem, "shapeId"),
                 text: text,
             };
@@ -102,7 +100,8 @@ module Comments {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "text", "comment");
             var rtrElems = xmlDoc.queryAllChilds(elem, "r");
-            var tElem = xmlDoc.queryOneChild(elem, "t");
+            var tElem = xmlDoc.queryOneChild(elem, "t", false);
+
             return {
                 rs: xmlDoc.readMulti(RichTextRun.read, rtrElems),
                 t: tElem ? Text.read(xmlDoc, tElem) : null,

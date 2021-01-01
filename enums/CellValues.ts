@@ -1,5 +1,5 @@
 ﻿/** ST_CellType (§18.18.11)
- * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.cellvalues.aspx
+ * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.cellvalues?view=openxml-2.8.1
  * @author TeamworkGuy2
  * @since 2016-5-26
  */
@@ -12,9 +12,9 @@ class CellValues {
     public static InlineString = new CellValues("inlineStr");
     public static Date = new CellValues("d");
 
-    public xmlValue: string;
+    public xmlValue: OpenXml.ST_CellType;
 
-    constructor(xmlValue: string) {
+    constructor(xmlValue: OpenXml.ST_CellType) {
         this.xmlValue = xmlValue;
     }
 

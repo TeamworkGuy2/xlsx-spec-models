@@ -4,7 +4,21 @@ This project does its best to adhere to [Semantic Versioning](http://semver.org/
 
 
 --------
-### [0.5.0](N/A) - 2020-09-05
+### [0.6.0](N/A) - 2021-01-01
+#### Added
+* Prototype OpenXml interface generator which reads from the Microsoft Docs documentation.
+  * Next step: integrate generator with XSD files definitions from ECMA-376 spec to generate spec correct/compliant interfaces
+
+#### Changes
+* TypeScript - enable `strict` compiler checking
+  * Fix compiler errors related to `strict`
+  * Change some OpenXml properties to be optional/nullable to align with the spec
+* Update dependency `dom-builder@0.9.0`
+* Update links to Microsoft OpenXml documentation
+
+
+--------
+### [0.5.0](https://github.com/TeamworkGuy2/xlsx-spec-models/commit/764d355e87d6cf5d4667ff2af9db10e89872cbe4) - 2020-09-05
 #### Changes
 * Update to TypeScript 4.0
 

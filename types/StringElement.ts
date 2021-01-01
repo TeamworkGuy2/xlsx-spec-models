@@ -8,7 +8,7 @@ class StringElement {
     public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement, expectedTagName: string, parentTags?: string): { content: string } {
         xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
         return {
-            content: elem.textContent,
+            content: <string><any>elem.textContent, // only null on document or Doctype
         };
     }
 

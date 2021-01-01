@@ -21,7 +21,7 @@ var SharedStringTable;
         read: function (xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "si", "sst");
             var rtrChilds = xmlDoc.queryAllChilds(elem, "r");
-            var textChild = xmlDoc.queryOneChild(elem, "t");
+            var textChild = xmlDoc.queryOneChild(elem, "t", false);
             return {
                 rs: xmlDoc.readMulti(RichTextRun.read, rtrChilds),
                 t: textChild ? Text.read(xmlDoc, textChild) : null,
@@ -29,7 +29,9 @@ var SharedStringTable;
         },
         write: function (xmlDoc, inst) {
             var elem = xmlDoc.dom.createElement("si");
-            xmlDoc.addChilds(elem, xmlDoc.writeMulti(RichTextRun.write, inst.rs));
+            if (inst.rs) {
+                xmlDoc.addChilds(elem, xmlDoc.writeMulti(RichTextRun.write, inst.rs));
+            }
             if (inst.t) {
                 elem.appendChild(Text.write(xmlDoc, inst.t));
             }

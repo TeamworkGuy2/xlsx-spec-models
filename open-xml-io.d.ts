@@ -20,7 +20,7 @@ declare module OpenXmlIo {
         /** refers to 'xlsxFilePath' field, whether the 'xlsxFilePath' is a template string or not */
         pathIsTemplate: boolean;
         /** a string to find/replace in 'xlsxFilePath' with a worksheet number or resource identifier (e.g. 'drawing1.xml', 'drawing2.xml', etc. names can be created using a template string) */
-        pathTemplateToken: string;
+        pathTemplateToken: string | null;
     }
 
 

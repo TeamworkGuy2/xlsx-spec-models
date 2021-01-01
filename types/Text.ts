@@ -6,8 +6,8 @@ class Text {
     public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.Text {
         xmlDoc.validator.expectNode(elem, "t", "si, r");
         return {
-            preserveSpace: xmlDoc.attrBool(elem, "xml:space"),
-            content: elem.textContent
+            preserveSpace: xmlDoc.attrBool(elem, "xml:space") || undefined,
+            content: <string><any>elem.textContent, // only null on document or Doctype
         };
     }
 

@@ -1,6 +1,6 @@
 "use strict";
 /** ST_CellFormulaType
- * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.cellformulavalues.aspx
+ * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.cellformulavalues?view=openxml-2.8.1
  * @author TeamworkGuy2
  * @since 2016-5-26
  */

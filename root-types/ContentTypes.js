@@ -21,10 +21,11 @@ var ContentTypes;
     };
     ContentTypes_1.ContentTypeDefault = {
         read: function (xmlDoc, elem) {
+            var _a, _b;
             xmlDoc.validator.expectNode(elem, "Default", "Types");
             return {
-                contentType: xmlDoc.attrString(elem, "ContentType"),
-                extension: xmlDoc.attrString(elem, "Extension"),
+                contentType: (_a = xmlDoc.attrString(elem, "ContentType")) !== null && _a !== void 0 ? _a : "",
+                extension: (_b = xmlDoc.attrString(elem, "Extension")) !== null && _b !== void 0 ? _b : "",
             };
         },
         write: function (xmlDoc, inst) {
@@ -37,10 +38,11 @@ var ContentTypes;
     };
     ContentTypes_1.ContentTypeOverride = {
         read: function (xmlDoc, elem) {
+            var _a, _b;
             xmlDoc.validator.expectNode(elem, "Override", "Types");
             return {
-                contentType: xmlDoc.attrString(elem, "ContentType"),
-                partName: xmlDoc.attrString(elem, "PartName"),
+                contentType: (_a = xmlDoc.attrString(elem, "ContentType")) !== null && _a !== void 0 ? _a : "",
+                partName: (_b = xmlDoc.attrString(elem, "PartName")) !== null && _b !== void 0 ? _b : "",
             };
         },
         write: function (xmlDoc, inst) {

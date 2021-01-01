@@ -9,15 +9,15 @@ module Worksheet {
             xmlDoc.validator.expectNode(elem, "worksheet", "root element of SpreadsheetML Worksheet part");
 
             var colsElems = xmlDoc.queryAllChilds(elem, "cols");
-            var dimensionElem = xmlDoc.queryOneChild(elem, "dimension");
-            var drawingElem = xmlDoc.queryOneChild(elem, "drawing");
-            var headerFooterElem = xmlDoc.queryOneChild(elem, "headerFooter");
-            var legacyDrawingElem = xmlDoc.queryOneChild(elem, "legacyDrawing");
-            var pageMarginElem = xmlDoc.queryOneChild(elem, "pageMargins");
-            var pageSetupElem = xmlDoc.queryOneChild(elem, "pageSetup");
+            var dimensionElem = xmlDoc.queryOneChild(elem, "dimension", false);
+            var drawingElem = xmlDoc.queryOneChild(elem, "drawing", false);
+            var headerFooterElem = xmlDoc.queryOneChild(elem, "headerFooter", false);
+            var legacyDrawingElem = xmlDoc.queryOneChild(elem, "legacyDrawing", false);
+            var pageMarginElem = xmlDoc.queryOneChild(elem, "pageMargins", false);
+            var pageSetupElem = xmlDoc.queryOneChild(elem, "pageSetup", false);
             var sheetDataElem = xmlDoc.queryOneChild(elem, "sheetData");
-            var sheetFormatPrElem = xmlDoc.queryOneChild(elem, "sheetFormatPr");
-            var sheetViewsElem = xmlDoc.queryOneChild(elem, "sheetViews");
+            var sheetFormatPrElem = xmlDoc.queryOneChild(elem, "sheetFormatPr", false);
+            var sheetViewsElem = xmlDoc.queryOneChild(elem, "sheetViews", false);
 
             return {
                 cols: xmlDoc.readMulti(Columns.read, colsElems),
@@ -55,18 +55,19 @@ module Worksheet {
     export var Cell: OpenXmlIo.ReadWrite<OpenXml.Cell> = {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "c", "row");
-            var fElem = xmlDoc.queryOneChild(elem, "f");
-            var isElem = xmlDoc.queryOneChild(elem, "is");
-            var vElem = xmlDoc.queryOneChild(elem, "v");
+            var fElem = xmlDoc.queryOneChild(elem, "f", false);
+            var isElem = xmlDoc.queryOneChild(elem, "is", false);
+            var vElem = xmlDoc.queryOneChild(elem, "v", false);
+
             return {
                 f: fElem ? CellFormula.read(xmlDoc, fElem) : null,
                 is: isElem ? InlineString.read(xmlDoc, isElem) : null,
                 v: vElem ? CellValue.read(xmlDoc, vElem) : null,
                 cm: xmlDoc.attrInt(elem, "cm"),
                 ph: xmlDoc.attrBool(elem, "ph"),
-                r: xmlDoc.attrString(elem, "r"),
+                r: xmlDoc.attrString(elem, "r") ?? "",
                 s: xmlDoc.attrInt(elem, "s"),
-                t: xmlDoc.attrString(elem, "t"),
+                t: <OpenXml.ST_CellType | null>xmlDoc.attrString(elem, "t"),
                 vm: xmlDoc.attrInt(elem, "vm"),
             };
         },
@@ -93,10 +94,10 @@ module Worksheet {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "f", "c, nc, oc");
             return {
-                content: elem.textContent,
+                content: <string>elem.textContent, // only null on document or Doctype
                 ref: xmlDoc.attrString(elem, "ref"),
                 si: xmlDoc.attrInt(elem, "si"),
-                t: <OpenXml.ST_CellFormulaType>xmlDoc.attrString(elem, "t"),
+                t: <OpenXml.ST_CellFormulaType | null>xmlDoc.attrString(elem, "t"),
             };
         },
 
@@ -131,8 +132,8 @@ module Worksheet {
                 collapsed: xmlDoc.attrBool(elem, "collapsed"),
                 customWidth: xmlDoc.attrBool(elem, "customWidth"),
                 hidden: xmlDoc.attrBool(elem, "hidden"),
-                max: xmlDoc.attrInt(elem, "max"),
-                min: xmlDoc.attrInt(elem, "min"),
+                max: xmlDoc.attrInt(elem, "max") ?? 0,
+                min: xmlDoc.attrInt(elem, "min") ?? 0,
                 outlineLevel: xmlDoc.attrInt(elem, "outlineLevel"),
                 phonetic: xmlDoc.attrBool(elem, "phonetic"),
                 style: xmlDoc.attrInt(elem, "style"),
@@ -180,7 +181,7 @@ module Worksheet {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "drawing", "chartsheet, dialogsheet, worksheet");
             return {
-                rid: xmlDoc.attrString(elem, "r:id"),
+                rid: xmlDoc.attrString(elem, "r:id") ?? "",
             };
         },
 
@@ -240,12 +241,12 @@ module Worksheet {
     export var HeaderFooter: OpenXmlIo.ReadWrite<OpenXml.HeaderFooter> = {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "headerFooter", "chartsheet, customSheetView, customSheetView, dialogsheet, worksheet");
-            var evenHeaderElem = xmlDoc.queryOneChild(elem, "evenHeader");
-            var evenFooterElem = xmlDoc.queryOneChild(elem, "evenFooter");
-            var firstHeaderElem = xmlDoc.queryOneChild(elem, "firstHeader");
-            var firstFooterElem = xmlDoc.queryOneChild(elem, "firstFooter");
-            var oddHeaderElem = xmlDoc.queryOneChild(elem, "oddHeader");
-            var oddFooterElem = xmlDoc.queryOneChild(elem, "oddFooter");
+            var evenHeaderElem = xmlDoc.queryOneChild(elem, "evenHeader", false);
+            var evenFooterElem = xmlDoc.queryOneChild(elem, "evenFooter", false);
+            var firstHeaderElem = xmlDoc.queryOneChild(elem, "firstHeader", false);
+            var firstFooterElem = xmlDoc.queryOneChild(elem, "firstFooter", false);
+            var oddHeaderElem = xmlDoc.queryOneChild(elem, "oddHeader", false);
+            var oddFooterElem = xmlDoc.queryOneChild(elem, "oddFooter", false);
 
             return {
                 evenHeader: evenHeaderElem ? EvenHeader.read(xmlDoc, evenHeaderElem) : null,
@@ -274,7 +275,8 @@ module Worksheet {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "is", "c, nc, oc");
             var rElems = xmlDoc.queryAllChilds(elem, "r");
-            var tElem = xmlDoc.queryOneChild(elem, "t");
+            var tElem = xmlDoc.queryOneChild(elem, "t", false);
+
             return {
                 rs: xmlDoc.readMulti(RichTextRun.read, rElems),
                 t: tElem ? Text.read(xmlDoc, tElem) : null,
@@ -294,7 +296,7 @@ module Worksheet {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "legacyDrawing", "chartsheet, dialogsheet, worksheet");
             return {
-                rid: xmlDoc.attrString(elem, "r:id"),
+                rid: xmlDoc.attrString(elem, "r:id") ?? "",
             };
         },
 
@@ -333,12 +335,12 @@ module Worksheet {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "pageMargins", "chartsheet, customSheetView, customSheetView, dialogsheet, worksheet");
             return {
-                bottom: xmlDoc.attrFloat(elem, "bottom"),
-                footer: xmlDoc.attrFloat(elem, "footer"),
-                header: xmlDoc.attrFloat(elem, "header"),
-                left: xmlDoc.attrFloat(elem, "left"),
-                right: xmlDoc.attrFloat(elem, "right"),
-                top: xmlDoc.attrFloat(elem, "top"),
+                bottom: xmlDoc.attrFloat(elem, "bottom") ?? 0,
+                footer: xmlDoc.attrFloat(elem, "footer") ?? 0,
+                header: xmlDoc.attrFloat(elem, "header") ?? 0,
+                left: xmlDoc.attrFloat(elem, "left") ?? 0,
+                right: xmlDoc.attrFloat(elem, "right") ?? 0,
+                top: xmlDoc.attrFloat(elem, "top") ?? 0,
             };
         },
 
@@ -361,8 +363,8 @@ module Worksheet {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "pageSetup", "customSheetView, dialogsheet, worksheet");
             return {
-                orientation: <OpenXml.ST_Orientation>xmlDoc.attrString(elem, "orientation"),
-                rid: xmlDoc.attrString(elem, "r:id"),
+                orientation: <OpenXml.ST_Orientation | null>xmlDoc.attrString(elem, "orientation"),
+                rid: xmlDoc.attrString(elem, "r:id") ?? "",
                 scale: xmlDoc.attrInt(elem, "scale"),
             };
         },
@@ -391,12 +393,12 @@ module Worksheet {
                 ht: xmlDoc.attrFloat(elem, "ht"),
                 outlineLevel: xmlDoc.attrInt(elem, "outlineLevel"),
                 ph: xmlDoc.attrBool(elem, "ph"),
-                r: xmlDoc.attrInt(elem, "r"),
+                r: xmlDoc.attrInt(elem, "r") ?? 0,
                 s: xmlDoc.attrInt(elem, "s"),
                 spans: xmlDoc.attrString(elem, "spans"),
                 thickBot: xmlDoc.attrBool(elem, "thickBot"),
                 thickTop: xmlDoc.attrBool(elem, "thickTop"),
-                dyDescent: xmlDoc.attrFloat(elem, "x14ac:dyDescent"),
+                dyDescent: xmlDoc.attrFloat(elem, "x14ac:dyDescent") ?? 0,
             };
         },
 
@@ -464,7 +466,7 @@ module Worksheet {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "dimension", "worksheet");
             return {
-                ref: xmlDoc.attrString(elem, "ref")
+                ref: xmlDoc.attrString(elem, "ref") ?? ""
             };
         },
 
@@ -482,8 +484,8 @@ module Worksheet {
             xmlDoc.validator.expectNode(elem, "sheetFormatPr", "dialogsheet, worksheet");
             return {
                 defaultColWidth: xmlDoc.attrFloat(elem, "defaultColWidth"),
-                defaultRowHeight: xmlDoc.attrFloat(elem, "defaultRowHeight"),
-                dyDescent: xmlDoc.attrFloat(elem, "x14ac:dyDescent"),
+                defaultRowHeight: xmlDoc.attrFloat(elem, "defaultRowHeight") ?? 0,
+                dyDescent: xmlDoc.attrFloat(elem, "x14ac:dyDescent") ?? 0,
             };
         },
 
@@ -502,12 +504,13 @@ module Worksheet {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "sheetView", "sheetViews");
             var selectionElems = xmlDoc.queryAllChilds(elem, "selection");
+
             return {
                 selections: xmlDoc.readMulti(Selection.read, selectionElems),
                 tabSelected: xmlDoc.attrBool(elem, "tabSelected"),
-                view: xmlDoc.attrString(elem, "view"),
+                view: <OpenXml.ST_SheetViewType | null>xmlDoc.attrString(elem, "view"),
                 topLeftCell: xmlDoc.attrString(elem, "topLeftCell"),
-                workbookViewId: xmlDoc.attrInt(elem, "workbookViewId"),
+                workbookViewId: xmlDoc.attrInt(elem, "workbookViewId") ?? 0,
                 zoomScale: xmlDoc.attrInt(elem, "zoomScale"),
                 zoomScaleNormal: xmlDoc.attrInt(elem, "zoomScaleNormal"),
                 zoomScalePageLayoutView: xmlDoc.attrInt(elem, "zoomScalePageLayoutView"),

@@ -13,9 +13,11 @@ declare module OpenXml {
 
     type ST_CellFormulaType = ("normal" | "array" | "dataTable" | "shared");
 
+    type ST_CellType = ("b" | "d" | "n" | "e" | "s" | "str" | "inlineStr");
+
     type ST_ColID = number; // >= 0
 
-    type ST_Coordinate = number;
+    type ST_Coordinate = number; // ST_UniversalMeasure: -?[0-9]+(\.[0-9]+)?(mm|cm|in|pt|pc|pi)
 
     type ST_EditAs = ("twoCell" | "oneCell" | "absolute");
 
@@ -45,6 +47,8 @@ declare module OpenXml {
 
     type ST_SheetState = ("visible" | "hidden" | "veryHidden");
 
+    type ST_SheetViewType = ("normal" | "pageBreakPreview" | "pageLayout");
+
     type ST_TableStyleType = ("wholeTable" | "headerRow" | "totalRow" | "firstColumn" | "lastColumn" | "firstRowStripe" | "secondRowStripe" | "firstColumnStripe" | "secondColumnStripe" | "firstHeaderCell" | "lastHeaderCell" | "firstTotalCell" | "lastTotalCell" | "firstSubtotalColumn" | "secondSubtotalColumn" | "thirdSubtotalColumn" | "firstSubtotalRow" | "secondSubtotalRow" | "thirdSubtotalRow" | "blankRow" | "firstColumnSubheading" | "secondColumnSubheading" | "thirdColumnSubheading" | "firstRowSubheading" | "secondRowSubheading" | "thirdRowSubheading" | "pageFieldLabels" | "pageFieldValues");
 
     type ST_TileFlipMode = ("none" | "x" | "y" | "xy");
@@ -61,7 +65,7 @@ declare module OpenXml {
      *
      * This element is used as an anchor placeholder for a shape or group of shapes.
      * It anchors the object in the same position relative to sheet position and its extents are in EMU units.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.spreadsheet.absoluteanchor.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.spreadsheet.absoluteanchor?view=openxml-2.8.1
      */
     interface AbsoluteAnchor extends EgObjectChoices {
         ext: Extent;
@@ -74,9 +78,9 @@ declare module OpenXml {
      */
     interface AgBlob {
         /** default: "" */
-        embed?: ST_RelationshipId;
+        embed?: ST_RelationshipId | null;
         /** default: "" */
-        link?: ST_RelationshipId;
+        link?: ST_RelationshipId | null;
     }
 
 
@@ -85,27 +89,27 @@ declare module OpenXml {
     interface AgLocking {
         // attributes
         /** Disallow Showing Adjust Handles - Specifies that the generating application should not show adjust handles for the corresponding connection shape; default: false */
-        noAdjustHandles?: boolean;
+        noAdjustHandles?: boolean | null;
         /** Disallow Arrowhead Changes - Specifies that the generating application should not allow arrowhead changes for the corresponding connection shape; default: false */
-        noChangeArrowheads?: boolean;
+        noChangeArrowheads?: boolean | null;
         /** Disallow Aspect Ratio Change - Specifies that the generating application should not allow aspect ratio changes for the corresponding connection shape; default: false */
-        noChangeAspect?: boolean;
+        noChangeAspect?: boolean | null;
         /** Disallow Shape Type Change - Specifies that the generating application should not allow shape type changes for the corresponding connection shape; default: false */
-        noChangeShapeType?: boolean;
+        noChangeShapeType?: boolean | null;
         /** Disallow Shape Point Editing - Specifies that the generating application should not allow shape point changes for the corresponding connection shape; default: false */
-        noEditPoints?: boolean;
+        noEditPoints?: boolean | null;
         /** Disallow Shape Grouping - Specifies that the generating application should not allow shape grouping for the corresponding connection shape.
          * That is it cannot be combined within other shapes to form a group of shapes; default: false */
-        noGrp?: boolean;
+        noGrp?: boolean | null;
         /** Disallow Shape Movement - Specifies that the generating application should not allow position changes for the corresponding connection shape; default: false */
-        noMove?: boolean;
+        noMove?: boolean | null;
         /** Disallow Shape Resize - Specifies that the generating application should not allow size changes for the corresponding connection shape; default: false */
-        noResize?: boolean;
+        noResize?: boolean | null;
         /** Disallow Shape Rotation - Specifies that the generating application should not allow shape rotation changes for the corresponding connection shape; default: false */
-        noRot?: boolean;
+        noRot?: boolean | null;
         /** Disallow Shape Selection - Specifies that the generating application should not allow selecting of the corresponding connection shape.
          * That means also that no picture, shapes or text attached to this connection shape can be selected if this attribute has been specified; default: false */
-        noSelect?: boolean;
+        noSelect?: boolean | null;
     }
 
 
@@ -113,37 +117,37 @@ declare module OpenXml {
      * parents: dxf (§18.8.14); ndxf (§18.11.1.4); odxf (§18.11.1.6); xf (§18.8.45)
      *
      * Formatting information pertaining to text alignment in cells. How text is aligned both horizontally and vertically, as well as indentation settings, etc.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.alignment.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.alignment?view=openxml-2.8.1
      */
     interface Alignment {
         // attributes
         /** horizontal alignment in cells */
-        horizontal?: ST_HorizontalAlignment;
+        horizontal?: ST_HorizontalAlignment | null;
         /** An integer value, where an increment of 1 represents 3 spaces. Indicates the number of spaces (of the normal style font) of indentation for text in a cell.
          * The number of spaces to indent is calculated as following: Number of spaces to indent = indent value * 3
          */
-        indent?: number;
+        indent?: number | null;
         /** indicates if the cells justified or distributed alignment should be used on the last line of text. (This is typical for East Asian alignments but not typical in other contexts) */
-        justifyLastLine?: boolean;
+        justifyLastLine?: boolean | null;
         /** An integer value indicating whether the reading order (bidirectionality) of the cell is left-to-right, right-to-left, or context dependent.
          * 0 - Context Dependent - reading order is determined by scanning the text for the first non-whitespace character: if it is a strong right-to-left character, the reading order is right-to-left; otherwise, the reading order left-to-right
          * 1 - Left-to-Right - reading order is left-to-right in the cell, as in English
          * 2 - Right-to-Left - reading order is right-to-left in the cell, as in Hebrew
          */
-        readingOrder?: number;
+        readingOrder?: number | null;
         /** An integer value (used only in a dxf element) to indicate the additional number of spaces of indentation to adjust for text in a cell */
-        relativeIndent?: number;
+        relativeIndent?: number | null;
         /** indicates if the displayed text in the cell should be shrunk to fit the cell width. Not applicable when a cell contains multiple lines of text */
-        shrinkToFit?: boolean;
+        shrinkToFit?: boolean | null;
         /** Text rotation in cells. Expressed in degrees. Values range from 0 to 180. The first letter of the text is considered the center-point of the arc.
          * For 0 - 90, the value represents degrees above horizon. For 91-180 the degrees below the horizon is calculated as: [degrees below horizon] = 90 - textRotation.
          * 0, 45, 90, 135, 180
          */
-        textRotation?: number;
+        textRotation?: number | null;
         /** vertical alignment in cells */
-        vertical?: ST_VerticalAlignment;
+        vertical?: ST_VerticalAlignment | null;
         /** indicates if the text in a cell should be line-wrapped within the cell */
-        wrapText?: boolean;
+        wrapText?: boolean | null;
     }
 
 
@@ -152,7 +156,7 @@ declare module OpenXml {
      *
      * This element holds a string representing the name of a single author of comments. Every comment shall have an author.
      * The maximum length of the author string is an implementation detail, but a good guideline is 255 chars.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.author.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.author?view=openxml-2.8.1
      */
     interface Author {
         content: string;
@@ -165,7 +169,7 @@ declare module OpenXml {
      * This element is a container that holds a list of comment author names. There can be many comment authors per sheet, but each author name shall be unique per sheet.
      * The information for each author is stored only once for that sheet, and comments refer to the author by zero based index.
      * Note that there can be multiple lists of authors per workbook since each sheet contains its own comments part, and each comments part defines a list of authors for comments on that sheet.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.authors.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.authors?view=openxml-2.8.1
      */
     interface Authors {
         authors: Author[];
@@ -176,7 +180,7 @@ declare module OpenXml {
      * parents: blipFill (§21.3.2.2); blipFill (§20.1.8.14); blipFill (§20.2.2.1); blipFill (§20.5.2.2); blipFill (§19.3.1.4); buBlip (§21.1.2.4.2)
      *
      * This element specifies the existence of an image (binary large image or picture) and contains a reference to the image data.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.blip.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.blip?view=openxml-2.8.1
      */
     interface Blip extends AgBlob {
         alphaBiLevel: Element; // CT_AlphaBiLevelEffect;
@@ -196,11 +200,11 @@ declare module OpenXml {
         hsl: Element; // CT_HSLEffect;
         lum: Element; // CT_LuminanceEffect;
         tint: Element; // CT_TintEffect;
-        extLst?: Element; // CT_OfficeArtExtensionList
+        extLst?: Element | null; // CT_OfficeArtExtensionList
 
         // attributes
         /** Compression State - Specifies the compression state with which the picture is stored. This allows the application to specify the amount of compression that has been applied to a picture. default: "none" */
-        cstate?: ST_BlipCompression;
+        cstate?: ST_BlipCompression | null;
         /** Embedded Picture Reference - Specifies the identification information for an embedded picture. This attribute is used to specify an image that resides locally within the file. */
         embed: ST_RelationshipId;
         /** Linked Picture Reference - Specifies the identification information for a linked picture. This attribute is used to specify an image that does not reside within this file. */
@@ -260,11 +264,11 @@ declare module OpenXml {
      * </xdr:pic>
      *
      * The above picture object is shown as an example of this double fill type. end example]
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.spreadsheet.blipfill.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.spreadsheet.blipfill?view=openxml-2.8.1
      */
     interface BlipFill extends EgFillModeProperties {
-        blip?: Blip;
-        srcRect?: FillRectangle;
+        blip?: Blip | null;
+        srcRect?: FillRectangle | null;
 
         // attributes
         /** DPI Setting
@@ -272,10 +276,10 @@ declare module OpenXml {
          * [Note: This attribute is primarily used to keep track of the picture quality within a document. There are different levels of quality needed for
          * print than on-screen viewing and thus a need to track this information. end note]
          */
-        dpi?: number;
+        dpi?: number | null;
         /** Rotate With Shape - Specifies that the fill should rotate with the shape. That is, when the shape that has been filled with a picture and
          * the containing shape (say a rectangle) is transformed with a rotation then the fill is transformed with the same rotation */
-        rotWithShape?: boolean;
+        rotWithShape?: boolean | null;
     }
 
 
@@ -283,7 +287,7 @@ declare module OpenXml {
      * parents: font (§18.8.22); rPr (§18.4.7)
      *
      * Displays characters in bold face font style.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.bold.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.bold?view=openxml-2.8.1
      */
     interface Bold {
         val: boolean; // default: true
@@ -294,54 +298,54 @@ declare module OpenXml {
      * parents: borders (§18.8.5); dxf (§18.8.14); ndxf (§18.11.1.4); odxf (§18.11.1.6)
      *
      * Expresses a single set of cell border formats (left, right, top, bottom, diagonal). Color is optional. When missing, 'automatic' is implied.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.border.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.border?view=openxml-2.8.1
      */
     interface Border {
         /** leading edge border */
-        start?: BorderProperty;
+        start?: BorderProperty | null;
         /** trailing edge border */
-        end?: BorderProperty;
+        end?: BorderProperty | null;
         /** top border */
-        top?: BorderProperty;
+        top?: BorderProperty | null;
         /** bottom border */
-        bottom?: BorderProperty;
+        bottom?: BorderProperty | null;
         /** diagonal */
-        diagonal?: BorderProperty;
+        diagonal?: BorderProperty | null;
         /** vertical inner border */
-        vertical?: BorderProperty;
+        vertical?: BorderProperty | null;
         /** horizontal inner borders */
-        horizontal?: BorderProperty;
+        horizontal?: BorderProperty | null;
 
         // these aren't part of the spec, but MS Office 2013 requires them
-        left?: BorderProperty;
-        right?: BorderProperty;
+        left?: BorderProperty | null;
+        right?: BorderProperty | null;
 
         // attributes
         /** indicates if the cell's diagonal border includes a diagonal line, starting at the top left corner of the cell and moving down to the bottom right corner of the cell */
-        diagonalDown?: boolean;
+        diagonalDown?: boolean | null;
         /** indicates if the cell's diagonal border includes a diagonal line, starting at the bottom left corner of the cell and moving up to the top right corner of the cell */
-        diagonalUp?: boolean;
+        diagonalUp?: boolean | null;
         /** indicates if left, right, top, and bottom borders should be applied only to outside borders of a cell range */
-        outline?: boolean; // default: true
+        outline?: boolean | null; // default: true
     }
 
 
     /** (W3C XML CT_BorderPr §A.2)
      * parents: border (§18.8.4)
      * implementations: <x:bottom> (Bottom Border); <x:diagonal> (Diagonal Border); <x:end> (Trailing Edge Border); <x:horizontal> (Horizontal Inner Border); <x:start> (Leading End Border); <x:top> (Top Border); <x:vertical> (Vertical Inner Border)
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.bottomborder.aspx
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.diagonalborder.aspx
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.endborder.aspx
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.horizontalborder.aspx
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.startborder.aspx
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.topborder.aspx
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.verticalborder.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.bottomborder?view=openxml-2.8.1
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.diagonalborder?view=openxml-2.8.1
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.endborder?view=openxml-2.8.1
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.horizontalborder?view=openxml-2.8.1
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.startborder?view=openxml-2.8.1
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.topborder?view=openxml-2.8.1
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.verticalborder?view=openxml-2.8.1
      */
     interface BorderProperty {
-        color?: Color;
+        color?: Color | null;
 
         // attributes
-        style?: ST_BorderStyle; // default: 'none'
+        style?: ST_BorderStyle | null; // default: 'none'
     }
 
 
@@ -350,7 +354,7 @@ declare module OpenXml {
      *
      * This element contains borders formatting information, specifying all border definitions for all cells in the workbook.
      * NOTE: see link for example
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.borders.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.borders?view=openxml-2.8.1
      */
     interface Borders {
         /** border count */
@@ -365,20 +369,20 @@ declare module OpenXml {
      * parents: calcChain (§18.6.2)
      *
      * This element represents a single cell, which shall contain a formula, in the calc chain. Cells are calculated in the same order as the c elements appear in the Calculation Chain part.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.calculationcell.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.calculationcell?view=openxml-2.8.1
      */
     interface CalculationCell {
         // attributes
         //t?: boolean; // default: false
         //a?: boolean; // default: false
         /** sheet Id; default: 0 */
-        i: number;
+        i?: number | null;
         /** new dependency level; default: false */
-        l: boolean;
+        l?: boolean | null;
         /** ST_CellRef 'A1' style */
         r: string;
         /** child chain; default: false */
-        s: boolean;
+        s?: boolean | null;
     }
 
 
@@ -386,7 +390,7 @@ declare module OpenXml {
      * parents: Root element of SpreadsheetML Calculation Chain part
      *
      * This element represents the root of the calculation chain.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.calculationchain.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.calculationchain?view=openxml-2.8.1
      */
     interface CalculationChain {
         cs: CalculationCell[];
@@ -399,32 +403,32 @@ declare module OpenXml {
      * This collection represents a cell in the worksheet. Information about the cell's location (reference), value, data type, formatting, and formula is expressed here.
      * While a cell can have a formula element f and a value element v, when the cell's type t is inlineStr then only the element is is allowed as a child element.
      * NOTE: see link for examples
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.cell.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.cell?view=openxml-2.8.1
      */
     interface Cell {
         // children
-        f: CellFormula;
+        f?: CellFormula | null;
         /** This element allows strings to be expressed directly in this cell instead of via a shared string table index */
-        is: InlineString;
+        is?: InlineString | null;
         /** The value of this cell, see the 't' (cell data type) attribute.  If the cell contains a string, then this value is an index into the shared string table. 
          * Otherwise, the cell's value is expressed directly in this element */
-        v: CellValue;
+        v?: CellValue | null;
 
         // attributes
         /** The 0-based index of the cell metadata record associated with this cell.  Metadata information is found in the Metadata Part. 
          * Cell metadata is extra information stored at the cell level, and is attached to the cell (travels through moves, copy / paste, clear, etc). */
-        cm?: number;
+        cm?: number | null;
         /** A Boolean indicating if the spreadsheet application should show phonetic information */
-        ph?: boolean;
-        /** ST_CellRef, 'A1' style cell reference */
+        ph?: boolean | null;
+        /** ST_CellRef, 'A1' style cell reference, technically optional, but not in practice */
         r: string;
         /** The 0-based index of this cell's style in the <cellXfs> collection. Style records are stored in the Styles Part */
-        s?: number;
+        s?: number | null;
         /** ST_CellType, cell data type */
-        t: string;
+        t?: ST_CellType | null;
         /** The 0-based index of the value metadata record associated with this cell's value.  Metadata records are stored in the Metadata Part.
          * Value metadata is extra information stored at the cell level, but associated with the value rather than the cell itself */
-        vm?: number;
+        vm?: number | null;
     }
 
 
@@ -435,22 +439,22 @@ declare module OpenXml {
      * Annex H contains a listing of cellStyles whose corresponding formatting records are implied rather than explicitly saved in the file.
      * In this case, a builtinId attribute is written on the cellStyle record, but no corresponding formatting records are written.
      * For all built-in cell styles, the builtinId determines the style, not the name. For all cell styles, Normal is applied by default.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.cellstyle.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.cellstyle?view=openxml-2.8.1
      */
     interface CellStyle {
         // attributes
         /** The index of a built-in cell style */
-        builtinId?: number;
+        builtinId?: number | null;
         /** True indicates that this built-in cell style has been customized.  By default built-in styles are not persisted when not in use.
          * This flag indicates that a built-in style has been modified, and therefore should be saved with the workbook, even if not currently in use. */
-        customBuiltin?: boolean;
+        customBuiltin?: boolean | null;
         /** If 'true' do not show this style in the application UI */
-        hidden?: boolean;
+        hidden?: boolean | null;
         /** Indicates that this formatting is for an outline style.  When styles are applied to outline levels (using the outline feature), this value is set and
          * the formatting specified on this cell style is applied to the corresponding level of the outline */
-        iLevel?: number;
+        iLevel?: number | null;
         /** The name of the cell style */
-        name?: string;
+        name?: string | null;
         /** CellStyleXfId, 0-based index referencing an xf record in the <cellStyleXfs> collection.  This is used to determine the formatting defined for this named cell style. */
         xfId: number;
     }
@@ -460,40 +464,40 @@ declare module OpenXml {
      * parents: cellStyleXfs (§18.8.9); cellXfs (§18.8.10)
      *
      * A single xf element describes all of the formatting for a cell.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.cellformat.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.cellformat?view=openxml-2.8.1
      */
     interface CellFormat {
-        alignment?: Alignment;
-        protection?: Protection;
+        alignment?: Alignment | null;
+        protection?: Protection | null;
         //extLst? Element;
 
         // attributes
         /** indicates whether the alignment formatting specified for this xf should be applied */
-        applyAlignment?: boolean;
+        applyAlignment?: boolean | null;
         /** indicates whether the border formatting specified for this xf should be applied */
-        applyBorder?: boolean;
+        applyBorder?: boolean | null;
         /** indicates whether the fill formatting specified for this xf should be applied */
-        applyFill?: boolean;
+        applyFill?: boolean | null;
         /** indicates whether the font formatting specified for this xf should be applied */
-        applyFont?: boolean;
+        applyFont?: boolean | null;
         /** indicates whether the number formatting specified for this xf should be applied */
-        applyNumberFormat?: boolean;
+        applyNumberFormat?: boolean | null;
         /** indicates whether the protection formatting specified for this xf should be applied */
-        applyProtection?: boolean;
+        applyProtection?: boolean | null;
         /** 0-based index of the border record used by this cell format */
-        borderId?: number;
+        borderId?: number | null;
         /** 0-based index of the fill record used by this cell format */
-        fillId?: number;
+        fillId?: number | null;
         /** 0-based index of the font record used by this cell format */
-        fontId?: number;
+        fontId?: number | null;
         /** NumberFormatId, Id of the number format (numFmt) record used by this cell format */
-        numFmtId?: number;
+        numFmtId?: number | null;
         /** indicates whether the cell rendering includes a pivot table dropdown button; default: false */
-        pivotButton?: boolean;
+        pivotButton?: boolean | null;
         /** indicates whether the text string in a cell should be prefixed by a single quote (e.g. 'text).  In these cases, the quote is not stored in the Shared Strings Part; default: false */
-        quotePrefix?: boolean;
+        quotePrefix?: boolean | null;
         /** CellStyleXfId, for xf records contained in cellXfs this is the 0-based index of an xf record contained in <cellStyleXfs> corresponding to the cell style applied to the cell */
-        xfId?: number;
+        xfId?: number | null;
     }
 
 
@@ -504,7 +508,7 @@ declare module OpenXml {
      * These records are the starting point for determining the formatting for a cell. Cells in the Sheet Part reference the xf records by zero-based index.
      * A cell can have both direct formatting (e.g., bold) and a cell style (e.g., Explanatory) applied to it.
      * Therefore, both the cell style xf records and cell xf records shall be read to understand the full set of formatting applied to a cell.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.cellformats.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.cellformats?view=openxml-2.8.1
      */
     interface CellFormats {
         xfs: CellFormat[];
@@ -520,15 +524,15 @@ declare module OpenXml {
      * Formula for the cell. The formula expression is contained in the character node of this element.
      * [Example: <f>SUM(C4:E4)</f> end example]
      * NOTE: see link for example
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.cellformula.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.cellformula?view=openxml-2.8.1
      */
     interface CellFormula {
         /** ST_Formula */
         content: string;
         // attributes
-        t: ST_CellFormulaType;
-        ref: ST_Ref;
-        si: number;
+        t?: ST_CellFormulaType | null;
+        ref?: ST_Ref | null;
+        si?: number | null;
     }
 
 
@@ -542,7 +546,7 @@ declare module OpenXml {
      * A cell can have both direct formatting (e.g., bold) and a cell style (e.g., Explanatory) applied to it.
      * Therefore, both the cell style xf records and cell xf records shall be read to understand the full set of formatting applied to a cell.
      * NOTE: see line for example
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.cellstyleformats.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.cellstyleformats?view=openxml-2.8.1
      */
     interface CellStyleFormats {
         xfs: CellFormat[];
@@ -568,7 +572,7 @@ declare module OpenXml {
      *   <cellStyle name="Title" xfId="1" builtinId="15"/>
      * </cellStyles>
      * end example]
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.cellstyles.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.cellstyles?view=openxml-2.8.1
      */
     interface CellStyles {
         cellStyles: CellStyle[];
@@ -595,7 +599,7 @@ declare module OpenXml {
      *   <v>1976-11-22T08:30Z</v>
      * </c>
      * end example]
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.cellvalue.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.cellvalue?view=openxml-2.8.1
      */
     interface CellValue {
         content: string;
@@ -606,13 +610,13 @@ declare module OpenXml {
      * parents: absoluteAnchor (§20.5.2.1); oneCellAnchor (§20.5.2.24); twoCellAnchor (§20.5.2.33)
      *
      * This element is used to set certain properties related to a drawing element on the client spreadsheet application.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.spreadsheet.clientdata.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.spreadsheet.clientdata?view=openxml-2.8.1
      */
     interface ClientData {
         /** Locks With Sheet Flag - This attribute indicates whether to disable selection on drawing elements when the sheet is protected; default: true */
-        fLocksWithSheet?: boolean;
+        fLocksWithSheet?: boolean | null;
         /** Prints With Sheet Flag - This attribute indicates whether to print drawing elements when printing the sheet; default: true */
-        fPrintsWithSheet?: boolean;
+        fPrintsWithSheet?: boolean | null;
     }
 
 
@@ -622,11 +626,11 @@ declare module OpenXml {
      * Color information associated with this stylesheet.  This collection is written whenever the legacy color palette has been
      * modified (backwards compatibility settings) or a custom color has been selected while using this workbook.
      * When the color palette is modified, the indexedColors collection is written. When a custom color has been selected, the mruColors collection is written.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.colors.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.colors?view=openxml-2.8.1
      */
     interface Colors {
-        indexedColors?: IndexedColors;
-        mruColors?: MruColors;
+        indexedColors?: IndexedColors | null;
+        mruColors?: MruColors | null;
     }
 
 
@@ -638,31 +642,31 @@ declare module OpenXml {
      * This example shows that column 5 (E) has width and style information applied.
      * <col min="5" max="5" width="9.140625" style="3"/>
      * end example]
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.column.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.column?view=openxml-2.8.1
      */
     interface Column {
         /** best fit column width; default: false */
-        bestFit?: boolean;
+        bestFit?: boolean | null;
         /** Flag indicating if the outlining of the affected column(s) is in the collapsed state. See description of row collapsed and outlinePr element's summaryBelow and summaryRight attributes for detailed information; default: false */
-        collapsed?: boolean;
+        collapsed?: boolean | null;
         /** custom width; default: false */
-        customWidth?: boolean;
+        customWidth?: boolean | null;
         /** Flag indicating if the affected column(s) are hidden on this worksheet; default: false */
-        hidden?: boolean;
+        hidden?: boolean | null;
         /** Last column affected by this 'column info' record */
         max: number;
         /** First column affected by this 'column info' record */
         min: number;
         /** Outline level of affected column(s). Range is 0 to 7. See description of outlinePr element's summaryBelow and summaryRight attributes for detailed information; default: 0 */
-        outlineLevel?: number;
+        outlineLevel?: number | null;
         /** Flag indicating if the phonetic information should be displayed by default for the affected column(s) of the worksheet; default: false */
-        phonetic?: boolean;
+        phonetic?: boolean | null;
         /** Default style, affects cells not yet allocated in the column; default: 0 */
-        style?: number;
+        style?: number | null;
         /** column width, measured as the number of chars of the maximum digit (0, 1, ..., 9) rendered in the
          * normal style's font, + 4 pixel margin padding (2 on each side), + 1 pixel padding for gridlines
          */
-        width?: number;
+        width?: number | null;
     }
 
 
@@ -678,7 +682,7 @@ declare module OpenXml {
      *   <col min="5" max="5" width="9.140625" style="3"/>
      * </cols>
      * end example]
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.columns.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.columns?view=openxml-2.8.1
      */
     interface Columns {
         cols: Column[];
@@ -689,7 +693,7 @@ declare module OpenXml {
      * parents: from (§20.5.2.15); to (§20.5.2.32)
      *
      * This element specifies the column that is used within the from and to elements to specify anchoring information for a shape within a spreadsheet
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.spreadsheet.columnid.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.spreadsheet.columnid?view=openxml-2.8.1
      */
     interface ColumnId {
         content: ST_ColID;
@@ -700,7 +704,7 @@ declare module OpenXml {
      * parents: from (§20.5.2.15); to (§20.5.2.32)
      *
      * This element is used to specify the column offset within a cell. The units for which this attribute is specified in reside within the simple type definition referenced below.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.spreadsheet.columnoffset.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.spreadsheet.columnoffset?view=openxml-2.8.1
      */
     interface ColumnOffset {
         content: ST_Coordinate;
@@ -711,17 +715,17 @@ declare module OpenXml {
      * parents: bottom (§18.8.6); colorScale (§18.3.1.16); dataBar (§18.3.1.28); diagonal (§18.8.13); end (§18.8.16); font (§18.8.22); horizontal (§18.8.25); mruColors (§18.8.28); rPr (§18.4.7); start (§18.8.37); stop (§18.8.38); top (§18.8.43); vertical (§18.8.44)
      *
      * One of the colors associated with the data bar or color scale.  The auto attribute shall not be used in the context of data bars.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.color.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.color?view=openxml-2.8.1
      */
     interface Color {
         /** indicating the color is automatic and system color dependent */
-        auto?: boolean;
+        auto?: boolean | null;
         /** indexed color value. Only used for backwards compatibility. References a color in indexedColors */
-        indexed?: number;
+        indexed?: number | null;
         /** UnsignedIntHex, Standard Alpha Red Green Blue color value (ARGB) */
-        rgb?: string | number;
+        rgb?: string | number | null;
         /** A 0-based index into the <clrScheme> collection (§20.1.6.2), referencing a particular <sysClr> or <srgbClr> value expressed in the Theme part */
-        theme?: number;
+        theme?: number | null;
         /** Specifies the tint value applied to the color. If tint is supplied, then it is applied to the value of the color to determine the final color applied.
          * The tint value is stored as a double from [-1.0, 1.0], where -1.0 means 100% darken and 1.0 means 100% lighten. Also, 0.0 means no change.
          * In loading the value, it is converted to HLS where HLS values are (0..HLSMAX), where HLSMAX is currently 255.
@@ -750,7 +754,7 @@ declare module OpenXml {
          *       = 0 + (255 – 0) = 255
          * )
          */
-        tint?: number; // default '0.0'
+        tint?: number | null; // default '0.0'
     }
 
 
@@ -758,7 +762,7 @@ declare module OpenXml {
      * parents: commentList (§18.7.4)
      *
      * This element represents a single user entered comment. Each comment shall have an author and can optionally contain richly formatted text.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.comment.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.comment?view=openxml-2.8.1
      */
     interface Comment {
         text: CommentText;
@@ -772,7 +776,7 @@ declare module OpenXml {
         ref: ST_Ref;
         /** Shape ID - Specifies the ID of the DrawingML shape that provides the visual representation of the comment.
          * [Example: <comment shapeId="10 " ...> end example] */
-        shapeId: number;
+        shapeId?: number | null;
         //guid: ST_Guid;
     }
 
@@ -781,7 +785,7 @@ declare module OpenXml {
      * parents: comments (§18.7.6)
      *
      * This element is a container that holds a list of comments for the sheet.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.commentlist.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.commentlist?view=openxml-2.8.1
      */
     interface CommentList {
         comments: Comment[];
@@ -793,7 +797,7 @@ declare module OpenXml {
      *
      * This element is the root container of a set of comments and comment authors for a particular sheet.
      * Each set of comments for a sheet is stored in a separate xml part. The relationship part for a sheet defines a link to the correct comment part for that sheet.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.comments.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.comments?view=openxml-2.8.1
      */
     interface Comments {
         authors: Authors;
@@ -806,11 +810,11 @@ declare module OpenXml {
      *
      * This element contains rich text which represents the text of a comment. The maximum length for this text
      * is a spreadsheet application implementation detail. A recommended guideline is 32767 chars.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.commenttext.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.commenttext?view=openxml-2.8.1
      */
     interface CommentText {
         rs: RichTextRun[];
-        t: Text;
+        t?: Text | null;
         //phoneticPr: PhoneticProperties;
         //rPh: PhoneticRun;
     }
@@ -831,7 +835,7 @@ declare module OpenXml {
      * parents: grpSp (§20.1.2.2.20); lockedCanvas (§20.3.2.1); absoluteAnchor (§20.5.2.1); grpSp (§20.5.2.17); oneCellAnchor (§20.5.2.24); twoCellAnchor (§20.5.2.33)
      *
      * This element specifies the properties for a connection shape drawing element (used to connect two sp elements). A connection shape is a line, etc. (specified using cxnSp) that connects two other shapes in this drawing.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.spreadsheet.connectionshape.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.spreadsheet.connectionshape?view=openxml-2.8.1
      */
     interface ConnectionShape {
         nvCxnSpPr: Element; // CT_ConnectorNonVisual;
@@ -840,13 +844,13 @@ declare module OpenXml {
 
         // attributes
         /** Publish to Server Flag - This attribute indicates whether the shape shall be published with the worksheet when sent to the server. default: false */
-        fPublish?: boolean;
+        fPublish?: boolean | null;
         /** Reference to Custom Function
          * This element specifies the custom function associated with the object. [Example: A macro script, add-in function, and so on. end example]
          * The format of this string shall be application-defined, and should be ignored if not understood.
          * [Example: <... macro="DoWork()" /> end example]
          */
-        macro?: string;
+        macro?: string | null;
     }
 
 
@@ -891,7 +895,7 @@ declare module OpenXml {
      * </Relationships>
      *
      * The corresponding relationship part item shows that the file to be imported is named svg1.xml. end example]
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.spreadsheet.contentpart.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.spreadsheet.contentpart?view=openxml-2.8.1
      */
     interface ContentPart {
         // attributes
@@ -929,7 +933,7 @@ declare module OpenXml {
      *
      * This element indicates that the sheet contains drawing components built on the drawingML platform.
      * The relationship Id references the part containing the drawingML definitions.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.drawing.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.drawing?view=openxml-2.8.1
      */
     interface Drawing {
         /** "r:id" */
@@ -941,11 +945,11 @@ declare module OpenXml {
      */
     interface EgColorChoice {
         // exclusive optional choice
-        scrgbClr?: Element; // CT_ScRgbColor
-        srgbClr?: Element; // CT_SRgbColor
-        hslClr?: Element; // CT_HslColor
-        schemeClr?: Element; // CT_SchemeColor
-        prstClr?: Element; // CT_PresetColor
+        scrgbClr?: Element | null; // CT_ScRgbColor
+        srgbClr?: Element | null; // CT_SRgbColor
+        hslClr?: Element | null; // CT_HslColor
+        schemeClr?: Element | null; // CT_SchemeColor
+        prstClr?: Element | null; // CT_PresetColor
     }
 
 
@@ -953,8 +957,8 @@ declare module OpenXml {
      */
     interface EgEffectProperties {
         // exclusive choice
-        effectLst?: Element; // CT_EffectList;
-        effectDag?: Element; // CT_EffectContainer;
+        effectLst?: Element | null; // CT_EffectList;
+        effectDag?: Element | null; // CT_EffectContainer;
     }
 
 
@@ -962,8 +966,8 @@ declare module OpenXml {
      */
     interface EgFillModeProperties {
         // exclusive choice
-        tile?: Tile;
-        stretch?: Stretch;
+        tile?: Tile | null;
+        stretch?: Stretch | null;
     }
 
 
@@ -971,12 +975,12 @@ declare module OpenXml {
      */
     interface EgFillProperties {
         // exclusive choice
-        noFill?: Element; // CT_NoFillProperties;
-        solidFill?: Element; // CT_SolidColorFillProperties;
-        gradFill?: Element; // CT_GradientFillProperties;
-        blipFill?: Element; // CT_BlipFillProperties;
-        pattFill?: Element; // CT_PatternFillProperties;
-        grpFill?: Element; // CT_GroupFillProperties;
+        noFill?: Element | null; // CT_NoFillProperties;
+        solidFill?: Element | null; // CT_SolidColorFillProperties;
+        gradFill?: Element | null; // CT_GradientFillProperties;
+        blipFill?: Element | null; // CT_BlipFillProperties;
+        pattFill?: Element | null; // CT_PatternFillProperties;
+        grpFill?: Element | null; // CT_GroupFillProperties;
     }
 
 
@@ -984,8 +988,8 @@ declare module OpenXml {
      */
     interface EgGeometry {
         // exclusive choice
-        custGeom?: Element; // CT_CustomGeometry2D
-        prstGeom?: Element; // CT_PresetGeometry2D
+        custGeom?: Element | null; // CT_CustomGeometry2D
+        prstGeom?: Element | null; // CT_PresetGeometry2D
     }
 
 
@@ -993,12 +997,12 @@ declare module OpenXml {
      */
     interface EgObjectChoices {
         // exclusive choice
-        contentPart?: ContentPart;
-        cxnSp?: ConnectionShape;
-        grpSp?: GroupShape;
-        graphicFrame?: GraphicFrame;
-        pic?: Picture;
-        sp?: Shape;
+        contentPart?: ContentPart | null;
+        cxnSp?: ConnectionShape | null;
+        grpSp?: GroupShape | null;
+        graphicFrame?: GraphicFrame | null;
+        pic?: Picture | null;
+        sp?: Shape | null;
     }
 
 
@@ -1006,15 +1010,15 @@ declare module OpenXml {
      * parents: dxfs (§18.8.15); rfmt (§18.11.1.17)
      *
      * A single dxf record, expressing incremental formatting to be applied.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.differentialformat.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.differentialformat?view=openxml-2.8.1
      */
     interface DifferentialFormat {
-        alignment?: Alignment;
-        border?: Border;
-        fill?: Fill;
-        font?: Font;
-        numFmt?: NumberingFormat;
-        protection?: Protection;
+        alignment?: Alignment | null;
+        border?: Border | null;
+        fill?: Fill | null;
+        font?: Font | null;
+        numFmt?: NumberingFormat | null;
+        protection?: Protection | null;
     }
 
 
@@ -1025,7 +1029,7 @@ declare module OpenXml {
      * Whereas xf records fully specify a particular aspect of formatting (e.g., cell borders) by referencing those formatting definitions elsewhere in the
      * Styles part, dxf records specify incremental (or differential) aspects of formatting directly inline within the dxf element.
      * The dxf formatting is to be applied on top of or in addition to any formatting already present on the object using the dxf record.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.differentialformats.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.differentialformats?view=openxml-2.8.1
      */
     interface DifferentialFormats {
         dxfs: DifferentialFormat[];
@@ -1043,7 +1047,7 @@ declare module OpenXml {
      * If no even footer is specified, then the odd footer's value is assumed for even page footers. See the evenHeader element (§18.3.1.39) description for full discussion of value content.
      *
      * Note: Specification URL for 'evenHeader' has full description of the content string format
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.evenfooter.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.evenfooter?view=openxml-2.8.1
      */
     interface EvenFooter {
         content: string;
@@ -1058,7 +1062,7 @@ declare module OpenXml {
      * If no even header is specified, then odd header value is assumed for even page headers.
      *
      * Note: Specification URL for 'evenHeader' has full description of the content string format
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.evenheader.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.evenheader?view=openxml-2.8.1
      */
     interface EvenHeader {
         content: string;
@@ -1081,7 +1085,7 @@ declare module OpenXml {
      * parents: absoluteAnchor (§20.5.2.1); oneCellAnchor (§20.5.2.24)
      *
      * This element describes the length and width properties for how far a drawing element should extend for.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.spreadsheet.extent.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.spreadsheet.extent?view=openxml-2.8.1
      */
     interface Extent {
         // attributes
@@ -1104,12 +1108,12 @@ declare module OpenXml {
      * parents: dxf (§18.8.14); fills (§18.8.21); ndxf (§18.11.1.4); odxf (§18.11.1.6)
      *
      * This element specifies fill formatting.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.fill.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.fill?view=openxml-2.8.1
      */
     interface Fill {
         // pattern and gradient are exclusive
-        patternFill?: PatternFill;
-        gradientFill?: GradientFill;
+        patternFill?: PatternFill | null;
+        gradientFill?: GradientFill | null;
     }
 
 
@@ -1119,7 +1123,7 @@ declare module OpenXml {
      * This element defines the cell fills portion of the Styles part, consisting of a sequence of fill records.
      * A cell fill consists of a background color, foreground color, and pattern to be applied across the cell.
      * NOTE: see link for examples
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.fills.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.fills?view=openxml-2.8.1
      */
     interface Fills {
         fills: Fill[];
@@ -1146,17 +1150,17 @@ declare module OpenXml {
      * </a:blipFill>
      * The above image is stretched to fill the entire rectangle except for the bottom 10% and rightmost 25%.
      * end example]
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.fillrectangle.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.fillrectangle?view=openxml-2.8.1
      */
     interface FillRectangle /* TODO extends RelativeRectangleType */ {
         /** Bottom Offset - Specifies the bottom edge of the rectangle. default: "0%" */
-        b?: ST_Percentage;
+        b?: ST_Percentage | null;
         /** Left Offset - Specifies the left edge of the rectangle. default: "0%" */
-        l?: ST_Percentage;
+        l?: ST_Percentage | null;
         /** Right Offset - Specifies the right edge of the rectangle. default: "0%" */
-        r?: ST_Percentage;
+        r?: ST_Percentage | null;
         /** Top Offset - Specifies the top edge of the rectangle. default: "0%" */
-        t?: ST_Percentage;
+        t?: ST_Percentage | null;
     }
 
 
@@ -1168,7 +1172,7 @@ declare module OpenXml {
      * See evenHeader (§18.3.1.39) description for full discussion of value content.
      *
      * Note: Specification URL for 'evenHeader' has full description of the content string format
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.firstfooter.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.firstfooter?view=openxml-2.8.1
      */
     interface FirstFooter {
         content: string;
@@ -1183,7 +1187,7 @@ declare module OpenXml {
      * See evenHeader (§18.3.1.39) description for full discussion of value content.
      *
      * Note: Specification URL for 'evenHeader' has full description of the content string format
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.firstheader.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.firstheader?view=openxml-2.8.1
      */
     interface FirstHeader {
         content: string;
@@ -1194,24 +1198,24 @@ declare module OpenXml {
      * parents: dxf (§18.8.14); fonts (§18.8.23); ndxf (§18.11.1.4); odxf (§18.11.1.6)
      *
      * This element defines the properties for one of the fonts used in this workbook.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.font.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.font?view=openxml-2.8.1
      */
     interface Font {
-        b?: Bold;
-        charset?: FontCharSet;
-        color?: Color;
-        condense?: Condense;
-        extend?: Extend;
-        family?: FontFamily;
-        i?: Italic;
-        name?: FontName;
-        outline?: Outline;
-        scheme?: FontScheme;
-        shadow?: Shadow;
-        strike?: Strike;
-        sz?: FontSize;
-        u?: Underline;
-        vertAlign?: VerticalTextAlignment;
+        b?: Bold | null;
+        charset?: FontCharSet | null;
+        color?: Color | null;
+        condense?: Condense | null;
+        extend?: Extend | null;
+        family?: FontFamily | null;
+        i?: Italic | null;
+        name?: FontName | null;
+        outline?: Outline | null;
+        scheme?: FontScheme | null;
+        shadow?: Shadow | null;
+        strike?: Strike | null;
+        sz?: FontSize | null;
+        u?: Underline | null;
+        vertAlign?: VerticalTextAlignment | null;
     }
 
 
@@ -1232,7 +1236,7 @@ declare module OpenXml {
      *   </font>
      * </fonts>
      * end example]
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.fonts.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.fonts?view=openxml-2.8.1
      */
     interface Fonts {
         fonts: Font[];
@@ -1245,7 +1249,7 @@ declare module OpenXml {
     /** <x:charset> (Charset, W3C XML content CT_IntProperty §A.2)
      * parents: font (§18.8.22); rPr (§18.4.7)
      *
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.fontcharset.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.fontcharset?view=openxml-2.8.1
      */
     interface FontCharSet {
         val: number;
@@ -1264,7 +1268,7 @@ declare module OpenXml {
      *  3       Modern
      *  4       Script
      *  5       Decorative
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.fontfamily.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.fontfamily?view=openxml-2.8.1
      */
     interface FontFamily {
         /** ST_FontFamily, range [0, 14], includes: 0=N/A, 1=Roman, 2=Swiss, 3=Modern, 4=Script, 5=Decorative */
@@ -1276,7 +1280,7 @@ declare module OpenXml {
      * parents: font (§18.8.22)
      *
      * This element specifies the face name of this font.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.fontname.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.fontname?view=openxml-2.8.1
      */
     interface FontName {
         /** A string representing the name of the font. If the font doesn't exist (because it isn't installed on the system),
@@ -1294,7 +1298,7 @@ declare module OpenXml {
      * then the font is categorized as either a major or minor font scheme component.
      * When a new theme is chosen, every font that is part of a theme definition is updated to use the new major or minor font definition for that theme.
      * Usually major fonts are used for styles like headings, and minor fonts are used for body and paragraph text.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.fontscheme.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.fontscheme?view=openxml-2.8.1
      */
     interface FontScheme {
         val: ST_FontScheme;
@@ -1310,7 +1314,7 @@ declare module OpenXml {
      *   <schemeClr val="tx1"/>
      * </fontRef>
      * In this example, we see a font referencing the minor font defined within the theme. end example]
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.fontreference.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.fontreference?view=openxml-2.8.1
      */
     interface FontReference extends EgColorChoice {
         // attributes
@@ -1323,7 +1327,7 @@ declare module OpenXml {
      * parents: font (§18.8.22); rPr (§18.4.7)
      *
      * This element represents the point size (1/72 of an inch) of the Latin and East Asian text.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.fontsize.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.fontsize?view=openxml-2.8.1
      */
     interface FontSize {
         /** positive font points measure (1/72 inch) */
@@ -1336,7 +1340,7 @@ declare module OpenXml {
      *
      * This element defines a gradient-style cell fill. Gradient cell fills can use one or two colors as the end points of color interpolation.
      * NOTE: see link for examples
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.gradientfill.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.gradientfill?view=openxml-2.8.1
      */
     interface GradientFill {
         stops: GradientStop[];
@@ -1345,7 +1349,7 @@ declare module OpenXml {
         /** Bottom Convergence - Range [0, 1]. Specifies in percentage format (from the top to the bottom) the position of the bottom edge of the inner rectangle (color 1).
          * For bottom, 0 means the bottom edge of the inner rectangle is on the top edge of the cell, and 1 means it is on the bottom edge of the cell. default 0
          */
-        bottom?: number;
+        bottom?: number | null;
         /** Linear Gradient Degree - Angle of the linear gradient - vertical, horizontal, diagonal.
          * (Example: In these examples, color 1 is white and color 2 is blue.
          *   90 = Horizontal & color 1 to color 2
@@ -1358,22 +1362,22 @@ declare module OpenXml {
          *   315 = Diagonal Down & bottom to top (color 1 to color 2)
          * ), default: 0
          */
-        degree?: number;
+        degree?: number | null;
         /** Left Convergence - Range [0, 1]. Specifies in percentage format (from the left to the right) the position of the left edge of the inner rectangle (color 1).
          * For left, 0 means the left edge of the inner rectangle is on the left edge of the cell, and 1 means it is on the right edge of the cell.
          * (applies to From Corner and From Center gradients). default: 0
          */
-        left?: number;
+        left?: number | null;
         /** Right Convergence - Range [0, 1]. Specifies in percentage format (from the left to the right) the position of the right edge of the inner rectangle (color 1).
          * For right, 0 means the right edge of the inner rectangle is on the left edge of the cell, and 1 means it is on the right edge of the cell.
          * (applies to From Corner and From Center gradients). default: 0
          */
-        right?: number;
+        right?: number | null;
         /** Top Gradient Convergence - Range [0, 1]. Specifies in percentage format (from the top to the bottom) the position of the top edge of the inner rectangle (color 1).
          * For top, 0 means the top edge of the inner rectangle is on the top edge of the cell, and 1 means it is on the bottom edge of the cell.
          * (applies to From Corner and From Center gradients). default: 0
          */
-        top?: number;
+        top?: number | null;
         /** Gradient Fill Type - gradient fill type; default: 'linear' */
         type: ST_GradientType;
     }
@@ -1383,7 +1387,7 @@ declare module OpenXml {
      * parents: gradientFill (§18.8.24)
      *
      * One of a sequence of two or more gradient stops, constituting this gradient fill.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.gradientstop.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.gradientstop?view=openxml-2.8.1
      */
     interface GradientStop {
         color: Color;
@@ -1402,7 +1406,7 @@ declare module OpenXml {
      *
      * This element specifies the existence of a single graphic object. Document authors should refer to this element when they wish to persist a graphical object of some kind.
      * The specification for this graphical object is provided entirely by the document author and referenced within the graphicData child element.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.graphic.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.graphic?view=openxml-2.8.1
      */
     interface Graphic {
         graphicData: GraphicData;
@@ -1414,7 +1418,7 @@ declare module OpenXml {
      *
      * This element specifies the reference to a graphic object within the document. This graphic object is provided entirely by the document authors who choose to persist this data within the document.
      * [Note: Depending on the kind of graphical object used not every generating application that supports the OOXML framework has the ability to render the graphical object. end note]
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.graphicdata.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.graphicdata?view=openxml-2.8.1
      */
     interface GraphicData {
         [key: string]: any;
@@ -1429,7 +1433,7 @@ declare module OpenXml {
      * parents: grpSp (§20.1.2.2.20); lockedCanvas (§20.3.2.1); absoluteAnchor (§20.5.2.1); grpSp (§20.5.2.17); oneCellAnchor (§20.5.2.24); twoCellAnchor (§20.5.2.33)
      *
      * This element describes a single graphical object frame for a spreadsheet which contains a graphical object.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.spreadsheet.graphicframe.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.spreadsheet.graphicframe?view=openxml-2.8.1
      */
     interface GraphicFrame {
         graphic: Graphic;
@@ -1438,13 +1442,13 @@ declare module OpenXml {
 
         // attributes
         /** Publish to Server Flag - This attribute indicates whether the shape shall be published with the worksheet when sent to the server. default: false */
-        fPublished?: boolean;
+        fPublished?: boolean | null;
         /** Reference To Custom Function
          * This element specifies the custom function associated with the object. [Example: A macro script, add-in function, and so on. end example]
          * The format of this string shall be application-defined, and should be ignored if not understood.
          * [Example: <... macro="DoWork()" /> end example]
          */
-        macro?: string;
+        macro?: string | null;
     }
 
 
@@ -1477,7 +1481,7 @@ declare module OpenXml {
      * </xdr:grpSp>
      * In the above example we see three shapes specified within a single group. These three shapes have their position and sizes specified just as they normally would within the shape tree.
      * The generating application should apply the transformation after the bounding box for the group shape has been calculated. end example]
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.spreadsheet.groupshape.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.spreadsheet.groupshape?view=openxml-2.8.1
      */
     interface GroupShape {
         nvGrpSpPr: NonVisualGroupShapeProperties;
@@ -1496,26 +1500,26 @@ declare module OpenXml {
      *
      * This element specifies all locking properties for a connection shape.
      * These properties inform the generating application about specific properties that have been previously locked and thus should not be changed.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.groupshapelocks.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.groupshapelocks?view=openxml-2.8.1
      */
     interface GroupShapeLocks {
         extLst?: Element; // CT_OfficeArtExtensionList
 
         // attributes
         /** (Disallow Aspect Ratio Change - Specifies that the generating application should not allow aspect ratio changes for the corresponding connection shape. default: false */
-        noChangeAspect?: boolean;
+        noChangeAspect?: boolean | null;
         /** Disallow Shape Grouping - Specifies that the corresponding group shape cannot be grouped. That is it cannot be combined within other shapes to form a group of shapes. default: false */
-        noGrp?: boolean;
+        noGrp?: boolean | null;
         /** Disallow Moving Shape - Specifies that the corresponding graphic frame cannot be moved. Objects that reside within the graphic frame can still be moved unless they also have been locked. default: false */
-        noMove?: boolean;
+        noMove?: boolean | null;
         /** Disallow Shape Resizing - Specifies that the corresponding group shape cannot be resized. default: false */
-        noResize?: boolean;
+        noResize?: boolean | null;
         /** Disallow Shape Rotation - Specifies that the corresponding group shape cannot be rotated Objects that reside within the group can still be rotated unless they also have been locked. default: false */
-        noRot?: boolean;
+        noRot?: boolean | null;
         /** Disallow Shape Selection - Specifies that the corresponding group shape cannot have any part of it be selected. That means that no picture, shapes or attached text can be selected either if this attribute has been specified. [Note: This property is inherited by sub-elements and thus all shapes within the group shape cannot be selected when this attribute is set to a value of true. end note]; default: false */
-        noSelect?: boolean;
+        noSelect?: boolean | null;
         /** Disallow Shape Ungrouping - Specifies that the generating application should not show adjust handles for the corresponding connection shape. default: false */
-        noUngrp?: boolean;
+        noUngrp?: boolean | null;
     }
 
 
@@ -1524,12 +1528,12 @@ declare module OpenXml {
      *
      * This element specifies the properties that are to be common across all of the shapes within the corresponding group. If there are any conflicting properties
      * within the group shape properties and the individual shape properties then the individual shape properties should take precedence.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.spreadsheet.groupshapeproperties.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.spreadsheet.groupshapeproperties?view=openxml-2.8.1
      */
     interface GroupShapeProperties extends EgEffectProperties, EgFillProperties {
-        xfrm?: TransformGroup;
-        scene3d?: Element; // CT_Scene3D
-        extLst?: Element; // CT_OfficeArtExtensionList
+        xfrm?: TransformGroup | null;
+        scene3d?: Element | null; // CT_Scene3D
+        extLst?: Element | null; // CT_OfficeArtExtensionList
 
         // attributes
         /** Black and White Mode
@@ -1539,7 +1543,7 @@ declare module OpenXml {
          * [Note: This does not mean that the group shapes themselves are stored with only black and white color information.
          * This attribute instead sets the rendering mode that the shapes use when rendering. end note]
          */
-        bwMode?: ST_BlackWhiteMode;
+        bwMode?: ST_BlackWhiteMode | null;
     }
 
 
@@ -1556,52 +1560,52 @@ declare module OpenXml {
      * end example]
      * The tokens in the header & footer elements can be localized. An application can decide which locales are supported.
      * Even when a locale is not supported, the header and footer text shall be loaded, and only the formatting is discarded.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.headerfooter.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.headerfooter?view=openxml-2.8.1
      */
     interface HeaderFooter {
-        evenFooter: EvenFooter; // (Even Page Footer)
-        evenHeader: EvenHeader; // (Even Page Header)
-        firstFooter: FirstFooter; // (First Page Footer)
-        firstHeader: FirstHeader; // (First Page Header)
-        oddFooter: OddFooter; // (Odd Page Footer)
-        oddHeader: OddHeader; // (Odd Page Header)
+        evenFooter?: EvenFooter | null; // (Even Page Footer)
+        evenHeader?: EvenHeader | null; // (Even Page Header)
+        firstFooter?: FirstFooter | null; // (First Page Footer)
+        firstHeader?: FirstHeader | null; // (First Page Header)
+        oddFooter?: OddFooter | null; // (Odd Page Footer)
+        oddHeader?: OddHeader | null; // (Odd Page Header)
     }
 
 
     /** (W3C XML CT_Hyperlink §A.4.1)
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.hyperlinktype.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.hyperlinktype?view=openxml-2.8.1
      */
     interface Hyperlink {
-        snd?: HyperlinkSound;
-        extLst?: Element;
+        snd?: HyperlinkSound | null;
+        extLst?: Element | null;
 
         // attributes
         /** Action Setting
          * Specifies an action that is to be taken when this hyperlink is activated. This can be used to specify a slide to be navigated to or a script of code to be run.
          * default: ""
          */
-        action?: string;
+        action?: string | null;
         /** End Sounds
          * Specifies if the URL in question should stop all sounds that are playing when it is clicked.
          * default: false
          */
-        endSnd?: boolean;
+        endSnd?: boolean | null;
         /** Add Hyperlink to Page History
          * Specifies whether to add this to the history when navigating to it. This allows for the viewing of this presentation without
          * the storing of history information on the viewing machine. If this attribute is omitted, then a value of 1 or true is assumed.
          * default: false
          */
-        history?: boolean;
+        history?: boolean | null;
         /** Highlight Click
          * Specifies if this attribute has already been used within this document. That is when a hyperlink has already been visited that this attribute would be utilized so the
          * generating application can determine the color of this text. If this attribute is omitted, then a value of 0 or false is implied.
          * default: false
          */
-        highlightClick?: boolean;
+        highlightClick?: boolean | null;
         /** <r:id> Drawing Object Hyperlink Target
          * Specifies the relationship id that when looked up in this slides relationship file contains the target of this hyperlink. This attribute cannot be omitted.
          */
-        id?: number;
+        id?: number | null;
         /** Invalid URL
          * Specifies the URL when it has been determined by the generating application that the URL is invalid.
          * That is the generating application can still store the URL but it is known that this URL is not correct.
@@ -1613,13 +1617,13 @@ declare module OpenXml {
          * a new window is launched for viewing or if an existing one can be used. If this attribute is omitted, than a new window is opened.
          * default: ""
          */
-        tgtFrame?: string;
+        tgtFrame?: string | null;
         /** Hyperlink Tooltip
          * Specifies the tooltip that should be displayed when the hyperlink text is hovered over with the mouse.
          * If this attribute is omitted, than the hyperlink text itself can be displayed.
          * default: ""
          */
-        tooltip?: string;
+        tooltip?: string | null;
     }
 
 
@@ -1643,7 +1647,7 @@ declare module OpenXml {
      * </p:txBody>
      * The above run of text is a hyperlink that points to the resource pointed at by rId2 within this slides relationship file.
      * Additionally this text should display a tooltip when the mouse is hovered over the run of text. end example]
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.hyperlinkonclick.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.hyperlinkonclick?view=openxml-2.8.1
      */
     interface HyperlinkOnClick extends Hyperlink {
     }
@@ -1655,7 +1659,7 @@ declare module OpenXml {
      * This element specifies the hyperlink information to be activated when the user's mouse is hovered over the corresponding object.
      * The operation of the hyperlink is to have the specified action be activated when the mouse of the user hovers over the object.
      * When this action is activated then additional attributes can be used to specify other tasks that should be performed along with the action.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.hyperlinkonhover.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.hyperlinkonhover?view=openxml-2.8.1
      */
     interface HyperlinkOnHover extends Hyperlink {
 
@@ -1666,7 +1670,7 @@ declare module OpenXml {
      * parents: hlinkClick (§21.1.2.3.5); hlinkHover (§20.1.2.2.23); hlinkMouseOver (§21.1.2.3.6)
      *
      * This element specifies a sound to be played when a hyperlink within the document is activated. This sound is specified from within the parent hyperlink element.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.hyperlinksound.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.hyperlinksound?view=openxml-2.8.1
      */
     interface HyperlinkSound {
         /** <r:embed> Embedded Audio File Relationship ID
@@ -1690,7 +1694,7 @@ declare module OpenXml {
      * This element contains a sequence of color values that correspond to color indexes (zero-based). When using the default indexed color palette,
      * the values are not written out, but instead are implied. When the color palette has been modified from default, then the entire color palette is written out.
      * NOTE: see link for further color index details
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.indexedcolors.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.indexedcolors?view=openxml-2.8.1
      */
     interface IndexedColors {
         rgbColors: RgbColor[];
@@ -1708,11 +1712,11 @@ declare module OpenXml {
      *   </is>
      * </c>
      * end example]
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.inlinestring.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.inlinestring?view=openxml-2.8.1
      */
     interface InlineString {
-        t?: Text;
-        rs?: RichTextRun[];
+        t?: Text | null;
+        rs: RichTextRun[];
         //rPh?: PhoneticRun[];
         //phoneticPr?: PhoneticPr;
     }
@@ -1732,7 +1736,7 @@ declare module OpenXml {
      * This element is present when the sheet contains drawing shapes defined by VML. In this case, the element
      * contains an explicit relationship whose ID points to the part containing the VML definitions.
      * [Example: <drawing r:id="rId1"/> end example]
-     * @see https://msdn.microsoft.com/EN-US/library/documentformat.openxml.spreadsheet.legacydrawing.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.legacydrawing?view=openxml-2.8.1
      */
     interface LegacyDrawing {
         /** "r:id" */
@@ -1768,7 +1772,7 @@ declare module OpenXml {
      *   <xdr:clientData/>
      * </xdr:twoCellAnchor>
      * The above example shows the first anchor point being specified via the from element. end example]
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.spreadsheet.frommarker.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.spreadsheet.frommarker?view=openxml-2.8.1
      */
     interface FromMarker extends MarkerType {
     }
@@ -1792,7 +1796,7 @@ declare module OpenXml {
      *   <xdr:clientData/>
      * </xdr:twoCellAnchor>
      * The above example shows the second anchor point being specified via the to element. end example]
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.spreadsheet.tomarker.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.spreadsheet.tomarker?view=openxml-2.8.1
      */
     interface ToMarker extends MarkerType {
     }
@@ -1802,7 +1806,7 @@ declare module OpenXml {
      * parents: colors (§18.8.11)
      *
      * This element contains sequence of values that correspond to custom colors selected by the user for this workbook.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.mrucolors.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.mrucolors?view=openxml-2.8.1
      */
     interface MruColors {
         colors: Color[];
@@ -1822,12 +1826,12 @@ declare module OpenXml {
      *   ..
      * </xdr:pic>
      * The above example defines some non-visual drawing properties for the inserted picture. end example]
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.nonvisualdrawingproperties.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.nonvisualdrawingproperties?view=openxml-2.8.1
      */
     interface NonVisualDrawingProperties {
-        hlinkClick?: HyperlinkOnClick;
-        hlinkHover?: HyperlinkOnHover;
-        extLst?: Element;
+        hlinkClick?: HyperlinkOnClick | null;
+        hlinkHover?: HyperlinkOnHover | null;
+        extLst?: Element | null;
 
         // attributes
         /** Alternative Text for Object
@@ -1838,7 +1842,7 @@ declare module OpenXml {
          * The descr attribute contains alternative text which can be used in place of the actual DrawingML object. end example]
          * default: ""
          */
-        descr?: string;
+        descr?: string | null;
         /** Hidden
          * Specifies whether this DrawingML object is displayed. When a DrawingML object is displayed within a document, that object can be hidden (i.e., present, but not visible).
          * This attribute determines whether the object is rendered or made hidden. [Note: An application can have settings which allow this object to be viewed. end note]
@@ -1848,7 +1852,7 @@ declare module OpenXml {
          * The hidden attribute has a value of true, which specifies that the DrawingML object is hidden and not displayed when the document is displayed. end example]
          * default: false
          */
-        hidden?: boolean;
+        hidden?: boolean | null;
         /** Unique Identifier
          * Specifies a unique identifier for the current DrawingML object within the current document. This ID can be used to assist in uniquely identifying this object so that it can be referred to by other parts of the document.
          * If multiple objects within the same document share the same id attribute value, then the document shall be considered non-conformant.
@@ -1872,7 +1876,7 @@ declare module OpenXml {
          * end example]
          * default: ""
          */
-        title?: string;
+        title?: string | null;
     }
 
 
@@ -1881,11 +1885,11 @@ declare module OpenXml {
      *
      * This element specifies the non-visual drawing properties for a group shape. These non-visual properties are properties that
      * the generating application would utilize when rendering the slide surface.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.nonvisualgroupshapedrawingproperties.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.nonvisualgroupshapedrawingproperties?view=openxml-2.8.1
      */
     interface NonVisualGroupShapeDrawingProperties {
-        grpSpLocks?: GroupShapeLocks;
-        extLst?: Element; // CT_OfficeArtExtensionList
+        grpSpLocks?: GroupShapeLocks | null;
+        extLst?: Element | null; // CT_OfficeArtExtensionList
     }
 
 
@@ -1894,7 +1898,7 @@ declare module OpenXml {
      *
      * This element specifies all non-visual properties for a group shape. This element is a container for the non-visual identification properties, shape properties and
      * application properties that are to be associated with a group shape. This allows for additional information that does not affect the appearance of the group shape to be stored.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.nonvisualgroupshapeproperties.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.nonvisualgroupshapeproperties?view=openxml-2.8.1
      */
     interface NonVisualGroupShapeProperties {
         cNvPr: NonVisualDrawingProperties;
@@ -1919,11 +1923,11 @@ declare module OpenXml {
      *   ...
      * </xdr:pic>
      * The above example defines some non-visual picture drawing properties for the inserted picture. end example]
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.spreadsheet.nonvisualpicturedrawingproperties.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.spreadsheet.nonvisualpicturedrawingproperties?view=openxml-2.8.1
      */
     interface NonVisualPictureDrawingProperties {
-        picLocks?: PictureLocks;
-        extLst?: Element; // CT_OfficeArtExtensionList
+        picLocks?: PictureLocks | null;
+        extLst?: Element | null; // CT_OfficeArtExtensionList
 
         // attributes
         /** Relative Resize Preferred
@@ -1935,7 +1939,7 @@ declare module OpenXml {
          * then a value of 100% should be shown because the picture has not yet been resized from its current (smaller) size. end example];
          * default: true
          */
-        preferRelativeResize?: boolean;
+        preferRelativeResize?: boolean | null;
     }
 
 
@@ -1944,7 +1948,7 @@ declare module OpenXml {
      *
      * This element specifies all non-visual properties for a picture. This element is a container for the non-visual identification properties,
      * shape properties and application properties that are to be associated with a picture. This allows for additional information that does not affect the appearance of the picture to be stored.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.spreadsheet.nonvisualpictureproperties.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.spreadsheet.nonvisualpictureproperties?view=openxml-2.8.1
      */
     interface NonVisualPictureProperties {
         cNvPr: NonVisualDrawingProperties;
@@ -1967,13 +1971,13 @@ declare module OpenXml {
      *   ...
      * </xdr:sp>
      * This shape lock is stored within the non-visual drawing properties for this shape. end example]
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.nonvisualshapedrawingproperties.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.nonvisualshapedrawingproperties?view=openxml-2.8.1
      */
     interface NonVisualShapeDrawingProperties {
         /** Extension List */
-        spLocks?: ShapeLocks;
+        spLocks?: ShapeLocks | null;
         /** Shape Locks */
-        extLst?: Element;
+        extLst?: Element | null;
 
         // attributes
         /** Text Box
@@ -1983,7 +1987,7 @@ declare module OpenXml {
          * A text box is merely a specialized shape with specific properties. end note]
          * default: false
          */
-        txBox?: boolean;
+        txBox?: boolean | null;
     }
 
 
@@ -1992,7 +1996,7 @@ declare module OpenXml {
      *
      * This element specifies all non-visual properties for a shape. This element is a container for the non-visual identification properties, shape properties and
      * application properties that are to be associated with a shape. This allows for additional information that does not affect the appearance of the shape to be stored.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.nonvisualshapeproperties.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.nonvisualshapeproperties?view=openxml-2.8.1
      */
     interface NonVisualShapeProperties {
         cNvPr: NonVisualDrawingProperties;
@@ -2010,7 +2014,7 @@ declare module OpenXml {
      * interpreted differently, depending on the UI language of the implementing application.
      * Ids not specified in the listing, such as 5, 6, 7, and 8, shall follow the number format specified by the formatCode attribute.
      *  NOTE see link for more format details
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.numberingformat.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.numberingformat?view=openxml-2.8.1
      */
     interface NumberingFormat {
         /** The number format code for this number format */
@@ -2033,7 +2037,7 @@ declare module OpenXml {
      * </numFmts>
      * end example]
      * NOTE: see link for list of Number Format Codes
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.numberingformats.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.numberingformats?view=openxml-2.8.1
      */
     interface NumberingFormats {
         numFmts: NumberingFormat[];
@@ -2052,7 +2056,7 @@ declare module OpenXml {
      * The possible values for this element are defined by the ST_Xstring simple type (§22.9.2.19).
      *
      * Note: Specification URL for 'evenHeader' has full description of the content string format
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.oddfooter.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.oddfooter?view=openxml-2.8.1
      */
     interface OddFooter {
         content: string;
@@ -2068,7 +2072,7 @@ declare module OpenXml {
      * The possible values for this element are defined by the ST_Xstring simple type (§22.9.2.19).
      *
      * Note: Specification URL for 'evenHeader' has full description of the content string format
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.oddheader.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.oddheader?view=openxml-2.8.1
      */
     interface OddHeader {
         content: string;
@@ -2079,7 +2083,7 @@ declare module OpenXml {
      * parents: wsDr (§20.5.2.35)
      *
      * This element specifies a one cell anchor placeholder for a group, a shape, or a drawing element. It moves with the cell and its extents is in EMU units.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.spreadsheet.onecellanchor.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.spreadsheet.onecellanchor?view=openxml-2.8.1
      */
     interface OneCellAnchor extends EgObjectChoices {
         clientData: ClientData;
@@ -2103,7 +2107,7 @@ declare module OpenXml {
      * [Example:
      * <pageMargins left="0.7" right="0.7" top="0.75" bottom="0.75" header="0.3"  footer="0.3"/>
      * end example]
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.pagemargins.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.pagemargins?view=openxml-2.8.1
      */
     interface PageMargins {
         bottom: number;
@@ -2122,12 +2126,12 @@ declare module OpenXml {
      * [Example: The following example shows the pageSetup element for A0 paper, printed in black and white, with graphics:
      * <pageSetup blackAndWhite="true" draft="false" paperHeight="1189" paperWidth="841" paperUnits="mm" />
      * end example]
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.pagesetup.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.pagesetup?view=openxml-2.8.1
      */
     interface PageSetup {
         // TODO incomplete
-        orientation: ST_Orientation;
-        scale: number;
+        orientation?: ST_Orientation | null;
+        scale?: number | null;
         /** "r:id" */
         rid: ST_RelationshipId;
     }
@@ -2157,15 +2161,16 @@ declare module OpenXml {
      *
      * This element is used to specify cell fill information for pattern and solid color cell fills. For solid cell fills (no pattern),
      * fgColor is used. For cell fills with patterns specified, then the cell fill color is specified by the bgColor element.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.patternfill.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.patternfill?view=openxml-2.8.1
      */
     interface PatternFill {
-        fgColor: Color;
-        bgColor: Color;
+        // choice
+        fgColor?: Color | null;
+        bgColor?: Color | null;
 
         // attributes
         /** ST_PatternType, Specifies the fill pattern type (including solid and none); default: 'none' */
-        patternType: ST_PatternType;
+        patternType?: ST_PatternType | null;
     }
 
 
@@ -2190,7 +2195,7 @@ declare module OpenXml {
      *   </xdr:spPr>
      * </xdr:pic>
      * end example]
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.spreadsheet.picture.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.spreadsheet.picture?view=openxml-2.8.1
      */
     interface Picture {
         blipFill: Element; // BlipFill;
@@ -2200,13 +2205,13 @@ declare module OpenXml {
 
         // attributes
         /** Publish to Server Flag - This attribute indicates whether the shape shall be published with the worksheet when sent to the server. default: false */
-        fPublished?: boolean;
+        fPublished?: boolean | null;
         /** Reference To Custom Function
          * This element specifies the custom function associated with the object. [Example: A macro script, add-in function, and so on. end example]
          * The format of this string shall be application-defined, and should be ignored if not understood.
          * [Example: <... macro="DoWork()" /> end example]
          */
-        macro?: string;
+        macro?: string | null;
     }
 
 
@@ -2215,23 +2220,23 @@ declare module OpenXml {
      *
      * This element specifies all locking properties for a graphic frame. These properties inform the generating application about
      * specific properties that have been previously locked and thus should not be changed.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.picturelocks.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.picturelocks?view=openxml-2.8.1
      */
     interface PictureLocks extends AgLocking {
-        extLst?: Element; // CT_OfficeArtExtensionList;
+        extLst?: Element | null; // CT_OfficeArtExtensionList;
 
         // attributes
         /** Disallow Crop Changes
          * Specifies that the generating application should not allow cropping for the corresponding picture. If this attribute is not specified, then a value of false is assumed.
          * default: false
          */
-        noCrop?: boolean;
+        noCrop?: boolean | null;
     }
 
 
     /** (W3C XML CT_Point2D §A.4.1)
      *
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.point2dtype.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.point2dtype?view=openxml-2.8.1
      */
     interface Point2DType {
         // attributes
@@ -2254,7 +2259,7 @@ declare module OpenXml {
      * parents: xfrm (§21.3.2.28); xfrm (§20.1.7.5); xfrm (§20.1.7.6); xfrm (§20.5.2.36); xfrm (§19.3.1.53)
      *
      * This element specifies the location of the bounding box of an object. Effects on an object are not included in this bounding box.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.offset.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.offset?view=openxml-2.8.1
      */
     interface Offset extends Point2DType {
     }
@@ -2264,7 +2269,7 @@ declare module OpenXml {
      * parents: absoluteAnchor (§20.5.2.1)
      *
      * This element describes the position of a drawing element within a spreadsheet.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.spreadsheet.position.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.spreadsheet.position?view=openxml-2.8.1
      */
     interface Position extends Point2DType {
     }
@@ -2275,7 +2280,7 @@ declare module OpenXml {
      *
      * Contains protection properties associated with the cell. Each cell has protection properties that can be set.
      * The cell protection properties do not take effect unless the sheet has been protected.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.protection.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.protection?view=openxml-2.8.1
      */
     interface Protection {
         // attributes
@@ -2284,11 +2289,11 @@ declare module OpenXml {
          * Therefore the cell A4 can contain a formula "=SUM(A1:A3)", but if the cell protection property of A4 is marked as hidden, and the sheet is protected,
          * then the cell should display the calculated result (e.g. "6"), but will not display the formula used to calculate the result
          */
-        hidden?: boolean;
+        hidden?: boolean | null;
         /** indicates if the cell is locked. When cells are marked as "locked" and the sheet is protected, then the options specified in the
          * Sheet Part's sheetProtection element (§18.3.1.85) are prohibited for these cells
          */
-        locked?: boolean;
+        locked?: boolean | null;
     }
 
 
@@ -2317,11 +2322,11 @@ declare module OpenXml {
      *
      * This element represents a run of rich text. A rich text run is a region of text that share a common set of properties, such as formatting properties.
      * The properties are defined in the rPr element, and the text displayed to the user is defined in the Text (t) element.
-     * @see https://msdn.microsoft.com/EN-US/library/documentformat.openxml.spreadsheet.run.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.run?view=openxml-2.8.1
      */
     interface RichTextRun {
         t: Text; /** text */
-        rPr: RichTextRunProperties;
+        rPr?: RichTextRunProperties | null;
     }
 
 
@@ -2329,15 +2334,31 @@ declare module OpenXml {
      * parents: r (§18.4.4)
      *
      * This element represents a set of properties to apply to the contents of this rich text run.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.runproperties.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.runproperties?view=openxml-2.8.1
      */
     interface RichTextRunProperties {
-        b?: Bold;
-        color?: Color;
-        sz?: FontSize;
-        rFont?: RunFont;
-        family?: FontFamily;
+        b?: Bold | null;
+        color?: Color | null;
+        sz?: FontSize | null;
+        rFont?: RunFont | null;
+        family?: FontFamily | null;
         // TODO other attributes
+        [key: string]: any;
+        //b?: CT_BooleanProperty;
+        //color?: CT_Color;
+        //sz?: CT_FontSize;
+        //rFont?: CT_FontName;
+        //family?: CT_IntProperty;
+        //charset?: CT_IntProperty;
+        //i?: CT_BooleanProperty;
+        //strike?: CT_BooleanProperty;
+        //outline?: CT_BooleanProperty;
+        //shadow?: CT_BooleanProperty;
+        //condense?: CT_BooleanProperty;
+        //extend?: CT_BooleanProperty;
+        //u?: CT_UnderlineProperty;
+        //vertAlign?: CT_VerticalAlignFontProperty;
+        //scheme?: CT_FontScheme;
     }
 
 
@@ -2345,11 +2366,11 @@ declare module OpenXml {
      * parents: indexedColors (§18.8.27)
      *
      * A single ARGB entry for the corresponding color index.
-     * @see https://msdn.microsoft.com/EN-US/library/documentformat.openxml.spreadsheet.rgbcolor.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.rgbcolor?view=openxml-2.8.1
      */
     interface RgbColor {
         /** ST_UnsignedIntHex, Color value expressed in Alpha Red Green Blue format (ARGB) */
-        rgb?: string | number;
+        rgb?: string | number | null;
     }
 
 
@@ -2369,7 +2390,7 @@ declare module OpenXml {
      *   </c>
      * </row>
      * end example]
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.row.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.row?view=openxml-2.8.1
      */
     interface Row {
         cs: Cell[];
@@ -2377,29 +2398,29 @@ declare module OpenXml {
         /** '1' if the rows 1 level of outlining deeper than the current row are in the collapsed outline state. It means that the rows which are 1 outline level deeper (numerically higher value)
          * than the current row are currently hidden due to a collapsed outline state. It is possible for collapsed to be false and yet still have the rows in question hidden.
          * This can be achieved by having a lower outline level collapsed, thus hiding all the child rows. default: false */
-        collapsed?: boolean;
+        collapsed?: boolean | null;
         /** '1' if the row style should be applied */
-        customFormat?: boolean;
+        customFormat?: boolean | null;
         /** '1' if the row height has been manually set */
-        customHeight?: boolean;
+        customHeight?: boolean | null;
         /** '1' if the row is hidden, e.g., due to a collapsed outline or by manually selecting and hiding a row. default: false */
-        hidden?: boolean;
+        hidden?: boolean | null;
         /** Row height measured in point size. There is no margin padding on row height */
-        ht?: number;
+        ht?: number | null;
         /** Outlining level of the row, when outlining is on. See description of outlinePr element's summaryBelow and summaryRight attributes for detailed information. default: 0 */
-        outlineLevel?: number;
+        outlineLevel?: number | null;
         /** '1' if the row should show phonetic. default: false */
-        ph?: boolean;
+        ph?: boolean | null;
         /** Row Index. Indicates to which row in the sheet this <row> definition corresponds */
         r: number;
         /** (Style Index) Index to style record for the row (only applied if customFormat attribute is '1') */
-        s?: number;
+        s?: number | null;
         /** ST_CellSpans */
-        spans: string;
+        spans?: string | null;
         /** (Thick Bottom), default: false */
-        thickBot?: boolean;
+        thickBot?: boolean | null;
         /** (Thick Top), default: false */
-        thickTop?: boolean;
+        thickTop?: boolean | null;
         /** "x14ac:dyDescent" */
         dyDescent: number;
     }
@@ -2409,10 +2430,10 @@ declare module OpenXml {
      * parents: rPr (§18.4.7)
      *
      * This element is a string representing the name of the font assigned to display this run.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.runfont.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.runfont?view=openxml-2.8.1
      */
     interface RunFont {
-        val?: string;
+        val: string;
     }
 
 
@@ -2420,7 +2441,7 @@ declare module OpenXml {
      * parents: from (§20.5.2.15); to (§20.5.2.32)
      *
      * This element specifies the row that is used within the from and to elements to specify anchoring information for a shape within a spreadsheet.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.spreadsheet.rowid.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.spreadsheet.rowid?view=openxml-2.8.1
      */
     interface RowId {
         content: ST_RowID;
@@ -2431,7 +2452,7 @@ declare module OpenXml {
      * parents: from (§20.5.2.15); to (§20.5.2.32)
      *
      * This element is used to specify the row offset within a cell. The units for which this attribute is specified in reside within the simple type definition referenced below.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.spreadsheet.rowoffset.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.spreadsheet.rowoffset?view=openxml-2.8.1
      */
     interface RowOffset {
         content: ST_Coordinate;
@@ -2442,19 +2463,19 @@ declare module OpenXml {
      * parents: customSheetView (§18.3.1.25); sheetView (§18.3.1.87)
      *
      * Worksheet view selection.
-     * @see https://msdn.microsoft.com/EN-US/library/documentformat.openxml.spreadsheet.selection.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.selection?view=openxml-2.8.1
      */
     interface Selection {
         // attributes
         /** ST_CellRef, Active Cell Location */
-        activeCell: string;
+        activeCell?: string | null;
         /** Active Cell Index - 0-based index of the range reference (in the array of references listed in sqref) containing the active cell.
          * Only used when the selection in sqref is not contiguous. Therefore, this value needs to be aware of the order in which the range references are written in sqref.
          * When this value is out of range then activeCell can be used.
          */
-        activeCellId: number;
+        activeCellId?: number | null;
         /** ST_Sqref, Sequence of References - Range of the selection. Can be non-contiguous set of ranges. */
-        sqref: string;
+        sqref?: string | null;
         /** The pane to which this selection belongs. */
         //pane: Pane;
     }
@@ -2477,7 +2498,7 @@ declare module OpenXml {
      * This element specifies the existence of a single shape. A shape can either be a preset or a custom geometry, defined using the SpreadsheetDrawingML framework.
      * In addition to a geometry each shape can have both visual and non-visual properties attached. Text and corresponding styling information can also be attached to a shape.
      * This shape is specified along with all other shapes within either the shape tree or group shape elements.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.spreadsheet.shape.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.spreadsheet.shape?view=openxml-2.8.1
      */
     interface Shape {
         nvSpPr: NonVisualShapeProperties;
@@ -2487,17 +2508,17 @@ declare module OpenXml {
 
         // attributes
         /** Lock Text Flag - This attribute indicates whether to allow text editing within this drawing object when the parent worksheet is protected; default: true */
-        fLocksText?: boolean;
+        fLocksText?: boolean | null;
         /** Publish to Server Flag - This attribute indicates whether the shape shall be published with the worksheet when sent to the server; default: false */
-        fPublished?: boolean;
+        fPublished?: boolean | null;
         /** Reference to Custom Function
          * This element specifies the custom function associated with the object. [Example: A macro script, add-in function, and so on. end example]
          * The format of this string shall be application-defined, and should be ignored if not understood.
          * [Example: <... macro="DoWork()" /> end example]
          */
-        macro?: string;
+        macro?: string | null;
         /** Text Link - This attribute specifies a formula linking to spreadsheet cell data */
-        textlink?: string;
+        textlink?: string | null;
     }
 
 
@@ -2508,13 +2529,13 @@ declare module OpenXml {
      * have been previously locked and thus should not be changed.
      */
     interface ShapeLocks extends AgLocking {
-        extLst?: Element;
+        extLst?: Element | null;
 
         // attributes
         /** Disallow Shape Text Editing
          * Specifies that the generating application should not allow editing of the shape text for the corresponding shape.
          * default: false */
-        noTextEdit?: boolean;
+        noTextEdit?: boolean | null;
     }
 
 
@@ -2524,17 +2545,17 @@ declare module OpenXml {
      * This element specifies the visual shape properties that can be applied to a special shape such as a connector shape or picture.
      * These are the same properties that are allowed to describe the visual properties of a shape but are used here to describe additional object-specific properties within a document.
      * This allows for these shapes to have both the properties of a shape as well as specific properties that are unique to only them.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.spreadsheet.shapeproperties.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.spreadsheet.shapeproperties?view=openxml-2.8.1
      */
     interface ShapeProperties extends EgGeometry, EgFillProperties, EgEffectProperties {
-        xfrm: Transform2D;
-        ln: Element; // CT_LineProperties
-        scene3d: Element; // CT_Scene3D
-        sp3d: Element; // CT_Shape3D
-        extLst: Element; // CT_OfficeArtExtensionList
+        xfrm?: Transform2D | null;
+        ln?: Element | null; // CT_LineProperties
+        scene3d?: Element | null; // CT_Scene3D
+        sp3d?: Element | null; // CT_Shape3D
+        extLst?: Element | null; // CT_OfficeArtExtensionList
 
         // attributes
-        bwMode?: ST_BlackWhiteMode;
+        bwMode?: ST_BlackWhiteMode | null;
     }
 
 
@@ -2542,7 +2563,7 @@ declare module OpenXml {
      * parents: cxnSp (§20.5.2.13); pic (§20.5.2.25); sp (§20.5.2.29)
      *
      * The element specifies the style that is applied to a shape and the corresponding references for each of the style components such as lines and fills.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.spreadsheet.shapestyle.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.spreadsheet.shapestyle?view=openxml-2.8.1
      */
     interface ShapeStyle {
         effectRef: EffectReference;
@@ -2559,10 +2580,10 @@ declare module OpenXml {
      * If the string is just a simple string with formatting applied at the cell level, then the String Item (si) should contain a single text element used to express the string.
      * However, if the string in the cell is more complex - i.e., has formatting applied at the character level - then the string item shall
      * consist of multiple rich text runs which collectively are used to express the string.
-     * @see https://msdn.microsoft.com/EN-US/library/documentformat.openxml.spreadsheet.sharedstringitem.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.sharedstringitem?view=openxml-2.8.1
      */
     interface SharedStringItem {
-        t?: Text;
+        t?: Text | null;
         rs?: RichTextRun[];
         //rPh?: PhoneticRun[]; // phonetic run
         //phoneticPr?: PhoneticProperties; // phonetic properties
@@ -2573,7 +2594,7 @@ declare module OpenXml {
      * parents: root element of SpreadsheetML Shared String Table part
      *
      * This element is the root of the Shared String Table, which serves as a collection of individual String Items (si).
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.sharedstringtable.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.sharedstringtable?view=openxml-2.8.1
      */
     interface SharedStringTable {
         sis: SharedStringItem[];
@@ -2601,7 +2622,7 @@ declare module OpenXml {
      * parents: worksheet (§18.3.1.99)
      *
      * This collection represents the cell table itself. This collection expresses information about each cell, grouped together by rows in the worksheet.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.sheetdata.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.sheetdata?view=openxml-2.8.1
      */
     interface SheetData {
         rows: Row[];
@@ -2615,7 +2636,7 @@ declare module OpenXml {
      * This is optional and is not required. Used cells include cells with formulas, text content, and cell formatting.
      * When an entire column is formatted, only the first cell in that column is considered used.
      * [Example: <dimension ref="A1:C2"/> end example]
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.sheetdimension.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.sheetdimension?view=openxml-2.8.1
      */
     interface SheetDimension {
         /** attr, ST_Ref row and column bounds of all cells in this worksheet 'A-1:B-2' style */
@@ -2627,13 +2648,13 @@ declare module OpenXml {
      * parents: dialogsheet (§18.3.1.34); worksheet (§18.3.1.99)
      *
      * Sheet formatting properties.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.sheetformatproperties.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.sheetformatproperties?view=openxml-2.8.1
      */
     interface SheetFormatProperties {
         // attributes
         //baseColWidth: number;
         //customHeight: boolean;
-        defaultColWidth: number;
+        defaultColWidth?: number | null;
         defaultRowHeight: number;
         /** double, "x14ac:dyDescent" */
         dyDescent: number;
@@ -2649,7 +2670,7 @@ declare module OpenXml {
      * parents: sheets (§18.2.20)
      *
      * This element defines a sheet in this workbook. Sheet data is stored in a separate part.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.sheet.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.sheet?view=openxml-2.8.1
      */
     interface Sheet {
         // attributes
@@ -2659,7 +2680,7 @@ declare module OpenXml {
         /** Sheet Tab Id */
         sheetId: number;
         /** Visible State */
-        state?: ST_SheetState;
+        state?: ST_SheetState | null;
     }
 
 
@@ -2671,7 +2692,7 @@ declare module OpenXml {
      * A worksheet consists of cells that are organized into columns and rows.
      * Some workbooks might have a modular design where there is one sheet for data and another worksheet for each specific analysis performed on that data.
      * In a complex modular system, you might have dozens of sheets, each dedicated to a specific task.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.sheets.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.sheets?view=openxml-2.8.1
      */
     interface Sheets {
         sheets: Sheet[];
@@ -2685,7 +2706,7 @@ declare module OpenXml {
      * each sheet view corresponds to a separate window within the spreadsheet application, where each window is showing the particular
      * sheet containing the same workbookViewId value, the last sheetView definition is loaded, and the others are discarded.
      * When multiple windows are viewing the same sheet, multiple sheetView elements (with corresponding workbookView entries) are saved.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.sheetview.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.sheetview?view=openxml-2.8.1
      */
     interface SheetView {
         selections: Selection[];
@@ -2703,15 +2724,15 @@ declare module OpenXml {
         //showRuler: boolean;
         //showWhiteSpace: boolean;
         //showZeros: boolean;
-        tabSelected: boolean;
-        topLeftCell: string; // ST_CellRef
-        view: string;
+        tabSelected?: boolean | null;
+        topLeftCell?: string | null; // ST_CellRef
+        view?: ST_SheetViewType | null;
         //windowProtection: boolean;
         workbookViewId: number;
-        zoomScale: number;
-        zoomScaleNormal: number;
-        zoomScalePageLayoutView: number;
-        zoomScaleSheetLayoutView: number;
+        zoomScale?: number | null;
+        zoomScaleNormal?: number | null;
+        zoomScalePageLayoutView?: number | null;
+        zoomScaleSheetLayoutView?: number | null;
     }
 
 
@@ -2731,7 +2752,7 @@ declare module OpenXml {
      *   </sheetView>
      * </sheetViews>
      * end example]
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.sheetviews.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.sheetviews?view=openxml-2.8.1
      */
     interface SheetViews {
         sheetViews: SheetView[];
@@ -2743,10 +2764,10 @@ declare module OpenXml {
      * parents: blipFill (§21.3.2.2); blipFill (§20.1.8.14); blipFill (§20.2.2.1); blipFill (§20.5.2.2); blipFill (§19.3.1.4)
      *
      * This element specifies that a BLIP should be stretched to fill the target rectangle. The other option is a tile where a BLIP is tiled to fill the available area.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.stretch.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.stretch?view=openxml-2.8.1
      */
     interface Stretch {
-        fillRect?: FillRectangle;
+        fillRect?: FillRectangle | null;
     }
 
 
@@ -2759,7 +2780,7 @@ declare module OpenXml {
 
 
     /** (W3C XML CT_StyleMatrixReference §A.4.1)
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.stylematrixreferencetype.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.stylematrixreferencetype?view=openxml-2.8.1
      */
     interface StyleMatrixReferenceType extends EgColorChoice {
         // attributes
@@ -2788,7 +2809,7 @@ declare module OpenXml {
      * </a:fillRef>
      * The above code indicates the object is to have the style's first background fill style using the accent2 color of the color scheme.
      * end example]
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.fillreference.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.fillreference?view=openxml-2.8.1
      */
     interface FillReference extends StyleMatrixReferenceType {
     }
@@ -2798,7 +2819,7 @@ declare module OpenXml {
      * parents: style (§21.3.2.24); style (§21.4.2.28); style (§20.1.2.2.37); style (§20.5.2.31); style (§19.3.1.46); tblBg (§20.1.4.2.25)
      *
      * This element defines a reference to an effect style within the style matrix. The idx attribute refers the index of an effect style within the effectStyleLst element.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.effectreference.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.effectreference?view=openxml-2.8.1
      */
     interface EffectReference extends StyleMatrixReferenceType {
     }
@@ -2808,9 +2829,22 @@ declare module OpenXml {
      * parents: bottom (§20.1.4.2.6); insideH (§20.1.4.2.14); insideV (§20.1.4.2.15); left (§20.1.4.2.18); right (§20.1.4.2.22); style (§21.3.2.24); style (§21.4.2.28); style (§20.1.2.2.37); style (§20.5.2.31); style (§19.3.1.46); tl2br (§20.1.4.2.31); top (§20.1.4.2.32); tr2bl (§20.1.4.2.33)
      *
      * This element defines a reference to a line style within the style matrix. The idx attribute refers the index of a line style within the fillStyleLst element.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.linereference.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.linereference?view=openxml-2.8.1
      */
     interface LineReference extends StyleMatrixReferenceType {
+    }
+
+
+    /** <xdr:oneCellAnchor> (One Cell Anchor Shape Size, W3C XML CT_OneCellAnchor §A.4.5)
+     * parents: wsDr (§20.5.2.35)
+     * 
+     * This element specifies a one cell anchor placeholder for a group, a shape, or a drawing element. It moves with the cell and its extents is in EMU units.
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.spreadsheet.onecellanchor?view=openxml-2.8.1
+     */
+    interface OneCellAnchor extends EgObjectChoices {
+        clientData: ClientData;
+        from: FromMarker;
+        ext: Extent;
     }
 
 
@@ -2818,20 +2852,20 @@ declare module OpenXml {
      * parents: root element of SpreadsheetML Styles part
      *
      * This is the root element of the Styles part.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.stylesheet.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.stylesheet?view=openxml-2.8.1
      */
     interface Stylesheet {
-        borders: Borders;
-        cellStyles: CellStyles;
-        cellStyleXfs: CellStyleFormats;
-        cellXfs: CellFormats;
-        colors?: Colors;
-        dxfs: DifferentialFormats;
-        fills: Fills;
-        fonts: Fonts;
-        numFmts: NumberingFormats;
-        tableStyles?: TableStyles;
-        extLst?: Element;
+        borders?: Borders | null;
+        cellStyles?: CellStyles | null;
+        cellStyleXfs?: CellStyleFormats | null;
+        cellXfs?: CellFormats | null;
+        colors?: Colors | null;
+        dxfs?: DifferentialFormats | null;
+        fills?: Fills | null;
+        fonts?: Fonts | null;
+        numFmts?: NumberingFormats | null;
+        tableStyles?: TableStyles | null;
+        extLst?: Element | null;
     }
 
 
@@ -2846,7 +2880,7 @@ declare module OpenXml {
      * [Note: Each of the table styles is made up of a collection of formatting definitions, each of which corresponds to a particular
      * structured region of the table. An application can decide to support these built-in types, and can also decide to define more styles, each with their own definitions.
      * An application can also decide whether the user is allowed to customize or further define additional table styles. end note]
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.tablestyle.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.tablestyle?view=openxml-2.8.1
      */
     interface TableStyle {
         tableStyleElements: TableStyleElement[];
@@ -2854,8 +2888,8 @@ declare module OpenXml {
         // attributes
         count?: number;
         name: string;
-        pivot?: boolean; // default: true
-        table?: boolean; // default: true
+        pivot?: boolean | null; // default: true
+        table?: boolean | null; // default: true
     }
 
 
@@ -2867,16 +2901,16 @@ declare module OpenXml {
      * Table Style Element Order: Whole Table, First Column Stripe, Second Column Stripe, First Row Stripe, Second Row Stripe, Last Column, First Column, Header Row, Total Row, First Header Cell, Last Header Cell, First Total Cell, Last Total Cell
      * For instance, row stripe formatting 'wins' over column stripe formatting, and both 'win' over whole table formatting.
      * PivotTable Style Element Order: Whole Table, Page Field Labels, Page Field Values, First Column Stripe, Second Column Stripe, First Row Stripe, Second Row Stripe, First Column, Header Row, First Header Cell, Subtotal Column 1, Subtotal Column 2, Subtotal Column 3, Blank Row, Subtotal Row 1, Subtotal Row 2, Subtotal Row 3, Column Subheading 1, Column Subheading 2, Column Subheading 3, Row Subheading 1, Row Subheading 2, Row Subheading 3, Grand Total Column, Grand Total Row
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.tablestyleelement.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.tablestyleelement?view=openxml-2.8.1
      */
     interface TableStyleElement {
         // attributes
         /** Table Style Type - Identifies this table style element's type. */
         type: ST_TableStyleType;
         /** Band Size - Number of rows or columns in a single band of striping. Applies only when type is firstRowStripe, secondRowStripe, firstColumnStripe, or secondColumnStripe; default: 1 */
-        size?: number;
+        size?: number | null;
         /** ST_DxfId, Formatting Id - Zero-based index to a dxf record in the dxfs collection, specifying differential formatting to use with this Table or PivotTable style element. */
-        dxfId?: number;
+        dxfId?: number | null;
     }
 
 
@@ -2888,7 +2922,7 @@ declare module OpenXml {
      * A Table style is a collection of formatting that applies to structured regions of a Table or PivotTable
      * [Example: make the header row & totals bold face, and apply light gray fill to alternating rows in the data portion of the table to achieve striped or banded rows. end example]
      * See the enumeration values in ST_TableStyleType for a listing of structured Table regions to which formatting can be applied, and which together make up a single Table style definition.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.tablestyles.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.tablestyles?view=openxml-2.8.1
      */
     interface TableStyles {
         tableStyles: TableStyle[];
@@ -2897,9 +2931,9 @@ declare module OpenXml {
         /** Table Style Count - Count of table styles defined in this collection. */
         count?: number;
         /** Default Pivot Style - Name of the default table style to apply to new PivotTables. This can be set by the user interface */
-        defaultPivotStyle?: string;
+        defaultPivotStyle?: string | null;
         /** Default Table Style - Name of default table style to apply to new Tables. This can be set by the user interface */
-        defaultTableStyle?: string;
+        defaultTableStyle?: string | null;
     }
 
 
@@ -2907,13 +2941,13 @@ declare module OpenXml {
      * parents: is (§18.3.1.53); r (§18.4.4); rPh (§18.4.6); si (§18.4.8); text (§18.7.7)
      *
      * This element represents the text content shown as part of a string.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.text.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.text?view=openxml-2.8.1
      */
     interface Text {
         /** text */
         content: string;
         /** "xml:space" */
-        preserveSpace: boolean;
+        preserveSpace?: boolean;
     }
 
 
@@ -2922,7 +2956,7 @@ declare module OpenXml {
      *
      * This element specifies the existence of text to be contained within the corresponding shape. All visible text and visible text related
      * properties are contained within this element. There can be multiple paragraphs and within paragraphs multiple runs of text.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.spreadsheet.textbody.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.spreadsheet.textbody?view=openxml-2.8.1
      */
     interface TextBody {
         bodyPr: Element; // CT_TextBodyProperties;
@@ -2936,22 +2970,22 @@ declare module OpenXml {
      *
      * This element specifies that a BLIP should be tiled to fill the available space. This element defines a "tile" rectangle within the bounding box.
      * The image is encompassed within the tile rectangle, and the tile rectangle is tiled across the bounding box to fill the entire area.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.tile.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.tile?view=openxml-2.8.1
      */
     interface Tile {
         // attributes
         /** Alignment - Specifies where to align the first tile with respect to the shape. Alignment happens after the scaling, but before the additional offset. */
-        algn?: ST_RectAlignment;
+        algn?: ST_RectAlignment | null;
         /** Tile Flipping - Specifies the direction(s) in which to flip the source image while tiling. Images can be flipped horizontally, vertically, or in both directions to fill the entire region. */
-        flip?: ST_TileFlipMode;
+        flip?: ST_TileFlipMode | null;
         /** Horizontal Ratio - Specifies the amount to horizontally scale the srcRect. */
-        sx?: ST_Percentage;
+        sx?: ST_Percentage | null;
         /** Vertical Ratio - Specifies the amount to vertically scale the srcRect. */
-        sy?: ST_Percentage;
+        sy?: ST_Percentage | null;
         /** Horizontal Offset - Specifies additional horizontal offset after alignment. */
-        tx?: ST_Coordinate;
+        tx?: ST_Coordinate | null;
         /** Vertical Offset - Specifies additional vertical offset after alignment. */
-        ty?: ST_Coordinate;
+        ty?: ST_Coordinate | null;
     }
 
 
@@ -2959,19 +2993,19 @@ declare module OpenXml {
      * parents: graphicFrame (§20.1.2.2.18); spPr (§21.2.2.197); spPr (§21.3.2.23); spPr (§21.4.3.7); spPr (§20.1.2.2.35); spPr (§20.2.2.6); spPr (§20.5.2.30); spPr (§19.3.1.44); txSp (§20.1.2.2.41)
      *
      * This element represents 2-D transforms for ordinary shapes.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.transform2d.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.transform2d?view=openxml-2.8.1
      */
     interface Transform2D {
-        off?: Position;
-        ext?: Extent;
+        off?: Position | null;
+        ext?: Extent | null;
 
         // attributes
         /** Horizontal Flip. When true, this attribute defines that the shape is flipped horizontally about the center of its bounding box. default: false */
-        flipH?: boolean;
+        flipH?: boolean | null;
         /** Vertical Flip. When true, this attribute defines that the group is flipped vertically about the center of its bounding box. default: false */
-        flipV?: boolean;
+        flipV?: boolean | null;
         /** Rotation. Specifies (the clockwise rotation of a shape in 1/64000 of a degree) the rotation of the Graphic Frame. The units for which this attribute is specified in reside within the simple type definition referenced below. default: 0 */
-        rot?: number;
+        rot?: number | null;
     }
 
 
@@ -2980,21 +3014,21 @@ declare module OpenXml {
      *
      * This element is nearly identical to the representation of 2-D transforms for ordinary shapes (§20.1.7.6).
      * The only addition is a member to represent the Child offset and the Child extents.
-     * https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.transformgroup.aspx
+     * https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.transformgroup?view=openxml-2.8.1
      */
     interface TransformGroup {
-        off?: Position;
-        ext?: Extent;
-        chOff?: Position;
-        chExt?: Extent;
+        off?: Position | null;
+        ext?: Extent | null;
+        chOff?: Position | null;
+        chExt?: Extent | null;
 
         // attributes
         /** Horizontal Flip. When true, this attribute defines that the group is flipped horizontally about the center of its bounding box. default: false */
-        flipH?: boolean;
+        flipH?: boolean | null;
         /** Vertical Flip. When true, this attribute defines that the group is flipped vertically about the center of its bounding box. default: false */
-        flipV?: boolean;
+        flipV?: boolean | null;
         /** Rotation. Specifies the clockwise rotation of a group in 1/64000 of a degree. default: 0 */
-        rot?: number;
+        rot?: number | null;
     }
 
 
@@ -3002,7 +3036,7 @@ declare module OpenXml {
      * parents: wsDr (§20.5.2.35)
      *
      * This element specifies a two cell anchor placeholder for a group, a shape, or a drawing element. It moves with cells and its extents are in EMU units.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.spreadsheet.twocellanchor.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.spreadsheet.twocellanchor?view=openxml-2.8.1
      */
     interface TwoCellAnchor extends EgObjectChoices {
         clientData: ClientData;
@@ -3019,13 +3053,13 @@ declare module OpenXml {
          * instead the anchor locations should be moved as needed to maintain the same size and position. end example];
          * default: "twoCell"
          */
-        editAs?: ST_EditAs;
+        editAs?: ST_EditAs | null;
     }
 
 
     /** <x:u> (Underline, W3C XML CT_UnderlineProperty §A.2)
      * parents: font (§18.8.22); rPr (§18.4.7)
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.underline.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.underline?view=openxml-2.8.1
      */
     interface Underline {
         val: ST_UnderlineValues;
@@ -3034,7 +3068,7 @@ declare module OpenXml {
 
     /** <x:vertAlign> (Vertical Alignment, W3C XML CT_VerticalAlignFontProperty §A.2)
      * parents: font (§18.8.22); rPr (§18.4.7)
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.verticaltextalignment.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.verticaltextalignment?view=openxml-2.8.1
      */
     interface VerticalTextAlignment {
         val: ST_VerticalAlignRun;
@@ -3045,7 +3079,7 @@ declare module OpenXml {
      * parents: root element of SpreadsheetML Workbook part
      *
      * This is the root element of the SpreadsheetML Workbook part.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.workbook.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.workbook?view=openxml-2.8.1
      */
     interface Workbook {
         // attributes
@@ -3081,45 +3115,45 @@ declare module OpenXml {
             lastEdited: string;
             lowestEdited: string;
             rupBuild: string;
-        } | Element;
+        } | Element | null;
         workbookPr?: {
             // attributes
             defaultThemeVersion: number;
             // others...
-        } | Element;
+        } | Element | null;
         bookViews?: {
             workbookView: {
                 // attributes
-                xWindow: number;
-                yWindow: number;
-                windowWidth: number;
-                windowHeight: number;
-                tabRatio: number;
+                xWindow?: number;
+                yWindow?: number;
+                windowWidth?: number;
+                windowHeight?: number;
+                tabRatio?: number;
             };
-        } | Element;
+        } | Element | null;
         calcPr?: {
             // attributes
             calcId: number;
-        } | Element;
-        extLst?: Element;
+        } | Element | null;
+        extLst?: Element | null;
     }
 
 
     /** <x:worksheet> (Worksheet, W3C XML CT_Worksheet §A.2)
      * parents: root element of SpreadsheetML Worksheet part
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.worksheet.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.worksheet?view=openxml-2.8.1
      */
     interface Worksheet {
-        dimension: SheetDimension;
-        sheetViews?: SheetViews;
-        sheetFormatPr?: SheetFormatProperties;
+        dimension?: SheetDimension | null;
+        sheetViews?: SheetViews | null;
+        sheetFormatPr?: SheetFormatProperties | null;
         cols: Columns[];
         sheetData: SheetData;
-        pageMargins?: PageMargins;
-        pageSetup?: PageSetup;
-        headerFooter?: HeaderFooter;
-        drawing?: Drawing;
-        legacyDrawing?: LegacyDrawing;
+        pageMargins?: PageMargins | null;
+        pageSetup?: PageSetup | null;
+        headerFooter?: HeaderFooter | null;
+        drawing?: Drawing | null;
+        legacyDrawing?: LegacyDrawing | null;
         // TODO and other elements
     }
 
@@ -3129,7 +3163,7 @@ declare module OpenXml {
      *
      * This element specifies all drawing objects within the worksheet. It acts much like the spTree element within the DrawingML framework.
      * Allowing for the specification of all shapes for a given part of a document, in this case a single Worksheet.
-     * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.drawing.spreadsheet.worksheetdrawing.aspx
+     * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.spreadsheet.worksheetdrawing?view=openxml-2.8.1
      */
     interface WorksheetDrawing {
         //absoluteAnchors: AbsoluteAnchor[];

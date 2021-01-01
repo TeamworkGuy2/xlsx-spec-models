@@ -1,6 +1,6 @@
 "use strict";
 /** ST_BorderStyle
- * @see https://msdn.microsoft.com/en-us/library/documentformat.openxml.spreadsheet.borderstylevalues.aspx
+ * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.borderstylevalues?view=openxml-2.8.1
  * @author TeamworkGuy2
  * @since 2016-5-26
  */

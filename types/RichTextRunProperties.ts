@@ -10,11 +10,11 @@ class RichTextRunProperties {
 
     public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.RichTextRunProperties {
         xmlDoc.validator.expectNode(elem, "rPr", "r");
-        var boldElem = xmlDoc.queryOneChild(elem, "b");
-        var colorElem = xmlDoc.queryOneChild(elem, "color");
-        var familyElem = xmlDoc.queryOneChild(elem, "family");
-        var rFontElem = xmlDoc.queryOneChild(elem, "rFont");
-        var szElem = xmlDoc.queryOneChild(elem, "sz");
+        var boldElem = xmlDoc.queryOneChild(elem, "b", false);
+        var colorElem = xmlDoc.queryOneChild(elem, "color", false);
+        var familyElem = xmlDoc.queryOneChild(elem, "family", false);
+        var rFontElem = xmlDoc.queryOneChild(elem, "rFont", false);
+        var szElem = xmlDoc.queryOneChild(elem, "sz", false);
 
         return {
             b: boldElem ? Bold.read(xmlDoc, boldElem, "b", "rPr") : null,

@@ -3,9 +3,10 @@ var RunFont = /** @class */ (function () {
     function RunFont() {
     }
     RunFont.read = function (xmlDoc, elem) {
+        var _a;
         xmlDoc.validator.expectNode(elem, "rFont", "rPr");
         return {
-            val: xmlDoc.attrString(elem, "val"),
+            val: (_a = xmlDoc.attrString(elem, "val")) !== null && _a !== void 0 ? _a : "",
         };
     };
     RunFont.write = function (xmlDoc, inst) {

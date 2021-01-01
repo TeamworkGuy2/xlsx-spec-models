@@ -6,9 +6,10 @@ var FloatAttribute = /** @class */ (function () {
     function FloatAttribute() {
     }
     FloatAttribute.read = function (xmlDoc, elem, expectedTagName, parentTags) {
+        var _a;
         xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
         return {
-            val: xmlDoc.attrFloat(elem, "val"),
+            val: (_a = xmlDoc.attrFloat(elem, "val")) !== null && _a !== void 0 ? _a : 0,
         };
     };
     FloatAttribute.write = function (xmlDoc, inst, tagName) {

@@ -6,9 +6,10 @@ var BooleanAttribute = /** @class */ (function () {
     function BooleanAttribute() {
     }
     BooleanAttribute.read = function (xmlDoc, elem, expectedTagName, parentTags) {
+        var _a;
         xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
         return {
-            val: xmlDoc.attrBool(elem, "val"),
+            val: (_a = xmlDoc.attrBool(elem, "val")) !== null && _a !== void 0 ? _a : false,
         };
     };
     BooleanAttribute.write = function (xmlDoc, inst, tagName) {

@@ -24,7 +24,7 @@ module CalcChain {
             return {
                 i: xmlDoc.attrInt(elem, "i"),
                 l: xmlDoc.attrBool(elem, "l"),
-                r: xmlDoc.attrString(elem, "r"),
+                r: xmlDoc.attrString(elem, "r") ?? "",
                 s: xmlDoc.attrBool(elem, "s"),
             };
         },

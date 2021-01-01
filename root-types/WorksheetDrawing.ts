@@ -43,8 +43,8 @@ module WorksheetDrawing {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "a:ext", "absoluteAnchor, oneCellAnchor");
             return {
-                cx: xmlDoc.attrInt(elem, "cx"),
-                cy: xmlDoc.attrInt(elem, "cy"),
+                cx: xmlDoc.attrInt(elem, "cx") ?? 0,
+                cy: xmlDoc.attrInt(elem, "cy") ?? 0,
             };
         },
 
@@ -88,8 +88,8 @@ module WorksheetDrawing {
             var spPrElem = xmlDoc.queryOneChild(elem, "spPr");
 
             return {
-                blipFill: <any>blipFillElem,
-                nvPicPr: <any>nvPicPrElem,
+                blipFill: blipFillElem,
+                nvPicPr: nvPicPrElem,
                 spPr: ShapeProperties.read(xmlDoc, spPrElem),
                 // attributes
                 fPublished: xmlDoc.attrBool(elem, "fPublished"),
@@ -114,8 +114,8 @@ module WorksheetDrawing {
         read(xmlDoc, elem, expectedTagName, parentTags?) {
             xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
             return {
-                x: xmlDoc.attrInt(elem, "x"),
-                y: xmlDoc.attrInt(elem, "y"),
+                x: xmlDoc.attrInt(elem, "x") ?? 0,
+                y: xmlDoc.attrInt(elem, "y") ?? 0,
             };
         },
 
@@ -132,16 +132,17 @@ module WorksheetDrawing {
     export var ShapeProperties: OpenXmlIo.ReadWrite<OpenXml.ShapeProperties> = {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "xdr:spPr", "cxnSp, pic, sp");
+            var xfrmElem = xmlDoc.queryOneChild(elem, "xfrm", false);
 
             return {
-                xfrm: Transform2D.read(xmlDoc, xmlDoc.queryOneChild(elem, "xfrm")),
-                ln: xmlDoc.queryOneChild(elem, "ln"),
-                scene3d: xmlDoc.queryOneChild(elem, "scene3d"),
-                sp3d: xmlDoc.queryOneChild(elem, "sp3d"),
-                prstGeom: xmlDoc.queryOneChild(elem, "prstGeom"),
-                extLst: xmlDoc.queryOneChild(elem, "extLst"),
+                xfrm: xfrmElem ? Transform2D.read(xmlDoc, xfrmElem) : null,
+                ln: xmlDoc.queryOneChild(elem, "ln", false),
+                scene3d: xmlDoc.queryOneChild(elem, "scene3d", false),
+                sp3d: xmlDoc.queryOneChild(elem, "sp3d", false),
+                prstGeom: xmlDoc.queryOneChild(elem, "prstGeom", false),
+                extLst: xmlDoc.queryOneChild(elem, "extLst", false),
                 // attributes
-                bwMode: <OpenXml.ST_BlackWhiteMode>xmlDoc.attrString(elem, "bwMode"),
+                bwMode: <OpenXml.ST_BlackWhiteMode | null>xmlDoc.attrString(elem, "bwMode"),
             };
         },
 
@@ -175,12 +176,12 @@ module WorksheetDrawing {
     export var Transform2D: OpenXmlIo.ReadWrite<OpenXml.Transform2D> = {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "a:xfrm", "graphicFrame, spPr, txSp");
-            var offElem = xmlDoc.queryOneChild(elem, "off");
-            var extElem = xmlDoc.queryOneChild(elem, "ext");
+            var offElem = xmlDoc.queryOneChild(elem, "off", false);
+            var extElem = xmlDoc.queryOneChild(elem, "ext", false);
 
             return {
-                off: Offset.read(xmlDoc, offElem),
-                ext: Extent.read(xmlDoc, extElem),
+                off: offElem ? Offset.read(xmlDoc, offElem) : null,
+                ext: extElem ? Extent.read(xmlDoc, extElem) : null,
                 // attributes
                 flipH: xmlDoc.attrBool(elem, "flipH"),
                 flipV: xmlDoc.attrBool(elem, "flipV"),
@@ -204,14 +205,16 @@ module WorksheetDrawing {
     export var TwoCellAnchor: OpenXmlIo.ReadWrite<OpenXml.TwoCellAnchor> = {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "xdr:twoCellAnchor", "xdr:wsDr");
+            var picElem = xmlDoc.queryOneChild(elem, "pic", false);
 
             return {
                 clientData: ClientData.read(xmlDoc, xmlDoc.queryOneChild(elem, "clientData")),
                 from: FromMarker.read(xmlDoc, xmlDoc.queryOneChild(elem, "from")),
                 to: ToMarker.read(xmlDoc, xmlDoc.queryOneChild(elem, "to")),
-                pic: Picture.read(xmlDoc, xmlDoc.queryOneChild(elem, "pic")),
+                pic: picElem ? Picture.read(xmlDoc, picElem) : null,
+                // TODO other EG_ObjectChoices properties
                 // attributes
-                editAs: <OpenXml.ST_EditAs>xmlDoc.attrString(elem, "editAs"),
+                editAs: <OpenXml.ST_EditAs | null>xmlDoc.attrString(elem, "editAs"),
             };
         },
 
@@ -221,7 +224,7 @@ module WorksheetDrawing {
                 .element;
             elem.appendChild(FromMarker.write(xmlDoc, inst.from));
             elem.appendChild(ToMarker.write(xmlDoc, inst.to));
-            elem.appendChild(Picture.write(xmlDoc, inst.pic));
+            if (inst.pic) { elem.appendChild(Picture.write(xmlDoc, inst.pic)); }
             elem.appendChild(ClientData.write(xmlDoc, inst.clientData));
             return elem;
         }

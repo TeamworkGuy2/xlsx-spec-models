@@ -5,8 +5,8 @@ var Text = /** @class */ (function () {
     Text.read = function (xmlDoc, elem) {
         xmlDoc.validator.expectNode(elem, "t", "si, r");
         return {
-            preserveSpace: xmlDoc.attrBool(elem, "xml:space"),
-            content: elem.textContent
+            preserveSpace: xmlDoc.attrBool(elem, "xml:space") || undefined,
+            content: elem.textContent,
         };
     };
     Text.write = function (xmlDoc, inst) {
