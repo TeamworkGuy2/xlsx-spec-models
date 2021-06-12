@@ -13,9 +13,9 @@ var StringUtil = require("./StringUtil");
  * @since 2020-12-12
  */
 function generate() {
-    OpenXmlSpecParser.loadXsdSpecs("C:/Users/TeamworkGuy2/Downloads/openxml/ECMA-376, Fifth Edition, Part 4 - Transitional Migration Features/OfficeOpenXML-XMLSchema-Transitional").done(function (xsdCache) {
+    OpenXmlSpecParser.loadXsdSpecs("C:/Users/TeamworkGuy2/Downloads/openxml/ECMA-376, Fifth Edition, Part 4 - Transitional Migration Features/OfficeOpenXML-XMLSchema-Transitional").then(function (xsdCache) {
         console.log("successfully loaded XSD cache with " + Object.keys(xsdCache).length + " keys");
-    }, function (err) {
+    }).catch(function (err) {
         console.error("error loading XSD cache", err);
     });
     var typeName = process.argv[2].trim();

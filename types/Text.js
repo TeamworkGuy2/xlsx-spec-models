@@ -6,7 +6,7 @@ var Text = /** @class */ (function () {
         xmlDoc.validator.expectNode(elem, "t", "si, r");
         return {
             preserveSpace: xmlDoc.attrBool(elem, "xml:space") || undefined,
-            content: elem.textContent,
+            content: elem.textContent, // only null on document or Doctype
         };
     };
     Text.write = function (xmlDoc, inst) {

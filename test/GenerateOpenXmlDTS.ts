@@ -14,9 +14,9 @@ import StringUtil = require("./StringUtil");
  */
 
 function generate() {
-    OpenXmlSpecParser.loadXsdSpecs("C:/Users/TeamworkGuy2/Downloads/openxml/ECMA-376, Fifth Edition, Part 4 - Transitional Migration Features/OfficeOpenXML-XMLSchema-Transitional").done((xsdCache) => {
+    OpenXmlSpecParser.loadXsdSpecs("C:/Users/TeamworkGuy2/Downloads/openxml/ECMA-376, Fifth Edition, Part 4 - Transitional Migration Features/OfficeOpenXML-XMLSchema-Transitional").then((xsdCache) => {
         console.log("successfully loaded XSD cache with " + Object.keys(xsdCache).length + " keys");
-    }, (err) => {
+    }).catch((err) => {
         console.error("error loading XSD cache", err);
     });
 

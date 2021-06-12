@@ -4,7 +4,13 @@ This project does its best to adhere to [Semantic Versioning](http://semver.org/
 
 
 --------
-### [0.6.0](N/A) - 2021-01-01
+### [0.7.0](N/A) - 2021-06-12
+#### Changed
+* Update to TypeScript 4.3
+
+
+--------
+### [0.6.0](https://github.com/TeamworkGuy2/xlsx-spec-models/commit/07fab8dcb37eca580d707bffa400f0203fc52735) - 2021-01-01
 #### Added
 * Prototype OpenXml interface generator which reads from the Microsoft Docs documentation.
   * Next step: integrate generator with XSD files definitions from ECMA-376 spec to generate spec correct/compliant interfaces

@@ -8,7 +8,7 @@ var StringElement = /** @class */ (function () {
     StringElement.read = function (xmlDoc, elem, expectedTagName, parentTags) {
         xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
         return {
-            content: parseInt(elem.textContent),
+            content: parseInt(elem.textContent), // only null on document or Doctype
         };
     };
     StringElement.write = function (xmlDoc, inst, tagName) {
