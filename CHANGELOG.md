@@ -4,7 +4,13 @@ This project does its best to adhere to [Semantic Versioning](http://semver.org/
 
 
 --------
-### [0.7.0](N/A) - 2021-06-12
+### [0.8.0](N/A) - 2022-01-03
+#### Changed
+* Update to TypeScript 4.4
+
+
+--------
+### [0.7.0](https://github.com/TeamworkGuy2/xlsx-spec-models/commit/4ede0a7ebba2badea354a25df0ff34da860c9ab7) - 2021-06-12
 #### Changed
 * Update to TypeScript 4.3
 
