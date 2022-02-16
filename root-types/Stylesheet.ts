@@ -753,8 +753,8 @@ module Stylesheet {
             var fgColorElem = xmlDoc.queryOneChild(elem, "fgColor", false);
 
             return {
-                bgColor: bgColorElem ? Color.read(xmlDoc, bgColorElem, "bgColor") : null,
                 fgColor: fgColorElem ? Color.read(xmlDoc, fgColorElem, "fgColor") : null,
+                bgColor: bgColorElem ? Color.read(xmlDoc, bgColorElem, "bgColor") : null,
                 patternType: <OpenXml.ST_PatternType | null>xmlDoc.attrString(elem, "patternType"),
             };
         },
