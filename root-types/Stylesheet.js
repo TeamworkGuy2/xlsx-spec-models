@@ -742,8 +742,8 @@ var Stylesheet;
             var bgColorElem = xmlDoc.queryOneChild(elem, "bgColor", false);
             var fgColorElem = xmlDoc.queryOneChild(elem, "fgColor", false);
             return {
-                bgColor: bgColorElem ? Color.read(xmlDoc, bgColorElem, "bgColor") : null,
                 fgColor: fgColorElem ? Color.read(xmlDoc, fgColorElem, "fgColor") : null,
+                bgColor: bgColorElem ? Color.read(xmlDoc, bgColorElem, "bgColor") : null,
                 patternType: xmlDoc.attrString(elem, "patternType"),
             };
         },

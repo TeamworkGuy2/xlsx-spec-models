@@ -4,7 +4,13 @@ This project does its best to adhere to [Semantic Versioning](http://semver.org/
 
 
 --------
-### [0.8.0](N/A) - 2022-01-03
+### [0.8.1](N/A) - 2022-02-18
+#### Fixed
+* Fix Stylesheet PatternFill XML serialization to work with MS Excel's eccentricities
+
+
+--------
+### [0.8.0](https://github.com/TeamworkGuy2/xlsx-spec-models/commit/26f6462f6fd5f93a4dab76b80729c5b1d783c5b8) - 2022-01-03
 #### Changed
 * Update to TypeScript 4.4
 
