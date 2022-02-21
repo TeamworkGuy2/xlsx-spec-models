@@ -1,6 +1,6 @@
 {
   "name": "xlsx-spec-models",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "TypeScript Open XML XLSX format models with DOM read/write methods",
   "author": "TeamworkGuy2",
   "homepage": "https://github.com/TeamworkGuy2/xlsx-spec-models",

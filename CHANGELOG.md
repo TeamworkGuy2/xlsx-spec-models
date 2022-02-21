@@ -4,9 +4,15 @@ This project does its best to adhere to [Semantic Versioning](http://semver.org/
 
 
 --------
-### [0.8.1](N/A) - 2022-02-18
+### [0.8.2](N/A) - 2022-02-21
 #### Fixed
-* Fix Stylesheet PatternFill XML serialization to work with MS Excel's eccentricities
+* Fix Stylesheet PatternFill.write() XML serialization to work with MS Excel's eccentricities
+
+
+--------
+### [0.8.1](https://github.com/TeamworkGuy2/xlsx-spec-models/commit/46d7324c207a6305d871945bdbed96fca71bf84c) - 2022-02-18
+#### Fixed
+* (incorrect) Fix Stylesheet PatternFill.read() to work with MS Excel's eccentricities
 
 
 --------
