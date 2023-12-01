@@ -2,7 +2,7 @@
  * @since 2016-05-26
  */
 class StringElement {
-    private static type: OpenXmlIo.ReadWrite<{ content: number }> = StringElement; // TODO type-checker
+    private static type: OpenXmlIo.ReadWriteNamed<{ content: number }> = StringElement; // TODO type-checker
 
 
     public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement, expectedTagName: string, parentTags?: string): { content: number } {

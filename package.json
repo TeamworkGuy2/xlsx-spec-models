@@ -1,6 +1,6 @@
 {
   "name": "xlsx-spec-models",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "description": "TypeScript Open XML XLSX format models with DOM read/write methods",
   "author": "TeamworkGuy2",
   "homepage": "https://github.com/TeamworkGuy2/xlsx-spec-models",
@@ -28,6 +28,6 @@
   },
   "scripts": {
     "test": "node node_modules/mocha/bin/_mocha -u tdd --recursive",
-    "tsc": "node node_modules/typescript/bin/tsc"
+    "build": "node node_modules/typescript/bin/tsc"
   }
 }

@@ -4,7 +4,7 @@
  * @since 2016-05-26
  */
 class BorderProperty {
-    private static type: OpenXmlIo.ReadWrite<OpenXml.BorderProperty> = BorderProperty; // TODO type-checker
+    private static type: OpenXmlIo.ReadWriteNamed<OpenXml.BorderProperty> = BorderProperty; // TODO type-checker
 
 
     public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement, expectedTagName: string, parentTags?: string): OpenXml.BorderProperty {

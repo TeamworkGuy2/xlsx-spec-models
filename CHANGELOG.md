@@ -4,7 +4,14 @@ This project does its best to adhere to [Semantic Versioning](http://semver.org/
 
 
 --------
-### [0.8.2](N/A) - 2022-02-21
+### [0.8.3](N/A) - 2023-11-30
+#### Changed
+* Build: Enable TypeScript `strict` compile option
+* Build: rename `tsc` npm command in package.json to `build`
+
+
+--------
+### [0.8.2](https://github.com/TeamworkGuy2/xlsx-spec-models/commit/976202313414e8534f7d5030c457740f94e352b3) - 2022-02-21
 #### Fixed
 * Fix Stylesheet PatternFill.write() XML serialization to work with MS Excel's eccentricities
 

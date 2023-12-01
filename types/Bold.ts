@@ -1,6 +1,6 @@
 ﻿
 class Bold {
-    private static type: OpenXmlIo.ReadWrite<OpenXml.Bold> = Bold; // TODO type-checker
+    private static type: OpenXmlIo.ReadWriteNamed<OpenXml.Bold> = Bold; // TODO type-checker
 
 
     public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement, expectedTagName: string, parentTags?: string): OpenXml.Bold {

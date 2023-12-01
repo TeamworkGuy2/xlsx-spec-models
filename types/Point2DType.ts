@@ -1,6 +1,6 @@
 ﻿
 class Point2DType {
-    private static type: OpenXmlIo.ReadWrite<OpenXml.Point2DType> = Point2DType; // TODO type-checker
+    private static type: OpenXmlIo.ReadWriteNamed<OpenXml.Point2DType> = Point2DType; // TODO type-checker
 
 
     public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement, expectedTagName: string, parentTags?: string): OpenXml.Point2DType {

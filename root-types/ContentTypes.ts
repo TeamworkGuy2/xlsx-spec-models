@@ -23,7 +23,7 @@ module ContentTypes {
     };
 
 
-    export var ContentTypeDefault: OpenXmlIo.ReadWriteNamed<OpenXml.ContentTypeDefault> = {
+    export var ContentTypeDefault: OpenXmlIo.ReadWrite<OpenXml.ContentTypeDefault> = {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "Default", "Types");
             return {
@@ -42,7 +42,7 @@ module ContentTypes {
     };
 
 
-    export var ContentTypeOverride: OpenXmlIo.ReadWriteNamed<OpenXml.ContentTypeOverride> = {
+    export var ContentTypeOverride: OpenXmlIo.ReadWrite<OpenXml.ContentTypeOverride> = {
         read(xmlDoc, elem) {
             xmlDoc.validator.expectNode(elem, "Override", "Types");
             return {

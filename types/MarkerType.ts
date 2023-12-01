@@ -4,7 +4,7 @@ import RowId = require("../types/RowId");
 import RowOffset = require("../types/RowOffset");
 
 class MarkerType {
-    private static type: OpenXmlIo.ReadWrite<OpenXml.MarkerType> = MarkerType; // TODO type-checker
+    private static type: OpenXmlIo.ReadWriteNamed<OpenXml.MarkerType> = MarkerType; // TODO type-checker
 
 
     public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement, expectedTagName: string, parentTags?: string): OpenXml.MarkerType {

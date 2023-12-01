@@ -751,11 +751,11 @@ var Stylesheet;
             var elem = xmlDoc.domBldr.create("patternFill")
                 .attrString("patternType", inst.patternType, true)
                 .element;
-            if (inst.bgColor) {
-                elem.appendChild(Color.write(xmlDoc, inst.bgColor, "bgColor"));
-            }
             if (inst.fgColor) {
                 elem.appendChild(Color.write(xmlDoc, inst.fgColor, "fgColor"));
+            }
+            if (inst.bgColor) {
+                elem.appendChild(Color.write(xmlDoc, inst.bgColor, "bgColor"));
             }
             return elem;
         }
