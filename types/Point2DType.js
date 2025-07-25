@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Point2DType = void 0;
 var Point2DType = /** @class */ (function () {
     function Point2DType() {
     }
@@ -20,4 +22,4 @@ var Point2DType = /** @class */ (function () {
     Point2DType.type = Point2DType; // TODO type-checker
     return Point2DType;
 }());
-module.exports = Point2DType;
+exports.Point2DType = Point2DType;

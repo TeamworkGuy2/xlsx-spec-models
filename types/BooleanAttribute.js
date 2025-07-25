@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.BooleanAttribute = void 0;
 /** Generic Open XML parse for an element with a single boolean attribute
  * @since 2016-05-26
  */
@@ -26,4 +28,4 @@ var BooleanAttribute = /** @class */ (function () {
     BooleanAttribute.type = BooleanAttribute; // TODO type-checker
     return BooleanAttribute;
 }());
-module.exports = BooleanAttribute;
+exports.BooleanAttribute = BooleanAttribute;

@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.BorderStyleValues = void 0;
 /** ST_BorderStyle
  * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.borderstylevalues?view=openxml-2.8.1
  * @author TeamworkGuy2
@@ -24,4 +26,4 @@ var BorderStyleValues = /** @class */ (function () {
     BorderStyleValues.SlantDashDot = new BorderStyleValues("slantDashDot");
     return BorderStyleValues;
 }());
-module.exports = BorderStyleValues;
+exports.BorderStyleValues = BorderStyleValues;

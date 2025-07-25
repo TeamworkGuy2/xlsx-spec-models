@@ -1,6 +1,8 @@
 "use strict";
 /// <reference path="./open-xml.d.ts" />
 /// <reference path="./open-xml-io.d.ts" />
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.XlsxSpecModels = void 0;
 var CalcChain = require("./root-types/CalcChain");
 var Comments = require("./root-types/Comments");
 var ContentTypes = require("./root-types/ContentTypes");
@@ -30,5 +32,4 @@ var XlsxSpecModels;
     XlsxSpecModels.Workbook = wb;
     XlsxSpecModels.Worksheet = ws;
     XlsxSpecModels.WorksheetDrawing = wd;
-})(XlsxSpecModels || (XlsxSpecModels = {}));
-module.exports = XlsxSpecModels;
+})(XlsxSpecModels = exports.XlsxSpecModels || (exports.XlsxSpecModels = {}));

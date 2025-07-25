@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.StringAttribute = void 0;
 /** Generic Open XML parse for an element with a single string attribute
  * @since 2016-05-26
  */
@@ -26,4 +28,4 @@ var StringAttribute = /** @class */ (function () {
     StringAttribute.type = StringAttribute; // TODO type-checker
     return StringAttribute;
 }());
-module.exports = StringAttribute;
+exports.StringAttribute = StringAttribute;

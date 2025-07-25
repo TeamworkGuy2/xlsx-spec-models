@@ -1,12 +1,11 @@
-﻿import Bold = require("./Bold");
-import Color = require("./Color");
-import FontFamily = require("./FontFamily");
-import RunFont = require("./RunFont");
-import FontSize = require("./FontSize");
+﻿import { Bold } from "./Bold";
+import { Color } from "./Color";
+import { FontFamily } from "./FontFamily";
+import { RunFont } from "./RunFont";
+import { FontSize } from "./FontSize";
 
-class RichTextRunProperties {
+export class RichTextRunProperties {
     private static type: OpenXmlIo.ReadWrite<OpenXml.RichTextRunProperties> = RichTextRunProperties; // TODO type-checker
-
 
     public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.RichTextRunProperties {
         xmlDoc.validator.expectNode(elem, "rPr", "r");
@@ -25,7 +24,6 @@ class RichTextRunProperties {
         };
     }
 
-
     public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.RichTextRunProperties): ElementLike {
         var rPrElem = xmlDoc.dom.createElement("rPr");
         if (inst.b && inst.b.val) { rPrElem.appendChild(Bold.write(xmlDoc, inst.b, "b")); }
@@ -37,7 +35,6 @@ class RichTextRunProperties {
         return rPrElem;
     }
 
-
     public static copy(inst: OpenXml.RichTextRunProperties): OpenXml.RichTextRunProperties {
         return {
             b: inst.b != null ? Bold.copy(inst.b) : null,
@@ -47,7 +44,4 @@ class RichTextRunProperties {
             sz: inst.sz != null ? FontSize.copy(inst.sz) : null,
         };
     }
-
 }
-
-export = RichTextRunProperties;

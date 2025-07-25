@@ -1,11 +1,10 @@
-﻿import ColumnId = require("../types/ColumnId");
-import ColumnOffset = require("../types/ColumnOffset");
-import RowId = require("../types/RowId");
-import RowOffset = require("../types/RowOffset");
+﻿import { ColumnId } from "../types/ColumnId";
+import { ColumnOffset } from "../types/ColumnOffset";
+import { RowId } from "../types/RowId";
+import { RowOffset } from "../types/RowOffset";
 
-class MarkerType {
+export class MarkerType {
     private static type: OpenXmlIo.ReadWriteNamed<OpenXml.MarkerType> = MarkerType; // TODO type-checker
-
 
     public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement, expectedTagName: string, parentTags?: string): OpenXml.MarkerType {
         xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
@@ -22,7 +21,6 @@ class MarkerType {
         };
     }
 
-
     public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.MarkerType, tagName: string): ElementLike {
         var elem = xmlDoc.dom.createElement(tagName);
         elem.appendChild(ColumnId.write(xmlDoc, inst.col));
@@ -31,7 +29,4 @@ class MarkerType {
         elem.appendChild(RowOffset.write(xmlDoc, inst.rowOff));
         return elem;
     }
-
 }
-
-export = MarkerType;

@@ -1,7 +1,6 @@
 ﻿
-class RunFont {
+export class RunFont {
     private static type: OpenXmlIo.ReadWrite<OpenXml.RunFont> = RunFont; // TODO type-checker
-
 
     public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.RunFont {
         xmlDoc.validator.expectNode(elem, "rFont", "rPr");
@@ -10,14 +9,12 @@ class RunFont {
         };
     }
 
-
     public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.RunFont): ElementLike {
         var elem = xmlDoc.domBldr.create("rFont")
             .attrString("val", inst.val)
             .element;
         return elem;
     }
-
 
     public static copy(inst: OpenXml.RunFont): OpenXml.RunFont {
         return {
@@ -26,5 +23,3 @@ class RunFont {
     }
 
 }
-
-export = RunFont;

@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.StringUtil = void 0;
 var StringUtil;
 (function (StringUtil) {
     /** Split a long string into multiple string at spaces between words, keeping each string's length less than or equal to the maxLength
@@ -58,5 +60,4 @@ var StringUtil;
             : (idx >= maxLen + 1 ? maxLen : idx)); // if the index somehow ended up too large (shouldn't be possible) limit it to maxLen, otherwise return the next valid index
     }
     StringUtil.getNextWordSplitIndex = getNextWordSplitIndex;
-})(StringUtil || (StringUtil = {}));
-module.exports = StringUtil;
+})(StringUtil = exports.StringUtil || (exports.StringUtil = {}));

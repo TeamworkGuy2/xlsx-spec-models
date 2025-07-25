@@ -3,7 +3,7 @@ import path = require("path");
 import xml2js = require("xml2js");
 import Defer = require("ts-promises/Defer");
 
-module OpenXmlSpecParser {
+export module OpenXmlSpecParser {
 
     export function loadXsdSpecs(xsdFolderOrFile: string) {
         var xsdTypesCache: { [fileName: string]: { [typeName: string]: object } } = {};
@@ -25,7 +25,6 @@ module OpenXmlSpecParser {
 
         return Defer.when(promises).then(() => xsdTypesCache);
     }
-
 
     function loadXsdToCache(basepath: string, fileName: string, fileCache: { [fileName: string]: { [typeName: string]: object } }) {
         var filePath = path.join(basepath, fileName);
@@ -78,7 +77,6 @@ module OpenXmlSpecParser {
         });
     }
 
-
     function parseHtmlDoc(html: string | Buffer): PsPromise<any, Error> {
         var dfd = Defer.newDefer<any, Error>();
 
@@ -93,7 +91,6 @@ module OpenXmlSpecParser {
 
         return dfd.promise;
     }
-
 
     function isValidFirstLevelTag(key: string) {
         switch (key) {
@@ -110,7 +107,4 @@ module OpenXmlSpecParser {
             default: return false;
         }
     }
-
 }
-
-export = OpenXmlSpecParser;

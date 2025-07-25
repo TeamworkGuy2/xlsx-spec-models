@@ -1,7 +1,6 @@
 ﻿
-class Bold {
+export class Bold {
     private static type: OpenXmlIo.ReadWriteNamed<OpenXml.Bold> = Bold; // TODO type-checker
-
 
     public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement, expectedTagName: string, parentTags?: string): OpenXml.Bold {
         xmlDoc.validator.expectNode(elem, expectedTagName, (parentTags || "font, rPr"));
@@ -11,7 +10,6 @@ class Bold {
         };
     }
 
-
     public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Bold, tagName: string): ElementLike {
         var elem = xmlDoc.domBldr.create(tagName)
             .attrBool("val", inst.val === true ? null : inst.val, true, "1", "0")
@@ -19,13 +17,9 @@ class Bold {
         return elem;
     }
 
-
     public static copy(inst: OpenXml.Bold): OpenXml.Bold {
         return {
             val: inst.val,
         };
     }
-
 }
-
-export = Bold;

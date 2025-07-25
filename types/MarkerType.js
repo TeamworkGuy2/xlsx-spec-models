@@ -1,8 +1,10 @@
 "use strict";
-var ColumnId = require("../types/ColumnId");
-var ColumnOffset = require("../types/ColumnOffset");
-var RowId = require("../types/RowId");
-var RowOffset = require("../types/RowOffset");
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MarkerType = void 0;
+var ColumnId_1 = require("../types/ColumnId");
+var ColumnOffset_1 = require("../types/ColumnOffset");
+var RowId_1 = require("../types/RowId");
+var RowOffset_1 = require("../types/RowOffset");
 var MarkerType = /** @class */ (function () {
     function MarkerType() {
     }
@@ -13,21 +15,21 @@ var MarkerType = /** @class */ (function () {
         var rowElem = xmlDoc.queryOneChild(elem, "row");
         var rowOffElem = xmlDoc.queryOneChild(elem, "rowOff");
         return {
-            col: ColumnId.read(xmlDoc, colElem),
-            colOff: ColumnOffset.read(xmlDoc, colOffElem),
-            row: RowId.read(xmlDoc, rowElem),
-            rowOff: RowOffset.read(xmlDoc, rowOffElem),
+            col: ColumnId_1.ColumnId.read(xmlDoc, colElem),
+            colOff: ColumnOffset_1.ColumnOffset.read(xmlDoc, colOffElem),
+            row: RowId_1.RowId.read(xmlDoc, rowElem),
+            rowOff: RowOffset_1.RowOffset.read(xmlDoc, rowOffElem),
         };
     };
     MarkerType.write = function (xmlDoc, inst, tagName) {
         var elem = xmlDoc.dom.createElement(tagName);
-        elem.appendChild(ColumnId.write(xmlDoc, inst.col));
-        elem.appendChild(ColumnOffset.write(xmlDoc, inst.colOff));
-        elem.appendChild(RowId.write(xmlDoc, inst.row));
-        elem.appendChild(RowOffset.write(xmlDoc, inst.rowOff));
+        elem.appendChild(ColumnId_1.ColumnId.write(xmlDoc, inst.col));
+        elem.appendChild(ColumnOffset_1.ColumnOffset.write(xmlDoc, inst.colOff));
+        elem.appendChild(RowId_1.RowId.write(xmlDoc, inst.row));
+        elem.appendChild(RowOffset_1.RowOffset.write(xmlDoc, inst.rowOff));
         return elem;
     };
     MarkerType.type = MarkerType; // TODO type-checker
     return MarkerType;
 }());
-module.exports = MarkerType;
+exports.MarkerType = MarkerType;

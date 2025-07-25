@@ -3,7 +3,7 @@
  * @author TeamworkGuy2
  * @since 2016-5-26
  */
-class CellValues {
+export class CellValues {
     public static Boolean = new CellValues("b");
     public static Number = new CellValues("n");
     public static Error = new CellValues("e");
@@ -19,5 +19,3 @@ class CellValues {
     }
 
 }
-
-export = CellValues;

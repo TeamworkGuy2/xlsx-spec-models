@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CellFormulaValues = void 0;
 /** ST_CellFormulaType
  * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.cellformulavalues?view=openxml-2.8.1
  * @author TeamworkGuy2
@@ -14,4 +16,4 @@ var CellFormulaValues = /** @class */ (function () {
     CellFormulaValues.Shared = new CellFormulaValues("shared");
     return CellFormulaValues;
 }());
-module.exports = CellFormulaValues;
+exports.CellFormulaValues = CellFormulaValues;

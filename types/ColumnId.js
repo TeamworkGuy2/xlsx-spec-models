@@ -1,15 +1,17 @@
 "use strict";
-var IntElement = require("../types/IntElement");
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ColumnId = void 0;
+var IntElement_1 = require("../types/IntElement");
 var ColumnId = /** @class */ (function () {
     function ColumnId() {
     }
     ColumnId.read = function (xmlDoc, elem) {
-        return IntElement.read(xmlDoc, elem, "xdr:col", "from, to");
+        return IntElement_1.IntElement.read(xmlDoc, elem, "xdr:col", "from, to");
     };
     ColumnId.write = function (xmlDoc, inst) {
-        return IntElement.write(xmlDoc, inst, "xdr:col");
+        return IntElement_1.IntElement.write(xmlDoc, inst, "xdr:col");
     };
     ColumnId.type = ColumnId; // TODO type-checker
     return ColumnId;
 }());
-module.exports = ColumnId;
+exports.ColumnId = ColumnId;

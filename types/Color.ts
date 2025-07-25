@@ -1,7 +1,6 @@
 ﻿
-class Color {
+export class Color {
     private static type: OpenXmlIo.ReadWriteNamed<OpenXml.Color> = Color; // TODO type-checker
-
 
     public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement, expectedTagName: string): OpenXml.Color {
         xmlDoc.validator.expectNode(elem, expectedTagName, "bottom, colorScale, dataBar, diagonal, end, font, horizontal, mruColors, rPr, start, stop, top, vertical");
@@ -15,7 +14,6 @@ class Color {
         };
     }
 
-
     public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.Color, expectedTagName: string): ElementLike {
         var rgbStr = inst.rgb && typeof inst.rgb === "number" ? (<number>inst.rgb).toString(16).toUpperCase() : <string>inst.rgb;
         var elem = xmlDoc.domBldr.create(expectedTagName)
@@ -28,7 +26,6 @@ class Color {
         return elem;
     }
 
-
     public static copy(inst: OpenXml.Color): OpenXml.Color {
         return {
             auto: inst.auto,
@@ -38,7 +35,4 @@ class Color {
             tint: inst.tint,
         };
     }
-
 }
-
-export = Color;

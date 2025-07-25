@@ -1,18 +1,20 @@
 "use strict";
-var IntAttribute = require("../types/IntAttribute");
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FontFamily = void 0;
+var IntAttribute_1 = require("../types/IntAttribute");
 var FontFamily = /** @class */ (function () {
     function FontFamily() {
     }
     FontFamily.read = function (xmlDoc, elem) {
-        return IntAttribute.read(xmlDoc, elem, "family", "font, rPr");
+        return IntAttribute_1.IntAttribute.read(xmlDoc, elem, "family", "font, rPr");
     };
     FontFamily.write = function (xmlDoc, inst) {
-        return IntAttribute.write(xmlDoc, inst, "family");
+        return IntAttribute_1.IntAttribute.write(xmlDoc, inst, "family");
     };
     FontFamily.copy = function (inst) {
-        return IntAttribute.copy(inst);
+        return IntAttribute_1.IntAttribute.copy(inst);
     };
     FontFamily.type = FontFamily; // TODO type-checker
     return FontFamily;
 }());
-module.exports = FontFamily;
+exports.FontFamily = FontFamily;

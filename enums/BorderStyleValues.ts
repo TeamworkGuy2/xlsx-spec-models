@@ -3,7 +3,7 @@
  * @author TeamworkGuy2
  * @since 2016-5-26
  */
-class BorderStyleValues {
+export class BorderStyleValues {
     public static None = new BorderStyleValues("none");
     public static Thin = new BorderStyleValues("thin");
     public static Medium = new BorderStyleValues("medium");
@@ -26,5 +26,3 @@ class BorderStyleValues {
     }
 
 }
-
-export = BorderStyleValues;

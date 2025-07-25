@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Color = void 0;
 var Color = /** @class */ (function () {
     function Color() {
     }
@@ -36,4 +38,4 @@ var Color = /** @class */ (function () {
     Color.type = Color; // TODO type-checker
     return Color;
 }());
-module.exports = Color;
+exports.Color = Color;

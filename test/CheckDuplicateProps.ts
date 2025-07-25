@@ -16,7 +16,6 @@ function fileName(path: string) {
     return (idx > -1 || (idx = path.lastIndexOf("\\")) > -1 ? path.substr(idx + 1) : path);
 }
 
-
 suite("validate OpenXml implementations", function validateOpenXmlImplementations() {
 
     test("duplicate class/prop names", function duplicateClassPropNames() {

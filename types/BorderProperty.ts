@@ -1,11 +1,10 @@
-﻿import Color = require("../types/Color");
+﻿import { Color } from "../types/Color";
 
 /** (W3C XML CT_BorderPr §A.2) Generic Open XML Border Property parser
  * @since 2016-05-26
  */
-class BorderProperty {
+export class BorderProperty {
     private static type: OpenXmlIo.ReadWriteNamed<OpenXml.BorderProperty> = BorderProperty; // TODO type-checker
-
 
     public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement, expectedTagName: string, parentTags?: string): OpenXml.BorderProperty {
         xmlDoc.validator.expectNode(elem, expectedTagName, parentTags || "border");
@@ -17,7 +16,6 @@ class BorderProperty {
         };
     }
 
-
     public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.BorderProperty, tagName: string): ElementLike {
         var elem = xmlDoc.domBldr.create(tagName)
             .attrString("style", inst.style, true)
@@ -26,7 +24,4 @@ class BorderProperty {
 
         return elem;
     }
-
 }
-
-export = BorderProperty;

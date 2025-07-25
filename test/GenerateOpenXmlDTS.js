@@ -1,11 +1,11 @@
 "use strict";
-/// <reference path="../node_modules/ts-promises/ts-promises.d.ts" />
 Object.defineProperty(exports, "__esModule", { value: true });
+/// <reference path="../node_modules/ts-promises/ts-promises.d.ts" />
 var https = require("https");
 var JSDom = require("jsdom");
-var MicrosoftDocsParser = require("./MicrosoftDocsParser");
-var OpenXmlSpecParser = require("./OpenXmlSpecParser");
-var StringUtil = require("./StringUtil");
+var MicrosoftDocsParser_1 = require("./MicrosoftDocsParser");
+var OpenXmlSpecParser_1 = require("./OpenXmlSpecParser");
+var StringUtil_1 = require("./StringUtil");
 /** Generate an interface for 'open-xml.d.ts'
  * Example command line:
  * /code/xlsx-spec-models/test> node .\GenerateOpenXmlDTS.js "drawing.spreadsheet.onecellanchor"
@@ -13,7 +13,7 @@ var StringUtil = require("./StringUtil");
  * @since 2020-12-12
  */
 function generate() {
-    OpenXmlSpecParser.loadXsdSpecs("C:/Users/TeamworkGuy2/Downloads/openxml/ECMA-376, Fifth Edition, Part 4 - Transitional Migration Features/OfficeOpenXML-XMLSchema-Transitional").then(function (xsdCache) {
+    OpenXmlSpecParser_1.OpenXmlSpecParser.loadXsdSpecs("C:/Users/TeamworkGuy2/Downloads/openxml/ECMA-376, Fifth Edition, Part 4 - Transitional Migration Features/OfficeOpenXML-XMLSchema-Transitional").then(function (xsdCache) {
         console.log("successfully loaded XSD cache with " + Object.keys(xsdCache).length + " keys");
     }).catch(function (err) {
         console.error("error loading XSD cache", err);
@@ -42,7 +42,7 @@ function getMsDoc(openxmlNamespace, openxmlType) {
             var html = Buffer.concat(htmlChunks).toString("utf-8");
             // parse the result
             var dom = parseHtmlDoc(html);
-            var obj = MicrosoftDocsParser.parseDocPageForOpenXml(dom, origin + path);
+            var obj = (0, MicrosoftDocsParser_1.parseDocPageForOpenXml)(dom, origin + path);
             // output
             var openXmlInterface = stringifyOpenXmlMsDoc(obj);
             console.log("read: " + (origin + path) + " (" + msg.statusCode + "):\n", openXmlInterface);
@@ -55,7 +55,7 @@ function stringifyOpenXmlMsDoc(obj) {
             obj.typeDescriptor.substr(1, obj.typeDescriptor.length - 2) + ", W3C XML " + obj.modelName + " " + obj.location + ")",
         "     * parents: " + obj.parents.join("; "),
         "     * ",
-        "     * " + StringUtil.splitLongString(obj.description, 120).join("\n     * "),
+        "     * " + StringUtil_1.StringUtil.splitLongString(obj.description, 120).join("\n     * "),
         "     * @see " + obj.link,
         "     */",
         "    interface " + toTitleCase(obj.typeName) + " {",
@@ -64,13 +64,13 @@ function stringifyOpenXmlMsDoc(obj) {
         }).join("\n") : ""),
         (obj.attributes.length > 0 ? "\n        // attributes\n" +
             obj.attributes.map(function (attr) {
-                var commentLines = StringUtil.splitLongString(attr.description, 300);
+                var commentLines = StringUtil_1.StringUtil.splitLongString(attr.description, 300);
                 var comment = "        /* " + commentLines.join("\n         * ") + (commentLines.length > 1 ? "\n        */" : " */");
                 return comment + "\n        // " + attr.name + ": any" + ";";
             }).join("\n") : ""),
         (obj.properties.length > 0 ? "\n        // properties\n" +
             obj.properties.map(function (prop) {
-                var commentLines = StringUtil.splitLongString(prop.description, 300);
+                var commentLines = StringUtil_1.StringUtil.splitLongString(prop.description, 300);
                 var comment = "        /* " + commentLines.join("\n         * ") + (commentLines.length > 1 ? "\n        */" : " */");
                 return comment + "\n        " + toCamelCase(prop.name) + ": any" + ";";
             }).join("\n") : ""),

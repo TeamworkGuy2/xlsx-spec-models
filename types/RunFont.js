@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RunFont = void 0;
 var RunFont = /** @class */ (function () {
     function RunFont() {
     }
@@ -23,4 +25,4 @@ var RunFont = /** @class */ (function () {
     RunFont.type = RunFont; // TODO type-checker
     return RunFont;
 }());
-module.exports = RunFont;
+exports.RunFont = RunFont;

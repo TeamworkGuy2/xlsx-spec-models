@@ -1,9 +1,8 @@
-﻿import RichTextRunProperties = require("./RichTextRunProperties");
-import Text = require("./Text");
+﻿import { RichTextRunProperties } from "./RichTextRunProperties";
+import { Text } from "./Text";
 
-class RichTextRun {
+export class RichTextRun {
     private static type: OpenXmlIo.ReadWrite<OpenXml.RichTextRun> = RichTextRun; // TODO type-checker
-
 
     public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.RichTextRun {
         xmlDoc.validator.expectNode(elem, "r", "si");
@@ -16,7 +15,6 @@ class RichTextRun {
         };
     }
 
-
     public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.RichTextRun): ElementLike {
         var elem = xmlDoc.dom.createElement("r");
         if (inst.rPr) { elem.appendChild(RichTextRunProperties.write(xmlDoc, inst.rPr)); }
@@ -24,7 +22,6 @@ class RichTextRun {
 
         return elem;
     }
-
 
     public static copy(inst: OpenXml.RichTextRun): OpenXml.RichTextRun {
         return {
@@ -34,5 +31,3 @@ class RichTextRun {
     }
 
 }
-
-export = RichTextRun;

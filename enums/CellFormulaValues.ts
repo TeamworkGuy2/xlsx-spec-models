@@ -3,7 +3,7 @@
  * @author TeamworkGuy2
  * @since 2016-5-26
  */
-class CellFormulaValues {
+export class CellFormulaValues {
     public static Normal = new CellFormulaValues("normal");
     public static Array = new CellFormulaValues("array");
     public static DataTable = new CellFormulaValues("dataTable");
@@ -16,5 +16,3 @@ class CellFormulaValues {
     }
 
 }
-
-export = CellFormulaValues;

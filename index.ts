@@ -21,7 +21,7 @@ var wb = Workbook;
 var ws = Worksheet;
 var wd = WorksheetDrawing;
 
-module XlsxSpecModels {
+export module XlsxSpecModels {
 
     export var CalcChain = cc;
 
@@ -42,5 +42,3 @@ module XlsxSpecModels {
     export var WorksheetDrawing = wd;
 
 }
-
-export = XlsxSpecModels;

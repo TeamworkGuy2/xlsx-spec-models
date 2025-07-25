@@ -1,18 +1,13 @@
-﻿import IntElement = require("../types/IntElement");
+﻿import { IntElement } from "../types/IntElement";
 
-class RowId {
+export class RowId {
     private static type: OpenXmlIo.ReadWrite<OpenXml.RowId> = RowId; // TODO type-checker
-
 
     public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.RowId {
         return IntElement.read(xmlDoc, elem, "xdr:row", "from, to");
     }
 
-
     public static write(xmlDoc: OpenXmlIo.WriterContext, inst: OpenXml.RowId): ElementLike {
         return IntElement.write(xmlDoc, inst, "xdr:row");
     }
-
 }
-
-export = RowId;

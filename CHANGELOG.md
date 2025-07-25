@@ -4,6 +4,14 @@ This project does its best to adhere to [Semantic Versioning](http://semver.org/
 
 
 --------
+### [1.0.0](https://github.com/TeamworkGuy2/xlsx-spec-models/releases/tag/v1.0.0) - 2025-07-25
+#### Changed
+Time to mark this package stable and v1!
+
+* BREAKING: update exports to use standard named exports rather than a default export object. This requires updating import statements from `import RichTextRun from 'xlsx-spec-models/types/RichTextRun';` to `import { RichTextRun } from 'xlsx-spec-models/types/RichTextRun';`, notice the parenthesis now required around the import type.
+
+
+--------
 ### [0.9.0](https://github.com/TeamworkGuy2/xlsx-spec-models/releases/tag/v0.9.0) - 2023-01-05
 #### Changed
 * Update to TypeScript 4.9

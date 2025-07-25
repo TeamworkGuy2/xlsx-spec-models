@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Bold = void 0;
 var Bold = /** @class */ (function () {
     function Bold() {
     }
@@ -23,4 +25,4 @@ var Bold = /** @class */ (function () {
     Bold.type = Bold; // TODO type-checker
     return Bold;
 }());
-module.exports = Bold;
+exports.Bold = Bold;

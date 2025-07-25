@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CellValues = void 0;
 /** ST_CellType (§18.18.11)
  * @see https://docs.microsoft.com/en-us/dotnet/api/documentformat.openxml.spreadsheet.cellvalues?view=openxml-2.8.1
  * @author TeamworkGuy2
@@ -17,4 +19,4 @@ var CellValues = /** @class */ (function () {
     CellValues.Date = new CellValues("d");
     return CellValues;
 }());
-module.exports = CellValues;
+exports.CellValues = CellValues;

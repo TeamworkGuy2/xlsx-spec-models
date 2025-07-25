@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.StringElement = void 0;
 /** Generic Open XML parser for an element containing text content
  * @since 2016-05-26
  */
@@ -19,4 +21,4 @@ var StringElement = /** @class */ (function () {
     StringElement.type = StringElement; // TODO type-checker
     return StringElement;
 }());
-module.exports = StringElement;
+exports.StringElement = StringElement;

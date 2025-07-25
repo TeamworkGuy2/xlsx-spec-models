@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Text = void 0;
 var Text = /** @class */ (function () {
     function Text() {
     }
@@ -26,4 +28,4 @@ var Text = /** @class */ (function () {
     Text.type = Text; // TODO type-checker
     return Text;
 }());
-module.exports = Text;
+exports.Text = Text;

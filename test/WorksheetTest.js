@@ -1,3 +1,4 @@
+"use strict";
 /// <reference path="../open-xml-io.d.ts" />
 /*
 import chai = require("chai");

@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.OpenXmlSpecParser = void 0;
 var fs = require("fs");
 var path = require("path");
 var xml2js = require("xml2js");
@@ -96,5 +98,4 @@ var OpenXmlSpecParser;
             default: return false;
         }
     }
-})(OpenXmlSpecParser || (OpenXmlSpecParser = {}));
-module.exports = OpenXmlSpecParser;
+})(OpenXmlSpecParser = exports.OpenXmlSpecParser || (exports.OpenXmlSpecParser = {}));

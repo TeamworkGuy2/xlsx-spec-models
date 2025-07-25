@@ -1,22 +1,24 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.IntElement = void 0;
 /** Generic Open XML parser for an element containing integer/numeric content
  * @since 2016-05-26
  */
-var StringElement = /** @class */ (function () {
-    function StringElement() {
+var IntElement = /** @class */ (function () {
+    function IntElement() {
     }
-    StringElement.read = function (xmlDoc, elem, expectedTagName, parentTags) {
+    IntElement.read = function (xmlDoc, elem, expectedTagName, parentTags) {
         xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
         return {
             content: parseInt(elem.textContent), // only null on document or Doctype
         };
     };
-    StringElement.write = function (xmlDoc, inst, tagName) {
+    IntElement.write = function (xmlDoc, inst, tagName) {
         var elem = xmlDoc.dom.createElement(tagName);
         elem.textContent = inst.content;
         return elem;
     };
-    StringElement.type = StringElement; // TODO type-checker
-    return StringElement;
+    IntElement.type = IntElement; // TODO type-checker
+    return IntElement;
 }());
-module.exports = StringElement;
+exports.IntElement = IntElement;

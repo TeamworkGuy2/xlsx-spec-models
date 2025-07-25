@@ -1,10 +1,9 @@
 ﻿/// <reference path="../node_modules/ts-promises/ts-promises.d.ts" />
-
-import https = require("https");
-import JSDom = require("jsdom");
-import MicrosoftDocsParser = require("./MicrosoftDocsParser");
-import OpenXmlSpecParser = require("./OpenXmlSpecParser");
-import StringUtil = require("./StringUtil");
+import * as https from "https";
+import * as JSDom from "jsdom";
+import { parseDocPageForOpenXml } from "./MicrosoftDocsParser";
+import { OpenXmlSpecParser } from "./OpenXmlSpecParser";
+import { StringUtil } from "./StringUtil";
 
 /** Generate an interface for 'open-xml.d.ts'
  * Example command line:
@@ -35,7 +34,6 @@ function generate() {
     }
 }
 
-
 function getMsDoc(openxmlNamespace: string, openxmlType: string) {
     var origin = "https://docs.microsoft.com";
     var path = "/en-us/dotnet/api/documentformat.openxml." + openxmlNamespace + "." + openxmlType + "?view=openxml-2.8.1"
@@ -51,7 +49,7 @@ function getMsDoc(openxmlNamespace: string, openxmlType: string) {
             var html = Buffer.concat(htmlChunks).toString("utf-8");
             // parse the result
             var dom = parseHtmlDoc(html);
-            var obj = MicrosoftDocsParser.parseDocPageForOpenXml(dom, origin + path);
+            var obj = parseDocPageForOpenXml(dom, origin + path);
             // output
             var openXmlInterface = stringifyOpenXmlMsDoc(obj);
             console.log("read: " + (origin + path) + " (" + msg.statusCode + "):\n", openXmlInterface);
@@ -59,8 +57,7 @@ function getMsDoc(openxmlNamespace: string, openxmlType: string) {
     });
 }
 
-
-function stringifyOpenXmlMsDoc(obj: ReturnType<typeof MicrosoftDocsParser["parseDocPageForOpenXml"]>) {
+function stringifyOpenXmlMsDoc(obj: ReturnType<typeof parseDocPageForOpenXml>) {
     return [
         "    /** <" + "xdr" + ":" + obj.typeName + "> (" +
         obj.typeDescriptor.substr(1, obj.typeDescriptor.length - 2) + ", W3C XML " + obj.modelName + " " + obj.location + ")",
@@ -89,17 +86,14 @@ function stringifyOpenXmlMsDoc(obj: ReturnType<typeof MicrosoftDocsParser["parse
     ].join("\n");
 }
 
-
 function parseHtmlDoc(html: string | Buffer): Document {
     var dom = new JSDom.JSDOM(html, { contentType: "text/html" }).window.document;
     return dom;
 }
 
-
 function toCamelCase(str: string): string {
     return str.charAt(0).toLowerCase() + str.substr(1);
 }
-
 
 function toTitleCase(str: string): string {
     return str.charAt(0).toUpperCase() + str.substr(1);

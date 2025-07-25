@@ -1,5 +1,5 @@
 ﻿
-module StringUtil {
+export module StringUtil {
 
     /** Split a long string into multiple string at spaces between words, keeping each string's length less than or equal to the maxLength
      * @param fullStr the description to split up
@@ -28,7 +28,6 @@ module StringUtil {
 
         return parts;
     }
-
 
     /** Determine the next index (up to a max sub-string size) at which to split a string, prefering to split at spaces between words
      * For example: getNextWordSplitIndex("the quick sly fox", 4, 5)
@@ -62,7 +61,4 @@ module StringUtil {
             ? Math.min(str.length - offset, maxLen) // if no spaces exist in the remaining string, take the remainder or maxLen, whichever is smaller
             : (idx >= maxLen + 1 ? maxLen : idx)); // if the index somehow ended up too large (shouldn't be possible) limit it to maxLen, otherwise return the next valid index
     }
-
 }
-
-export = StringUtil;
