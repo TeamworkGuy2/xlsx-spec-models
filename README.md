@@ -16,8 +16,8 @@ Here is a Node.js example of reading an XML stream into a [`Workbook`](root-type
 
 ```ts
 import { Workbook } from 'xlsx-spec-models/root-types/Workbook';
-import DomBuilderHelper = require('@twg2/dom-builder/dom/DomBuilderHelper'); // for mock DOM 'document' in Node.js runtime
-import { XmlFileInst } = require('xlsx-spec-utils/files/XmlFileInst');
+import { DomBuilderHelper } from '@twg2/dom-builder/dom/DomBuilderHelper'; // for mock DOM 'document' in Node.js runtime
+import { XmlFileInst } from 'xlsx-spec-utils/files/XmlFileInst';
 
 // Read from XML
 const xmlStr = /* load XML */;

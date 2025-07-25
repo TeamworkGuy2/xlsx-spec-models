@@ -1,6 +1,6 @@
 {
   "name": "xlsx-spec-models",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "TypeScript Open XML XLSX format models with DOM read/write methods",
   "author": "TeamworkGuy2",
   "homepage": "https://github.com/TeamworkGuy2/xlsx-spec-models",
@@ -11,7 +11,7 @@
     "url": "https://github.com/TeamworkGuy2/xlsx-spec-models.git"
   },
   "dependencies": {
-    "@twg2/dom-builder": "^0.11.0"
+    "@twg2/dom-builder": "^1.0.0"
   },
   "devDependencies": {
     "@types/chai": "~4.2.4",

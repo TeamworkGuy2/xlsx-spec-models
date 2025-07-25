@@ -1,4 +1,5 @@
 ﻿/// <reference path="../node_modules/ts-promises/ts-promises.d.ts" />
+
 import * as https from "https";
 import * as JSDom from "jsdom";
 import { parseDocPageForOpenXml } from "./MicrosoftDocsParser";

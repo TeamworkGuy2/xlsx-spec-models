@@ -1,6 +1,6 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /// <reference path="../node_modules/ts-promises/ts-promises.d.ts" />
+Object.defineProperty(exports, "__esModule", { value: true });
 var https = require("https");
 var JSDom = require("jsdom");
 var MicrosoftDocsParser_1 = require("./MicrosoftDocsParser");

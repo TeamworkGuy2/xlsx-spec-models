@@ -52,7 +52,7 @@ declare module OpenXmlIo {
     }
 
 
-    /** Read and write OpenXml files of a specific type into objects or back to an XML string
+    /** Read and write OpenXml files of a specific type into an object or back to an XML string
      */
     export interface FileReadWriter<T> {
         fileInfo: XlsxFileType;
