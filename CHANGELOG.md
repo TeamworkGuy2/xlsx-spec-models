@@ -4,7 +4,13 @@ This project does its best to adhere to [Semantic Versioning](http://semver.org/
 
 
 --------
-### [0.8.3](N/A) - 2023-11-30
+### [0.9.0](https://github.com/TeamworkGuy2/xlsx-spec-models/releases/tag/v0.9.0) - 2023-01-05
+#### Changed
+* Update to TypeScript 4.9
+
+
+--------
+### [0.8.3](https://github.com/TeamworkGuy2/xlsx-spec-models/releases/tag/v0.8.3) - 2023-11-30
 #### Changed
 * Build: Enable TypeScript `strict` compile option
 * Build: rename `tsc` npm command in package.json to `build`
