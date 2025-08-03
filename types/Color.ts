@@ -2,7 +2,7 @@
 export class Color {
     private static type: OpenXmlIo.ReadWriteNamed<OpenXml.Color> = Color; // TODO type-checker
 
-    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement, expectedTagName: string): OpenXml.Color {
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: Element, expectedTagName: string): OpenXml.Color {
         xmlDoc.validator.expectNode(elem, expectedTagName, "bottom, colorScale, dataBar, diagonal, end, font, horizontal, mruColors, rPr, start, stop, top, vertical");
         var rgbStr = xmlDoc.attrString(elem, "rgb");
         return {

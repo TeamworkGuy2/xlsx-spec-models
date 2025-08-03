@@ -3,7 +3,7 @@
 export class ColumnOffset {
     private static type: OpenXmlIo.ReadWrite<OpenXml.ColumnOffset> = ColumnOffset; // TODO type-checker
 
-    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.ColumnOffset {
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: Element): OpenXml.ColumnOffset {
         return IntElement.read(xmlDoc, elem, "xdr:colOff", "from, to");
     }
 

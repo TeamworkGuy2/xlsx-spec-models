@@ -6,7 +6,7 @@ import { RowOffset } from "../types/RowOffset";
 export class MarkerType {
     private static type: OpenXmlIo.ReadWriteNamed<OpenXml.MarkerType> = MarkerType; // TODO type-checker
 
-    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement, expectedTagName: string, parentTags?: string): OpenXml.MarkerType {
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: Element, expectedTagName: string, parentTags?: string): OpenXml.MarkerType {
         xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
         var colElem = xmlDoc.queryOneChild(elem, "col");
         var colOffElem = xmlDoc.queryOneChild(elem, "colOff");

@@ -2,7 +2,7 @@
 export class Bold {
     private static type: OpenXmlIo.ReadWriteNamed<OpenXml.Bold> = Bold; // TODO type-checker
 
-    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement, expectedTagName: string, parentTags?: string): OpenXml.Bold {
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: Element, expectedTagName: string, parentTags?: string): OpenXml.Bold {
         xmlDoc.validator.expectNode(elem, expectedTagName, (parentTags || "font, rPr"));
         var valAttr = xmlDoc.attrBool(elem, "val");
         return {

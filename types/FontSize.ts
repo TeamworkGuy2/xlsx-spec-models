@@ -3,7 +3,7 @@
 export class FontSize {
     private static type: OpenXmlIo.ReadWrite<OpenXml.FontSize> = FontSize; // TODO type-checker
 
-    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.FontSize {
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: Element): OpenXml.FontSize {
         return FloatAttribute.read(xmlDoc, elem, "sz", "font, rPr");
     }
 

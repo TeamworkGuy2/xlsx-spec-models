@@ -4,7 +4,7 @@
  export class IntElement {
     private static type: OpenXmlIo.ReadWriteNamed<{ content: number }> = IntElement; // TODO type-checker
 
-    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement, expectedTagName: string, parentTags?: string): { content: number } {
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: Element, expectedTagName: string, parentTags?: string): { content: number } {
         xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
         return {
             content: parseInt(<any>elem.textContent), // only null on document or Doctype

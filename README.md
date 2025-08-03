@@ -23,15 +23,15 @@ import { XmlFileInst } from 'xlsx-spec-utils/files/XmlFileInst';
 const xmlStr = /* load XML */;
 const dom = DomBuilderHelper.getParser().parseFromString(xmlStr, 'application/xml');
 var xmlDoc = XmlFileInst.newInst(dom);
-const myWorkbook = Workbook.read(xmlDoc, <HTMLElement>xmlDoc.dom.childNodes[0]);
+const myWorkbook = Workbook.read(xmlDoc, <Element>xmlDoc.dom.childNodes[0]);
 
 // modify 'myWorkbook'...
 
 // Write to XML
-xmlDoc.removeChilds(<HTMLElement>(<Document>xmlDoc.dom).childNodes[0]);
+xmlDoc.removeChilds(<Element>(<Document>xmlDoc.dom).childNodes[0]);
 var elem = Workbook.write(xmlDoc, myWorkbook);
 
-var elemDom = <HTMLElement>(<Document>xmlDoc.dom).childNodes[0];
+var elemDom = <Element>(<Document>xmlDoc.dom).childNodes[0];
 xmlDoc.addChilds(elemDom, xmlDoc.getChildNodes(elem));
 
 const xmlText = DomBuilderHelper.getSerializer().serializeToString(xmlDoc.dom);

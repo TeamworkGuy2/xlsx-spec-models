@@ -3,7 +3,7 @@
 export class ColumnId {
     private static type: OpenXmlIo.ReadWrite<OpenXml.ColumnId> = ColumnId; // TODO type-checker
 
-    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.ColumnId {
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: Element): OpenXml.ColumnId {
         return IntElement.read(xmlDoc, elem, "xdr:col", "from, to");
     }
 

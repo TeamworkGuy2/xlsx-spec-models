@@ -41,11 +41,11 @@ declare module OpenXmlIo {
     /** An instance of a parsed XML file with utilities to help write the resulting XMLDocument
      */
     export interface WriterContext extends DomBuilderHelper {
-        /** this XML file's parsed DOM */
+        /** This XML file's parsed DOM */
         dom: DocumentLike;
-        /** a DOM builder for this XML document */
+        /** A DOM builder util for creating elements for insertion into this XML document */
         domBldr: DomBuilderFactory;
-        /** an XLSX DOM writer utility */
+        /** Serialize an array of elements and add them to this  XLSX DOM writer utility */
         writeMulti: ElementsWriter;
         /** a validator for XLSX DOM elements */
         validator: DomValidate;
@@ -55,59 +55,80 @@ declare module OpenXmlIo {
     /** Read and write OpenXml files of a specific type into an object or back to an XML string
      */
     export interface FileReadWriter<T> {
+        /** The OpenXML file type this instance can read and write */
         fileInfo: XlsxFileType;
-
+        /** Parse an XML string into the OpenXML data type `T` of this reader */
         read(xmlContentStr: string): T;
-
+        /** Serialize an OpenXML data object `T` to an XML string */
         write(data: T): string;
 
         // alternatives using existing Documents
+        /** Parse an XML {@link Document} into the OpenXML data type `T` of this reader */
         loadFromDom(dom: Document): T;
-
+        /** Serialize an OpenXML data object `T` to an XML {@link Document}.
+         * Note: the returned document could be a virtual/mock in non-browser environments
+         * such as node.js, see the implementation of this interface for details.
+         */
         saveToDom(data: T): Document;
     }
 
 
-    /** Helper interface for parsing HTMLElement arrays using a 'reader' function which accepts individual HTMLElements
+    /** Function for parsing {@link Element} arrays using a 'reader' function
+     * which accepts individual {@link Elements}.
      */
     export interface ElementsReader {
 
-        /** Given a 'reader' function and an array of HTML elements, run the reader against each of the elements and return the results as an array.
+        /** Given a 'reader' function and an array of {@link Element}(s), run the reader against each of the
+         * elements and return the results as an array.
+         * @param reader the reader function to call for each `elems`
+         * @param elems array of {@link Element}s to read through the `reader`
          * @return an array of results in the same order as the 'elems' array
          */
-        <T>(reader: /*ReadFunc<T>*/(xmlDoc: ReaderContext, elem: HTMLElement, expectedElemName?: string) => T, elems: HTMLElement[]): T[];
+        <T>(reader: /*ReadFunc<T>*/(xmlDoc: ReaderContext, elem: Element, expectedElemName?: string) => T, elems: Element[]): T[];
 
-        /** Given a 'reader' function and an array of HTML elements, run the reader against each of the elements and return the results as an array.
+        /** Given a 'reader' function and an array of {@link Element}(s), run the reader against each of the
+         * elements and return the results as an array.
+         * @param reader the reader function to call for each `elems`
+         * @param elems array of {@link Element}s to read through the `reader`
          * @param expectedElemName the expected nodeName of each of the 'elems', throw an error if any mismatch
          * @return an array of results in the same order as the 'elems' array
          */
-        <T>(reader: /*ReadFuncNamed<T>*/(xmlDoc: ReaderContext, elem: HTMLElement, expectedElemName: string) => T, elems: HTMLElement[], expectedElemName: string): T[];
+        <T>(reader: /*ReadFuncNamed<T>*/(xmlDoc: ReaderContext, elem: Element, expectedElemName: string) => T, elems: Element[], expectedElemName: string): T[];
     }
 
 
-    /** Helper interface for serializing an array of data to HTMLElements using a 'writer' function which accepts individual data items
+    /** Function for serializing an array of data to {@link Element}s using a 'writer'
+     * function which accepts individual data items.
      */
     export interface ElementsWriter {
 
-        /** Given a 'writer' function and an array of data objects, run the writer against each of the objects and return the results as an array of HTMLElements.
-         * @return an array of HTMLElements in the same order as the 'insts' array
+        /** Given a 'writer' function and array of data objects, run the writer against each of the
+         * objects and return the results as an array of {@link Element}(s).
+         * @param writer the writer function to call for each data element in `insts`
+         * @param insts array or map of data elements to write
+         * @param keys optional array of keys/indexes into `insts` of the elements to write.
+         * If not provided, `Object.keys()` is used to determine which keys to iterate over and elements to serialize in `insts`.
+         * @return an array of {@link Element}(s) in the same order as the `insts` array
          */
         <T, E extends ElementLike>(writer: /*WriteFunc<T>*/(xmlDoc: WriterContext, data: T, expectedElemName?: string) => E, insts: T[] | { [id: string]: T }, keys?: string[]): E[];
 
-        /** Given a 'writer' function and an array of data objects, run the writer against each of the objects and return the results as an array of HTMLElements.
-         * @param expectedElemName the expected nodeName of each of the HTMLElements produced by the writer, throw an error if any mismatch
-         * @return an array of HTMLElements in the same order as the 'insts' array
+        /** Given a 'writer' function and an array of data objects, run the writer against each of the
+         * objects and return the results as an array of {@link Element}(s).
+         * @param writer the writer function to call for each data element in `insts`
+         * @param insts array of data elements to write
+         * @param expectedElemName the expected nodeName of each of the {@link Element}(s) produced by the writer, throw an error if any mismatch
+         * @return an array of {@link Element}(s) in the same order as the `insts` array
          */
         <T, E extends ElementLike>(writer: /*WriteFuncNamed<T>*/(xmlDoc: WriterContext, data: T, expectedElemName: string) => E, insts: T[], expectedElemName: string): E[];
     }
 
 
     export interface ReadFunc<T> {
-        (xmlDoc: ReaderContext, elem: HTMLElement, expectedElemName?: string): T;
+        (xmlDoc: ReaderContext, elem: Element, expectedElemName?: string): T;
     }
 
     export interface ReadFuncNamed<T> {
-        (xmlDoc: ReaderContext, elem: HTMLElement, expectedElemName: string, parentElemName?: string): T;
+        (xmlDoc: ReaderContext, elem: Element, expectedElemName: string, parentElemName?: string): T;
     }
 
 

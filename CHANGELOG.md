@@ -4,6 +4,13 @@ This project does its best to adhere to [Semantic Versioning](http://semver.org/
 
 
 --------
+### [1.2.0](https://github.com/TeamworkGuy2/xlsx-spec-models/releases/tag/v1.2.0) - 2025-08-03
+#### Changed
+* Relax `ElementsReader`, `ReadFunc`, and `ReadFuncNamed` function interfaces `elems` argument to take `Element[]` instead of `HTMLElement[]`
+* Adjust all OpenXML reader/writer `types/*` to take `Element` instead of `HTMLElement`
+
+
+--------
 ### [1.1.0](https://github.com/TeamworkGuy2/xlsx-spec-models/releases/tag/v1.1.0) - 2025-07-25
 #### Changed
 * Update `@twg2/dom-builder` dependency to `v1.0.0`

@@ -3,7 +3,7 @@
 export class FontFamily {
     private static type: OpenXmlIo.ReadWrite<OpenXml.FontFamily> = FontFamily; // TODO type-checker
 
-    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.FontFamily {
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: Element): OpenXml.FontFamily {
         return IntAttribute.read(xmlDoc, elem, "family", "font, rPr");
     }
 

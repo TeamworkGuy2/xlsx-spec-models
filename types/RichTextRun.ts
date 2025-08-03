@@ -4,7 +4,7 @@ import { Text } from "./Text";
 export class RichTextRun {
     private static type: OpenXmlIo.ReadWrite<OpenXml.RichTextRun> = RichTextRun; // TODO type-checker
 
-    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.RichTextRun {
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: Element): OpenXml.RichTextRun {
         xmlDoc.validator.expectNode(elem, "r", "si");
         var rPrElem = xmlDoc.queryOneChild(elem, "rPr", false);
         var textElem = xmlDoc.queryOneChild(elem, "t");

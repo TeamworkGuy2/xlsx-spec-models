@@ -6,7 +6,7 @@
 export class BorderProperty {
     private static type: OpenXmlIo.ReadWriteNamed<OpenXml.BorderProperty> = BorderProperty; // TODO type-checker
 
-    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement, expectedTagName: string, parentTags?: string): OpenXml.BorderProperty {
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: Element, expectedTagName: string, parentTags?: string): OpenXml.BorderProperty {
         xmlDoc.validator.expectNode(elem, expectedTagName, parentTags || "border");
         var colorElem = xmlDoc.queryOneChild(elem, "color", false);
 

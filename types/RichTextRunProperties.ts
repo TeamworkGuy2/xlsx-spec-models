@@ -7,7 +7,7 @@ import { FontSize } from "./FontSize";
 export class RichTextRunProperties {
     private static type: OpenXmlIo.ReadWrite<OpenXml.RichTextRunProperties> = RichTextRunProperties; // TODO type-checker
 
-    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.RichTextRunProperties {
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: Element): OpenXml.RichTextRunProperties {
         xmlDoc.validator.expectNode(elem, "rPr", "r");
         var boldElem = xmlDoc.queryOneChild(elem, "b", false);
         var colorElem = xmlDoc.queryOneChild(elem, "color", false);

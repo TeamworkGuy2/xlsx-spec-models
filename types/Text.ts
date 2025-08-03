@@ -2,7 +2,7 @@
 export class Text {
     private static type: OpenXmlIo.ReadWrite<OpenXml.Text> = Text; // TODO type-checker
 
-    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.Text {
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: Element): OpenXml.Text {
         xmlDoc.validator.expectNode(elem, "t", "si, r");
         return {
             preserveSpace: xmlDoc.attrBool(elem, "xml:space") || undefined,

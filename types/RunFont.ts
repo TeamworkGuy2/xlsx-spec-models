@@ -2,7 +2,7 @@
 export class RunFont {
     private static type: OpenXmlIo.ReadWrite<OpenXml.RunFont> = RunFont; // TODO type-checker
 
-    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.RunFont {
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: Element): OpenXml.RunFont {
         xmlDoc.validator.expectNode(elem, "rFont", "rPr");
         return {
             val: xmlDoc.attrString(elem, "val") ?? "",

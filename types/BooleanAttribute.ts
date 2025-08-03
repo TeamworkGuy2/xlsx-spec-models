@@ -4,7 +4,7 @@
 export class BooleanAttribute {
     private static type: OpenXmlIo.ReadWriteNamed<{ val: boolean }> = BooleanAttribute; // TODO type-checker
 
-    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement, expectedTagName: string, parentTags?: string): { val: boolean } {
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: Element, expectedTagName: string, parentTags?: string): { val: boolean } {
         xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
         return {
             val: xmlDoc.attrBool(elem, "val") ?? false,

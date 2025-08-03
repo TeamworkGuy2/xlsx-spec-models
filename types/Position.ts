@@ -3,7 +3,7 @@
 export class Position {
     private static type: OpenXmlIo.ReadWrite<OpenXml.Position> = Position; // TODO type-checker
 
-    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement): OpenXml.Position {
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: Element): OpenXml.Position {
         return Point2DType.read(xmlDoc, elem, "a:pos", "absoluteAnchor");
     }
 

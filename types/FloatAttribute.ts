@@ -4,7 +4,7 @@
 export class FloatAttribute {
     private static type: OpenXmlIo.ReadWriteNamed<{ val: number }> = FloatAttribute; // TODO type-checker
 
-    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: HTMLElement, expectedTagName: string, parentTags?: string): { val: number } {
+    public static read(xmlDoc: OpenXmlIo.ReaderContext, elem: Element, expectedTagName: string, parentTags?: string): { val: number } {
         xmlDoc.validator.expectNode(elem, expectedTagName, parentTags);
         return {
             val: xmlDoc.attrFloat(elem, "val") ?? 0,
